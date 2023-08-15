@@ -22,7 +22,7 @@ public class SongList implements Serializable {
     private Byte type; //0普通歌单，1我喜欢
     private String introduction;
     @TableField("style_ids")
-    private Integer styleIds;//风格
+    private String styleIds;//风格
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private LocalDateTime createTime; //创建时间
 
