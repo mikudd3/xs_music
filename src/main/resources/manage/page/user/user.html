@@ -1,10 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>用户管理</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,employee-scalable=no" name="viewport">
 </head>
-<body>
+<body class="hold-transition">
+<div id="app">
+    <div class="content-header">
+        <h1>用户管理</h1>
+    </div>
+    <div class="app-container">
+        <div class="box">
+            <!--模糊查询条件-->
+            <div class="filter-container">
+                <el-input placeholder="用户名" v-model="user.username" style="width: 200px;"
+                          class="filter-item"></el-input>
+                <!--<el-input placeholder="真实姓名" v-model="user.realname" style="width: 180px;"
+                          class="filter-item"></el-input>-->
+                <el-select placeholder="性别" v-model="user.sex" style="width: 90px;"
+                           class="filter-item">
+                    <el-option value="男"></el-option>
+                    <el-option value="女"></el-option>
+                </el-select>
+                <el-input placeholder="电话" v-model="user.phone" style="width: 200px;"
+                          class="filter-item"></el-input>
+                <el-input placeholder="邮箱" v-model="user.email" style="width: 200px;"
+                          class="filter-item"></el-input>
+                <el-select placeholder="地区" v-model="user.zt" style="width: 120px;"
+                           class="filter-item">
+                    <el-option :value="1" label="广西"></el-option>
+                    <el-option :value="0" label="广东"></el-option>
+                </el-select>
+                <el-select placeholder="启用状态" v-model="user.zt" style="width: 120px;"
+                           class="filter-item">
+                    <el-option :value="1" label="禁用"></el-option>
+                    <el-option :value="0" label="启用"></el-option>
+                </el-select>
+                <span>
+                    <el-button type="primary" @click="getAll()" class="dalfBut">查询</el-button>
+                    <el-button type="primary" @click="cz()" class="dalfBut">重置</el-button>
+                </span>
+            </div>
 
+            <!-- 表格-->
+            <el-table size="small" current-row-key="id" :data="dataList" stripe highlight-current-row>
+                <el-table-column type="index" align="center" label="序号"></el-table-column>
+                <el-table-column prop="username" label="用户名" align="center"></el-table-column>
+                <el-table-column prop="sex" label="性别" align="center"></el-table-column>
+                <el-table-column prop="phone" label="电话" align="center"></el-table-column>
+                <el-table-column prop="email" label="邮箱" align="center"></el-table-column>
+                <el-table-column prop="location" label="地区" align="center"></el-table-column>
+                </el-table-column>
+                <el-table-column prop="zt" label="状态" align="center">
+                    <template slot-scope="scope">
+                        <span v-if="scope.row.zt === 1">禁用</span>
+                        <span v-else-if="scope.row.zt === 0">启用</span>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="create_time" label="创建时间" align="center"></el-table-column>
+                <el-table-column label="操作" align="center">
+                    <template slot-scope="scope">
+                        <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">修改</el-button>
+                        <el-button type="danger" size="mini" @click="handleDelete(scope.row)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+
+            <!-- 编辑标签弹层 -->
+            <div class="add-form">
+                <el-dialog title="编辑检查项" :visible.sync="dialogFormVisible4Edit">
+                    <el-form ref="dataEditForm" :model="formData" :rules="rules" label-position="right"
+                             label-width="100px">
+                        <el-row>
+                            <el-col :span="12">
+                                <el-form-item label="用户名" prop="username">
+                                    <el-input v-model="formData.username"/>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="12">
+                                <el-form-item label="性别" prop="sex">
+                                    <el-radio-group v-model="formData.sex">
+                                        <el-radio label="男">男</el-radio>
+                                        <el-radio label="女">女</el-radio>
+                                    </el-radio-group>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                            <el-col :span="12">
+                                <el-form-item label="电话" prop="phone">
+                                    <el-input v-model="formData.phone"/>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="12">
+                                <el-form-item label="邮箱">
+                                    <el-input v-model="formData.email" type="email"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <!--<el-row>
+                            <el-col :span="12">
+                                <el-form-item label="地区">
+                                    <el-select v-model="formData.location" placeholder="请选择地区">
+                                        <el-option v-for="region in regions" :key="region.value" :label="region.label" :value="region.value"></el-option>
+                                    </el-select>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>-->
+                        <el-row>
+                            <el-col :span="12">
+                                <el-form-item label="账号状态">
+                                    <el-radio-group v-model="formData.zt">
+                                        <el-radio :label="0">启用</el-radio>
+                                        <el-radio :label="1">禁用</el-radio>
+                                    </el-radio-group>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                    </el-form>
+                    <div slot="footer" class="dialog-footer">
+                        <el-button @click="resetForm()">取消</el-button>
+                        <el-button type="primary" @click="handleEdit()">确定</el-button>
+                    </div>
+                </el-dialog>
+            </div>
+        </div>
+    </div>
+    <!--分页工具条-->
+    <div class="block">
+        <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage"
+                :page-sizes="[5, 10, 15, 20]"
+                :page-size="pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="totalCount">
+        </el-pagination>
+    </div>
+</div>
 </body>
+<!-- 引入组件库 -->
+<script src="../../plugins/vue/vue.js"></script>
+<link rel="stylesheet" href="../../plugins/element-ui/index.css">
+<script src="../../plugins/element-ui/index.js"></script>
+<script src="../../plugins/jquery/jquery-1.10.0.min.js"></script>
+<script src="../../plugins/axios/axios-0.18.0.js"></script>
+<script src="user.js"></script>
 </html>
