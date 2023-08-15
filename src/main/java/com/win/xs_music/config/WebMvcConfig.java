@@ -27,7 +27,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         log.info("访问静态资源");
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/client/**").addResourceLocations("classpath:/client/");
+        registry.addResourceHandler("/manage/**").addResourceLocations("classpath:/manage/");
     }
 
     /**

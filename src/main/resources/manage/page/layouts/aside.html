@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="aside.html">
+</head>
+<body>
+<div class="sidebar">
+    <el-menu
+            class="sidebar-el-menu"
+            background-color="#ffffff"
+            active-text-color="#30a4fc"
+            default-active="2"
+            router
+            :collapse="collapse"
+    >
+        <el-menu-item index="info">
+            <el-icon>
+                <pie-chart/>
+            </el-icon>
+            <span>系统首页</span>
+        </el-menu-item>
+        <el-menu-item index="consumer">
+            <el-icon>
+                <User/>
+            </el-icon>
+            <span>用户管理</span>
+        </el-menu-item>
+        <el-menu-item index="singer">
+            <el-icon>
+                <mic/>
+            </el-icon>
+            <span>歌手管理</span>
+        </el-menu-item>
+        <el-menu-item index="songList">
+            <el-icon>
+                <Document/>
+            </el-icon>
+            <span>歌单管理</span>
+        </el-menu-item>
+    </el-menu>
+
+
+</div>
+
+<script src="../../plugins/vue/vue.js"></script>
+<link rel="stylesheet" href="../plugins/element-ui/index.css">
+<script src="../plugins/element-ui/index.js"></script>
+</body>
+</html>
