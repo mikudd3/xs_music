@@ -1,10 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>轮播图管理</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,employee-scalable=no" name="viewport">
 </head>
-<body>
+<body class="hold-transition">
+<div id="app">
+    <div class="content-header">
+        <h1>轮播图管理</h1>
+    </div>
+    <div class="app-container">
+        <div class="box">
+            <el-table size="small" current-row-key="id" :data="dataList" stripe highlight-current-row>
+                <el-table-column type="index" align="center" label="序号"></el-table-column>
+
+                <el-table-column prop="pic" label="图片" width="400" align="center">
+                    <template slot-scope="scope">
+                        　　　　 <img :src="scope.row.pic" width="200" height="100"/>
+                    </template>
+                </el-table-column>
+                <el-table-column label="操作" align="center">
+                    <template slot-scope="scope">
+                        <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">修改</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+
+            <!-- 编辑标签弹层 -->
+            <div class="add-form">
+                <el-dialog title="编辑检查项" :visible.sync="dialogFormVisible4Edit">
+                    <el-form ref="dataEditForm" :model="formData" label-position="right"
+                             label-width="100px">
+                        <el-form-item label="图片:" prop="avatar" class="uploadImg">
+                            <el-upload class="avatar-uploader" action="/common/upload" :show-file-list="false"
+                                       :on-success="handleAvatarSuccess" :on-change="onChange" ref="upload">
+                                <img v-if="`/common/download?name=` + imageUrl" :src="`/common/download?name=` +  imageUrl" class="avatar" style="width: 70px; height: 70px;"/>
+                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                            </el-upload>
+                        </el-form-item>
+                    </el-form>
+                    <div slot="footer" class="dialog-footer">
+                        <el-button @click="dialogFormVisible4Edit = false">取消</el-button>
+                        <el-button type="primary" @click="handleEdit()">确定</el-button>
+                    </div>
+                </el-dialog>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
+
+<!-- 引入组件库 -->
+
+<script src="../../plugins/vue/vue.js"></script>
+<link rel="stylesheet" href="../../plugins/element-ui/index.css">
+<script src="../../plugins/element-ui/index.js"></script>
+<script src="../../plugins/axios/axios-0.18.0.js"></script>
+<script src="lbt.js"></script>
+
 </html>

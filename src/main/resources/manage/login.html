@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>登录页面</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+<div id="app">
+    <div class="box">
+        <h3>管理员登录</h3>
+        <div class="login">
+            <input type="text" placeholder="账号" id="username" v-model="username">
+            <input type="password" placeholder="密码" id="password" v-model="password">
+            <input type="button" id="btn" v-on:click="dosubmit()" value="登录">
+        </div>
+    </div>
+</div>
+
+<script src="plugins/vue/vue.js"></script>
+<link rel="stylesheet" href="plugins/element-ui/index.css">
+<script src="plugins/element-ui/index.js"></script>
+<script src="plugins/axios/axios-0.18.0.js"></script>
+<script src="js/login.js"></script>
+</body>
+
+</html>

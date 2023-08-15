@@ -1,10 +1,228 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+    <!-- 页面meta -->
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>歌曲管理</title>
+    <style>
+        .introduction-container {
+            height: 100px; /* 设置容器的固定高度 */
+            overflow: auto; /* 设置容器的overflow属性为auto，使内容溢出时显示滚动条 */
+        }
+    </style>
 </head>
 <body>
+<div id="app">
+    <div class="content-header">
+        <h1>歌曲管理</h1>
+    </div>
+    <div class="app-container">
+        <div class="filter-container">
+            <el-select placeholder="状态" v-model="singerName" style="width: 120px;" class="filter-item">
+                <el-option v-for="option in options" :key="option.singerName" :value="option.singerName"
+                           :label="option.singerName"></el-option>
+            </el-select>
+            <el-button @click="getAll()" class="dalfBut">查询</el-button>
+            <el-button type="primary" class="butT" @click="handleCreate()">添加歌曲</el-button>
+        </div>
+        <!--表格-->
+        <el-table size="small" current-row-key="id" :data="dataList" stripe highlight-current-row>
+            <el-table-column type="index" align="center" label="序号"></el-table-column>
+            <el-table-column prop="singerName" label="歌手名" align="center"></el-table-column>
+            <el-table-column prop="name" label="歌曲名" align="center"></el-table-column>
+            <el-table-column prop="introduction" label="专辑/介绍" align="center"></el-table-column>
+            <el-table-column prop="image" label="图片" width="90" align="center">
+                <template slot-scope="scope">
+                    　　　　 <img :src="'/common/download?name=' + scope.row.pic" width="80" height="80"/>
+                </template>
+            </el-table-column>
+            <el-table-column prop="lyric" label="歌词" align="center">
+                <template slot-scope="scope">
+                    <div class="introduction-container">
+                        {{ scope.row.lyric }}
+                    </div>
+                </template>
+            </el-table-column>
 
+            <el-table-column label="操作" align="center">
+                <template slot-scope="scope">
+                    <el-button type="primary" size="mini" @click="openUploadDialog">更新资源</el-button>
+                    <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">修改</el-button>
+                    <el-button type="danger" size="mini" @click="handleDelete(scope.row)">删除</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+
+
+        <el-dialog
+                title="上传音频文件"
+                :visible.sync="uploadDialogVisible"
+                width="50%">
+            <el-upload
+                    class="upload-demo"
+                    action="/common/upload"
+                    :on-success="handleUploadSuccess"
+                    :file-list="fileList"
+                    multiple
+                    accept="audio/*"
+                    :limit="3"
+                    :limit-size="1024"
+            >
+                <el-button>
+                    <i class="el-icon-upload"></i> 选择音频文件
+                </el-button>
+            </el-upload>
+        </el-dialog>
+
+        <!-- 新增标签弹层 -->
+        <div class="add-form">
+            <el-dialog title="新增歌曲" :visible.sync="dialogFormVisible">
+                <el-form ref="dataAddForm" :model="formData" label-position="right"
+                         label-width="100px">
+                    <el-row>
+                        <el-col :span="12">
+                            <el-form-item label="歌手名" prop="singerName">
+                                <el-input v-model="formData.singerName"/>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+
+                    <el-row>
+                        <el-col :span="12">
+                            <el-form-item label="歌曲名" prop="name">
+                                <el-input v-model="formData.name"/>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+
+                    <el-row>
+                        <el-col :span="12">
+                            <el-form-item label="专辑/介绍" prop="introduction">
+                                <el-input v-model="formData.introduction"/>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+
+                    <el-row>
+                        <el-form-item label="图片:" prop="avatar" class="uploadImg">
+                            <el-upload class="avatar-uploader" action="/common/upload" :show-file-list="false"
+                                       :on-success="handleAvatarSuccess" :on-change="onChange" ref="upload">
+                                <img v-if="'/common/download?name=' + imageUrl"
+                                     :src="'/common/download?name=' + imageUrl" class="avatar"
+                                     style="width: 70px; height: 70px;"/>
+                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                            </el-upload>
+                        </el-form-item>
+                    </el-row>
+
+                    <el-row>
+                        <el-col :span="12">
+                            <el-form-item label="歌词" prop="lyric">
+                                <el-input v-model="formData.lyric"/>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+
+                    <el-row>
+                        <el-col :span="12">
+                            <el-form-item label="资源" prop="url">
+                                <el-button type="primary" size="mini" @click="openUploadDialog">上传歌曲</el-button>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+
+                </el-form>
+                <div slot="footer" class="dialog-footer">
+                    <el-button @click="dialogFormVisible = false">取消</el-button>
+                    <el-button type="primary" @click="handleAdd()">确定</el-button>
+                </div>
+            </el-dialog>
+        </div>
+        <!-- 编辑标签弹层 -->
+        <div class="add-form">
+            <el-dialog title="编辑检查项" :visible.sync="dialogFormVisible4Edit">
+                <el-row>
+                    <el-col :span="12">
+                        <el-form-item label="歌手名" prop="singerName">
+                            <el-input v-model="formData.singerName"/>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row>
+                    <el-col :span="12">
+                        <el-form-item label="歌曲名" prop="name">
+                            <el-input v-model="formData.name"/>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row>
+                    <el-col :span="12">
+                        <el-form-item label="专辑/介绍" prop="introduction">
+                            <el-input v-model="formData.introduction"/>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row>
+                    <el-form-item label="图片:" prop="avatar" class="uploadImg">
+                        <el-upload class="avatar-uploader" action="/common/upload" :show-file-list="false"
+                                   :on-success="handleAvatarSuccess" :on-change="onChange" ref="upload">
+                            <img v-if="'/common/download?name=' + imageUrl"
+                                 :src="'/common/download?name=' + imageUrl" class="avatar"
+                                 style="width: 70px; height: 70px;"/>
+                            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                        </el-upload>
+                    </el-form-item>
+                </el-row>
+
+                <el-row>
+                    <el-col :span="12">
+                        <el-form-item label="歌词" prop="lyric">
+                            <el-input v-model="formData.lyric"/>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row>
+                    <el-col :span="12">
+                        <el-form-item label="资源" prop="url">
+                            <el-button type="primary" size="mini" @click="openUploadDialog">上传歌曲</el-button>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                </el-form>
+                <div slot="footer" class="dialog-footer">
+                    <el-button @click="dialogFormVisible4Edit = false">取消</el-button>
+                    <el-button type="primary" @click="handleEdit()">确定</el-button>
+                </div>
+            </el-dialog>
+        </div>
+
+    </div>
+
+    <!--分页工具条-->
+    <div class="block">
+        <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage"
+                :page-sizes="[5, 10, 15, 20]"
+                :page-size="pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="totalCount">
+        </el-pagination>
+    </div>
+
+</div>
 </body>
+<!-- 引入组件库 -->
+<script src="../../plugins/vue/vue.js"></script>
+<link rel="stylesheet" href="../../plugins/element-ui/index.css">
+<script src="../../plugins/element-ui/index.js"></script>
+<script src="../../plugins/axios/axios-0.18.0.js"></script>
+<script src="song.js"></script>
 </html>
