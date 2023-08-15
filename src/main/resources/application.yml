@@ -1,10 +1,25 @@
+server:
+  port: 80
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://47.109.67.241:3306/music
     username: root
     password: xiaosongRoot123
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+mybatis-plus:
+  configuration:
+    #在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: ASSIGN_ID
 
-server:
-  port: 80
-
+#文件上传下载路径设置
+xiaosong:
+  path:
