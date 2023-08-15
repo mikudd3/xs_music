@@ -26,11 +26,11 @@ public class SMSUtils {
      * @param param 参数
      */
     public static void sendMessage(String signName, String templateCode,String phoneNumbers,String param){
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "", "");
+        DefaultProfile profile = DefaultProfile.getProfile("cn-shenzhen", "LTAI5tP6PRn6okQhm9tsJAK6", "ttuwN1UANqRbAilArgwcaPdAIfQG4Y");
         IAcsClient client = new DefaultAcsClient(profile);
 
         SendSmsRequest request = new SendSmsRequest();
-        request.setSysRegionId("cn-hangzhou");
+        request.setSysRegionId("cn-shenzhen");
         request.setPhoneNumbers(phoneNumbers);
         request.setSignName(signName);
         request.setTemplateCode(templateCode);

@@ -39,8 +39,8 @@ public class LoginCheckFilter implements Filter {
 
         //定义放行数组
         String[] uris = new String[]{
-                "/employee/login", "/employee/logout",
-                "/backend/**", "/front/**",
+                "/admin/login",
+                "/client/**", "/manage/**",
                 "/user/sendMsg", "/user/login"
         };
 
