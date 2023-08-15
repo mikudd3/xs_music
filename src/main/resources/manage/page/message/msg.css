@@ -1,0 +1,46 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 150px;
+}
+
+.above {
+    flex: 1;
+    height: 100%;
+}
+.under {
+    position: relative;
+    height: 550px;
+}
+
+.box {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+}
+
+.box-top-left {
+    top: 0;
+    left: 0;
+    /*background-color: #ccc;*/
+}
+
+.box-top-right {
+    top: 0;
+    right: 0;
+    /*background-color: #aaa;*/
+}
+
+.box-bottom-left {
+    bottom: 0;
+    left: 0;
+    /*background-color: #888;*/
+}
+
+.box-bottom-right {
+    bottom: 0;
+    right: 0;
+    /*background-color: #555;*/
+}

@@ -2,11 +2,78 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>系统首页</title>
+    <link rel="stylesheet" href="msg.css">
 </head>
 <body>
-<div>
-
+<div id="app">
+    <!--上面部分盒子  用来显示四个参数的-->
+    <div class="container">
+        <div class="above" style="display: flex">
+            <div style="width: 50%;height: 100%;">
+                <img src="img/1.png" style=" position: absolute;top: 40px;left: 60px">
+            </div>
+            <div style="flex: 1;">
+                <span style=" margin-left: 50px;font-size: 60px">{{userCount}}</span>
+                <br>
+                <span style=" margin-left: 50px;font-size: 20px">用户总数</span>
+            </div>
+        </div>
+        <div class="above" style="display: flex">
+            <div style="width: 50%;height: 100%;">
+                <img src="img/2.png" style=" position: absolute;top: 40px;left: 340px">
+            </div>
+            <div style="flex: 1;">
+                <span style=" margin-left: 50px;font-size: 60px">{{songCount}}</span>
+                <br>
+                <span style=" margin-left: 50px;font-size: 20px">歌曲总数</span>
+            </div>
+        </div>
+        <div class="above" style="display: flex">
+            <div style="width: 50%;height: 100%;">
+                <img src="img/3.png" style=" position: absolute;top: 40px;left: 630px">
+            </div>
+            <div style="flex: 1;">
+                <span style=" margin-left: 50px;font-size: 60px">{{singerCount}}</span>
+                <br>
+                <span style=" margin-left: 50px;font-size: 20px">歌手数量</span>
+            </div>
+        </div>
+        <div class="above" style="display: flex">
+            <div style="width: 50%;height: 100%;">
+                <img src="img/4.png" style=" position: absolute;top: 40px;left: 930px">
+            </div>
+            <div style="flex: 1;">
+                <span style=" margin-left: 50px;font-size: 60px">{{song_list_Count}}</span>
+                <br>
+                <span style=" margin-left: 50px;font-size: 20px">歌单总数</span>
+            </div>
+        </div>
+    </div>
+<!--下面的盒子 用来装四个统计图的-->
+    <div class="under">
+        <div class="box box-top-left">
+            <span style="padding: 240px">用户性别比例</span>
+            <div id="chart1" style="width: 724px; height: 230px;"></div>
+        </div>
+        <div class="box box-top-right">
+            <span style="padding: 250px">歌曲类型</span>
+            <div id="chart2" style="width: 724px; height: 230px;"></div>
+        </div>
+        <div class="box box-bottom-left">
+            <span style="padding: 240px">歌手性别比例</span>
+            <div id="chart3" style="width: 724px; height: 230px;"></div>
+        </div>
+        <div class="box box-bottom-right">
+            <span style="padding: 250px">歌手国籍</span>
+            <div id="chart4" style="width: 724px; height: 230px;"></div>
+        </div>
+    </div>
 </div>
 </body>
+<script src="../../plugins/vue/vue.js"></script>
+<script src="../../plugins/jquery/jquery-1.10.0.min.js"></script>
+<script src="../../plugins/axios/axios-0.18.0.js"></script>
+<script src="../../plugins/echarts/echarts.min.js"></script>
+<script src="msg.js"></script>
 </html>
