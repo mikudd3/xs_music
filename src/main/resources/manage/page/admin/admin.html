@@ -24,6 +24,7 @@
                 </el-select>
                 <span>
                     <el-button type="primary" @click="getAll()" class="dalfBut">查询</el-button>
+                    <el-button type="primary" class="butT" @click="handleCreate()">添加员工</el-button>
                     <el-button type="primary" @click="cz()" class="dalfBut">重置</el-button>
                 </span>
             </div>
@@ -32,7 +33,7 @@
             <el-table size="small" current-row-key="id" :data="dataList" stripe highlight-current-row>
                 <el-table-column type="index" align="center" label="序号"></el-table-column>
                 <el-table-column prop="name" label="用户名" align="center"></el-table-column>
-                <el-table-column prop="create_time" label="创建时间" align="center"></el-table-column>
+                <el-table-column prop="createTime" label="创建时间" align="center"></el-table-column>
                 <el-table-column prop="zt" label="状态" align="center">
                     <template slot-scope="scope">
                         <span v-if="scope.row.zt === 1">禁用</span>
@@ -46,6 +47,33 @@
                     </template>
                 </el-table-column>
             </el-table>
+
+            <!--新增-->
+            <div class="add-form">
+                <el-dialog title="新增员工" :visible.sync="dialogFormVisible">
+                    <el-form ref="dataAddForm" :model="formData" label-position="right"
+                             label-width="100px">
+                        <el-row>
+                            <el-col :span="12">
+                                <el-form-item label="用户名" prop="name">
+                                    <el-input v-model="formData.name"/>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="12">
+                                <el-form-item label="密码" prop="password">
+                                    <el-input v-model="formData.password"/>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                    </el-form>
+                    <div slot="footer" class="dialog-footer">
+                        <el-button @click="dialogFormVisible = false">取消</el-button>
+                        <el-button type="primary" @click="handleAdd()">确定</el-button>
+                    </div>
+                </el-dialog>
+            </div>
 
             <!-- 编辑标签弹层 -->
             <div class="add-form">

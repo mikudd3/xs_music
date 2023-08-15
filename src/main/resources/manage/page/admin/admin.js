@@ -1,48 +1,83 @@
 new Vue({
-    el:"#app",
-    data(){
-    return{
-        currentPage: 1,
-        pageSize: 5,
-        totalCount: 0,
-        pagination: {},
-        dataList:[
-            {
-                name:"zhangsan",
-                create_time:"2020-1-1",
-                zt:1
+    el: "#app",
+    data() {
+        return {
+            currentPage: 1,
+            pageSize: 5,
+            totalCount: 0,
+            pagination: {},
+            dataList: [
+                {
+                    name: "zhangsan",
+                    create_time: "2020-1-1",
+                    zt: 1
+                }
+            ],
+            formData: {},//表单数据
+            dialogFormVisible: false,//控制表单是否可见
+            dialogFormVisible4Edit: false,//编辑表单是否可见
+            admin: {
+                name: "",
+                zt: "",
             }
-        ],
-        formData: {},//表单数据
-        dialogFormVisible: false,//控制表单是否可见
-        dialogFormVisible4Edit: false,//编辑表单是否可见
-        admin: {
-            name:"",
-            zt:"",
         }
-    }
     },
-    methods:{
+    mounted() {
+        this.getAll();
+    },
+    methods: {
         //获取所有管理员信息
-        getAll(){
+        getAll() {
             axios({
                 method: "post",
                 //查询所有管理员请求路径
-                url: "#",
+                url: "/admin/page",
                 data: {
                     currentPage: this.currentPage,
                     pageSize: this.pageSize,
                     admin: this.admin,
                 }
             }).then((res) => {
-                if (res.data.code == 1){
+                if (res.data.code == 1) {
                     let r = res.data;
                     this.dataList = r.data.records;
                     this.totalCount = r.data.total;
                     console.log(this.totalCount)
-                }else{
+                } else {
                     this.$message.error(res.data.msg)
                 }
+            })
+        },
+        //弹出添加窗口
+        handleCreate() {
+            this.dialogFormVisible = true;
+            this.resetForm();
+        },
+        //重置表单
+        resetForm() {
+            this.formData = {};
+        },
+        //添加
+        handleAdd() {
+            //发送请求
+            axios({
+                method: "POST",
+                url: "/admin/add",
+                data: this.formData
+            }).then((res) => {
+                let r = res.data;
+                if (r.code == 1) {
+                    //添加成功
+                    this.$message.success("添加成功");
+                    //关闭窗口
+                    this.dialogFormVisible = false;
+                } else {
+                    //添加失败
+                    this.$message.success(res.data.msg);
+                }
+
+            }).finally(() => {
+                this.getAll();
             })
         },
         //点击了修改
@@ -57,8 +92,6 @@ new Vue({
             this.admin = {}
         },
 
-
-
         // 删除
         handleDelete(row) {
             //弹出提示框
@@ -70,10 +103,10 @@ new Vue({
                 axios({
                     method: "post",
                     //删除管理员请求路径
-                    url: "#" + row.id,
+                    url: "/admin/deleteById?id=" + row.id,
                 }).then((res) => {
                     if (res.data.code == 1) {
-                        this.$message.success(res.data.msg);
+                        this.$message.success("删除成功");
                     } else {
                         this.$message.error(res.data.msg);
                     }
@@ -88,14 +121,12 @@ new Vue({
         },
 
         //修改点击了取消
-        resetForm(){
+        resetForm() {
             //重置表单
             this.formData = {};
             //收起表单
             this.dialogFormVisible4Edit = false;
         },
-
-
         //编辑
         //确认修改
         handleEdit() {
@@ -103,7 +134,7 @@ new Vue({
             axios({
                 method: "post",
                 //修改管理员信息请求路径
-                url: "#",
+                url: "/admin/update",
                 data: this.formData
             }).then((res) => {
                 this.dialogFormVisible4Edit = false;

@@ -31,7 +31,7 @@ public class AdminController {
     @PostMapping("/login")
     public R login(@RequestBody Admin admin, HttpServletRequest request) {
         log.info("登录管理员后台所传入信息：{}", admin);
-        return adminService.login(admin,request);
+        return adminService.login(admin, request);
     }
 
     //管理员界面员工管理分页查询
@@ -41,4 +41,28 @@ public class AdminController {
         return adminService.adminMgrPage(adminPageDto.getAdmin(), adminPageDto.getCurrentPage(), adminPageDto.getPageSize());
     }
 
+
+    //添加员工
+    @PostMapping("/add")
+    public R add(@RequestBody Admin admin) {
+        log.info("添加员工所输入信息：{}", admin);
+        boolean save = adminService.save(admin);
+        return save ? R.success("添加成功") : R.success("添加失败");
+    }
+
+    //修改信息
+    @PostMapping("/update")
+    public R update(@RequestBody Admin admin) {
+        log.info("修改员工所输入信息：{}", admin);
+        boolean ret = adminService.updateById(admin);
+        return ret ? R.success("修改成功") : R.success("修改失败");
+    }
+
+    //删除管理员
+    @PostMapping("deleteById")
+    public R deleteById(Integer id) {
+        log.info("删除员工所输入信息：{}", id);
+        boolean ret = adminService.removeById(id);
+        return ret ? R.success("删除成功") : R.success("删除失败");
+    }
 }

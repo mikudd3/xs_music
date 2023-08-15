@@ -64,4 +64,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         request.getSession().setAttribute("admin", a.getId());
         return R.success(a);
     }
+
+
+
 }
