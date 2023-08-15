@@ -41,6 +41,7 @@ new Vue({
     methods: {
         handleAvatarSuccess(response, file, fileList) {
             this.imageUrl = response.data
+            console.log(this.imageUrl)
         },
         //列表
         getAll() {
@@ -98,14 +99,8 @@ new Vue({
         },
         //弹出编辑窗口
         handleUpdate(row) {
-            //根据id查询数据
-            axios({
-                method: "get",
-                url: "/singer/selectById?id=" + row.id,
-            }).then((res) => {
-                this.formData = res.data.data;
-                this.dialogFormVisible4Edit = true;
-            })
+            this.formData = row;
+            this.dialogFormVisible4Edit = true;
         },
         //编辑
         handleEdit() {
@@ -113,7 +108,7 @@ new Vue({
             //发送请求
             axios({
                 method: "post",
-                url: "/user/update",
+                url: "/singer/update",
                 data: this.formData
             }).then((res) => {
                 //弹窗
@@ -128,7 +123,7 @@ new Vue({
         // 删除
         handleDelete(row) {
             //弹出提示框
-            this.$confirm("此操作将永久删除该数据，是否继续？", "提示", {
+            this.$confirm("此操作将永久删除该歌手并将其关联的歌全部删除，是否继续？", "提示", {
                 type: "info"
             }).then(() => {
                 //做删除业务
