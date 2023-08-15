@@ -59,11 +59,7 @@
             <version>2.7.3</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.2.1</version>
-        </dependency>
+
 
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -106,16 +102,8 @@
             <artifactId>hutool-all</artifactId>
             <version>5.3.9</version>
         </dependency>
-        <dependency>
-            <groupId>io.zipkin.brave</groupId>
-            <artifactId>brave-spring-web-servlet-interceptor</artifactId>
-            <version>4.13.6</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>5.3.22</version>
-        </dependency>
+
+
 
 
     </dependencies>
