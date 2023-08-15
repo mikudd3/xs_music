@@ -3,13 +3,15 @@ package com.win.xs_music.filter;
 import com.alibaba.fastjson.JSON;
 import com.win.xs_music.common.BaseContext;
 import com.win.xs_music.common.R;
-import jakarta.servlet.*;
-import jakarta.servlet.annotation.WebFilter;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.AntPathMatcher;;
 
+
+import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -39,7 +41,7 @@ public class LoginCheckFilter implements Filter {
 
         //定义放行数组
         String[] uris = new String[]{
-                "/admin/login",
+                "/admin/login", "mapper/**",
                 "/client/**", "/manage/**",
                 "/user/sendMsg", "/user/login"
         };

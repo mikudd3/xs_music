@@ -2,7 +2,7 @@ new Vue({
     el: "#app",
     data() {
         return {
-            username: "",
+            name: "",
             password: "",
         }
 
@@ -13,7 +13,7 @@ new Vue({
                 url: "/admin/login",
                 method: "post",
                 data: {
-                    username: this.username,
+                    name: this.name,
                     password: this.password
                 }
             }).then(resp => {

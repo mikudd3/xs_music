@@ -1,8 +1,17 @@
 package com.win.xs_music.controller;
 
+import com.win.xs_music.common.R;
+import com.win.xs_music.dto.AdminPageDto;
+import com.win.xs_music.pojo.Admin;
+import com.win.xs_music.service.AdminService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @project:
@@ -12,8 +21,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
-@RequestMapping("admin")
+@RequestMapping("/admin")
 public class AdminController {
 
+    @Autowired
+    private AdminService adminService;
+
+    //管理员后台登录
+    @PostMapping("/login")
+    public R login(@RequestBody Admin admin, HttpServletRequest request) {
+        log.info("登录管理员后台所传入信息：{}", admin);
+        return adminService.login(admin,request);
+    }
+
+    //管理员界面员工管理分页查询
+    @PostMapping("page")
+    public R adminMgrPage(@RequestBody AdminPageDto adminPageDto) {
+        log.info("管理员界面员工管理分页查询输入的信息为：{}", adminPageDto);
+        return adminService.adminMgrPage(adminPageDto.getAdmin(), adminPageDto.getCurrentPage(), adminPageDto.getPageSize());
+    }
 
 }
