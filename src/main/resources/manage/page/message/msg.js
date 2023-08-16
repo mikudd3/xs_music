@@ -65,17 +65,18 @@ new Vue({
         //绘制用户饼图男女比例表
         bingtu1(){
             var option = {
+                color: ['pink', 'blue' ],
                 series: [
                     {
                         type: 'pie',
                         data: [
                             {
-                                value: this.menCount,
-                                name: '男'
-                            },
-                            {
                                 value: this.womenCount,
                                 name: '女'
+                            },
+                            {
+                                value: this.menCount,
+                                name: '男'
                             },
                         ],
                         label: {
@@ -121,17 +122,18 @@ new Vue({
         //绘制歌手饼图男女比例表
         bingtu2(){
             var option = {
+                color: ['pink', 'blue' ],
                 series: [
                     {
                         type: 'pie',
                         data: [
                             {
-                                value: this.singerCountMan,
-                                name: '男'
-                            },
-                            {
                                 value: this.singerCountWomen,
                                 name: '女'
+                            },
+                            {
+                                value: this.singerCountMan,
+                                name: '男'
                             },
                         ],
                         label: {
