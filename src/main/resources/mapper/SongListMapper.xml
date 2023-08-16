@@ -2,4 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.win.xs_music.mapper.SongListMapper">
 
+
+
+    <select id="getStyle" resultType="java.util.Map">
+        SELECT song_style.style_name as name ,count(song_list.style_ids) as "count"
+        from song_style,song_list
+        WHERE song_style.id = song_list.style_ids
+        GROUP BY song_list.style_ids
+        ORDER BY count DESC LIMIT 5
+    </select>
 </mapper>

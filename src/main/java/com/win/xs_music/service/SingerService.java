@@ -14,4 +14,6 @@ public interface SingerService extends IService<Singer> {
 
     //删除歌手
     R delete(Integer id);
+
+    R selectCount();
 }

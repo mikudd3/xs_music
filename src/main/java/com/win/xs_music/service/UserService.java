@@ -8,4 +8,7 @@ public interface UserService extends IService<User> {
 
     //
     R getPage(Integer currentPage, Integer pageSize, User user);
+
+    R update(User user);
+    R selectUserCount();
 }
