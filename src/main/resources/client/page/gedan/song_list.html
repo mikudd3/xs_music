@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>歌单</title>
+		<link rel="shortcut icon" href="#" type="image/x-icon">
+		<link rel="stylesheet" href="../../css/song_list.css">
+
+	</head>
+	<body>
+		<div id="main">
+			<div id="m3" class="type">
+
+<!--				歌单类型-->
+				<div class="title">
+					<div id="app">
+						<a v-for="category in categories" :href="category.url">{{ category.name }}</a>
+					</div>
+				</div>
+
+				<div id="song" class="content">
+<!--					迭代遍历歌单-->
+						<div v-for="(song_list,i) in song_list">
+							<a href="../gedan/gedan.html">
+								<img  src="{{song_list.pic}}" alt="">	<!--图片-->
+								<div>{{song_list.introduction}}</div>	<!--歌单介绍-->
+							</a>
+
+						</div>
+<!--					</table>-->
+				</div>
+			</div>
+		</div>
+	</body>
+<script src="../../plugins/vue/vue.js"></script>
+<script src="../../plugins/axios/axios-0.18.0.js"></script>
+
+<script src="../../js/song_list.js"></script>	<!--遍历歌单-->
+<script src="../../js/song_type.js"></script>   <!--歌单类型-->
+<script ></script>
+</html>
