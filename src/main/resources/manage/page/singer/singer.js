@@ -29,7 +29,7 @@ new Vue({
             ],//当前页要展示的列表数据
             formData: {},//表单数据
             dialogFormVisible: false,//控制表单是否可见
-            dialogFormVisible1: false,
+            dialogFormVisible4Edit: false,
             name: "",
             imageUrl: "",
         }
@@ -75,7 +75,7 @@ new Vue({
         },
         //添加
         handleAdd() {
-            this.formData.image = this.imageUrl;
+            this.formData.pic = this.imageUrl;
             //发送请求
             axios({
                 method: "POST",
@@ -101,10 +101,11 @@ new Vue({
         handleUpdate(row) {
             this.formData = row;
             this.dialogFormVisible4Edit = true;
+            this.imageUrl = "";
         },
         //编辑
         handleEdit() {
-            this.formData.image = this.imageUrl;
+            this.formData.pic = this.imageUrl;
             //发送请求
             axios({
                 method: "post",

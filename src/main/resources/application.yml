@@ -11,6 +11,10 @@ spring:
       host: localhost
       port: 6379
       database: 0
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
 mybatis-plus:
   configuration:
     #在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射
@@ -22,4 +26,5 @@ mybatis-plus:
 
 #文件上传下载路径设置
 xiaosong:
-  path:
+  imagePath: "D:/upload/image/"
+  urlPath: "D:/upload/video/"

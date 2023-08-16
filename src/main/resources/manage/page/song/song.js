@@ -33,19 +33,22 @@ new Vue({
             fileList: [],
             uploadDialogVisible: false,
             dialogFormVisible: false,//控制表单是否可见
-            dialogFormVisible1: false,
+            dialogFormVisible4Edit: false,
             singerName: "",
-            options: [
-                {singerName: "陈奕迅"}, {singerName: "孙燕姿"}, {singerName: "周杰伦"},
-            ], // 存放从后端获取的选项数据
+            options: ["陈奕迅", "孙燕姿", "周杰伦"], // 存放从后端获取的选项数据
             imageUrl: "",
+            video: "",
         }
     },
     //钩子函数，VUE对象初始化完成后自动执行
     created() {
         this.getAll();
+        this.getSingerName();
     },
     methods: {
+        remove() {
+            this.singerName = "";
+        },
         handleAvatarSuccess(response, file, fileList) {
             this.imageUrl = response.data
         },
@@ -54,25 +57,30 @@ new Vue({
         },
         handleUploadSuccess(response, file, fileList) {
             // 处理文件上传成功后的逻辑
-            console.log('File uploaded successfully:', response, file, fileList);
+            this.video = response.data;
         },
-        handleUploadError(err, file, fileList) {
-            // 处理文件上传失败后的逻辑
-            console.error('File upload error:', err, file, fileList);
-        },
-        beforeUpload(file) {
-            // 预处理文件上传的逻辑，例如限制文件大小等
-            console.log('Before file upload:', file);
+        getSingerName() {
+            axios({
+                method: "get",
+                url: "/song/getSingerName",
+            }).then((res) => {
+                let r = res.data;
+                if (r.code == 1) {
+                    this.options = r.data;
+                } else {
+                    this.$message.error(r.msg)
+                }
+            })
         },
         //列表
         getAll() {
             axios({
                 method: "post",
-                url: "/singer/page",
+                url: "/song/page",
                 data: {
                     currentPage: this.currentPage,
                     pageSize: this.pageSize,
-                    name: this.name,
+                    singerName: this.singerName,
                 }
             }).then((res) => {
                 let r = res.data;
@@ -96,11 +104,12 @@ new Vue({
         },
         //添加
         handleAdd() {
-            this.formData.image = this.imageUrl;
+            this.formData.pic = this.imageUrl;
+            this.formData.url = this.video;
             //发送请求
             axios({
                 method: "POST",
-                url: "/singer/add",
+                url: "/song/add",
                 data: this.formData
             }).then((res) => {
                 let r = res.data;
@@ -111,7 +120,7 @@ new Vue({
                     this.dialogFormVisible = false;
                 } else {
                     //添加失败
-                    this.$message.success(res.data.msg);
+                    this.$message.error(res.data.msg);
                 }
 
             }).finally(() => {
@@ -120,22 +129,19 @@ new Vue({
         },
         //弹出编辑窗口
         handleUpdate(row) {
-            //根据id查询数据
-            axios({
-                method: "get",
-                url: "/singer/selectById?id=" + row.id,
-            }).then((res) => {
-                this.formData = res.data.data;
-                this.dialogFormVisible4Edit = true;
-            })
+            this.formData = row;
+            this.imageUrl = row.pic;
+            this.video = row.url;
+            this.dialogFormVisible4Edit = true;
         },
         //编辑
         handleEdit() {
-            this.formData.image = this.imageUrl;
+            this.formData.pic = this.imageUrl;
+            this.formData.url = this.video;
             //发送请求
             axios({
                 method: "post",
-                url: "/user/update",
+                url: "/song/update",
                 data: this.formData
             }).then((res) => {
                 //弹窗
@@ -157,7 +163,7 @@ new Vue({
                 //根据id查询数据
                 axios({
                     method: "post",
-                    url: "/singer/delete?id=" + row.id,
+                    url: "/song/delete?id=" + row.id,
                 }).then((res) => {
                     if (res.data.code == 1) {
                         this.$message.success(res.data.msg);

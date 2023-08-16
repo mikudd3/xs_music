@@ -61,13 +61,8 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
     // 删除歌手
     @Override
     public R delete(Integer id) {
-        //根据歌手id查询歌曲信息
-        List<Song> songList = songMapper.getListBySingerId(id);
-        log.info("查询到的数据为：{}", songList);
-        //根据获取的ids删除歌曲
-        for (Song song : songList) {
-            songMapper.deleteById(id);
-        }
+        //删除歌手对应的歌曲
+        songMapper.deleteBySingerId(id);
         //删除歌手
         this.removeById(id);
         return R.success("删除成功");
