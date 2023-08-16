@@ -19,4 +19,6 @@ public interface UserService extends IService<User> {
     //获取当前登录的用户
     R getUser();
 
+    R updatePhone(User user);
+
 }

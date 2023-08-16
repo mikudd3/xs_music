@@ -24,23 +24,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
     @Override
     public R getPage(Integer currentPage, Integer pageSize, User user) {
-        Page<User> page = new Page(currentPage,pageSize);
+        Page<User> page = new Page(currentPage, pageSize);
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
         //进行动态sql
-        if (user != null){
-            wrapper.like(StringUtils.isNotEmpty(user.getUsername()),User::getUsername,user.getUsername())
-                    .eq(user.getZt() != null,User::getZt,user.getZt());
+        if (user != null) {
+            wrapper.like(StringUtils.isNotEmpty(user.getUsername()), User::getUsername, user.getUsername())
+                    .eq(user.getZt() != null, User::getZt, user.getZt());
         }
         //进行分页查询
-        this.page(page,wrapper);
+        this.page(page, wrapper);
         return R.success(page);
     }
-    public R update(User user){
+
+    public R update(User user) {
         QueryWrapper<User> query = Wrappers.query();
-        query.eq("username",user.getUsername());
+        query.eq("username", user.getUsername());
         User u = this.getOne(query);
-        if (u!=null){
-            if(u.getId() != user.getId()){
+        if (u != null) {
+            if (u.getId() != user.getId()) {
                 return R.success("用户名以存在");
             }
         }
@@ -59,22 +60,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         women.eq("sex", 0);
         int womenCount = this.count(women);
         int userCount = menCount + womenCount;
-        UserCountVo userCountVo = new UserCountVo(menCount, womenCount,userCount);
+        UserCountVo userCountVo = new UserCountVo(menCount, womenCount, userCount);
         return R.success(userCountVo);
     }
 
     @Override
     public R login(User user, HttpServletRequest request) {
         QueryWrapper<User> query = Wrappers.query();
-        query.eq("phone",user.getPhone());
-        query.eq("password",user.getPassword());
+        query.eq("phone", user.getPhone());
+        query.eq("password", user.getPassword());
         User one = this.getOne(query);
-        if (one== null){
+        if (one == null) {
             return R.error("账号或密码错误");
-        }else {
-            request.getSession().setAttribute("user", one.getId());
-            return R.success(one);
         }
+        request.getSession().setAttribute("user", one.getId());
+        return R.success(one);
 
     }
 
@@ -83,9 +83,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     public R getUser() {
         //从本地线程获取登录用户的id
         Integer userId = BaseContext.getCurrentId();
+        //根据id查询用户信息
+        User u = this.getById(userId);
         //根据用户id
-        return null;
+        return R.success(u);
     }
 
-
+    @Override
+    public R updatePhone(User user) {
+        //从本地线程获取当前登录用户的id
+        Integer id = BaseContext.getCurrentId();
+        //创建user对象
+        user.setId(id);
+        //更新电话
+        boolean ret = this.updateById(user);
+        return ret ? R.success("更新成功") : R.error("更新失败");
+    }
 }

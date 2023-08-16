@@ -1,9 +1,9 @@
-new Vue( {
-    el:"#app",
+new Vue({
+    el: "#app",
     data() {
         return {
             imageUrl: '',
-            userdata:{},
+            userdata: {},
 
         };
     },
@@ -39,16 +39,19 @@ new Vue( {
             return isJPG && isLt2M;
         },
         //重新上传头像
-        reupload(){
-            this.imageUrl='';
+        reupload() {
+            this.imageUrl = '';
             this.$message.success("已重置")
         },
         //修改头像,上面仅仅是上传预览，没写入数据库
-        alterAvator(){
+        alterAvator() {
             axios({
-                url: "/user/tx",
+                url: "/user/update",
                 method: "post",
-                data: this.imageUrl,
+                data: {
+                    id: this.userdata.id,
+                    tx: this.imageUrl,
+                }
             }).then(resp => {
                 if (resp.data.code == 1) {
                     this.$message.success("修改成功！")
