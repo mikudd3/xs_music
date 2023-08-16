@@ -29,4 +29,5 @@ public class BannerController {
         return R.success(list);
     }
 
+
 }

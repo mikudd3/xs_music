@@ -93,6 +93,7 @@
                     </div>
                     <img :src="song.pic" width="200px" height="200px">
                     <span>{{ song.title }}</span>
+                    <span style="font-size: 12px; color: #777; display: block;">收藏数：{{ song.love }}</span>
                 </li>
             </ul>
         </div>
@@ -109,7 +110,7 @@
         <p style="-moz-user-select: text;-webkit-user-select: text;-ms-user-select: text; user-select:text">
             如有侵权，请联系：xiaosong@163.com </p>
         <p>Copyright&nbsp;&nbsp;©&nbsp;&nbsp;2023&nbsp;&nbsp;版权所有&nbsp;&nbsp;
-            <a hidefocus="true" href="http://www.beian.miit.gov.cn" target="_blank">桂ICP备19004924号</a>
+            <a hidefocus="true" href="#" target="_blank">桂ICP备19004924号</a>
             <a hidefocus="true" class="office-verification"
                href="http://netadreg.gzaic.gov.cn/ntmm/WebSear/WebLogoPub.aspx?logo=440106106022006022000209"
                target="_blank"></a>
@@ -118,6 +119,9 @@
 </div>
 
 <script src="../../plugins/vue/vue.js"></script>
+<script src="../../plugins/element-ui/index.js"></script>
+<link href="../../plugins/element-ui/index.css">
+<script src="../../plugins/axios/axios-0.18.0.js"></script>
 <script src="index.js"></script>
 </body>
 

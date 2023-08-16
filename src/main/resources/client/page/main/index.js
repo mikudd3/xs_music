@@ -7,7 +7,6 @@ new Vue({
         }
     },
     mounted() {
-        // this.startAutoPlay();
         this.getUser();
     },
     methods: {
@@ -101,6 +100,7 @@ new Vue({
                     id: 1,
                     pic: 'https://liquan-springboot-music.oss-cn-shanghai.aliyuncs.com/images/introduce_img/f1.jpg',
                     title: '每日最新单曲',
+                    love: 4846948449,
                 },
             ]
         };
