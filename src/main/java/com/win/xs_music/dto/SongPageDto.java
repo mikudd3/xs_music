@@ -18,5 +18,5 @@ public class SongPageDto implements Serializable {
     private Integer currentPage;
     private Integer pageSize;
     //模糊查询条件
-    private String name;
+    private String singerName;
 }

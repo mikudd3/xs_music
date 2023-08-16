@@ -16,17 +16,22 @@ public class SingerController {
     @Autowired
     private SingerService singerService;
 
+
+
+    //查询歌手男女个数
     @GetMapping("/getSingCount")
     public R getSingCount() {
-        int count = singerService.count();
-        return R.success(count);
+        return singerService.selectCount();
     }
 
     //获取歌手分布地区信息以及对应的数量
     @GetMapping("/getSingerLocationCategory")
     public R getSingerLocationCategory() {
-        return singerService.getSingerLocationCategory();
-
+        R r = singerService.getSingerLocationCategory();
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!3");
+        log.info(String.valueOf(r));
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!4");
+        return  r;
     }
 
     //歌手信息分页查询

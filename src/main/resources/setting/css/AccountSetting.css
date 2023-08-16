@@ -1,0 +1,39 @@
+#ht{
+    color: #2b2b2b;
+    font-size: 20px;
+}
+
+.line{
+    color: #2b2b2b;
+    font-size: 20px
+}
+
+.i-box{
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    border-radius: 4px
+}
+.i-box span el-button{
+    text-align: right
+}
+
+.myicon{
+    font-size: 30px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+}
+.myicon span{
+    color: #2b2b2b;
+    font-size: 20px;
+}
+
+.form-icon{
+    font-size: 50px;
+    color: #088308;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+
+}

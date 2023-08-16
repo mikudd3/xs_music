@@ -10,40 +10,40 @@
     <!--上面部分盒子  用来显示四个参数的-->
     <div class="container">
         <div class="above" style="display: flex">
-            <div style="width: 50%;height: 100%;">
-                <img src="img/1.png" style=" position: absolute;top: 40px;left: 60px">
+            <div style="flex-grow: 1; flex-shrink: 1;">
+                <img src="img/1.png" style="width: 100%; height: 100%; object-fit: contain;">
             </div>
-            <div style="flex: 1;">
-                <span style=" margin-left: 50px;font-size: 60px">{{userCount}}</span>
+            <div style="flex-grow: 0; flex-shrink: 0;">
+                <span style="margin-left: 50px; font-size: 60px;">{{userCount}}</span>
                 <br>
-                <span style=" margin-left: 50px;font-size: 20px">用户总数</span>
+                <span style="margin-left: 50px; font-size: 20px;">用户总数</span>
             </div>
         </div>
         <div class="above" style="display: flex">
-            <div style="width: 50%;height: 100%;">
-                <img src="img/2.png" style=" position: absolute;top: 40px;left: 340px">
+            <div style="flex-grow: 1; flex-shrink: 1;">
+                <img src="img/2.png" style="width: 100%; height: 100%; object-fit: contain;">
             </div>
-            <div style="flex: 1;">
+            <div style="flex-grow: 0; flex-shrink: 0;">
                 <span style=" margin-left: 50px;font-size: 60px">{{songCount}}</span>
                 <br>
                 <span style=" margin-left: 50px;font-size: 20px">歌曲总数</span>
             </div>
         </div>
         <div class="above" style="display: flex">
-            <div style="width: 50%;height: 100%;">
-                <img src="img/3.png" style=" position: absolute;top: 40px;left: 630px">
+            <div style="flex-grow: 1; flex-shrink: 1;">
+                <img src="img/3.png" style="width: 100%; height: 100%; object-fit: contain;">
             </div>
-            <div style="flex: 1;">
+            <div style="flex-grow: 0; flex-shrink: 0;">
                 <span style=" margin-left: 50px;font-size: 60px">{{singerCount}}</span>
                 <br>
                 <span style=" margin-left: 50px;font-size: 20px">歌手数量</span>
             </div>
         </div>
         <div class="above" style="display: flex">
-            <div style="width: 50%;height: 100%;">
-                <img src="img/4.png" style=" position: absolute;top: 40px;left: 930px">
+            <div style="flex-grow: 1; flex-shrink: 1;">
+                <img src="img/4.png" style="width: 100%; height: 100%; object-fit: contain;">
             </div>
-            <div style="flex: 1;">
+            <div style="flex-grow: 0; flex-shrink: 0;">
                 <span style=" margin-left: 50px;font-size: 60px">{{song_list_Count}}</span>
                 <br>
                 <span style=" margin-left: 50px;font-size: 20px">歌单总数</span>
@@ -76,102 +76,4 @@
 <script src="../../plugins/axios/axios-0.18.0.js"></script>
 <script src="../../plugins/echarts/echarts.min.js"></script>
 <script src="msg.js"></script>
-<!--<script>-->
-
-<!--    var option = {-->
-<!--        xAxis: {-->
-<!--            type: 'category',-->
-<!--            data: ['中国', '韩国', '意大利', '新加坡', '美国', '西班牙'],-->
-<!--        },-->
-<!--        yAxis: {-->
-<!--            type: 'value'-->
-<!--        },-->
-<!--        series: [{-->
-<!--            data: [18, 12, 5, 6, 9, 2, 10],-->
-<!--            type: 'bar',-->
-<!--            barWidth: 30,-->
-<!--            barCategoryGap: '100%',-->
-<!--            barGap: '100%',-->
-<!--            itemStyle: {-->
-<!--                color: '#3366CC' // 设置圆柱体的颜色-->
-<!--            }-->
-<!--        }]-->
-<!--    };-->
-<!--    var chart = echarts.init(document.getElementById('chart4'));-->
-<!--    chart.setOption(option);-->
-<!--</script>-->
-<script>
-    var option = {
-        series: [
-            {
-                type: 'pie',
-                data: [
-                    {
-                        value: 100,
-                        name: '男'
-                    },
-                    {
-                        value: 200,
-                        name: '女'
-                    },
-                ],
-                label: {
-                    show: true,
-                    formatter: '{b}: {c} ({d}%)'
-                }
-            }
-        ]
-    };
-    var chart = echarts.init(document.getElementById('chart1'));
-    chart.setOption(option);
-</script>
-<script>
-    var option = {
-        xAxis: {
-            type: 'category',
-            data: ['华语', '粤语', '欧美', '日韩', '轻音乐', '乐器', ''],
-            barWidth: 30
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-            data: [150, 200, 300, 180, 250, 230],
-            type: 'bar',
-            barWidth: 30,
-            barCategoryGap: '100%',
-            barGap: '100%',
-            itemStyle: {
-                color: '#3366CC' // 设置圆柱体的颜色
-            }
-        }]
-    };
-    var chart = echarts.init(document.getElementById('chart2'));
-    chart.setOption(option);
-</script>
-<script>
-    var option = {
-        series: [
-            {
-                type: 'pie',
-                data: [
-                    {
-                        value: 100,
-                        name: '男'
-                    },
-                    {
-                        value: 150,
-                        name: '女'
-                    },
-                ],
-                label: {
-                    show: true,
-                    formatter: '{b}: {c} ({d}%)'
-                }
-            }
-        ]
-    };
-    var chart = echarts.init(document.getElementById('chart3'));
-    chart.setOption(option);
-</script>
 </html>

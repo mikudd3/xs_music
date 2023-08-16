@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设置</title>
+    <link rel="stylesheet" href="../client/plugins/element-ui/index.css">
+    <link rel="stylesheet" href="./css/AccountSetting.css">
+</head>
+<body>
+<div id="div">
+    <h1 id="ht">账号设置</h1>
+    <br>
+    <el-divider class="line" content-position="left"></el-divider>
+    <div  class="i-box">
+        <i class="el-icon-mobile myicon"></i>
+        <span>已绑定号码：{{'181****3660'}}
+            <el-button @click="PhonedialogForm">重新绑定</el-button>
+        </span>
+    </div>
+    <el-divider class="line" content-position="left" ></el-divider>
+    <div  class="i-box">
+        <i class="el-icon-lock myicon"></i>
+        <span>需要通过手机号修改密码
+            <el-button @click="PwddialogForm">修改密码</el-button>
+        </span>
+    </div>
+
+    <!-- 手机号绑定弹窗-->
+    <div class="add-form">
+        <el-dialog title="重新绑定手机号" :visible.sync="dialogFormVisible4Phone">
+            <el-steps :active="active" finish-status="success">
+                <el-step title="步骤 1"></el-step>
+                <el-step title="步骤 2"></el-step>
+                <el-step title="步骤 3"></el-step>
+            </el-steps>
+            <div class="step-content">
+                <div v-if="active === 0">
+                    输入完整手机号（旧）：
+                </div>
+                <div v-if="active === 1">
+                    输入新手机号；
+                </div>
+                <div v-if="active === 2">
+                    输入验证码；
+                </div>
+                <div v-if="active === 3">
+                    <i class="el-icon-check form-icon"></i>
+                    <p>修改成功</p>
+                </div>
+            </div>
+
+            <div slot="footer" class="dialog-footer">
+                <el-button v-if="this.active < 3" style="margin-top: 12px;" @click="next">下一步</el-button>
+                <el-button v-else type="primary" @click="PhoneEdit()">确定</el-button>
+                <el-button @click="dialogFormVisible4Phone = false">取消</el-button>
+            </div>
+        </el-dialog>
+    </div>
+
+    <!--修改密码弹窗-->
+    <div class="add-form">
+        <el-dialog title="修改密码" :visible.sync="dialogFormVisible4Pwd">
+            <el-steps :active="active" finish-status="success">
+                <el-step title="步骤 1"></el-step>
+                <el-step title="步骤 2"></el-step>
+                <el-step title="步骤 3"></el-step>
+            </el-steps>
+            <div class="step-content">
+                <div v-if="active === 0">
+                    输入完整手机号
+                </div>
+                <div v-if="active === 1">
+                    输入验证码
+                </div>
+                <div v-if="active === 2">
+                    输入两次新密码
+                </div>
+                <div v-if="active === 3">
+                    <i class="el-icon-check form-icon"></i>
+                    <p>修改成功</p>
+                </div>
+            </div>
+
+            <div slot="footer" class="dialog-footer">
+                <el-button v-if="this.active < 3" style="margin-top: 12px;" @click="next">下一步</el-button>
+                <el-button v-else type="primary" @click="PhoneEdit()">确定</el-button>
+                <el-button @click="dialogFormVisible4Pwd = false">取消</el-button>
+            </div>
+        </el-dialog>
+    </div>
+
+</div>
+</body>
+
+<script src="../client/plugins/vue/vue.js"></script>
+<script src="../client/plugins/element-ui/index.js"></script>
+<script src="../client/plugins/axios/axios-0.18.0.js"></script>
+<script src="./js/AccountSetting.js"></script>
+</html>

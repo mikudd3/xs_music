@@ -13,4 +13,11 @@ public interface SingerMapper extends BaseMapper<Singer> {
 
     List<Map<String, Object>> getSingerLocationCategory();
 
+
+    @Select("select * from singer where  name = #{singerName}")
+    Singer selectByName(String singerName);
+
+    @Select("select name from singer")
+    List<String> getSingerName();
+
 }
