@@ -1,0 +1,569 @@
+
+body {
+    width: 1100px;
+    margin: 0 auto;
+    background-color: #e1e1e1;
+    /*浏览器文本不可选择*/
+    -moz-user-select: none;
+    /*火狐*/
+    -webkit-user-select: none;
+    /*webkit浏览器*/
+    -ms-user-select: none;
+    /*IE10*/
+    -khtml-user-select: none;
+    /*早期浏览器*/
+    user-select: none;
+    /*文本上显示默认鼠标指针*/
+    cursor: default;
+    /*默认字体*/
+    font-family: 微软雅黑;
+    /*阴影效果*/
+    box-shadow: #666 0px 0px 20px;
+}
+
+hr {
+    border: none;
+    margin: 0;
+    height: 1px;
+    background-color: #23262c;
+}
+
+@font-face {
+    /*提取后的标题字体*/
+    font-family: font;
+    src: url('font.otf');
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #2c2e32;
+    border-radius: 4px;
+}
+
+
+/* 顶部样式 */
+
+#header {
+    background-color: #222225;
+    margin: 0;
+    height: 65px;
+}
+
+#logo {
+    color: #e1e1e1;
+    /*padding: 5px;*/
+    font-size: 30px;
+    width: 260px;
+    float: left;
+    font-family: font;
+    margin: 12px 12px;
+}
+
+#searchbox {
+    float: left;
+    background-color: #161618;
+    color: #414143;
+    border-radius: 10px;
+    position: absolute;
+    border: none;
+    height: 20px;
+    width: 250px;
+    top: 27px;
+    outline: none;
+    text-indent: 10px;
+}
+
+#search {
+    position: relative;
+    top: 25px;
+    left: 220px;
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+}
+
+#user {
+    position: relative;
+    top: 23px;
+    left: 610px;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+}
+
+#mail {
+    position: relative;
+    top: 26px;
+    left: 620px;
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+}
+
+#skin {
+    position: relative;
+    top: 25px;
+    left: 630px;
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+}
+
+#redline {
+    background-color: #b02222;
+    height: 3px;
+}
+
+
+/* 中间样式 */
+
+#middle {
+    background-color: #191b1f;
+    height: 600px;
+}
+
+#list {
+    float: left;
+    background-color: #191b1f;
+    width: 210px;
+    height: 600px;
+}
+
+#top {
+    width: 210px;
+    height: 520px;
+    overflow-y: scroll;
+}
+
+#top ul {
+    margin: 0;
+    color: #a1a3a7;
+    padding: 10px 10px;
+    font-size: 14px;
+    display: block;
+    list-style: none;
+}
+
+#top ul li {
+    margin: 6px 30px;
+    font-size: 13px;
+    width: 150px;
+}
+
+#top ul li:hover {
+    color: #d4d5db;
+    cursor: pointer;
+}
+
+#bottom {
+    width: 210px;
+    height: 79px;
+}
+
+#bottom-left {
+    width: 79px;
+    height: 79px;
+    background-color: #656566;
+    float: left;
+}
+
+#songpic {
+    width: 79px;
+    height: 79px;
+    background-color: #656566;
+}
+
+#sszk {
+    width: 79px;
+    height: 79px;
+    cursor: pointer;
+    position: relative;
+    top: -80px;
+    visibility: hidden;
+}
+
+#bottom-middle {
+    width: 110px;
+    height: 79px;
+    float: left;
+}
+
+#songname {
+    color: #e1e1e1;
+    font-family: 宋体;
+    font-size: 15px;
+    padding-left: 8px;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+#singername {
+    color: #e1e1e1;
+    font-family: 宋体;
+    font-size: 13px;
+    padding-left: 8px;
+    white-space: nowrap;
+}
+
+#bottom-right {
+    float: left;
+    width: 21px;
+    height: 79px;
+}
+
+#like {
+    color: #b02222;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#pointPic {
+    position: absolute;
+    bottom: 150px;
+    left: 16px;
+    height: 50px;
+    width: 50px;
+}
+
+#content {
+    float: left;
+    width: 890px;
+    height: 600px;
+    background-color: #16181c;
+    overflow-y: scroll;
+}
+
+#nav {
+    text-align: center;
+}
+
+#nav ul li {
+    display: inline-block;
+    list-style: none;
+    padding: 2px 20px;
+    color: #a1a3a7;
+}
+
+#nav ul li:hover {
+    color: #d4d5db;
+    cursor: pointer;
+}
+
+#ads {
+    width: 830px;
+    height: 200px;
+    margin: 20px auto;
+    position: relative;
+    top: 0px;
+    left: 0px;
+}
+
+#ads img {
+    position: absolute;
+    transition: 0.5s;
+    box-shadow: black 0px 0px 5px;
+}
+
+#ads1 {
+    left: 120px;
+    top: -10px;
+    z-index: 3;
+    height: 220px;
+    opacity: 1;
+}
+
+#ads2 {
+    left: 290px;
+    top: 10px;
+    z-index: 2;
+    height: 200px;
+    opacity: 0.5;
+}
+
+#ads3 {
+    left: 0px;
+    top: 10px;
+    z-index: 1;
+    height: 200px;
+    opacity: 0.5;
+}
+
+#detail ul {
+    list-style: none;
+    color: #a1a3a7;
+    font-size: 20px;
+    padding: 0 30px;
+}
+
+.tj {
+    margin: 10px 9px;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.tj img {
+    height: 140px;
+    width: 140px;
+}
+
+.dj {
+    margin: 10px 9px;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.dj img {
+    height: 150px;
+    width: 250px;
+}
+
+.more:hover {
+    color: #d4d5db;
+    cursor: pointer;
+}
+
+
+/* 底部样式 */
+
+#footer {
+    height: 60px;
+    background-color: #222225;
+}
+
+#control-left {
+    float: left;
+    margin-left: 30px;
+}
+
+#control-left img {
+    margin: 10px 12px;
+    vertical-align: middle;
+}
+
+#play {
+    width: 36px;
+    height: 36px;
+}
+
+#barpart {
+    float: left;
+    margin: 20px 30px;
+    color: #d5d6dd;
+    font-size: 15px;
+}
+
+#bar {
+    width: 500px;
+    height: 4px;
+    margin: 8px 12px;
+    background-color: #191b1f;
+    border-radius: 2px;
+}
+
+#redbar {
+    float: left;
+    width: 120px;
+    height: 4px;
+    background-color: #b02222;
+    border-radius: 2px;
+}
+
+#slider {
+    width: 14px;
+    height: 14px;
+    border-radius: 7px;
+    background-color: #ffffff;
+    position: relative;
+    top: -5px;
+    left: 113px;
+}
+
+#slider:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 5px #ffffff;
+}
+
+#control-right {
+    float: left;
+    width: 200px;
+    height: 40px;
+    margin: 10px auto;
+}
+
+#up:hover {
+    cursor: pointer;
+}
+
+#play:hover {
+    cursor: pointer;
+}
+
+#down:hover {
+    cursor: pointer;
+}
+
+#volume {
+    height: 24px;
+    width: 24px;
+    float: left;
+    margin: 8px 8px 8px 0px;
+    cursor: pointer;
+}
+
+#volbar {
+    width: 100px;
+    height: 4px;
+    margin: 18px auto;
+    background-color: #191b1f;
+    border-radius: 2px;
+}
+
+#volredbar {
+    float: left;
+    width: 100px;
+    height: 4px;
+    background-color: #b02222;
+    border-radius: 2px;
+}
+
+#volslider {
+    width: 14px;
+    height: 14px;
+    border-radius: 7px;
+    background-color: #ffffff;
+    position: relative;
+    top: -5px;
+    /*滑块位置=红条长度-7*/
+    left: 93px;
+    visibility: hidden;
+}
+
+#volslider:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 5px #ffffff;
+}
+
+
+/*隐藏播放页*/
+
+#hider {
+    height: 0px;
+    width: 0px;
+    position: absolute;
+    /*top: 68px;*/
+    bottom: 60px;
+    background-color: #16181c;
+    visibility: hidden;
+    z-index: 5;
+    background-size: cover;
+}
+
+#playPart {
+    float: left;
+    height: 500px;
+    width: 500px;
+    /*box-sizing: border-box;
+    border: 1px solid red;*/
+    border-bottom: 1px solid dimgray;
+    display: none;
+    position: relative;
+    overflow: hidden;
+}
+
+#lrcPart {
+    float: left;
+    height: 500px;
+    width: 500px;
+    /*box-sizing: border-box;
+    border: 1px solid red;*/
+    border-bottom: 1px solid dimgray;
+    display: none;
+    overflow: hidden;
+}
+
+#ssPart {
+    float: left;
+    height: 500px;
+    width: 100px;
+    /*box-sizing: border-box;
+    border: 1px solid red;*/
+    border-bottom: 1px solid dimgray;
+    display: none;
+}
+
+#ssPic {
+    height: 50px;
+    width: 50px;
+    margin: 20px 15px;
+    background-color: #212428;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#jp {
+    margin: 75px;
+    height: 350px;
+    width: 350px;
+    position: absolute;
+    z-index: 10;
+}
+
+#ct {
+    position: absolute;
+    z-index: 20;
+    left: 225px;
+    top: -25px;
+    transition: 0.7s;
+    transform-origin: 20% 13%;
+    transform: rotate(-25deg);
+}
+
+#lrcSpan {
+    display: block;
+    color: lightgray;
+    width: 400px;
+    height: 400px;
+    overflow-y: scroll;
+    margin: 50px 50px;
+    font-size: 13px;
+    border-right: 1px solid #2c2e32;
+}
+
+#userPage {
+    height: 220px;
+    width: 250px;
+    visibility: hidden;
+    z-index: 6;
+    position: absolute;
+    top: 55px;
+    right: 60px;
+    background-color: #191b1f;
+    box-shadow: dimgray 0px 0px 5px;
+    color: #a1a3a7;
+    text-align: center;
+}
+
+#userPage p a {
+    text-decoration: underline;
+    color: gray;
+    cursor: pointer;
+}
+
+#mailPage {
+    height: 100px;
+    width: 250px;
+    visibility: hidden;
+    z-index: 5;
+    position: absolute;
+    top: 55px;
+    right: 30px;
+    background-color: #191b1f;
+    box-shadow: dimgray 0px 0px 5px;
+    color: #a1a3a7;
+    text-align: center;
+}
