@@ -29,18 +29,8 @@ new Vue({
             imageUrl: '../../image/tx.jpg',
             user: {
                 username: "",
-                sex: "",
-                phone: "",
-                email: "",
-                location: "",
+                zt:"",
             },
-            selectedRegion: '', // 选择的地区
-            regions: [
-                { value: '1', label: '广西' },
-                { value: '2', label: '广东' },
-                { value: '3', label: '北京' },
-                // 其他地区数据...
-            ]
         }
     },
     //钩子函数，VUE对象初始化完成后自动执行
@@ -70,7 +60,6 @@ new Vue({
                 }
 
             })
-
         },
         //重置表单
         resetForm() {
@@ -89,11 +78,13 @@ new Vue({
         //编辑
         handleEdit() {
             //发送请求
+            console.log(this.formData)
             axios({
                 method: "post",
                 url: "/user/update",
                 data: this.formData
             }).then((res) => {
+                console.log(res)
                 this.dialogFormVisible4Edit = false;
                 if (res.data.code == 1) {
                     //弹窗
@@ -117,7 +108,7 @@ new Vue({
                 //根据id查询数据
                 axios({
                     method: "post",
-                    url: "/user/delete?id=" + row.id,
+                    url: "/user/deleteById?id=" + row.id,
                 }).then((res) => {
                     if (res.data.code == 1) {
                         this.$message.success(res.data.msg);
