@@ -6,18 +6,16 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.win.xs_music.common.BaseContext;
 import com.win.xs_music.common.R;
 import com.win.xs_music.mapper.UserMapper;
 import com.win.xs_music.pojo.User;
 import com.win.xs_music.service.UserService;
-import com.win.xs_music.util.SMSUtils;
-import com.win.xs_music.util.ValidateCodeUtils;
 import com.win.xs_music.vo.UserCountVo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.nio.file.NotLinkException;
 
 @Service
@@ -74,23 +72,31 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         User one = this.getOne(query);
         if (one == null) {
             return R.error("账号或密码错误");
-        } else {
-            request.getSession().setAttribute("user", one.getId());
-            return R.success(one);
         }
+        request.getSession().setAttribute("user", one.getId());
+        return R.success(one);
 
+    }
+
+    //获取当前登录的用户
+    @Override
+    public R getUser() {
+        //从本地线程获取登录用户的id
+        Integer userId = BaseContext.getCurrentId();
+        //根据id查询用户信息
+        User u = this.getById(userId);
+        //根据用户id
+        return R.success(u);
     }
 
     @Override
-    public R send(String phone, HttpSession session) {
-        if (StringUtils.isNotEmpty(phone)) {
-            String code = ValidateCodeUtils.generateValidateCode(4).toString();
-            SMSUtils.sendMessage("mikudd3游戏商城", "", phone, code);
-            session.setAttribute("code", code);
-            return R.success("手机验证码发送成功");
-        }
-        return R.error("手机验证码发送失败");
+    public R updatePhone(User user) {
+        //从本地线程获取当前登录用户的id
+        Integer id = BaseContext.getCurrentId();
+        //创建user对象
+        user.setId(id);
+        //更新电话
+        boolean ret = this.updateById(user);
+        return ret ? R.success("更新成功") : R.error("更新失败");
     }
-
-
 }
