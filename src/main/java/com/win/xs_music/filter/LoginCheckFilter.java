@@ -59,12 +59,12 @@ public class LoginCheckFilter implements Filter {
         }
 
         //4.判断用户登录状态，
-        if (request.getSession().getAttribute("employee") != null) {
+        if (request.getSession().getAttribute("admin") != null) {
             log.info("用户已登录");
             //获取修改人id
-            Long empId = (Long) request.getSession().getAttribute("employee");
+            Integer adminId = (Integer) request.getSession().getAttribute("admin");
             //设置当前线程的id
-            BaseContext.setCurrentId(empId);
+            BaseContext.setCurrentId(adminId);
 
             //用户已登录，则放行
             filterChain.doFilter(request, response);
@@ -74,7 +74,7 @@ public class LoginCheckFilter implements Filter {
         if (request.getSession().getAttribute("user") != null) {
             log.info("用户已登录");
             //获取移动端用户id
-            Long userId = (Long) request.getSession().getAttribute("user");
+            Integer userId = (Integer) request.getSession().getAttribute("user");
             //设置当前线程的id
             BaseContext.setCurrentId(userId);
 

@@ -15,4 +15,8 @@ public interface UserService extends IService<User> {
     R selectUserCount();
 
     R login(User user, HttpServletRequest request);
+
+    //获取当前登录的用户
+    R getUser();
+
 }

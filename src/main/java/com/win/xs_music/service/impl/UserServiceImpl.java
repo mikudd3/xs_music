@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.win.xs_music.common.BaseContext;
 import com.win.xs_music.common.R;
 import com.win.xs_music.mapper.UserMapper;
 import com.win.xs_music.pojo.User;
@@ -75,6 +76,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             return R.success(one);
         }
 
+    }
+
+    //获取当前登录的用户
+    @Override
+    public R getUser() {
+        //从本地线程获取登录用户的id
+        Integer userId = BaseContext.getCurrentId();
+        //根据用户id
+        return null;
     }
 
 

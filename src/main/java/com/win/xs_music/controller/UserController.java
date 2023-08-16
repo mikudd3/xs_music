@@ -50,10 +50,14 @@ public class UserController {
     }
 
     @PostMapping("login")
-    public R login(@RequestBody User user, HttpServletRequest request){
-        log.info("输入的信息为:",user);
-        return userService.login(user,request);
+    public R login(@RequestBody User user, HttpServletRequest request) {
+        log.info("输入的信息为:", user);
+        return userService.login(user, request);
     }
 
-
+    //获取当前登录的用户
+    @GetMapping("/getUser")
+    public R getUser() {
+        return userService.getUser();
+    }
 }
