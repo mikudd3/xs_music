@@ -1,16 +1,24 @@
 package com.win.xs_music.controller;
 
 
+import com.win.xs_music.common.R;
 import com.win.xs_music.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.MultipartConfigFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.util.unit.DataSize;
-import org.springframework.util.unit.DataUnit;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @RestController
+@RequestMapping("/song")
 public class SongController {
+
+    @Autowired
+    private SongService songService;
+
+    //查找歌曲数量
+    @GetMapping("/getSongCount")
+    public R getSongCount() {
+        int count = songService.count();
+        return R.success(count);
+    }
+
 
 }

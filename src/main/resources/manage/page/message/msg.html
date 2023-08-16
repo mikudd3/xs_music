@@ -50,7 +50,7 @@
             </div>
         </div>
     </div>
-<!--下面的盒子 用来装四个统计图的-->
+    <!--下面的盒子 用来装四个统计图的-->
     <div class="under">
         <div class="box box-top-left">
             <span style="padding: 240px">用户性别比例</span>
@@ -65,7 +65,7 @@
             <div id="chart3" style="width: 724px; height: 230px;"></div>
         </div>
         <div class="box box-bottom-right">
-            <span style="padding: 250px">歌手国籍</span>
+            <span style="padding: 250px">歌手地区</span>
             <div id="chart4" style="width: 724px; height: 230px;"></div>
         </div>
     </div>
@@ -76,29 +76,30 @@
 <script src="../../plugins/axios/axios-0.18.0.js"></script>
 <script src="../../plugins/echarts/echarts.min.js"></script>
 <script src="msg.js"></script>
-<script>
-    var option = {
-        xAxis: {
-            type: 'category',
-            data: ['中国', '韩国', '意大利', '新加坡', '美国','西班牙','',''],
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-            data: [18, 12, 5, 6, 9,2,10],
-            type: 'bar',
-            barWidth: 30,
-            barCategoryGap: '100%',
-            barGap: '100%',
-            itemStyle: {
-                color: '#3366CC' // 设置圆柱体的颜色
-            }
-        }]
-    };
-    var chart = echarts.init(document.getElementById('chart4'));
-    chart.setOption(option);
-</script>
+<!--<script>-->
+
+<!--    var option = {-->
+<!--        xAxis: {-->
+<!--            type: 'category',-->
+<!--            data: ['中国', '韩国', '意大利', '新加坡', '美国', '西班牙'],-->
+<!--        },-->
+<!--        yAxis: {-->
+<!--            type: 'value'-->
+<!--        },-->
+<!--        series: [{-->
+<!--            data: [18, 12, 5, 6, 9, 2, 10],-->
+<!--            type: 'bar',-->
+<!--            barWidth: 30,-->
+<!--            barCategoryGap: '100%',-->
+<!--            barGap: '100%',-->
+<!--            itemStyle: {-->
+<!--                color: '#3366CC' // 设置圆柱体的颜色-->
+<!--            }-->
+<!--        }]-->
+<!--    };-->
+<!--    var chart = echarts.init(document.getElementById('chart4'));-->
+<!--    chart.setOption(option);-->
+<!--</script>-->
 <script>
     var option = {
         series: [
@@ -128,14 +129,14 @@
     var option = {
         xAxis: {
             type: 'category',
-            data: ['华语', '粤语', '欧美', '日韩', '轻音乐','乐器',''],
+            data: ['华语', '粤语', '欧美', '日韩', '轻音乐', '乐器', ''],
             barWidth: 30
         },
         yAxis: {
             type: 'value'
         },
         series: [{
-            data: [150, 200, 300, 180, 250,230],
+            data: [150, 200, 300, 180, 250, 230],
             type: 'bar',
             barWidth: 30,
             barCategoryGap: '100%',
