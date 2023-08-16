@@ -70,20 +70,14 @@ new Vue({
             songs: [
                 {
                     id: 1,
-                    imageUrl: 'https://liquan-springboot-music.oss-cn-shanghai.aliyuncs.com/images/introduce_img/f1.jpg',
+                    pic: 'https://liquan-springboot-music.oss-cn-shanghai.aliyuncs.com/images/introduce_img/f1.jpg',
                     title: '每日最新单曲',
-                    playCount: '640万'
                 },
                 {
                     id: 2,
-                    imageUrl: 'https://liquan-springboot-music.oss-cn-shanghai.aliyuncs.com/images/introduce_img/f13.jpg',
+                    pic: 'https://liquan-springboot-music.oss-cn-shanghai.aliyuncs.com/images/introduce_img/f13.jpg',
                     title: '每日最新网络单曲',
-                    playCount: '514万'
                 },
-
-
-
-
             ]
         };
     },
