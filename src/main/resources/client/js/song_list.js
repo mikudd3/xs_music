@@ -10,6 +10,7 @@ Vue.createApp({
             create_time:""
         }
     },
+
     methods:{
         listUsers(){
             axios({
