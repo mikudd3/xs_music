@@ -36,23 +36,37 @@
             </el-steps>
             <div class="step-content">
                 <div v-if="active === 0">
-                    输入完整手机号（旧）：
+                    <p>你已绑定号码：{{'181****3660'}} </p>
+                    <el-input
+                            placeholder="请输入完整号码："
+                            v-model="phoneSet.oldphone"
+                            clearable>
+                    </el-input>
                 </div>
                 <div v-if="active === 1">
-                    输入新手机号；
+                    <p>输入新手机号，我们将发送验证码到新手机号；</p>
+                    <el-input
+                            placeholder="请输入新号码："
+                            v-model="phoneSet.newphone"
+                            clearable>
+                    </el-input>
                 </div>
                 <div v-if="active === 2">
-                    输入验证码；
+                    <p>输入验证码； 未收到？<a href="#" @click="sentMasage">重新发送</a></p>
+                    <el-input
+                            placeholder="请输入验证码："
+                            v-model="phoneSet.yzm"
+                            clearable>
+                    </el-input>
                 </div>
                 <div v-if="active === 3">
                     <i class="el-icon-check form-icon"></i>
                     <p>修改成功</p>
                 </div>
             </div>
-
             <div slot="footer" class="dialog-footer">
-                <el-button v-if="this.active < 3" style="margin-top: 12px;" @click="next">下一步</el-button>
-                <el-button v-else type="primary" @click="PhoneEdit()">确定</el-button>
+                <el-button v-if="this.active < 3" style="margin-top: 12px;" @click="nexta">下一步</el-button>
+                <el-button v-else type="primary" @click="dialogFormVisible4Phone = false">确定</el-button>
                 <el-button @click="dialogFormVisible4Phone = false">取消</el-button>
             </div>
         </el-dialog>
@@ -68,31 +82,52 @@
             </el-steps>
             <div class="step-content">
                 <div v-if="active === 0">
-                    输入完整手机号
+                    <p>你已绑定号码：{{'181****3660'}} 输入完整号码后发送验证码</p>
+                    <el-input
+                            placeholder="请输入完整号码："
+                            v-model="pwdSet.phone"
+                            clearable>
+                    </el-input>
                 </div>
                 <div v-if="active === 1">
-                    输入验证码
+                    <p>输入验证码； 未收到？ <a href="#" @click="sentMasage">重新发送</a></p>
+                    <el-input
+                            placeholder="请输入验证码："
+                            v-model="pwdSet.yzm"
+                            clearable>
+                    </el-input>
                 </div>
                 <div v-if="active === 2">
-                    输入两次新密码
+                    <p>输入新密码</p>
+                    <el-input
+                            placeholder="请输入密码："
+                            v-model="pwdSet.pwd1"
+                            clearable>
+                    </el-input>
+                    <el-input
+                            placeholder="再请输入密码："
+                            v-model="pwdSet.pwd2"
+                            clearable>
+                    </el-input>
                 </div>
                 <div v-if="active === 3">
                     <i class="el-icon-check form-icon"></i>
                     <p>修改成功</p>
                 </div>
+
             </div>
 
             <div slot="footer" class="dialog-footer">
-                <el-button v-if="this.active < 3" style="margin-top: 12px;" @click="next">下一步</el-button>
+                <el-button v-if="this.active < 3" style="margin-top: 12px;" @click="nextb">下一步</el-button>
                 <el-button v-else type="primary" @click="PhoneEdit()">确定</el-button>
                 <el-button @click="dialogFormVisible4Pwd = false">取消</el-button>
             </div>
+
         </el-dialog>
     </div>
 
 </div>
 </body>
-
 <script src="../client/plugins/vue/vue.js"></script>
 <script src="../client/plugins/element-ui/index.js"></script>
 <script src="../client/plugins/axios/axios-0.18.0.js"></script>
