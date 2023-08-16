@@ -22,7 +22,7 @@ new Vue({
     methods: {
         fetchSlides() {
             axios({
-                url: "/house/getlbHouse",
+                url: "/banner/getlbt",
                 method: "get"
             }).then(response => {
                 if (response.data.code == 1) {
@@ -30,7 +30,7 @@ new Vue({
                     this.slides = r.data;
                     //进行图片处理
                     for (let i = 0; i < this.slides.length; i++) {
-                        this.slides[i].url = `/common/download?name=${this.slides[i].url}`
+                        this.slides[i] = `/common/download?name=${this.slides[i]}`
                     }
                     console.log(r.data)
                     this.startAutoPlay();
@@ -80,24 +80,9 @@ new Vue({
                     title: '每日最新网络单曲',
                     playCount: '514万'
                 },
-                {
-                    id: 3,
-                    imageUrl: 'https://liquan-springboot-music.oss-cn-shanghai.aliyuncs.com/images/introduce_img/z25.jpg',
-                    title: '最新伤感情歌',
-                    playCount: '960万'
-                },
-                {
-                    id: 4,
-                    imageUrl: 'https://liquan-springboot-music.oss-cn-shanghai.aliyuncs.com/images/introduce_img/f12.jpg',
-                    title: '最新古风歌曲',
-                    playCount: '351万'
-                },
-                {
-                    id: 5,
-                    imageUrl: 'https://liquan-springboot-music.oss-cn-shanghai.aliyuncs.com/images/introduce_img/f12.jpg',
-                    title: '最新古风歌曲',
-                    playCount: '351万'
-                },
+
+
+
 
             ]
         };
