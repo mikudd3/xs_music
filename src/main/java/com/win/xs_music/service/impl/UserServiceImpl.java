@@ -10,11 +10,14 @@ import com.win.xs_music.common.R;
 import com.win.xs_music.mapper.UserMapper;
 import com.win.xs_music.pojo.User;
 import com.win.xs_music.service.UserService;
+import com.win.xs_music.util.SMSUtils;
+import com.win.xs_music.util.ValidateCodeUtils;
 import com.win.xs_music.vo.UserCountVo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.nio.file.NotLinkException;
 
 @Service
@@ -23,23 +26,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
     @Override
     public R getPage(Integer currentPage, Integer pageSize, User user) {
-        Page<User> page = new Page(currentPage,pageSize);
+        Page<User> page = new Page(currentPage, pageSize);
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
         //进行动态sql
-        if (user != null){
-            wrapper.like(StringUtils.isNotEmpty(user.getUsername()),User::getUsername,user.getUsername())
-                    .eq(user.getZt() != null,User::getZt,user.getZt());
+        if (user != null) {
+            wrapper.like(StringUtils.isNotEmpty(user.getUsername()), User::getUsername, user.getUsername())
+                    .eq(user.getZt() != null, User::getZt, user.getZt());
         }
         //进行分页查询
-        this.page(page,wrapper);
+        this.page(page, wrapper);
         return R.success(page);
     }
-    public R update(User user){
+
+    public R update(User user) {
         QueryWrapper<User> query = Wrappers.query();
-        query.eq("username",user.getUsername());
+        query.eq("username", user.getUsername());
         User u = this.getOne(query);
-        if (u!=null){
-            if(u.getId() != user.getId()){
+        if (u != null) {
+            if (u.getId() != user.getId()) {
                 return R.success("用户名以存在");
             }
         }
@@ -58,23 +62,34 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         women.eq("sex", 0);
         int womenCount = this.count(women);
         int userCount = menCount + womenCount;
-        UserCountVo userCountVo = new UserCountVo(menCount, womenCount,userCount);
+        UserCountVo userCountVo = new UserCountVo(menCount, womenCount, userCount);
         return R.success(userCountVo);
     }
 
     @Override
     public R login(User user, HttpServletRequest request) {
         QueryWrapper<User> query = Wrappers.query();
-        query.eq("phone",user.getPhone());
-        query.eq("password",user.getPassword());
+        query.eq("phone", user.getPhone());
+        query.eq("password", user.getPassword());
         User one = this.getOne(query);
-        if (one== null){
+        if (one == null) {
             return R.error("账号或密码错误");
-        }else {
+        } else {
             request.getSession().setAttribute("user", one.getId());
             return R.success(one);
         }
 
+    }
+
+    @Override
+    public R send(String phone, HttpSession session) {
+        if (StringUtils.isNotEmpty(phone)) {
+            String code = ValidateCodeUtils.generateValidateCode(4).toString();
+            SMSUtils.sendMessage("mikudd3游戏商城", "", phone, code);
+            session.setAttribute("code", code);
+            return R.success("手机验证码发送成功");
+        }
+        return R.error("手机验证码发送失败");
     }
 
 

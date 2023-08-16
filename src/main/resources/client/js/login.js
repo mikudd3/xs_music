@@ -12,6 +12,7 @@ new Vue({
 
         //点击发送验证码六十秒倒计时
         send() {
+            console.log(typeof this.phone)
             // 3. 点击之后，禁用按钮，同时开启倒计时
             this.disabled = true
             // 控制显示数字的
@@ -29,6 +30,14 @@ new Vue({
                     btn.disabled = false
                 }
             }, 1000)
+            axios({
+                method: "post",
+                url: "/user/send",
+                data:{
+                    phone:this.phone,
+                    password:123,
+                }
+            })
         },
 
         //切换密码或者验证码登录
@@ -59,27 +68,35 @@ new Vue({
             //isPasswordLogin = !isPasswordLogin; // 切换登录模式
         },
 
-
         //点击登录
         login() {
             //发送请求
+            console.log(this.isPasswordLogin)
             console.log(this.phone)
             console.log(this.password)
-            axios({
-                method: "post",
-                url: "/user/login",
-                data: {
-                    phone: this.phone,
-                    password: this.password
-                }
-            }).then(res => {
-                if (res.data.code == 1) {
-                    //登录成功
-                    alert("登录成功")
-                } else {
-                    alert("登录失败")
-                }
-            })
+            //当this.isPasswordLogin为true的时候使用的是密码登录
+            if (this.isPasswordLogin) {
+                axios({
+                    method: "post",
+                    url: "/user/login",
+                    data: {
+                        phone: this.phone,
+
+                    }
+                }).then(res => {
+                    if (res.data.code == 1) {
+                        //登录成功
+                        alert("登录成功")
+                    } else {
+                        alert("登录失败")
+                    }
+                })
+            } else {
+                //使用验证码登录
+
+
+            }
+
         },
     }
 
