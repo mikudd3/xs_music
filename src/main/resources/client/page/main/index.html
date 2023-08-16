@@ -1,339 +1,124 @@
-<!doctype html>
-<html data-n-head-ssr>
+<!DOCTYPE html>
+<html>
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>小松音乐</title>
-    <meta data-n-head="ssr" charset="utf-8">
-    <link rel="stylesheet" href="../../css/ku2.css">
-    <LINK href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/index.css">
+
 </head>
 
 <body>
+<!-- 首页头部  -->
+<div style="width: 100%;height: 80px; background-color:#fff;position: relative;">
 
-
-
-<div data-server-rendered="true" id="__nuxt">
-    <div id="__layout">
-        <div class="page">
-            <div class="header">
-                <div class="container">
-                    <div class="head" data-v-613630e0>
-                        <div class="flex_c" data-v-613630e0><a href="/" aria-current="page"
-                                                               class="nuxt-link-exact-active nuxt-link-active"
-                                                               data-v-613630e0><img src="" alt=""
-                                                                                    class="logo" data-v-613630e0></a>
-                            <ul class="nav" data-v-613630e0>
-                                <li class="item active" data-v-613630e0>
-                                    <a href="/" aria-current="page" class="nuxt-link-exact-active nuxt-link-active"
-                                       data-v-613630e0>首页</a>
-                                </li>
-                                <li class="item" data-v-613630e0><a rel="nofollow" href="page1.html" target="_blank"
-                                                                    data-v-613630e0>歌单</a>
-                                </li>
-                                <li class="item" data-v-613630e0><a rel="nofollow"
-                                                                    href="http://vip1.kuwo.cn/vip/added/vip_2016/index.jsp?from=1"
-                                                                    target="_blank" data-v-613630e0>歌手</a>
-                                </li>
-
-
-                            </ul>
-                        </div>
-                        <div class="flex_c nav_r" data-v-613630e0>
-                            <div class="search_out" data-v-613630e0>
-                                <div data-v-641b187a data-v-613630e0>
-                                    <div class="search_inn flex_c" data-v-641b187a><i
-                                            class="icon iconfont icon-header_icon_search_" data-v-641b187a></i>
-                                        <input maxlength="128" type="text" placeholder="搜索音乐/MV/歌单/歌手" value=""
-                                               class="search" data-v-641b187a> <!---->
-                                    </div>
-                                    <div class="list" data-v-641b187a>
-                                        <p class="tit" style="display:none;" data-v-641b187a>大家都在搜</p>
-                                        <ul data-v-641b187a></ul>
-                                    </div>
-                                </div>
+    <div class="search1">
+        <div class="logo1" style="width: 153px; padding: 20.6px 0; display: inline-block;">
+            <img src="../../image/logo.png">
+        </div>
+        <nav class="navmargin navbar navbar-default" role="navigation">
+            <div class="shurukuang" style="padding: 30px 100px;">
+                <form class="bs-example" role="form" action="#" method="get">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <input type="text" id="songName" name="songName" class="form-control"
+                                       placeholder="为音乐而生">
+                                <span class="input-group-btn">
+                                        <button onclick="getList2($('#songName').serialize())" class="btn btn-default"
+                                                type="button">搜索</button></span>
                             </div>
-                            <div class="reg_text" data-v-613630e0><span data-v-613630e0>登录</span> <span
-                                    data-v-613630e0>/</span> <span data-v-613630e0>注册</span></div>
-                        </div> <!---->
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
-            <div class="container">
-                <section class="main" data-v-2f0cd249>
-                    <div class="sub_nav" data-v-2f0cd249>
-                        <div data-v-17ae183a data-v-2f0cd249><a href="javascript:;" class="active"
-                                                                data-v-17ae183a></a><a href="javascript:;"
-                                                                                       data-v-17ae183a></a><a
-                                href="javascript:;" data-v-17ae183a></a><a href="javascript:;"
-                                                                           data-v-17ae183a></a><a href=""
-                                                                                                  data-v-17ae183a></a>
-                        </div>
-                    </div>
-                    <div class="banner_out" data-v-2f0cd249>
-                        <div class="swiper_out" data-v-6facd977 data-v-2f0cd249>
-                            <div class="swiper_inn" data-v-6facd977>
-                                <div data-v-6facd977>
-                                    <div class="swiper-wrapper" data-v-6facd977>
-                                        <div class="swiper-slide" data-v-6facd977><a href="" target="_self"
-                                                                                     data-v-6facd977><img
-                                                src="https://kwimg1.kuwo.cn/star/upload/73/44/1677749209264_.png"
-                                                alt class="banner" style="width: 100%" data-v-6facd977></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <!-- 歌单-->
-                    <div data-v-2f0cd249>
-                        <div class="rec_nav" data-v-2f0cd249>
-                            <h3 class="title" data-v-2f0cd249>推荐歌单</h3>
-
-                        </div>
-                        <div class="rec_list" data-v-2f0cd249>
-                            <div class="item" data-v-c776cbc2 data-v-2f0cd249>
-                                <div class="pic_out" data-v-c776cbc2>
-                                    <div class="cover" data-v-c776cbc2><span class="play icon_play"
-                                                                             data-v-c776cbc2><i
-                                            class="iconfont icon-icon_play_1"
-                                            data-v-c776cbc2></i></span></div>
-                                    <img alt="每日最新单曲推荐"
-                                         src="https://h5static.kuwo.cn/www/kw-www/img/def270.99aa867.png" class="pic"
-                                         data-v-c776cbc2>
-                                </div>
-                                <p class="name" data-v-c776cbc2><span title="每日最新单曲推荐"
-                                                                      data-v-c776cbc2>每日最新单曲推荐</span></p>
-                                <p class="count" style="display:none;" data-v-c776cbc2><i
-                                        class="iconfont icon-icon_play_" data-v-c776cbc2></i>20451.1万 </p>
-                            </div>
-                            <div class="item" data-v-c776cbc2 data-v-2f0cd249>
-                                <div class="pic_out" data-v-c776cbc2>
-                                    <div class="cover" data-v-c776cbc2><span class="play icon_play"
-                                                                             data-v-c776cbc2><i
-                                            class="iconfont icon-icon_play_1"
-                                            data-v-c776cbc2></i></span></div>
-                                    <img alt="【游戏BGM】执剑王者，力挽狂澜"
-                                         src="https://h5static.kuwo.cn/www/kw-www/img/def270.99aa867.png" class="pic"
-                                         data-v-c776cbc2>
-                                </div>
-                                <p class="name" data-v-c776cbc2><span title="【游戏BGM】执剑王者，力挽狂澜"
-                                                                      data-v-c776cbc2>【游戏BGM】执剑王者，力挽狂澜</span>
-                                </p>
-                                <p class="count" style="display:none;" data-v-c776cbc2><i
-                                        class="iconfont icon-icon_play_" data-v-c776cbc2></i>2.8万 </p>
-                            </div>
-                            <div class="item" data-v-c776cbc2 data-v-2f0cd249>
-                                <div class="pic_out" data-v-c776cbc2>
-                                    <div class="cover" data-v-c776cbc2><span class="play icon_play"
-                                                                             data-v-c776cbc2><i
-                                            class="iconfont icon-icon_play_1"
-                                            data-v-c776cbc2></i></span></div>
-                                    <img alt="国风：满目山河空念远，落花风雨更伤春"
-                                         src="https://h5static.kuwo.cn/www/kw-www/img/def270.99aa867.png" class="pic"
-                                         data-v-c776cbc2>
-                                </div>
-                                <p class="name" data-v-c776cbc2><span title="国风：满目山河空念远，落花风雨更伤春"
-                                                                      data-v-c776cbc2>国风：满目山河空念远，落花风雨更伤春</span>
-                                </p>
-                                <p class="count" style="display:none;" data-v-c776cbc2><i
-                                        class="iconfont icon-icon_play_" data-v-c776cbc2></i>2798 </p>
-                            </div>
-                            <div class="item" data-v-c776cbc2 data-v-2f0cd249>
-                                <div class="pic_out" data-v-c776cbc2>
-                                    <div class="cover" data-v-c776cbc2><span class="play icon_play"
-                                                                             data-v-c776cbc2><i
-                                            class="iconfont icon-icon_play_1"
-                                            data-v-c776cbc2></i></span></div>
-                                    <img alt="内卷隔离｜宅家享乐做条躺平咸鱼"
-                                         src="https://h5static.kuwo.cn/www/kw-www/img/def270.99aa867.png" class="pic"
-                                         data-v-c776cbc2>
-                                </div>
-                                <p class="name" data-v-c776cbc2><span title="内卷隔离｜宅家享乐做条躺平咸鱼"
-                                                                      data-v-c776cbc2>内卷隔离｜宅家享乐做条躺平咸鱼</span>
-                                </p>
-                                <p class="count" style="display:none;" data-v-c776cbc2><i
-                                        class="iconfont icon-icon_play_" data-v-c776cbc2></i>5.9万 </p>
-                            </div>
-                            <div class="item" data-v-c776cbc2 data-v-2f0cd249>
-                                <div class="pic_out" data-v-c776cbc2>
-                                    <div class="cover" data-v-c776cbc2><span class="play icon_play"
-                                                                             data-v-c776cbc2><i
-                                            class="iconfont icon-icon_play_1"
-                                            data-v-c776cbc2></i></span></div>
-                                    <img alt="跑步神器：动感节奏轻松甩掉卡路里"
-                                         src="https://h5static.kuwo.cn/www/kw-www/img/def270.99aa867.png" class="pic"
-                                         data-v-c776cbc2>
-                                </div>
-                                <p class="name" data-v-c776cbc2><span title="跑步神器：动感节奏轻松甩掉卡路里"
-                                                                      data-v-c776cbc2>跑步神器：动感节奏轻松甩掉卡路里</span>
-                                </p>
-                                <p class="count" style="display:none;" data-v-c776cbc2><i
-                                        class="iconfont icon-icon_play_" data-v-c776cbc2></i>9.0万 </p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+            <!-- 图标加上搜索框结束 -->
+            <div id="col10" class="dengluzhuce">
+                <img id="touxiang" src="../../image/tx.jpg"
+                     style="display: inline-block; width: 50px;height: 50px;border-radius: 40px;margin-top: 20px;margin-right: 30px">
+                <button id="display1" class="btn denglu" data-toggle="modal" data-target="#myModal"
+                        style="margin-top: 20px">登 &nbsp&nbsp录
+                </button>
             </div>
+        </nav>
+    </div>
+</div>
 
+<nav class="daohanglan">
+    <div class="big3">
+        <ul>
+            <li><a class="gudingbeij erjicaidan2" href="#">首页</a></li>
+            <li><a class=" erjicaidan2" href="/bangdan.html">榜单</a></li>
+            <li><a class="erjicaidan2" href="./mv.html">MV</a></li>
+        </ul>
+    </div>
+</nav>
 
-            <!--  -->
-            <div data-v-47b3f606>
-                <div class="footer" data-v-47b3f606>
-                    <div class="container" data-v-47b3f606>
-                        <div class="foot_info" data-v-47b3f606>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="model" style="display:none;" data-v-7627263e data-v-47b3f606>
-                    <div data-v-7627263e>
-                        <div class="btns" data-v-7627263e><!----> <!---->
-                            <div class="line" data-v-7627263e></div>
-                            <div data-v-7627263e><img src="" alt class="codeimg" data-v-7627263e>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div id="m2">
+    <div id="slider">
+        <div class="slider-wrapper">
+            <img :src="currentSlide.url" alt=""/>
+        </div>
+        <div class="slider-footer">
+            <ul class="slider-indicator">
+                <li v-for="(slide, index) in slides" :key="index" :class="{ active: index === currentIndex }"></li>
+            </ul>
+            <div class="toggle">
+                <button class="prev" @click="prevSlide">&lt;</button>
+                <button class="next" @click="nextSlide">&gt;</button>
             </div>
-
-            <div class="playControl nolock" style="bottom: 0;" data-v-6fff4d9b>
-                <div class="playControl_inn" data-v-6fff4d9b>
-                    <div class="control_out" data-v-6fff4d9b>
-
-                        <div class="posi_re" data-v-6fff4d9b>
-                            <div class="control" data-v-6fff4d9b>
-                                <div class="con_l flex_c" data-v-6fff4d9b>
-                                    <div class="cover" style="display:none;" data-v-6fff4d9b></div>
-                                    <a
-                                            href="/play_detail/undefined" data-v-6fff4d9b><img src="" alt=""
-                                                                                               class="song_img"
-                                                                                               data-v-6fff4d9b></a>
-                                    <div data-v-6fff4d9b>
-                                        <div class="flex_c info_con" data-v-6fff4d9b>
-                                            <div class="info" data-v-6fff4d9b>
-                                                <div style="display:none;" data-v-6fff4d9b><span class="song_name"
-                                                                                                 data-v-6fff4d9b></span>
-                                                    <span class="artist"
-                                                          data-v-6fff4d9b> - </span></div>
-                                                <div style="display:none;" data-v-6fff4d9b></div>
-                                            </div>
-                                            <span class="time" data-v-6fff4d9b>00:00/00:00</span>
-                                        </div>
-                                        <div class="process" data-v-6fff4d9b>
-                                            <div class="progress_bar" data-v-f7e8b018 data-v-6fff4d9b>
-                                                <div class="bar_inner" data-v-f7e8b018>
-                                                    <div class="progress" data-v-f7e8b018></div>
-                                                    <div class="progress_btn_wrapper" data-v-f7e8b018></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col_c flex_c no_list" data-v-6fff4d9b>
-                                    <div title="上一首" class="prev" data-v-6fff4d9b><i
-                                            class="iconfont icon-bar_icon_pre_" data-v-6fff4d9b></i></div>
-                                    <div title="播放" class="play" data-v-6fff4d9b><i
-                                            class="iconfont icon-bar_icon_play_1" data-v-6fff4d9b></i></div>
-                                    <div title="下一首" class="next" data-v-6fff4d9b><i
-                                            class="iconfont icon-bar_icon_next_" data-v-6fff4d9b></i></div>
-                                </div>
-                                <div class="col_r flex_c" data-v-6fff4d9b><i title="收藏歌曲"
-                                                                             class="prev icon_heart iconfont icon-bar_icon_heart_"
-                                                                             data-v-6fff4d9b></i>
-                                    <i title="下载歌曲" class="prev iconfont icon-bar_icon_download_"
-                                       data-v-6fff4d9b></i> <i title="评论"
-                                                               class="prev iconfont icon-lyric_icon_comment_"
-                                                               data-v-6fff4d9b></i> <span
-                                            data-v-6fff4d9b><i title="循环播放"
-                                                               class="prev iconfont icon-bar_icon_loop_"
-                                                               style="display:none;" data-v-6fff4d9b></i><i
-                                            title="单曲循环"
-                                            class="prev iconfont icon-bar_icon_repeat_" style="display:none;"
-                                            data-v-6fff4d9b></i><i title="顺序播放"
-                                                                   class="prev iconfont icon-bar_icon_list_"
-                                                                   style="display:none;"
-                                                                   data-v-6fff4d9b></i><i title="随机播放"
-                                                                                          class="prev iconfont icon-bar_icon_random_"
-                                                                                          style="display:none;"
-                                                                                          data-v-6fff4d9b></i></span>
-                                    <span class="playList"
-                                          data-v-6fff4d9b><!----> <i title="歌曲列表"
-                                                                     class="prev iconfont icon-bar_icon_playlistfuzhi"
-                                                                     data-v-6fff4d9b></i></span>
-                                    <div class="song_type" data-v-6fff4d9b><span title="品质"
-                                                                                 data-v-6fff4d9b>高品</span><i
-                                            class="iconfont icon-bar_icon_arrow_"
-                                            data-v-6fff4d9b></i>
-                                        <div class="type_out" data-v-6fff4d9b>
-                                            <ul class="items" style="display:none;" data-v-6fff4d9b>
-                                                <li style="display:none;" data-v-6fff4d9b>无损</li>
-                                                <li class="active" data-v-6fff4d9b>高品</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <i title="音量" class="iconfont icon-bar_icon_mute" style="display:none;"
-                                       data-v-6fff4d9b></i> <i title="音量" class="iconfont icon-bar_icon_volume_"
-                                                               style="display:none;" data-v-6fff4d9b></i>
-                                    <div class="volume" data-v-6fff4d9b>
-                                        <div class="progress_bar" data-v-f7e8b018 data-v-6fff4d9b>
-                                            <div class="bar_inner" data-v-f7e8b018>
-                                                <div class="progress" data-v-f7e8b018></div>
-                                                <div class="progress_btn_wrapper" data-v-f7e8b018></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="song_list" style="display:none;" data-v-6fff4d9b>
-                                <div class="list_top flex_c" data-v-6fff4d9b>
-                                    <div data-v-6fff4d9b><span class="text" data-v-6fff4d9b>播放列表</span> <span
-                                            class="num" data-v-6fff4d9b>(0)</span></div>
-                                    <div class="flex_c no_list" data-v-6fff4d9b>
-                                        <div class="clear_all" data-v-6fff4d9b><i class="iconfont icon-list_clean_n"
-                                                                                  data-v-6fff4d9b></i> <span
-                                                class="clear_btn"
-                                                data-v-6fff4d9b>清空列表</span>
-                                            <div class="confirm" style="display:none;" data-v-6fff4d9b>
-                                                <div class="confirm_tit flex_c" data-v-6fff4d9b><span
-                                                        data-v-6fff4d9b>清空列表</span> <i
-                                                        class="iconfont icon-list_icon_x" data-v-6fff4d9b></i>
-                                                </div>
-                                                <p class="text" data-v-6fff4d9b>确认清空当前播放列表</p>
-                                                <p data-v-6fff4d9b><span class="sure" data-v-6fff4d9b>清空</span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <i class="close iconfont icon-list_icon_x" data-v-6fff4d9b></i>
-                                    </div>
-                                </div>
-                                <div class="list_con" data-v-6fff4d9b>
-                                    <div data-v-6fff4d9b>
-                                        <div class="no_data" data-v-6fff4d9b><img
-                                                src="https://h5static.kuwo.cn/www/kw-www/img/download_grey.e14b104.png"
-                                                alt data-v-6fff4d9b>
-                                            <p data-v-6fff4d9b>您还没有添加任何歌曲</p>
-                                            <p data-v-6fff4d9b>去首页 <a href="/" aria-current="page"
-                                                                         class="nuxt-link-exact-active nuxt-link-active"
-                                                                         data-v-6fff4d9b>发现音乐</a>，添加自己喜欢的歌曲吧~
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <audio autoplay="autoplay" data-v-6fff4d9b></audio>
-            </div>
-            <div class="model_out" data-v-5cb78f71>
-            </div>
-
         </div>
     </div>
 </div>
 
+
+<div class="big4">
+    <div class="gedan">
+        <div class="dazi">
+            <p>精品歌单
+            <p>
+        </div>
+        <div class="xiaodaohang" id="gedan">
+            <ul class="clearfix">
+                <li v-for="song in songs" :key="song.id" style="width: 200px;">
+                    <div class="zhedang">
+                        <div class="bofang">
+                            <div class="bofang1">
+                                <a href=""><span class="glyphicon glyphicon-play"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <img :src="song.imageUrl" width="200px" height="200px">
+                    <span>{{ song.title }}</span>
+                    <span style="font-size: 12px; color: #777; display: block;">播放量：{{ song.playCount }}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="links">
+        <a hidefocus="true" href="#" target="_blank">开发者：</a>
+        <a hidefocus="true" href="https://github.com/linliquan" target="_blank">小松音乐</a>
+        <a hidefocus="true" href="#" target="_blank">广告合作</a>
+    </div>
+    <div class="copyright">
+        <p style="-moz-user-select: text;-webkit-user-select: text;-ms-user-select: text; user-select:text">
+            如有侵权，请联系：xiaosong@163.com </p>
+        <p>Copyright&nbsp;&nbsp;©&nbsp;&nbsp;2023&nbsp;&nbsp;版权所有&nbsp;&nbsp;
+            <a hidefocus="true" href="http://www.beian.miit.gov.cn" target="_blank">桂ICP备19004924号</a>
+            <a hidefocus="true" class="office-verification"
+               href="http://netadreg.gzaic.gov.cn/ntmm/WebSear/WebLogoPub.aspx?logo=440106106022006022000209"
+               target="_blank"></a>
+        </p>
+    </div>
+</div>
+
+<script src="../../plugins/vue/vue.js"></script>
+<script src="index.js"></script>
 </body>
 
 </html>
