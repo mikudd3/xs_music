@@ -1,19 +1,17 @@
 new Vue({
     el: "#container",
-
-    data(){
-        isPasswordLogin = false;
-        return{
-            phone:"",
-            password:"",
-            username:"",
-
+    data() {
+        return {
+            isPasswordLogin: false,
+            phone: "",
+            password: "",
+            username: "",
         }
     },
-    methods:{
+    methods: {
 
         //点击发送验证码六十秒倒计时
-        send(){
+        send() {
             // 3. 点击之后，禁用按钮，同时开启倒计时
             this.disabled = true
             // 控制显示数字的
@@ -27,7 +25,6 @@ new Vue({
                 // 4. 如果时间为0，则清除定时器，并且更改文字
                 if (i < 0) {
                     clearInterval(timer)
-
                     btn.innerHTML = '获取验证码'
                     btn.disabled = false
                 }
@@ -35,15 +32,15 @@ new Vue({
         },
 
         //切换密码或者验证码登录
-        switchLoginMode(){
+        switchLoginMode() {
             var phone = document.querySelector('#phone');
             var password = document.querySelector('#password');
             var btn = document.querySelector('#btn');
             var switchBtn = document.querySelector('#switchBtn');
 
-            if (isPasswordLogin) {
+            if (this.isPasswordLogin) {
                 // 切换到验证码登录
-                switchBtn.innerHTML = '验证码登录';
+                switchBtn.innerHTML = '密码登录';
                 document.querySelector('.header').innerHTML = '验证码登录';
                 password.type = 'text';
                 password.placeholder = '验证码';
@@ -51,35 +48,35 @@ new Vue({
                 btn.classList.remove('hidden');
             } else {
                 // 切换回密码登录
-                switchBtn.innerHTML = '密码登录';
+                switchBtn.innerHTML = '验证码登录';
                 document.querySelector('.header').innerHTML = '手机号登录';
                 password.type = 'password';
                 password.placeholder = '密码';
                 password.classList.add('hidden');
                 btn.classList.add('hidden');
             }
-
-            isPasswordLogin = !isPasswordLogin; // 切换登录模式
+            this.isPasswordLogin = !this.isPasswordLogin;
+            //isPasswordLogin = !isPasswordLogin; // 切换登录模式
         },
 
 
         //点击登录
-        login(){
+        login() {
             //发送请求
             console.log(this.phone)
             console.log(this.password)
             axios({
-                method:"post",
-                url:"/user/login",
+                method: "post",
+                url: "/user/login",
                 data: {
-                   phone: this.phone,
+                    phone: this.phone,
                     password: this.password
                 }
-            }).then(res=>{
-                if (res.data.code == 1){
+            }).then(res => {
+                if (res.data.code == 1) {
                     //登录成功
                     alert("登录成功")
-                }else {
+                } else {
                     alert("登录失败")
                 }
             })
