@@ -36,8 +36,10 @@
             </div>
             <!-- 图标加上搜索框结束 -->
             <div id="col10" class="dengluzhuce">
-                <img id="touxiang" src="../../image/tx.jpg"
-                     style="display: inline-block; width: 50px;height: 50px;border-radius: 40px;margin-top: 20px;margin-right: 30px">
+                <a href="../setting/Setting.html">
+                    <img id="touxiang" :src="imageUrl"
+                         style="display: inline-block; width: 50px;height: 50px;border-radius: 40px;margin-top: 20px;margin-right: 30px">
+                </a>
                 <button id="display1" class="btn denglu" data-toggle="modal" data-target="#myModal"
                         style="margin-top: 20px">登 &nbsp&nbsp录
                 </button>
@@ -59,7 +61,7 @@
 <div id="m2">
     <div id="slider">
         <div class="slider-wrapper">
-            <img :src="currentSlide.url" alt=""/>
+            <img :src="currentSlide.pic" alt=""/>
         </div>
         <div class="slider-footer">
             <ul class="slider-indicator">

@@ -1,10 +1,39 @@
+//获取登录用户的头像
+new Vue({
+    el: "#col10",
+    data() {
+        return {
+            imageUrl: "../../image/tx.jpg",
+        }
+    },
+    mounted() {
+        // this.startAutoPlay();
+        this.getUser();
+    },
+    methods: {
+        getUser() {
+            axios({
+                url: "/user/getUser",
+                method: "get",
+            }).then(resp => {
+                if (resp.data.code == 1) {
+                    this.imageUrl = `/common/download?name=` + resp.data.data.tx;
+                } else {
+                    this.$message.error(resp.data.msg);
+                }
+            })
+        },
+    }
+})
+
+//获取轮播图
 new Vue({
     el: '#slider',
     data() {
         return {
             slides: [
-                {url: '../../image/a (1).png'},
-                {url: '../../image/a (2).png'},
+                {pic: '../../image/a (1).png'},
+                {pic: '../../image/a (2).png'},
             ],
             currentIndex: 0,
             timerId: null
@@ -30,7 +59,7 @@ new Vue({
                     this.slides = r.data;
                     //进行图片处理
                     for (let i = 0; i < this.slides.length; i++) {
-                        this.slides[i] = `/common/download?name=${this.slides[i]}`
+                        this.slides[i].pic = `/common/download?name=${this.slides[i].pic}`
                     }
                     console.log(r.data)
                     this.startAutoPlay();
@@ -73,15 +102,25 @@ new Vue({
                     pic: 'https://liquan-springboot-music.oss-cn-shanghai.aliyuncs.com/images/introduce_img/f1.jpg',
                     title: '每日最新单曲',
                 },
-                {
-                    id: 2,
-                    pic: 'https://liquan-springboot-music.oss-cn-shanghai.aliyuncs.com/images/introduce_img/f13.jpg',
-                    title: '每日最新网络单曲',
-                },
             ]
         };
     },
-    methods() {
-
+    mounted() {
+        this.getSongList();
+    },
+    methods: {
+        getSongList() {
+            axios({
+                method: "get",
+                url: "/songlist/getSongList",
+            }).then(resp => {
+                let r = resp.data;
+                if (r.code == 1) {
+                    this.songs = r;
+                } else {
+                    this.$message.error(resp.data.msg);
+                }
+            })
+        }
     }
 })

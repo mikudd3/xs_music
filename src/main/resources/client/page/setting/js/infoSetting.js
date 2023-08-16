@@ -33,7 +33,6 @@ new Vue({
             }).then(resp => {
                 if (resp.data.code == 1) {
                     this.userdata = resp.data.data;
-                    this.getuserinfo();
                 } else {
                     this.$message.error(resp.data.msg);
                 }
