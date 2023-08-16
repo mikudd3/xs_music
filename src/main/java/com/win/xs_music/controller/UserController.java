@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/user")
 @Slf4j
@@ -46,5 +48,12 @@ public class UserController {
         log.info("查询用户个数");
         return userService.selectUserCount();
     }
+
+    @PostMapping("login")
+    public R login(@RequestBody User user, HttpServletRequest request){
+        log.info("输入的信息为:",user);
+        return userService.login(user,request);
+    }
+
 
 }

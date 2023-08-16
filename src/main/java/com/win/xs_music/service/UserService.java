@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.win.xs_music.common.R;
 import com.win.xs_music.pojo.User;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface UserService extends IService<User> {
 
     //
@@ -11,4 +13,6 @@ public interface UserService extends IService<User> {
 
     R update(User user);
     R selectUserCount();
+
+    R login(User user, HttpServletRequest request);
 }

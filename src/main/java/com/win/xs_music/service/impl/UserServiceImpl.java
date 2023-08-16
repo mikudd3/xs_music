@@ -14,6 +14,9 @@ import com.win.xs_music.vo.UserCountVo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import java.nio.file.NotLinkException;
+
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         implements UserService {
@@ -57,6 +60,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         int userCount = menCount + womenCount;
         UserCountVo userCountVo = new UserCountVo(menCount, womenCount,userCount);
         return R.success(userCountVo);
+    }
+
+    @Override
+    public R login(User user, HttpServletRequest request) {
+        QueryWrapper<User> query = Wrappers.query();
+        query.eq("phone",user.getPhone());
+        query.eq("password",user.getPassword());
+        User one = this.getOne(query);
+        if (one== null){
+            return R.error("账号或密码错误");
+        }else {
+            request.getSession().setAttribute("user", one.getId());
+            return R.success(one);
+        }
+
     }
 
 
