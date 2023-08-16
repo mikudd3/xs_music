@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			div {
+				display: block;
+			}
+
+			.main {
+				max-width: 1200px;
+				margin: 0 auto;
+				position: relative;
+			}
+
+			/* 筛选歌手选项 */
+			.mod_singer_tag {
+				background-color: #fbfbfd;
+				padding: 34px 0 17px 40px;
+				margin: 30px 0 20px;
+			}
+
+			/* 筛选子选项 */
+			.singer_tag__list {
+				padding-bottom: 3px;
+				height: auto;
+				zoom: 1;
+				clear: both;
+				overflow: hidden;
+			}
+
+			a {
+				color: #000;
+				cursor: pointer;
+			}
+
+			a,
+			a:hover {
+				text-decoration: none;
+			}
+
+			.singer_tag__item {
+				float: left;
+				padding: 0 8px;
+				margin: 0 12px 14px 0;
+				height: 26px;
+				line-height: 27px;
+				overflow: hidden;
+			}
+
+			/* 先给定颜色判断，后面删除 */
+			/* 歌手列表 */
+			ul {
+				display: block;
+				list-style-type: disc;
+				margin-block-start: 1em;
+				margin-block-end: 1em;
+				margin-inline-start: 0px;
+				margin-inline-end: 0px;
+				padding-inline-start: 40px;
+			}
+
+			.singer_list__item_box {
+				background-color: #black;
+			}
+
+			.mod_singer_list {
+				overflow: hidden;
+				text-align: center;
+			}
+
+			.singer_list__list {
+				margin-bottom: 4px;
+				margin-right: -20px;
+				overflow: hidden;
+				zoom: 1;
+				/* zoom 缩放比例 */
+			}
+
+			.singer_list__item {
+				float: left;
+				width: 20%;
+				margin-bottom: 20px;
+				overflow: hidden;
+			}
+
+			li {
+				display: list-item;
+				text-align: -webkit-match-parent;
+				list-style: none;
+			}
+
+			.singer_list__item_box {
+				position: relative;
+				margin-right: 20px;
+				background-color: #black;
+				min-height: 195px;
+				padding: 25px 0;
+				overflow: hidden;
+			}
+
+			a:hover {
+				color: #c22f31;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div class="main" id="main">
+			<div class="mod_singer_tag">
+				<!-- 歌手筛选选项 -->
+
+				<div class="singer_tag__list"><a class="singer_tag__item ">全部</a><a class="singer_tag__item ">中国</a><a
+						class="singer_tag__item ">中国香港</a><a class="singer_tag__item ">中国台湾</a><a
+						class="singer_tag__item ">马来西亚</a>
+					<a class="singer_tag__item ">韩国</a>
+					<a class="singer_tag__item ">德国</a>
+					<a class="singer_tag__item ">挪威</a>
+					<a class="singer_tag__item ">瑞典</a>
+					<a class="singer_tag__item ">美国</a>
+					<a class="singer_tag__item "></a>
+				</div>
+				<div class="singer_tag__list"><a class="singer_tag__item ">全部</a><a class="singer_tag__item ">男</a><a
+						class="singer_tag__item ">女</a></div>
+				<div class="singer_tag__list"><a class="singer_tag__item ">全部</a><a class="singer_tag__item ">流行</a>
+					<a class="singer_tag__item ">说唱</a>
+					<a class="singer_tag__item ">国风</a>
+					<a class="singer_tag__item ">摇滚</a>
+					<a class="singer_tag__item ">电子</a>
+					<a class="singer_tag__item ">民谣</a>
+					<a class="singer_tag__item ">R&amp;B</a>
+					<a class="singer_tag__item ">民族乐</a>
+					<a class="singer_tag__item ">轻音乐</a>
+					<a class="singer_tag__item ">爵士</a>
+					<a class="singer_tag__item ">古典</a><a
+						class="singer_tag__item ">乡村</a>
+						<a class="singer_tag__item ">蓝调</a>
+				</div>
+			</div>
+
+			<!-- 歌手列表 -->
+			<div class="mod_singer_list ">
+				<ul class="singer_list__list" >
+					<li class="singer_list__item">
+						<div class="singer_list__item_box"><a class="singer_list__cover" title=""
+								href="">
+								<img class="singer_list__pic" loading="lazy"
+									src="1.jpg"
+									alt="周杰伦"
+									data-qar-def="" /></a>
+							<h3 class="singer_list__title" style="min-height:20px"><a
+									href="">{{datalist.name}}</a></h3>
+						</div>
+					</li>
+					<li class="singer_list__item">
+						<div class="singer_list__item_box" id="tes"><a class="singer_list__cover" title=""
+								href="">
+								<img class="singer_list__pic" loading="lazy"
+									src="1.jpg"
+									alt="周杰伦"
+									data-qar-def="" /></a>
+							<h3 class="singer_list__title" style="min-height:20px"><a
+									href="">{{name}}</a></h3>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script src="add/vue.js"></script>
+	<script src="add/add1.js"></script>
+	<script>
+		new Vue({
+		    el: '#tes',
+			name:"sgfg",
+		    data() {
+		        return {
+					name:"gui",
+		            dataList: [
+		                {
+		                }
+		            ],//当前页要展示的列表数据
+		        }
+		    }
+		})
+	</script>
+</html>
