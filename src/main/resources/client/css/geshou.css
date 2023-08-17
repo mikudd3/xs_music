@@ -1,0 +1,105 @@
+div {
+    display: block;
+}
+
+.main {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* 筛选歌手选项 */
+.mod_singer_tag {
+    background-color: #fbfbfd;
+    padding: 34px 0 17px 40px;
+    margin: 30px 0 20px;
+}
+
+/* 筛选子选项 */
+.singer_tag__list {
+    padding-bottom: 3px;
+    height: auto;
+    zoom: 1;
+    clear: both;
+    overflow: hidden;
+}
+
+a {
+    color: #000;
+    cursor: pointer;
+}
+
+a,
+a:hover {
+    text-decoration: none;
+}
+
+.singer_tag__item {
+    float: left;
+    padding: 0 8px;
+    margin: 0 12px 14px 0;
+    height: 26px;
+    line-height: 27px;
+    overflow: hidden;
+}
+
+/* 先给定颜色判断，后面删除 */
+/* 歌手列表 */
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.singer_list__item_box {
+    background-color: #black;
+}
+
+.mod_singer_list {
+    overflow: hidden;
+    text-align: center;
+}
+
+.singer_list__list {
+    margin-bottom: 4px;
+    margin-right: -20px;
+    overflow: hidden;
+    zoom: 1;
+    /* zoom 缩放比例 */
+}
+
+.singer_list__item {
+    float: left;
+    width: 20%;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+    list-style: none;
+}
+
+.singer_list__item_box {
+    position: relative;
+    margin-right: 20px;
+    background-color: #black;
+    min-height: 195px;
+    min-width: 195px;
+    height: 200px;
+    padding: 25px 0;
+    overflow: hidden;
+}
+
+a:hover {
+    color: #c22f31;
+}
+.singer_list__item_box {
+    justify-content: center;
+    align-items: center;
+}

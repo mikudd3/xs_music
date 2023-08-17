@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../../css/geshou.css">
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+
+<div class="main" id="main">
+    <div class="mod_singer_tag">
+        <!-- 歌手筛选选项 -->
+        <div class="singer_tag__list"><a class="singer_tag__item ">全部</a>
+            <a class="singer_tag__item ">中国</a>
+            <a class="singer_tag__item ">中国香港</a>
+            <a class="singer_tag__item ">中国台湾</a>
+            <a class="singer_tag__item ">马来西亚</a>
+            <a class="singer_tag__item " @click="getlocation('')">韩国</a>
+            <a class="singer_tag__item ">德国</a>
+            <a class="singer_tag__item ">挪威</a>
+            <a class="singer_tag__item ">瑞典</a>
+            <a class="singer_tag__item ">美国</a>
+            <a class="singer_tag__item "></a>
+        </div>
+        <div class="singer_tag__list"><a class="singer_tag__item ">全部</a>
+            <a class="singer_tag__item ">男</a>
+            <a class="singer_tag__item ">女</a></div>
+        <div class="singer_tag__list">
+            <a class="singer_tag__item ">全部</a>
+            <a class="singer_tag__item ">流行</a>
+            <a class="singer_tag__item ">说唱</a>
+            <a class="singer_tag__item ">国风</a>
+            <a class="singer_tag__item ">摇滚</a>
+            <a class="singer_tag__item ">电子</a>
+            <a class="singer_tag__item ">民谣</a>
+            <a class="singer_tag__item ">R&amp;B</a>
+            <a class="singer_tag__item ">民族乐</a>
+            <a class="singer_tag__item ">轻音乐</a>
+            <a class="singer_tag__item ">爵士</a>
+            <a class="singer_tag__item ">古典</a>
+            <a class="singer_tag__item ">乡村</a>
+            <a class="singer_tag__item ">蓝调</a>
+        </div>
+    </div>
+
+    <!-- 歌手列表 -->
+    <div class="mod_singer_list ">
+        <ul class="singer_list__list">
+            <li class="singer_list__item" v-for="singer in singers" :key="singer.id">
+                <div class="singer_list__item_box"><a class="singer_list__cover" title=""
+                                                      href="">
+                    <img class="singer_list__pic" loading="lazy"
+                         src="https://img2.baidu.com/it/u=2896911436,1340659831&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1692291600&t=7eff2f6418d13226b43a26677a1b7eb6"
+                         alt="singer.name"
+                         data-qar-def=""/></a>
+                    <h3 class="singer_list__title" style="min-height:20px">
+                        <a href="">{{singer.name}}</a></h3>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+<script src="../../plugins/vue/vue.js"></script>
+<script src="geshou.js"></script>
+
+</html>
