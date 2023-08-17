@@ -56,7 +56,7 @@ ul {
 }
 
 .singer_list__item_box {
-    background-color: #black;
+    background-color: black;
 }
 
 .mod_singer_list {
@@ -88,14 +88,11 @@ li {
 .singer_list__item_box {
     position: relative;
     margin-right: 20px;
-    background-color: #black;
-    min-height: 195px;
-    min-width: 195px;
+    background-color: white;
     padding: 25px 0;
     overflow: hidden;
-    max-width: 200px; /* 设置图片容器的最大宽度 */
-    max-height: 200px; /* 设置图片容器的最大高度 */
-    overflow: hidden;
+    width: 195px;
+    height: 300px;
 }
 
 a:hover {
@@ -103,8 +100,7 @@ a:hover {
 }
 /*设置图片格式*/
 .singer_list__item_box img{
-    height: 195px;
-    width: 100%; /* 让图片宽度占满容器 */
-    height: auto;
+    height: 220px;
+    width: 160px; /* 让图片宽度占满容器 */
 }
 

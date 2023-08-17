@@ -12,32 +12,31 @@
     <!--个人信息组件-->
     <div id="seletByDIY">
         <el-form :model="formdata" style="margin-right: auto">
-            <el-form-item label="用户名" required prop="username" >
-                <el-input v-model="formdata.username"  style="width: 300px;"></el-input>
+            <el-form-item label="用户名" required prop="username">
+                <el-input v-model="formdata.username" style="width: 300px;"></el-input>
             </el-form-item>
             <el-form-item label="性别" required prop="sex">
-                <el-select v-model="formdata.sex" style="width: 300px;" value="">
-                    <el-option value="男"></el-option>
-                    <el-option value="女"></el-option>
-                </el-select>
+                <el-radio-group v-model="formdata.sex">
+                    <el-radio label="1">男</el-radio>
+                    <el-radio label="0">女</el-radio>
+                </el-radio-group>
             </el-form-item>
             <el-form-item label="生日" prop="birth">
-                    <template>
-                        <el-date-picker value-format="yyyy-MM-dd" v-model="formdata.birth" type="date" placeholder="请选择日期"></el-date-picker>
-                    </template>
+                <template>
+                    <el-date-picker value-format="yyyy-MM-dd" v-model="formdata.birth" type="date"
+                                    placeholder="请选择日期"></el-date-picker>
+                </template>
             </el-form-item>
-            <el-form-item label="地区" prop="location" >
-                <el-input v-model="formdata.location"  style="width: 300px"></el-input>
+            <el-form-item label="地区" prop="location">
+                <el-input v-model="formdata.location" style="width: 300px"></el-input>
             </el-form-item>
             <el-form-item label="邮箱" prop="email">
                 <el-input v-model="formdata.email" style="width: 300px;"></el-input>
             </el-form-item>
-            <el-form-item label="手机号" required prop="sjh">
-                <el-input itemtype="phone" v-model="formdata.sjh" style="width: 300px;"></el-input>
+            <el-form-item label="个人简介" prop="introduction">
+                <el-input type="textarea" v-model="formdata.introduction" maxlength="200"
+                          style="width: 400px;"></el-input>
             </el-form-item>
-			<el-form-item label="个人简介"  prop="introduction">
-			    <el-input type="textarea" v-model="formdata.introduction" maxlength="200" style="width: 400px;"></el-input>
-			</el-form-item>
             <el-form-item style="align-items: center">
                 <el-button type="warning" @click="updata()">修改</el-button>
             </el-form-item>

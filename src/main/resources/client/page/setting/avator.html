@@ -9,11 +9,11 @@
 <div id="app" >
     <el-upload
             class="avatar-uploader"
-            action="C:\Users\yanguanghesama\Desktop\admin-pages\imgs"
+            action="/common/upload"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload">
-        <img v-if="imageUrl" :src="imageUrl" class="avatar">
+        <img v-if="'/common/download?name=' + imageUrl" :src="'/common/download?name=' + imageUrl" class="avatar">
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
     </el-upload>
     <el-button id="upload" @click="alterAvator">修改头像</el-button>

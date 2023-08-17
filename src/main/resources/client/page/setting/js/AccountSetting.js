@@ -22,6 +22,7 @@ new Vue({
             phone: '18154643660',
         },//用户信息
         formdata: [], //页面信息
+        currentPhone: "",
     },
     methods: {
         //获取用户信息
@@ -37,20 +38,6 @@ new Vue({
                 }
             })
         },
-        //动态获取页面信息
-        getuserinfo() {
-            axios({
-                url: "/user/getuserinfo",
-                method: "get",
-            }).then(resp => {
-                if (resp.data.code == 1) {
-                    this.formdata = resp.data.data;
-                    this.formdata.phone = this.hidePhoneNumber(resp.data.data.phone);
-                } else {
-                    this.$message.error(resp.data.msg);
-                }
-            })
-        },
         //隐藏手机号
         hidePhoneNumber(phoneNumber) {
             if (phoneNumber.length >= 7) {
@@ -61,14 +48,33 @@ new Vue({
         },
         //请求发送验证码，并获取验证码用于验证
         "sentMasage"(phone) {
+            console.log(phone)
             axios({
-                url: "/user/getuserinfo",
+                url: "/user/send",
                 method: "post",
-                data: phone,
+                data: {
+                    phone: phone,
+                },
             }).then(resp => {
                 if (resp.data.code == 1) {
-                    this.trueyzm =
-                        this.$message.success("发送验证码成功！");
+                    this.$message.success("发送验证码成功！");
+                    this.getLoginCode(phone);
+                } else {
+                    this.$message.error(resp.data.msg);
+                }
+            })
+        },
+        getLoginCode(phone) {
+            axios({
+                url: "/user/getLoginCode",
+                method: "post",
+                data: {
+                    phone: phone,
+                },
+            }).then(resp => {
+                if (resp.data.code == 1) {
+                    this.trueyzm = resp.data.data;
+                    console.log(this.trueyzm);
                 } else {
                     this.$message.error(resp.data.msg);
                 }
@@ -109,7 +115,7 @@ new Vue({
                         this.$message.error("手机号不合法!");
                         return;
                     } else {
-                        this.sentMasage();
+                        this.sentMasage(this.phoneSet.newphone);
                     }
                 }
                     ;
@@ -140,6 +146,7 @@ new Vue({
             }).then(resp => {
                 if (resp.data.code == 1) {
                     this.$message.success("修改成功！");
+                    this.getUser();
                 } else {
                     this.$message.error(resp.data.msg);
                 }
@@ -169,7 +176,7 @@ new Vue({
                             return;
                         } else {
                             this.$message.success("成功");
-                            this.sentMasage();
+                            this.sentMasage(this.pwdSet.phone);
                         }
                     }
                 }
@@ -212,6 +219,7 @@ new Vue({
             }).then(resp => {
                 if (resp.data.code == 1) {
                     this.$message.success("修改成功！");
+                    this.dialogFormVisible4Pwd = false;
                 } else {
                     this.$message.error(resp.data.msg);
                 }
@@ -220,5 +228,6 @@ new Vue({
     },
     mounted() {
         this.getUser();
+        this.currentPhone = this.hidePhoneNumber(this.userdata.phone)
     }
 });

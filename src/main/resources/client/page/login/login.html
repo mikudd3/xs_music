@@ -9,20 +9,22 @@
 </head>
 
 <body>
-    <div id="container">
-        <div class="login-wrapper">
-            <div class="header">手机号登录</div>
-            <div class="form-wrapper">
-                <input type="text" id="phone" v-model="phone" placeholder="手机号" class="input-item">
-                <input type="password" id="password" v-model="password" placeholder="验证码" class="input-item">
-                <button type="button" id="btn" class="btn" @click="send()">发送验证码</button>
-                <button type="button" id="switchBtn"  class="btn" @click="switchLoginMode()">密码登录</button>
-                <button class="btn" id="login" @click="login()">登录</button>
-            </div>
+<div id="container">
+    <div class="login-wrapper">
+        <div class="header">手机号登录</div>
+        <div class="form-wrapper">
+            <input type="text" id="phone" v-model="phone" placeholder="手机号" class="input-item">
+            <input type="password" id="password" v-model="password" placeholder="验证码" class="input-item">
+            <button type="button" id="btn" class="btn" @click="send()">发送验证码</button>
+            <button type="button" id="switchBtn" class="btn" @click="switchLoginMode()">密码登录</button>
+            <button class="btn" id="login" @click="login()">登录</button>
         </div>
     </div>
+</div>
 </body>
 <script src="../../plugins/vue/vue.js"></script>
+<script src="../../plugins/element-ui/index.js"></script>
+<link rel="stylesheet" href="../../plugins/element-ui/index.css">
 <script src="../../plugins/axios/axios-0.18.0.js"></script>
 <script src="../../plugins/jquery/jquery-1.10.0.min.js"></script>
 <script src="../../js/login.js"></script>
