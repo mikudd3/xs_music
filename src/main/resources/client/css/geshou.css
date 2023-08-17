@@ -91,8 +91,10 @@ li {
     background-color: #black;
     min-height: 195px;
     min-width: 195px;
-    height: 200px;
     padding: 25px 0;
+    overflow: hidden;
+    max-width: 200px; /* 设置图片容器的最大宽度 */
+    max-height: 200px; /* 设置图片容器的最大高度 */
     overflow: hidden;
 }
 
@@ -100,7 +102,9 @@ a:hover {
     color: #c22f31;
 }
 /*设置图片格式*/
-.singer_list__item_box {
-    justify-content: center;
-    align-items: center;
+.singer_list__item_box img{
+    height: 195px;
+    width: 100%; /* 让图片宽度占满容器 */
+    height: auto;
 }
+

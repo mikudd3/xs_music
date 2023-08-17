@@ -9,21 +9,13 @@ import com.win.xs_music.common.R;
 import com.win.xs_music.mapper.SingerMapper;
 import com.win.xs_music.mapper.SongMapper;
 import com.win.xs_music.pojo.Singer;
-import com.win.xs_music.pojo.Song;
-import com.win.xs_music.pojo.User;
 import com.win.xs_music.service.SingerService;
 import com.win.xs_music.vo.SingCountVo;
-import com.win.xs_music.vo.UserCountVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,5 +86,15 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
         return R.success(singer);
 
     }
+
+
+
+    @Override
+    public R getSingers(Singer singer) {
+        List<Map<String, Object>> singerList = singerMapper.getSingers();
+        // 处理查询结果
+        return R.success(singerList);
+    }
+
 
 }

@@ -9,13 +9,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.stream.Location;
+
 @RestController
 @RequestMapping("/singer")
 @Slf4j
 public class SingerController {
     @Autowired
     private SingerService singerService;
-
 
 
     //查询歌手男女个数
@@ -29,7 +30,7 @@ public class SingerController {
     public R getSingerLocationCategory() {
         R r = singerService.getSingerLocationCategory();
         log.info(String.valueOf(r));
-        return  r;
+        return r;
     }
 
     //歌手信息分页查询
@@ -69,6 +70,12 @@ public class SingerController {
     public R getOne(Integer id){
         log.info("查询的歌手id为：{}",id);
         return singerService.getOne(id);
+    }
+
+    @PostMapping("/getSingers")
+    public R getSingersFromInformation(Singer singer) {
+        log.info("传入的歌手信息" + singer);
+        return singerService.getSingers(singer);
     }
 
 }

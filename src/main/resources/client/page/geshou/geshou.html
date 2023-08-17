@@ -98,10 +98,10 @@
         <ul class="singer_list__list">
             <li class="singer_list__item" v-for="singer in singers" :key="singer.id">
                 <div class="singer_list__item_box"><a class="singer_list__cover" title=""
-                                                      href="">
+                                                      :href=singer.url>
                     <img class="singer_list__pic" loading="lazy"
-                         src="https://img2.baidu.com/it/u=2896911436,1340659831&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1692291600&t=7eff2f6418d13226b43a26677a1b7eb6"
-                         alt="singer.name"
+                         :src="singer.pic"
+                         :alt="singer.name"
                          data-qar-def=""/></a>
                     <h3 class="singer_list__title" style="min-height:20px">
                         <a href="">{{singer.name}}</a></h3>
@@ -130,5 +130,6 @@
 </div>
 </body>
 <script src="../../plugins/vue/vue.js"></script>
+<script src="../../plugins/axios/axios-0.18.0.js"></script>
 <script src="geshou.js"></script>
 </html>

@@ -19,4 +19,6 @@ public interface SingerService extends IService<Singer> {
 
 
     R getOne(Integer id);
+    R getSingers(Singer singer);
+
 }

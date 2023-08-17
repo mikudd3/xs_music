@@ -9,23 +9,9 @@ new Vue({
             singers: [{
                 name: "杰哥",
                 pic: 'https://liquan-springboot-music.oss-cn-shanghai.aliyuncs.com/images/introduce_img/f1.jpg',
+                url:'http://localhost/client/page/main/index.html',
             }
-                , {
-                    name: "阿伟",
-                    pic: 'https://y.qq.com/n/ryqq/playlist/7060349831',
-                }
-                , {
-                    name: "阿伟",
-                    pic: 'https://y.qq.com/n/ryqq/playlist/7060349831',
-                }
-                , {
-                    name: "阿伟",
-                    pic: 'https://y.qq.com/n/ryqq/playlist/7060349831',
-                }
-                , {
-                    name: "阿伟",
-                    pic: 'https://y.qq.com/n/ryqq/playlist/7060349831',
-                }
+
             ]
         }
     },
@@ -40,11 +26,11 @@ new Vue({
             this.location = location;
             console.log(location);
             this.getallSingers();
-        }, getallSingers(sex) {
+        }, getallSingers() {
             //方法
             axios({
                 method: "get",
-                url: "#",
+                url: "/singer/getSingers",
                 params: {
                     sex: this.sex,
                     location: this.location,
@@ -53,7 +39,10 @@ new Vue({
                 this.singers = res.data;
                 console.log(this.singers);
             })
-        }
+        },mouted(){
+                // this.startAutoPlay();
+                this.getallSingers();
+}
 
     }
 })
