@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import java.util.List;
@@ -48,7 +49,6 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         //注意转换器有顺序，最前面的先使用，故追加到第一位
         converters.add(0, messageConverter);
     }
-
 
 
 }

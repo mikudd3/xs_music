@@ -1,8 +1,12 @@
 #app {
-    width: 1100px;
+    width: 1200px;
     margin: auto;
-    padding: 10px;
 
+}
+
+p {
+    font-size: 32px;
+    margin-bottom: 20px;
 }
 
 .title {
@@ -11,21 +15,18 @@
 
 #one {
     height: 250px;
-}
-
-a {
-    width: 200px;
-    height: 300px;
-    margin-top: 20px;
-    margin-right: 40px;
-}
-
-.img {
-    width: 200px;
-    height: 200px;
+    margin-top: 30px;
 }
 
 #two {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 30px;
 }
+
+.img {
+    width: 200px;
+    height: 200px;
+    margin-right: 30px;
+}
+

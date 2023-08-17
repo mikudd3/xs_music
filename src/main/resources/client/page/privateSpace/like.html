@@ -17,31 +17,109 @@
             <img class="img" src="../../image/tx.jpg" alt="">
         </a>
     </div>
-    <p>我创建的歌单</p>
+    <p>
+        <span>我创建的歌单</span>
+        <el-button @click="addSongList()" class="dalfBut">新增歌单</el-button>
+    </p>
+
     <div id="two">
         <a v-for="(item, index) in items" :key="index" href="#">
             <img class="img" :src="item.pic">
             <p class="title">{{ item.title }}</p>
         </a>
     </div>
+
+    <div class="add-form">
+        <el-dialog title="新增歌单" :visible.sync="dialogFormVisible">
+            <el-form ref="dataEditForm" :model="formData" label-position="right"
+                     label-width="100px">
+                <el-row>
+                    <el-form-item label="图片:" prop="avatar" class="uploadImg">
+                        <el-upload class="avatar-uploader" action="/common/upload" :show-file-list="false"
+                                   :on-success="handleAvatarSuccess" :on-change="onChange" ref="upload">
+                            <img v-if="'/common/download?name=' + imageUrl" :src="'/common/download?name=' + imageUrl"
+                                 class="avatar" style="width: 70px; height: 70px;"/>
+                            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                        </el-upload>
+                    </el-form-item>
+                </el-row>
+
+                <el-row>
+                    <el-col :span="12">
+                        <el-form-item label="标题" prop="name">
+                            <el-input v-model="formData.title"/>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row>
+                    <el-col :span="12">
+                        <el-form-item label="简介" prop="introduction">
+                            <el-input v-model="formData.introduction"/>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row>
+                    <el-col :span="12">
+                        <el-form-item label="风格" prop="style">
+                            <el-input v-model="formData.style"/>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取消</el-button>
+                <el-button type="primary" @click="handleAdd()">确定</el-button>
+            </div>
+        </el-dialog>
+    </div>
+
+
 </div>
 <script src="../../plugins/vue/vue.js"></script>
+<script src="../../plugins/axios/axios-0.18.0.js"></script>
+<script src="../../plugins/element-ui/index.js"></script>
+<link rel="stylesheet" href="../../plugins/element-ui/index.css">
 <script>
     new Vue({
         el: "#app",
         data() {
             return {
                 items: [
-                    {pic: "../../image/tx.jpg", title: "陈奕迅"},
-                    {pic: "../../image/tx.jpg", title: "陈奕迅"},
-                    {pic: "../../image/tx.jpg", title: "陈奕迅"},
-                ]
+                    {id: 1, pic: "../../image/tx.jpg", title: "陈奕迅"},
+                    {id: 2, pic: "../../image/tx.jpg", title: "陈奕迅"},
+                    {id: 3, pic: "../../image/tx.jpg", title: "陈奕迅"},
+                ],
+                dialogFormVisible: false,
+                formData: {},
             };
         },
         mounted() {
             this.getMyCreateSongList();
         },
         methods: {
+            handleAvatarSuccess(resp) {
+                this.imageUrl = resp.data;
+            },
+            addSongList() {
+                this.dialogFormVisible = true;
+            },
+            handleAdd() {
+                this.formData.pic = this.imageUrl;
+                axios({
+                    url: "/songlist/addSongList",
+                    method: "post",
+                }).then(resp => {
+                    if (resp.data.code == 1) {
+                        this.$message.success("添加成功");
+                        this.getMyCreateSongList();
+                    } else {
+                        this.$message.error(resp.data.msg);
+                    }
+                })
+            },
             getMyCreateSongList() {
                 axios({
                     url: "/songlist/getMyCreateSongList",
