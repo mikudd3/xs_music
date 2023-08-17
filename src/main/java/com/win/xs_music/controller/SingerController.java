@@ -72,9 +72,10 @@ public class SingerController {
         return singerService.getOne(id);
     }
 
-    @PostMapping("/getSingers")
+    @GetMapping("/getSingers")
     public R getSingersFromInformation(Singer singer) {
         log.info("传入的歌手信息" + singer);
+        log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         return singerService.getSingers(singer);
     }
 

@@ -91,7 +91,7 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
 
     @Override
     public R getSingers(Singer singer) {
-        List<Map<String, Object>> singerList = singerMapper.getSingers();
+        List<Map<String, Object>> singerList = singerMapper.getSingers(singer);
         // 处理查询结果
         return R.success(singerList);
     }

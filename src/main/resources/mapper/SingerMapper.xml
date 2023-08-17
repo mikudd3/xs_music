@@ -9,15 +9,17 @@
         ORDER BY count DESC LIMIT 5
     </select>
     <select id="getSingers" resultType="java.util.Map">
-    SELECT *
-    FROM singer
-    where 1=1
-    <if test="location!=''and location!=null">
-        and loaction like concat('%',#{location},'%')
-    </if>
-    <if test="sex!='' and sex!=null">
-        and sex =${sex}
-    </if>
+        SELECT *
+        FROM singer
+        WHERE 1=1
+        <if test="sex!=null">
+            and sex = #{sex}
+        </if>
+        -- and sex = 0
+        <if test="location!=''and location!=null">
+            and location like concat('%',#{location},'%')
+        </if>
+
     </select>
 
 </mapper>
