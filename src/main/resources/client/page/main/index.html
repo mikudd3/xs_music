@@ -51,9 +51,28 @@
 <nav class="daohanglan">
     <div class="big3">
         <ul>
-            <li><a class="gudingbeij erjicaidan2" href="#">首页</a></li>
-            <li><a class=" erjicaidan2" href="../gedan/song_list.html">歌单</a></li>
-            <li><a class="erjicaidan2" href="../geshou/geshou.html">歌手</a></li>
+
+
+            <li>
+                <a class="gudingbeij erjicaidan2" href="#">
+                    <el-menu-item class="gudingbeij erjicaidan2" index="1" @click="findInfo()">首页</el-menu-item>
+                </a>
+            </li>
+            <li>
+                <a class=" erjicaidan2">
+                    <el-menu-item class=" erjicaidan2" index="2" @click="findAccount()">歌单</el-menu-item>
+                </a>
+            </li>
+            <li>
+                <a class="erjicaidan2">
+                    <el-menu-item class="erjicaidan2" index="3" @click="findAvator()">歌手</el-menu-item>
+                </a>
+            </li>
+            <li>
+                <a class="erjicaidan2">
+                    <el-menu-item class="erjicaidan2" index="4" @click="findAvator()">我的音乐</el-menu-item>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>
