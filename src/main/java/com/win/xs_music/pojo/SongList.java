@@ -21,6 +21,7 @@ public class SongList implements Serializable {
     private String pic;
     private Byte type; //0普通歌单，1我喜欢
     private String introduction;
+    private Long love;
     @TableField("style_ids")
     private String styleIds;//风格
     @TableField(value = "create_time", fill = FieldFill.INSERT)

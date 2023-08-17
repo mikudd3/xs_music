@@ -43,7 +43,8 @@ public class LoginCheckFilter implements Filter {
         String[] uris = new String[]{
                 "/admin/login", "mapper/**",
                 "/client/**", "/manage/**",
-                "/user/sendMsg", "/user/login"
+                "/user/sendMsg", "/user/login",
+                "/banner/getlbt", "/songlist/getSongList",
         };
 
         //2.判断本次请求是否需要处理
