@@ -80,7 +80,7 @@ new Vue({
                     url: "/user/login",
                     data: {
                         phone: this.phone,
-
+                        password: this.password,
                     }
                 }).then(res => {
                     if (res.data.code == 1) {
