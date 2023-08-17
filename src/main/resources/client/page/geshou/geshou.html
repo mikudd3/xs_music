@@ -1,46 +1,96 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="../../css/geshou.css">
+
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/index.css">
+    <link rel="stylesheet" type="text/css" href="../../css/geshou.css">
     <title></title>
 </head>
 <body>
+<div style="width: 100%;height: 80px; background-color:#fff;position: relative;">
 
+    <div class="search1">
+        <div class="logo1" style="width: 153px; padding: 20.6px 0; display: inline-block;">
+            <img src="../../image/logo.png">
+        </div>
+        <nav class="navmargin navbar navbar-default" role="navigation">
+            <div class="shurukuang" style="padding: 30px 100px;">
+                <form class="bs-example" role="form" action="#" method="get">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <input type="text" id="songName" name="songName" class="form-control"
+                                       placeholder="为音乐而生">
+                                <span class="input-group-btn">
+                                        <button onclick="getList2($('#songName').serialize())" class="btn btn-default"
+                                                type="button">搜索</button></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- 图标加上搜索框结束 -->
+            <div id="col10" class="dengluzhuce">
+                <a href="../setting/Setting.html">
+                    <img id="touxiang" :src="imageUrl"
+                         style="display: inline-block; width: 50px;height: 50px;border-radius: 40px;margin-top: 20px;margin-right: 30px">
+                </a>
+                <button id="display1" class="btn denglu" data-toggle="modal" data-target="#myModal"
+                        style="margin-top: 20px">登 &nbsp&nbsp录
+                </button>
+            </div>
+        </nav>
+    </div>
+</div>
+<nav class="daohanglan">
+    <div class="big3">
+        <ul>
+            <li><a class="gudingbeij erjicaidan2" href="#">首页</a></li>
+            <li><a class=" erjicaidan2" href="../gedan/song_list.html">歌单</a></li>
+            <li><a class="erjicaidan2" href="./mv.html">歌手</a></li>
+        </ul>
+    </div>
+</nav>
 <div class="main" id="main">
+
     <div class="mod_singer_tag">
         <!-- 歌手筛选选项 -->
-        <div class="singer_tag__list"><a class="singer_tag__item ">全部</a>
-            <a class="singer_tag__item ">中国</a>
-            <a class="singer_tag__item ">中国香港</a>
-            <a class="singer_tag__item ">中国台湾</a>
-            <a class="singer_tag__item ">马来西亚</a>
-            <a class="singer_tag__item " @click="getlocation('')">韩国</a>
-            <a class="singer_tag__item ">德国</a>
-            <a class="singer_tag__item ">挪威</a>
-            <a class="singer_tag__item ">瑞典</a>
-            <a class="singer_tag__item ">美国</a>
+        <div class="singer_tag__list">
+            <a class="singer_tag__item " @click="getlocation('')">全部</a>
+            <a class="singer_tag__item " @click="getlocation('中国')">中国</a>
+            <a class="singer_tag__item " @click="getlocation('中国香港')">中国香港</a>
+            <a class="singer_tag__item " @click="getlocation('中国台湾')">中国台湾</a>
+            <a class="singer_tag__item " @click="getlocation('马来西亚')">马来西亚</a>
+            <a class="singer_tag__item " @click="getlocation('韩国')">韩国</a>
+            <a class="singer_tag__item " @click="getlocation('德国')">德国</a>
+            <a class="singer_tag__item " @click="getlocation('挪威')">挪威</a>
+            <a class="singer_tag__item " @click="getlocation('瑞典')">瑞典</a>
+            <a class="singer_tag__item " @click="getlocation('美国')">美国</a>
             <a class="singer_tag__item "></a>
         </div>
-        <div class="singer_tag__list"><a class="singer_tag__item ">全部</a>
-            <a class="singer_tag__item ">男</a>
-            <a class="singer_tag__item ">女</a></div>
-        <div class="singer_tag__list">
-            <a class="singer_tag__item ">全部</a>
-            <a class="singer_tag__item ">流行</a>
-            <a class="singer_tag__item ">说唱</a>
-            <a class="singer_tag__item ">国风</a>
-            <a class="singer_tag__item ">摇滚</a>
-            <a class="singer_tag__item ">电子</a>
-            <a class="singer_tag__item ">民谣</a>
-            <a class="singer_tag__item ">R&amp;B</a>
-            <a class="singer_tag__item ">民族乐</a>
-            <a class="singer_tag__item ">轻音乐</a>
-            <a class="singer_tag__item ">爵士</a>
-            <a class="singer_tag__item ">古典</a>
-            <a class="singer_tag__item ">乡村</a>
-            <a class="singer_tag__item ">蓝调</a>
-        </div>
+
+        <div class="singer_tag__list"><a class="singer_tag__item " @click="getsex('')">全部</a>
+            <a class="singer_tag__item " @click="getsex(1)">男</a>
+            <a class="singer_tag__item " @click="getsex(0)">女</a></div>
+<!--        表格中歌手没有风格-->
+<!--        <div class="singer_tag__list">-->
+<!--            <a class="singer_tag__item ">全部</a>-->
+<!--            <a class="singer_tag__item ">流行</a>-->
+<!--            <a class="singer_tag__item ">说唱</a>-->
+<!--            <a class="singer_tag__item ">国风</a>-->
+<!--            <a class="singer_tag__item ">摇滚</a>-->
+<!--            <a class="singer_tag__item ">电子</a>-->
+<!--            <a class="singer_tag__item ">民谣</a>-->
+<!--            <a class="singer_tag__item ">R&amp;B</a>-->
+<!--            <a class="singer_tag__item ">民族乐</a>-->
+<!--            <a class="singer_tag__item ">轻音乐</a>-->
+<!--            <a class="singer_tag__item ">爵士</a>-->
+<!--            <a class="singer_tag__item ">古典</a>-->
+<!--            <a class="singer_tag__item ">乡村</a>-->
+<!--            <a class="singer_tag__item ">蓝调</a>-->
+<!--        </div>-->
     </div>
 
     <!-- 歌手列表 -->
@@ -59,9 +109,26 @@
             </li>
         </ul>
     </div>
+
+    <div class="footer">
+        <div class="links">
+            <a hidefocus="true" href="#" target="_blank">开发者：</a>
+            <a hidefocus="true" href="https://github.com/linliquan" target="_blank">小松音乐</a>
+            <a hidefocus="true" href="#" target="_blank">广告合作</a>
+        </div>
+        <div class="copyright">
+            <p style="-moz-user-select: text;-webkit-user-select: text;-ms-user-select: text; user-select:text">
+                如有侵权，请联系：xiaosong@163.com </p>
+            <p>Copyright&nbsp;&nbsp;©&nbsp;&nbsp;2023&nbsp;&nbsp;版权所有&nbsp;&nbsp;
+                <a hidefocus="true" href="#" target="_blank">桂ICP备19004924号</a>
+                <a hidefocus="true" class="office-verification"
+                   href="http://netadreg.gzaic.gov.cn/ntmm/WebSear/WebLogoPub.aspx?logo=440106106022006022000209"
+                   target="_blank"></a>
+            </p>
+        </div>
+    </div>
 </div>
 </body>
 <script src="../../plugins/vue/vue.js"></script>
 <script src="geshou.js"></script>
-
 </html>

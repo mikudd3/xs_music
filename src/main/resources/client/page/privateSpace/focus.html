@@ -1,10 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>关注</title>
+    <link rel="stylesheet" href="css/focus.css">
 </head>
+
 <body>
 
+<div id="app">
+    <div class="box">
+        <a v-for="(item, index) in items" :key="index" href="#">
+            <img class="img" :src="item.pic">
+            <p>{{ item.name }}</p>
+        </a>
+    </div>
+</div>
+<script src="../../plugins/vue/vue.js"></script>
+<script src="../../plugins/element-ui/index.js"></script>
+<link rel="stylesheet" href="../../plugins/element-ui/index.css">
+<script src="../../plugins/axios/axios-0.18.0.js"></script>
+<script src="js/focus.js"></script>
 </body>
+
 </html>

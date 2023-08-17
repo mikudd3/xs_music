@@ -14,6 +14,7 @@ import com.win.xs_music.service.UserService;
 import com.win.xs_music.util.SMSUtils;
 import com.win.xs_music.util.ValidateCodeUtils;
 import com.win.xs_music.vo.UserCountVo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpSession;
 import java.nio.file.NotLinkException;
 
 @Service
+@Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         implements UserService {
 
@@ -105,12 +107,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
     @Override
     public R send(String phone, HttpSession session) {
-        if (StringUtils.isNotEmpty(phone)){
-            Integer code = ValidateCodeUtils.generateValidateCode(4);
-
-            //SMSUtils.sendMessage();
-
+        if (StringUtils.isNotEmpty(phone)) {
+            String code = ValidateCodeUtils.generateValidateCode(4).toString();
+            log.info("生成的验证码为：{}", code);
+            SMSUtils.sendMessage("苏健昌的音乐", "SMS_462595788", phone, code);
+            session.setAttribute("code", code);
+            return R.success("短信发送成功");
         }
-        return null;
+        return R.error("登陆失败");
     }
+
+
+
+
 }

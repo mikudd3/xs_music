@@ -56,7 +56,7 @@ ul {
 }
 
 .singer_list__item_box {
-    background-color: #black;
+    background-color: black;
 }
 
 .mod_singer_list {
@@ -88,19 +88,12 @@ li {
 .singer_list__item_box {
     position: relative;
     margin-right: 20px;
-    background-color: #black;
+    background-color: black;
     min-height: 195px;
-    min-width: 195px;
-    height: 200px;
     padding: 25px 0;
     overflow: hidden;
 }
 
 a:hover {
     color: #c22f31;
-}
-/*设置图片格式*/
-.singer_list__item_box {
-    justify-content: center;
-    align-items: center;
 }
