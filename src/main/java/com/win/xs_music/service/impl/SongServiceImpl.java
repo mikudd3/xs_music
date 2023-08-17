@@ -50,7 +50,7 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
     @Override
     public R selectList(Integer id) {
         List<Song> songs = singerMapper.selectList(id);
-        log.info("查到歌曲：{}",songs);
+        log.info("查到了：{}首歌曲",songs.size());
         for (int i = 0; i < songs.size(); i++) {
             String[] arr = songs.get(i).getName().split("-");
             songs.get(i).setName(arr[1]);

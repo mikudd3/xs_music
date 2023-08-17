@@ -22,6 +22,6 @@ public interface SingerMapper extends BaseMapper<Singer> {
     @Select("select name from singer")
     List<String> getSingerName();
 
-    @Select("SELECT name,introduction FROM `song` WHERE singer_id = #{id}")
+    @Select("SELECT * FROM `song` WHERE singer_id = #{id}")
     List<Song> selectList(Integer id);
 }

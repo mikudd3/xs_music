@@ -37,9 +37,7 @@ public class SongListController {
     @GetMapping("/getStyle")
     public R getStyle(){
         R result = songListService.getStyle();
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!1");
         log.info(String.valueOf(result));
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!2");
         return result;
     }
 

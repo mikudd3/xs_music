@@ -22,7 +22,10 @@ new Vue({
         }
     },
     methods: {
-
+        handleClick(id) {
+            // 在这里处理获取歌曲ID的操作
+            console.log("点击了歌曲ID：" + id);
+        },
         get(){
             console.log(this.text)
             this.getAll();
@@ -32,7 +35,7 @@ new Vue({
         getAll(){
             axios({
                 method:"post",
-                url:"/singer/one?id="+2,
+                url:"/singer/one?id="+4,
             }).then(res=>{
                 let singer = res.data.data;
                 console.log(singer)
@@ -40,12 +43,12 @@ new Vue({
                 this.introduction = singer.introduction;
                 this.birth = singer.birth;
                 this.location = singer.location;
-                this.imageUrl = singer.pic;
+                this.imageurl = singer.pic;
                 console.log(this.imageUrl)
             });
             axios({
                 method:"post",
-                url:"/song/list?id="+2,
+                url:"/song/list?id="+4,
             }).then(rest=>{
                 this.songs = rest.data.data;
             })
