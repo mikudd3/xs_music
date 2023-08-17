@@ -1,12 +1,16 @@
 package com.win.xs_music.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.win.xs_music.common.R;
 import com.win.xs_music.mapper.SongListMapper;
+import com.win.xs_music.pojo.Singer;
 import com.win.xs_music.pojo.SongList;
 import com.win.xs_music.service.SongListService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,4 +45,25 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
         log.info("查询到的map集合为：{}", map);
         return R.success(map);
     }
+
+    //歌手信息分页查询
+    @Override
+    public R getPage(Integer currentPage, Integer pageSize, String name) {
+        Page<SongList> page = new Page<>(currentPage, pageSize);
+        LambdaQueryWrapper<SongList> wrapper = new LambdaQueryWrapper<>();
+        wrapper.like(StringUtils.isNotEmpty(name), SongList::getTitle, name);
+        this.page(page, wrapper);
+        return R.success(page);
+    }
+
+    // 删除歌手
+//    @Override
+//    public R delete(Integer id) {
+//        //删除歌单
+//        songListMapper.getListById(id);
+//
+//        //删除歌手
+//        this.removeById(id);
+//        return R.success("删除成功");
+//    }
 }

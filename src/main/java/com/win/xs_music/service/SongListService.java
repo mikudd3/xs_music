@@ -7,5 +7,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface SongListService extends IService<SongList> {
 
+    R getPage(Integer currentPage, Integer pageSize, String name);
+
     R getStyle();
+
+    //删除歌单
+//    R delete(Integer id);
 }
