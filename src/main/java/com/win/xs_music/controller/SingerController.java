@@ -28,9 +28,7 @@ public class SingerController {
     @GetMapping("/getSingerLocationCategory")
     public R getSingerLocationCategory() {
         R r = singerService.getSingerLocationCategory();
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!3");
         log.info(String.valueOf(r));
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!4");
         return  r;
     }
 
@@ -64,6 +62,13 @@ public class SingerController {
     public R delete(Integer id) {
         log.info("删除歌手传入信息：{}", id);
         return singerService.delete(id);
+    }
+
+    //查询一个歌手信息
+    @PostMapping("one")
+    public R getOne(Integer id){
+        log.info("查询的歌手id为：{}",id);
+        return singerService.getOne(id);
     }
 
 }

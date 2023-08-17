@@ -87,4 +87,12 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
         SingCountVo singCountVo = new SingCountVo(singerCountMan, singerCountWomen, singerCount);
         return R.success(singCountVo);
     }
+
+    @Override
+    public R getOne(Integer id) {
+        Singer singer = songMapper.selectOne(id);
+        return R.success(singer);
+
+    }
+
 }

@@ -16,4 +16,7 @@ public interface SingerService extends IService<Singer> {
     R delete(Integer id);
 
     R selectCount();
+
+
+    R getOne(Integer id);
 }
