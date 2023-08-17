@@ -11,4 +11,14 @@
         GROUP BY song_list.style_ids
         ORDER BY count DESC LIMIT 5
     </select>
+
+    <select id="getSongList" resultType="java.util.Map">
+        SELECT song_list.id as id ,song_list.pic as pic,song_list.title as title,song_list.love as love
+        from song_style,song_list
+        WHERE song_style.id = song_list.style_ids
+        <if test="style_name != null and style_name != ''">
+            and song_style.style_name like concat('%',#{style_name},'%')
+        </if>
+        ORDER BY song_list.id
+    </select>
 </mapper>

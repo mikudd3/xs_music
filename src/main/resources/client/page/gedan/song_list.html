@@ -61,23 +61,33 @@
 
 <!--				歌单类型-->
 				<div class="title">
-					<div id="app">
-						<a v-for="category in categories" :href="category.url">{{ category.name }}</a>
+					<div>
+						<a class="all" rel="nofollow" @click="getPriceRange()">全部歌单</a>
+						<a rel="nofollow" @click="getPriceRange('华语')">华语</a>
+						<a rel="nofollow" @click="getPriceRange('粤语')">粤语</a>
+						<a rel="nofollow" @click="getPriceRange('欧美')">欧美</a>
+						<a rel="nofollow" @click="getPriceRange('日韩')">日韩</a>
+						<a rel="nofollow" @click="getPriceRange('轻音乐')">轻音乐</a>
+						<a rel="nofollow" @click="getPriceRange('BGM')">BGM</a>
+						<a rel="nofollow" @click="getPriceRange('乐器')">乐器</a>
+						<a rel="nofollow" @click="getPriceRange('电子')">电子</a>
 					</div>
 				</div>
 
 				<div class="content">
 <!--					迭代遍历歌单-->
 						<div >
-							<a v-for="(song_list,i) in song_list" href="../gedan/gedan.html">
-								<img  src="../../image/a%20(1).png">	<!--图片-->
-								<div>11111111111111111111</div>	<!--歌单介绍-->
+							<a v-for="(song_list,i) in items" href="../gedan/gedan.html">
+								<img  :src="song_list.pic">	<!--图片-->
+								<div>{{song_list.title}}</div>	<!--歌单介绍-->
 							</a>
-
 						</div>
 				</div>
 			</div>
 		</div>
+	<div class="aaa">
+
+	</div>
 	<div class="footer">
 		<div class="links">
 			<a hidefocus="true" href="#" target="_blank">开发者：</a>
@@ -99,7 +109,7 @@
 <script src="../../plugins/vue/vue.js"></script>
 <script src="../../plugins/axios/axios-0.18.0.js"></script>
 <script src="../../plugins/echarts/echarts.min.js"></script>
-	<link href="../../plugins/element-ui/index.css">
+<link href="../../plugins/element-ui/index.css">
 <script src="../../js/song_list.js"></script>	<!--遍历歌单-->
 
 <script ></script>

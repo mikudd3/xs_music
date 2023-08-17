@@ -5,9 +5,12 @@ import com.win.xs_music.common.R;
 import com.win.xs_music.dto.SongListPageDto;
 import com.win.xs_music.pojo.SongList;
 import com.win.xs_music.service.SongListService;
+import com.win.xs_music.vo.SongListflVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/songlist")
@@ -54,5 +57,16 @@ public class SongListController {
         log.info("要删除的用户id为:{}", id);
         boolean b = songListService.removeById(id);
         return b ? R.success("删除成功") : R.success("删除失败");
+    }
+
+    //歌单分类
+    @RequestMapping("/songfl")
+    public ArrayList<SongListflVo> getSongList(String style_name){
+        ArrayList<SongListflVo> sl=songListService.getSongList(style_name);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+        log.info(String.valueOf(sl));
+        System.out.println(style_name);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!2");
+        return sl;
     }
 }

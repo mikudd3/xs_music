@@ -77,11 +77,13 @@ body{
 }
 
 .content div > a{
+	float: left;
+	text-align: left;
 	width: 24%;
 	height: 300px;
 	background-color:rgba(0,0,0,0);
 	display: inline-block;
-	border-radius: 10px;
+	border-radius: 20px;
 	margin: 5px;
 }
 
@@ -92,13 +94,18 @@ body{
 
 .content div> a > img{
 
-	width: 250px;
-	height: 250px;
+	width: 240px;
+	height: 240px;
 	padding: 10px;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .content div> a > img ~ div{
 	text-align: center;
+}
+
+.aaa {
+	clear: both;
 }
 
 #footer{

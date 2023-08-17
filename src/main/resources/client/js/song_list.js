@@ -2,51 +2,34 @@ new Vue({
     el: '#m3',
     data(){
         return {
-            categories: [],
-            song_list: [],
-            title:"",
-            pic:"",
-            introduction:"",
-            type:"",
-            style_ids:"",
-            create_time:""
+            items: [
+                {
+                    id: "",
+                    title: "飞得更高！！！",
+                    pic: "../../image/a (7).png",
+                    love: "",
+                }
+
+            ],
         }
     },
-    created() {
-        // 调用API或其他方式获取categories数据
-        // 假设获取到的数据是一个数组
-        this.categories=[
-            { name: '全部歌单', url: '#' },
-            { name: '华语', url: '#' },
-            { name: '粤语', url: '#' },
-            { name: '欧美', url: '#' },
-            { name: '日韩', url: '#' },
-            { name: '轻音乐', url: '#' },
-            { name: 'BGM', url: '#' },
-            { name: '乐器', url: '#' }];
-        this.pic="../../image/a(1).png";
-        this.introduction="11111";
+    mounted() {
+        this.getPriceRange();
     },
-    methods:{
-        listUsers(){
-            axios({
-                method:"get",
-                url:"#",
-                params:{
-                    title:this.title,
-                    pic:this.pic,
-                    introduction:this.introduction,
-                    type:this.type,
-                    style_ids:this.style_ids,
-                    create_time: this.create_time
-                }
-            }).then(res => {
-                this.song_list = res.data;
-            })
-        },
 
+    methods:{
+        getPriceRange(range) {
+            axios({
+                url: "/songlist/songfl",
+                method: "get",
+                params: {style_name: range}
+            }).then(resp => {
+
+                    this.items = resp.data;
+                    for (let index = 0; index < this.items.length; index++) {
+                        this.items[index].pic = `../../image/a (7).png`
+                    }
+            })
+        }
     },
-    mounted(){
-        this.listUsers();
-    }
 })
