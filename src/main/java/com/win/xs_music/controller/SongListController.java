@@ -49,10 +49,10 @@ public class SongListController {
     }
 
     //删除歌单
-//    @PostMapping("/deleteById")
-//    public R delete(Integer id) {
-//        log.info("要删除的用户id为:{}", id);
-//        boolean b = songListService.removeById(id);
-//        return b ? R.success("删除成功") : R.success("删除失败");
-//    }
+    @PostMapping("/deleteById")
+    public R delete(Integer id) {
+        log.info("要删除的用户id为:{}", id);
+        boolean b = songListService.removeById(id);
+        return b ? R.success("删除成功") : R.success("删除失败");
+    }
 }

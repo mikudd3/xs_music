@@ -92,7 +92,7 @@ new Vue({
                 //根据id查询数据
                 axios({
                     method: "post",
-                    url: "/songlist/delete?id=" + row.id,
+                    url: "/songlist/deleteById?id=" + row.id,
                 }).then((res) => {
                     if (res.data.code == 1) {
                         this.$message.success(res.data.msg);

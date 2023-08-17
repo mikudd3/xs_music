@@ -56,14 +56,4 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
         return R.success(page);
     }
 
-    // 删除歌手
-//    @Override
-//    public R delete(Integer id) {
-//        //删除歌单
-//        songListMapper.getListById(id);
-//
-//        //删除歌手
-//        this.removeById(id);
-//        return R.success("删除成功");
-//    }
 }
