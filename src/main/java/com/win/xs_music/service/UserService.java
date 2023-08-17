@@ -5,6 +5,7 @@ import com.win.xs_music.common.R;
 import com.win.xs_music.pojo.User;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public interface UserService extends IService<User> {
 
@@ -21,4 +22,6 @@ public interface UserService extends IService<User> {
 
     R updatePhone(User user);
 
+    R send(String phone, HttpSession session);
 }
+

@@ -35,7 +35,6 @@ new Vue({
                 url: "/user/send",
                 data:{
                     phone:this.phone,
-                    password:123,
                 }
             })
         },

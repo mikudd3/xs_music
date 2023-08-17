@@ -11,11 +11,14 @@ import com.win.xs_music.common.R;
 import com.win.xs_music.mapper.UserMapper;
 import com.win.xs_music.pojo.User;
 import com.win.xs_music.service.UserService;
+import com.win.xs_music.util.SMSUtils;
+import com.win.xs_music.util.ValidateCodeUtils;
 import com.win.xs_music.vo.UserCountVo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.nio.file.NotLinkException;
 
 @Service
@@ -98,5 +101,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         //更新电话
         boolean ret = this.updateById(user);
         return ret ? R.success("更新成功") : R.error("更新失败");
+    }
+
+    @Override
+    public R send(String phone, HttpSession session) {
+        if (StringUtils.isNotEmpty(phone)){
+            Integer code = ValidateCodeUtils.generateValidateCode(4);
+
+            //SMSUtils.sendMessage();
+
+        }
+        return null;
     }
 }

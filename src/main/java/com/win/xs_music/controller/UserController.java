@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/user")
@@ -59,6 +60,16 @@ public class UserController {
     @GetMapping("/getUser")
     public R getUser() {
         return userService.getUser();
+    }
+
+
+
+    //发送验证码
+    @PostMapping("/send")
+    public R send(String phone, HttpSession session){
+        log.info("输入的手机号为：{}",phone);
+        return null;
+        //return userService.send(phone,session);
     }
 
 }
