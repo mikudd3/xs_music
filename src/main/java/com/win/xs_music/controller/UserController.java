@@ -63,8 +63,8 @@ public class UserController {
     //验证码登录
     @PostMapping("login1")
     public R login1(@RequestBody UserLoginDto userLoginDto, HttpServletRequest request) {
-        log.info("输入的信息为:{}",userLoginDto);
-        return userService.login1(userLoginDto,request);
+        log.info("输入的信息为:{}", userLoginDto);
+        return userService.login1(userLoginDto, request);
     }
 
 
@@ -75,13 +75,18 @@ public class UserController {
     }
 
 
-
     //发送验证码
     @PostMapping("/send")
-    public R send(@RequestBody User user, HttpSession session){
-        log.info("输入的手机号为：{}",user.getPhone());
+    public R send(@RequestBody User user, HttpSession session) {
+        log.info("输入的手机号为：{}", user.getPhone());
 //        return null;
-        return userService.send(user.getPhone(),session);
+        return userService.send(user.getPhone(), session);
+    }
+
+    @PostMapping("/getLoginCode")
+    public R getLoginCode(@RequestBody User user, HttpSession session) {
+        log.info("获取的用户信息为：{}", user);
+        return userService.getLoginCode(user.getPhone(), session);
     }
 
 }

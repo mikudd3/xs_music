@@ -15,13 +15,6 @@ new Vue({
             yhsf: [
                 {required: true, message: '请选择用户身份', trigger: 'blur'}
             ],
-            sex: [
-                {required: true, message: '请选择性别', trigger: 'blur'},
-            ],
-            sjh: [
-                {required: true, message: '请输入手机号', trigger: 'blur'},
-                {min: 11, max: 11, message: '长度为11的号码', trigger: 'blur'}
-            ],
         }
     },
     methods: {
@@ -32,19 +25,6 @@ new Vue({
                 method: "get",
             }).then(resp => {
                 if (resp.data.code == 1) {
-                    this.userdata = resp.data.data;
-                } else {
-                    this.$message.error(resp.data.msg);
-                }
-            })
-        },
-        //动态获取信息
-        getuserinfo(){
-            axios({
-                url: "/user/getuserinfo",
-                method: "get",
-            }).then(resp => {
-                if (resp.data.code == 1) {
                     this.formdata = resp.data.data;
                 } else {
                     this.$message.error(resp.data.msg);
@@ -52,9 +32,9 @@ new Vue({
             })
         },
         //修改信息
-        "updata"() {
+        updata() {
             axios({
-                url: "/user/updata",
+                url: "/user/update",
                 method: "post",
                 data: this.formdata,
             }).then(resp => {

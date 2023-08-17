@@ -90,6 +90,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         //从本地线程获取登录用户的id
         Integer userId = BaseContext.getCurrentId();
         //根据id查询用户信息
+//        User u = this.getById(64); //测试
         User u = this.getById(userId);
         //根据用户id
         return R.success(u);
@@ -121,23 +122,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     @Override
     public R login1(UserLoginDto userLoginDto, HttpServletRequest request) {
         String codeSession = (String) request.getSession().getAttribute(userLoginDto.getPhone());
-        log.info(codeSession);
-        System.out.println(codeSession != null);
-        String code = userLoginDto.getCode()+"";
-        log.info(code);
+//        log.info(codeSession);
+//        System.out.println(codeSession != null);
+        String code = userLoginDto.getCode() + "";
+//        log.info(code);
         if (codeSession != null && codeSession.equals(code)) {
-            log.info("22222");
+//            log.info("22222");
             QueryWrapper<User> query = Wrappers.query();
             query.eq("phone", userLoginDto.getPhone());
             User user = this.getOne(query);
             if (user == null) {
-                log.info("3333");
+//                log.info("3333");
                 user = new User();
                 user.setPhone(userLoginDto.getPhone());
                 user.setUsername(userLoginDto.getPhone());
                 user.setPassword(userLoginDto.getPhone());
                 this.save(user);
             }
+            //查找新创建用户的id
+            user = this.getOne(query);
             request.setAttribute("user", user.getId());
             return R.success(user);
         }
@@ -145,4 +148,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     }
 
 
+    @Override
+    public R getLoginCode(String phone, HttpSession session) {
+        Object code = session.getAttribute(phone);
+        log.info("验证码为：{}", code);
+        return R.success(code);
+    }
 }

@@ -14,6 +14,7 @@ public interface UserService extends IService<User> {
     R getPage(Integer currentPage, Integer pageSize, User user);
 
     R update(User user);
+
     R selectUserCount();
 
     R login(User user, HttpServletRequest request);
@@ -27,5 +28,7 @@ public interface UserService extends IService<User> {
 
 
     R login1(UserLoginDto userLoginDto, HttpServletRequest request);
+
+    R getLoginCode(String phone, HttpSession session);
 }
 
