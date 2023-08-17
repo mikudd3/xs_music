@@ -136,10 +136,86 @@
         </p>
     </div>
 </div>
+<!-- 播放器组件 -->
+<div id="music" >
+    <!-- 正在播放的歌曲信息（图片） -->
+    <span id="playingsonginfo">
+				<span>
+					<el-image
+                            id="img"
+                            :src="this.playsong.ImgUrl"
+                    >
+					  <div slot="error" class="image-slot">
+					        <i class="el-icon-picture-outline"></i>
+					</div>
+					</el-image>
+				</span>
+			</span>
+    <!-- 文字信息 -->
+    <span style="float:left; margin-top: 30px;margin-left: 50px;font-size: 15px;">
+				{{this.playsong.name}}
+				<br/>
+				{{this.playsong.singer}}
+			</span>
 
+    <!-- 播放器控制按键(上一首，播放暂停，下一首) -->
+    <div >
+        <el-button class="eic" icon="el-icon-d-arrow-left" @click="backup" circle></el-button>
+        <el-button v-if="this.state == true" class="eic" icon="el-icon-caret-right"  @click="play" circle></el-button>
+        <el-button v-else class="eic" icon="el-icon-video-pause"  @click="stop" circle></el-button>
+        <el-button class="eic" icon="el-icon-d-arrow-right" @click="nextto" circle></el-button>
+    </div>
+
+
+    <!--播放器-->
+    <div style="align-items: center ;margin-top: 20px;display: inline;">
+        <audio id="musicer" controls="controls" style="width: 900px;">
+            <source :src="this.playsong.song" type="audio/mp3" />
+            <embed height="100" width="100" src="song.mp3" />
+        </audio>
+    </div>
+
+
+    <!-- 播放单抽屉 -->
+    <span id="song_list">
+				<el-button icon="el-icon-s-unfold" @click="changelist" plain></el-button>
+			</span>
+
+    <el-drawer
+            title="播放列表"
+            :visible.sync="drawer"
+            :direction="direction"
+            :modal="false">
+        <template>
+            <el-table
+                    :data="songlist"
+                    style="width: 100%">
+                <el-table-column
+                        prop="name"
+                        label="歌名"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="singer"
+                        label="歌手"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        label="操作"
+                        width="100">
+                    <template slot-scope="scope">
+                        <el-button @click="selectplay(scope.$index)" type="text" size="small">播放</el-button>
+                        <el-button @click="deletesong(scope.$index)" type="text" size="small">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </template>
+    </el-drawer>
+</div>
 <script src="../../plugins/vue/vue.js"></script>
 <script src="../../plugins/element-ui/index.js"></script>
-<link href="../../plugins/element-ui/index.css">
+<script src="../../plugins/jquery/jquery-1.10.0.min.js"></script>
+<link rel="stylesheet" href="../../plugins/element-ui/index.css">
 <script src="../../plugins/axios/axios-0.18.0.js"></script>
 <script src="index.js"></script>
 </body>

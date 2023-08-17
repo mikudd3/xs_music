@@ -581,3 +581,48 @@ a {
     text-align: center;
     color: #000;
 }
+
+#music{
+    background: #f1f3f4;
+    border: none;
+    height: 105px;
+    width: 100%;
+    margin: 0px ;
+    padding: 0px ;
+    position: fixed;
+    bottom: 0;
+    box-shadow: 4px 2px 4px 0 rgba(0, 0, 0, 0.5);
+    text-align: center
+}
+
+#playingsonginfo{
+    float: left;
+    margin-left: 20px;
+}
+
+#img{
+    width: 90px; height: 90px;border-radius: 10px;margin-top: 10px;
+}
+
+
+#playingsonginfo i{
+    font-size: 100px;
+    color: #8c939d;
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+
+.eic {
+    width: 50px;
+    height: 50px;
+
+
+}
+
+#song_list{
+    float: right;
+    margin-top: 0px;
+}
+
