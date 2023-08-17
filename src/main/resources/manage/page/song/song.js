@@ -104,8 +104,8 @@ new Vue({
         },
         //添加
         handleAdd() {
-            this.formData.pic = this.imageUrl;
-            this.formData.url = this.video;
+            // this.formData.pic = this.imageUrl;
+            // this.formData.url = this.video;
             //发送请求
             axios({
                 method: "POST",
@@ -130,14 +130,14 @@ new Vue({
         //弹出编辑窗口
         handleUpdate(row) {
             this.formData = row;
-            this.imageUrl = row.pic;
-            this.video = row.url;
+            // this.imageUrl = row.pic;
+            // this.video = row.url;
             this.dialogFormVisible4Edit = true;
         },
         //编辑
         handleEdit() {
-            this.formData.pic = this.imageUrl;
-            this.formData.url = this.video;
+            // this.formData.pic = this.imageUrl;
+            // this.formData.url = this.video;
             //发送请求
             axios({
                 method: "post",

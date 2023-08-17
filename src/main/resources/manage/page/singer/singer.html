@@ -31,11 +31,16 @@
 
             <el-table-column prop="image" label="歌手图片" width="90" align="center">
                 <template slot-scope="scope">
-                    　　　　 <img :src="'/common/download?name=' + scope.row.pic" width="80" height="80"/>
+                    　　　　 <img :src="scope.row.pic" width="80" height="80"/>
                 </template>
             </el-table-column>
             <el-table-column prop="name" label="歌手名" align="center"></el-table-column>
-            <el-table-column prop="sex" label="性别" align="center"></el-table-column>
+            <el-table-column prop="sex" label="性别" align="center">
+                <template slot-scope="scope">
+                    <span v-if="scope.row.sex == 1">男</span>
+                    <span v-else-if="scope.row.sex == 0">女</span>
+                </template>
+            </el-table-column>
             <el-table-column prop="birth" label="出生日期" align="center"></el-table-column>
             <el-table-column prop="location" label="地区" align="center"></el-table-column>
             <el-table-column prop="introduction" label="简介" align="center">
@@ -63,11 +68,7 @@
                          label-width="100px">
                     <el-row>
                         <el-form-item label="头像:" prop="avatar" class="uploadImg">
-                            <el-upload class="avatar-uploader" action="/common/upload" :show-file-list="false"
-                                       :on-success="handleAvatarSuccess" :on-change="onChange" ref="upload">
-                                <img v-if="'/common/download?name=' + imageUrl" :src="'/common/download?name=' + imageUrl" class="avatar" style="width: 70px; height: 70px;"/>
-                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                            </el-upload>
+                            <el-input v-model="formData.pic"/>
                         </el-form-item>
                     </el-row>
 
@@ -82,7 +83,10 @@
                     <el-row>
                         <el-col :span="12">
                             <el-form-item label="性别" prop="sex">
-                                <el-input v-model="formData.sex"/>
+                                <el-radio-group v-model="formData.sex">
+                                    <el-radio :label="1">男</el-radio>
+                                    <el-radio :label="0">女</el-radio>
+                                </el-radio-group>
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -133,11 +137,7 @@
                          label-width="100px">
                     <el-row>
                         <el-form-item label="头像:" prop="avatar" class="uploadImg">
-                            <el-upload class="avatar-uploader" action="/common/upload" :show-file-list="false"
-                                       :on-success="handleAvatarSuccess" :on-change="onChange" ref="upload">
-                                <img v-if="'/common/download?name=' + imageUrl" :src="'/common/download?name=' + imageUrl" class="avatar" style="width: 70px; height: 70px;"/>
-                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                            </el-upload>
+                            <el-input v-model="formData.pic"/>
                         </el-form-item>
                     </el-row>
 
@@ -152,7 +152,10 @@
                     <el-row>
                         <el-col :span="12">
                             <el-form-item label="性别" prop="sex">
-                                <el-input v-model="formData.sex"/>
+                                <el-radio-group v-model="formData.sex">
+                                    <el-radio :label="1">男</el-radio>
+                                    <el-radio :label="0">女</el-radio>
+                                </el-radio-group>
                             </el-form-item>
                         </el-col>
                     </el-row>

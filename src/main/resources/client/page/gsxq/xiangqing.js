@@ -8,24 +8,12 @@ new Vue({
             birth:"2020-01-01",       //歌手生日
             location:"中国",          //歌手国籍
             pic:"",                   //歌手图片
-            songs:[
-                {
-                    name:"素颜",
-                    introduction:"素颜",
-                },
-                {
-                    name:"有何不可",
-                    introduction:"自定义",
-                },
-            ],                 //歌曲列表
-            imageurl:"all.jpg",
+            songs:[],                 //歌曲列表
+            imageurl:"https://bkimg.cdn.bcebos.com/pic/d1a20cf431adcbef76091cafaff839dda3cc7cd93159?x-bce-process=image/resize,m_lfit,w_536,limit_1/format,f_auto"
         }
     },
     methods: {
-        handleClick(id) {
-            // 在这里处理获取歌曲ID的操作
-            console.log("点击了歌曲ID：" + id);
-        },
+
         get(){
             console.log(this.text)
             this.getAll();
@@ -35,7 +23,7 @@ new Vue({
         getAll(){
             axios({
                 method:"post",
-                url:"/singer/one?id="+4,
+                url:"/singer/one?id="+2,
             }).then(res=>{
                 let singer = res.data.data;
                 console.log(singer)
@@ -43,14 +31,8 @@ new Vue({
                 this.introduction = singer.introduction;
                 this.birth = singer.birth;
                 this.location = singer.location;
-                this.imageurl = singer.pic;
+                this.imageUrl = singer.pic;
                 console.log(this.imageUrl)
-            });
-            axios({
-                method:"post",
-                url:"/song/list?id="+4,
-            }).then(rest=>{
-                this.songs = rest.data.data;
             })
         },
     }

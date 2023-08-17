@@ -10,7 +10,7 @@ new Vue({
                 {
                     pic: "../../image/tx.jpg",
                     name: "陈奕迅",
-                    sex: "男",
+                    sex: 1,
                     birth: "中国香港",
                     location: "中国香港",
                     introduction: "陈奕迅（Eason Chan），" +
@@ -31,7 +31,6 @@ new Vue({
             dialogFormVisible: false,//控制表单是否可见
             dialogFormVisible4Edit: false,
             name: "",
-            imageUrl: "",
         }
     },
     //钩子函数，VUE对象初始化完成后自动执行
@@ -75,7 +74,6 @@ new Vue({
         },
         //添加
         handleAdd() {
-            this.formData.pic = this.imageUrl;
             //发送请求
             axios({
                 method: "POST",
@@ -101,11 +99,9 @@ new Vue({
         handleUpdate(row) {
             this.formData = row;
             this.dialogFormVisible4Edit = true;
-            this.imageUrl = "";
         },
         //编辑
         handleEdit() {
-            this.formData.pic = this.imageUrl;
             //发送请求
             axios({
                 method: "post",

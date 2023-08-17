@@ -63,10 +63,11 @@ new Vue({
         handleUpdate(row) {
             this.formData = row;
             this.dialogFormVisible4Edit = true;
+            this.imageUrl = "";
         },
         //编辑
         handleEdit() {
-            this.formData.image = this.imageUrl;
+            this.formData.pic = this.imageUrl;
             //发送请求
             axios({
                 method: "post",
