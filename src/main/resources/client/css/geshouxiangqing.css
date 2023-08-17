@@ -77,7 +77,6 @@ div {
     position: relative;
 }
 .song-list{
-    height: 400px;
     top: 40px;
     position: relative;
     top: 100px;
@@ -154,6 +153,9 @@ a {
 }
 
 
+/*.foot {*/
+/*    flex-shrink: 0;*/
+/*}*/
 .foot{
     height: 200px;
     position: relative;

@@ -62,4 +62,11 @@ public class SongController {
         boolean ret = songService.removeById(id);
         return ret ? R.success("删除成功") : R.error("删除失败");
     }
+
+    @PostMapping("list")
+    public R selectList(Integer id){
+      return  songService.selectList(id);
+    }
+
+
 }

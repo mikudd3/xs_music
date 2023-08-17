@@ -13,4 +13,5 @@ public interface SongService extends IService<Song> {
 
     R getSingerName();
 
+    R selectList(Integer id);
 }

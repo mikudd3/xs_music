@@ -29,8 +29,6 @@ public class Singer implements Serializable {
     private LocalDateTime updateTime; //更新时间
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private LocalDateTime createTime; //创建时间
-
-
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);

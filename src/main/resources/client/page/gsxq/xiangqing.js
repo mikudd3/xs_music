@@ -8,8 +8,17 @@ new Vue({
             birth:"2020-01-01",       //歌手生日
             location:"中国",          //歌手国籍
             pic:"",                   //歌手图片
-            songs:[],                 //歌曲列表
-            imageurl:"https://bkimg.cdn.bcebos.com/pic/d1a20cf431adcbef76091cafaff839dda3cc7cd93159?x-bce-process=image/resize,m_lfit,w_536,limit_1/format,f_auto"
+            songs:[
+                {
+                    name:"素颜",
+                    introduction:"素颜",
+                },
+                {
+                    name:"有何不可",
+                    introduction:"自定义",
+                },
+            ],                 //歌曲列表
+            imageurl:"all.jpg",
         }
     },
     methods: {
@@ -33,6 +42,12 @@ new Vue({
                 this.location = singer.location;
                 this.imageUrl = singer.pic;
                 console.log(this.imageUrl)
+            });
+            axios({
+                method:"post",
+                url:"/song/list?id="+2,
+            }).then(rest=>{
+                this.songs = rest.data.data;
             })
         },
     }

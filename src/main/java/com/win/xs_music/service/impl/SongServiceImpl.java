@@ -46,4 +46,15 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
         log.info("获得的歌手名为：{}", singerName);
         return R.success(singerName);
     }
+
+    @Override
+    public R selectList(Integer id) {
+        List<Song> songs = singerMapper.selectList(id);
+        log.info("查到歌曲：{}",songs);
+        for (int i = 0; i < songs.size(); i++) {
+            String[] arr = songs.get(i).getName().split("-");
+            songs.get(i).setName(arr[1]);
+        }
+        return R.success(songs);
+    }
 }

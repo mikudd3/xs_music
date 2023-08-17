@@ -25,7 +25,6 @@ public class Song implements Serializable {
 
     private String introduction;
 
-
     private String pic;
 
     private String lyric;

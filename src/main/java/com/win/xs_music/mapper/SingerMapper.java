@@ -2,6 +2,7 @@ package com.win.xs_music.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.win.xs_music.pojo.Singer;
+import com.win.xs_music.pojo.Song;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -21,4 +22,6 @@ public interface SingerMapper extends BaseMapper<Singer> {
     @Select("select name from singer")
     List<String> getSingerName();
 
+    @Select("SELECT name,introduction FROM `song` WHERE singer_id = #{id}")
+    List<Song> selectList(Integer id);
 }
