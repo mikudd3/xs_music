@@ -99,6 +99,7 @@ li {
 a:hover {
     color: #c22f31;
 }
+/*设置图片格式*/
 .singer_list__item_box {
     justify-content: center;
     align-items: center;
