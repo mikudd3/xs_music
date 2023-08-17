@@ -4,6 +4,7 @@ package com.win.xs_music.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.win.xs_music.common.R;
+import com.win.xs_music.dto.UserLoginDto;
 import com.win.xs_music.dto.UserPageDto;
 import com.win.xs_music.mapper.UserMapper;
 import com.win.xs_music.pojo.User;
@@ -50,11 +51,22 @@ public class UserController {
         return userService.selectUserCount();
     }
 
+
+    //密码登录
     @PostMapping("login")
     public R login(@RequestBody User user, HttpServletRequest request) {
-        log.info("输入的信息为:", user);
+        log.info("输入的信息为:{}", user);
         return userService.login(user, request);
     }
+
+
+    //验证码登录
+    @PostMapping("login1")
+    public R login1(@RequestBody UserLoginDto userLoginDto, HttpServletRequest request) {
+        log.info("输入的信息为:{}",userLoginDto);
+        return userService.login1(userLoginDto,request);
+    }
+
 
     //获取当前登录的用户
     @GetMapping("/getUser")

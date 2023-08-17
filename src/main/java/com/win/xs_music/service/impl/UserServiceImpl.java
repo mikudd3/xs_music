@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.win.xs_music.common.BaseContext;
 import com.win.xs_music.common.R;
+import com.win.xs_music.dto.UserLoginDto;
 import com.win.xs_music.mapper.UserMapper;
 import com.win.xs_music.pojo.User;
 import com.win.xs_music.service.UserService;
@@ -110,11 +111,37 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         if (StringUtils.isNotEmpty(phone)) {
             String code = ValidateCodeUtils.generateValidateCode(4).toString();
             log.info("生成的验证码为：{}", code);
-            SMSUtils.sendMessage("苏健昌的音乐", "SMS_462595788", phone, code);
-            session.setAttribute("code", code);
+            //SMSUtils.sendMessage("苏健昌的音乐", "SMS_462595788", phone, code);
+            session.setAttribute(phone, code);
             return R.success("短信发送成功");
         }
         return R.error("登陆失败");
+    }
+
+    @Override
+    public R login1(UserLoginDto userLoginDto, HttpServletRequest request) {
+        String codeSession = (String) request.getSession().getAttribute(userLoginDto.getPhone());
+        log.info(codeSession);
+        System.out.println(codeSession != null);
+        String code = userLoginDto.getCode()+"";
+        log.info(code);
+        if (codeSession != null && codeSession.equals(code)) {
+            log.info("22222");
+            QueryWrapper<User> query = Wrappers.query();
+            query.eq("phone", userLoginDto.getPhone());
+            User user = this.getOne(query);
+            if (user == null) {
+                log.info("3333");
+                user = new User();
+                user.setPhone(userLoginDto.getPhone());
+                user.setUsername(userLoginDto.getPhone());
+                user.setPassword(userLoginDto.getPhone());
+                this.save(user);
+            }
+            request.setAttribute("user", user.getId());
+            return R.success(user);
+        }
+        return R.error("登录失败");
     }
 
 

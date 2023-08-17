@@ -69,12 +69,13 @@ new Vue({
 
         //点击登录
         login() {
-            //发送请求
             console.log(this.isPasswordLogin)
-            console.log(this.phone)
-            console.log(this.password)
             //当this.isPasswordLogin为true的时候使用的是密码登录
             if (this.isPasswordLogin) {
+                console.log("当前为密码登录")
+                console.log("手机号"+this.phone)
+                console.log("密码："+this.password)
+                //发送请求
                 axios({
                     method: "post",
                     url: "/user/login",
@@ -92,10 +93,25 @@ new Vue({
                 })
             } else {
                 //使用验证码登录
-
-
+                console.log("当前为验证码登录")
+                console.log("手机号："+this.phone)
+                console.log("验证码："+this.password)
+                axios({
+                    method: "post",
+                    url: "/user/login1",
+                    data: {
+                        phone: this.phone,
+                        code: this.password,
+                    }
+                }).then(res => {
+                    if (res.data.code == 1) {
+                        //登录成功
+                        alert("登录成功")
+                    } else {
+                        alert("登录失败")
+                    }
+                })
             }
-
         },
     }
 
