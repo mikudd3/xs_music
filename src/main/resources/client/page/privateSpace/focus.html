@@ -1,91 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>关注</title>
-    <link href="../../css/base.css">
-    <link href="focus.css">
+    <link rel="stylesheet" href="css/focus.css">
 </head>
+
 <body>
 
 <div id="app">
-    <!--    <div class="mod_singer_list ">-->
-    <!--        <ul class="singer_list__list">-->
-    <!--            <li class="singer_list__item" v-for="singer in singers" :key="singer.id">-->
-    <!--                <div class="singer_list__item_box"><a class="singer_list__cover" title=""-->
-    <!--                                                      href="">-->
-    <!--                    <img class="singer_list__pic" loading="lazy"-->
-    <!--                         src="https://img2.baidu.com/it/u=2896911436,1340659831&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1692291600&t=7eff2f6418d13226b43a26677a1b7eb6"-->
-    <!--                         alt="singer.name"-->
-    <!--                         data-qar-def=""/></a>-->
-    <!--                    <h3 class="singer_list__title" style="min-height:20px">-->
-    <!--                        <a href="">{{singer.name}}</a></h3>-->
-    <!--                </div>-->
-    <!--            </li>-->
-    <!--        </ul>-->
-    <!--    </div>-->
-    <!--    <div class="mod_singer_list ">-->
-    <!--        <ul class="singer_list__list">-->
-    <!--            <li class="singer_list__item" v-for="singer in singers" :key="singer.id">-->
-    <!--                <div class="singer_list__item_box"><a class="singer_list__cover" title=""-->
-    <!--                                                      href="">-->
-    <!--                    <img class="singer_list__pic" loading="lazy"-->
-    <!--                         src="https://img2.baidu.com/it/u=2896911436,1340659831&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1692291600&t=7eff2f6418d13226b43a26677a1b7eb6"-->
-    <!--                         alt="singer.name"-->
-    <!--                         data-qar-def=""/></a>-->
-    <!--                    <h3 class="singer_list__title" style="min-height:20px">-->
-    <!--                        <a href="">{{singer.name}}</a></h3>-->
-    <!--                </div>-->
-    <!--            </li>-->
-    <!--        </ul>-->
-    <!--    </div>-->
-    <!--    <div class="mod_singer_list ">-->
-    <!--        <ul class="singer_list__list">-->
-    <!--            <li class="singer_list__item" v-for="singer in singers" :key="singer.id">-->
-    <!--                <div class="singer_list__item_box"><a class="singer_list__cover" title=""-->
-    <!--                                                      href="">-->
-    <!--                    <img class="singer_list__pic" loading="lazy"-->
-    <!--                         src="https://img2.baidu.com/it/u=2896911436,1340659831&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1692291600&t=7eff2f6418d13226b43a26677a1b7eb6"-->
-    <!--                         alt="singer.name"-->
-    <!--                         data-qar-def=""/></a>-->
-    <!--                    <h3 class="singer_list__title" style="min-height:20px">-->
-    <!--                        <a href="">{{singer.name}}</a></h3>-->
-    <!--                </div>-->
-    <!--            </li>-->
-    <!--        </ul>-->
-    <!--    </div>-->
-    <!--    <div class="mod_singer_list ">-->
-    <!--        <ul class="singer_list__list">-->
-    <!--            <li class="singer_list__item" v-for="singer in singers" :key="singer.id">-->
-    <!--                <div class="singer_list__item_box"><a class="singer_list__cover" title=""-->
-    <!--                                                      href="">-->
-    <!--                    <img class="singer_list__pic" loading="lazy"-->
-    <!--                         src="https://img2.baidu.com/it/u=2896911436,1340659831&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1692291600&t=7eff2f6418d13226b43a26677a1b7eb6"-->
-    <!--                         alt="singer.name"-->
-    <!--                         data-qar-def=""/></a>-->
-    <!--                    <h3 class="singer_list__title" style="min-height:20px">-->
-    <!--                        <a href="">{{singer.name}}</a></h3>-->
-    <!--                </div>-->
-    <!--            </li>-->
-    <!--        </ul>-->
-    <!--    </div>-->
-    <!--    <div class="mod_singer_list ">-->
-    <!--        <ul class="singer_list__list">-->
-    <!--            <li class="singer_list__item" v-for="singer in singers" :key="singer.id">-->
-    <!--                <div class="singer_list__item_box"><a class="singer_list__cover" title=""-->
-    <!--                                                      href="">-->
-    <!--                    <img class="singer_list__pic" loading="lazy"-->
-    <!--                         src="https://img2.baidu.com/it/u=2896911436,1340659831&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1692291600&t=7eff2f6418d13226b43a26677a1b7eb6"-->
-    <!--                         alt="singer.name"-->
-    <!--                         data-qar-def=""/></a>-->
-    <!--                    <h3 class="singer_list__title" style="min-height:20px">-->
-    <!--                        <a href="">{{singer.name}}</a></h3>-->
-    <!--                </div>-->
-    <!--            </li>-->
-    <!--        </ul>-->
-    <!--    </div>-->
+    <div class="box">
+        <a v-for="(item, index) in items" :key="index" href="#">
+            <img class="img" :src="item.pic">
+            <p>{{ item.name }}</p>
+        </a>
+    </div>
 </div>
-
-<!--<script src="../../plugins/vue/vue.js"></script>-->
+<script src="../../plugins/vue/vue.js"></script>
+<script src="../../plugins/element-ui/index.js"></script>
+<link rel="stylesheet" href="../../plugins/element-ui/index.css">
+<script src="../../plugins/axios/axios-0.18.0.js"></script>
+<script src="js/focus.js"></script>
 </body>
+
 </html>

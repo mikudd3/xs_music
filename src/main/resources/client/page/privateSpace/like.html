@@ -1,10 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>喜欢</title>
+    <title>我创建的歌单</title>
+    <link rel="stylesheet" href="css/myCreate.css">
+    <link rel="stylesheet" href="../../css/base.css">
 </head>
+
 <body>
 
+<div id="app">
+    <p>我喜欢的音乐</p>
+    <div id="one">
+        <a href="#">
+            <img class="img" src="../../image/tx.jpg" alt="">
+        </a>
+    </div>
+    <p>我创建的歌单</p>
+    <div id="two">
+        <a v-for="(item, index) in items" :key="index" href="#">
+            <img class="img" :src="item.pic">
+            <p class="title">{{ item.title }}</p>
+        </a>
+    </div>
+</div>
+<script src="../../plugins/vue/vue.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                items: [
+                    {pic: "../../image/tx.jpg", title: "陈奕迅"},
+                    {pic: "../../image/tx.jpg", title: "陈奕迅"},
+                    {pic: "../../image/tx.jpg", title: "陈奕迅"},
+                ]
+            };
+        },
+        mounted() {
+            this.getMyCreateSongList();
+        },
+        methods: {
+            getMyCreateSongList() {
+                axios({
+                    url: "/songlist/getMyCreateSongList",
+                    method: "get",
+                }).then(resp => {
+                    if (resp.data.code == 1) {
+                        this.items = resp.data.data;
+                        //对图片进行处理
+                        for (let i = 0; i < this.items.length; i++) {
+                            this.items[i].pic = `/common/download?name=` + this.items[i].pic;
+                        }
+                    } else {
+                        this.$message.error(resp.data.msg);
+                    }
+                })
+            }
+        }
+    })
+</script>
 </body>
+
 </html>
