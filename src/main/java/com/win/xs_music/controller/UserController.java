@@ -66,10 +66,10 @@ public class UserController {
 
     //发送验证码
     @PostMapping("/send")
-    public R send(String phone, HttpSession session){
-        log.info("输入的手机号为：{}",phone);
-        return null;
-        //return userService.send(phone,session);
+    public R send(@RequestBody User user, HttpSession session){
+        log.info("输入的手机号为：{}",user.getPhone());
+//        return null;
+        return userService.send(user.getPhone(),session);
     }
 
 }

@@ -28,19 +28,18 @@
 <div id="div">
     <el-container>
         <!-- 头部-->
-        <el-header  style="background: #282828; height: 160px;" >
+        <el-header style="background: #282828; height: 160px;">
             <!--个人主页头像 src中放头像地址-->
-            <div style="margin: 10px 20px auto;" >
-                <div class="demo-basic--circle" >
+            <div style="margin: 10px 20px auto;">
+                <div class="demo-basic--circle">
                     <div class="block" style="display: inline;float:left;">
                         <el-avatar :size="200" :src="avatarUrl"></el-avatar>
                     </div>
                     <!--个人信息-->
                     <div class="box-card" style="margin-left: 50px ;display: inline;color: white">
-                        <div  class="text item">
-                            {{this.formdata.name}}
-
-                            <i v-if="this.formdata.sex === '男'" class="el-icon-male" style="font-size: 15px;
+                        <div class="text item">
+                            {{this.userdata.name}}
+                            <i v-if="this.userdata.sex === 1" class="el-icon-male" style="font-size: 15px;
                                 color: deepskyblue;
                                 width: 1.5px;
                                 height: 1.5px;
@@ -53,9 +52,9 @@
                                 line-height: 1.5px;
                                 text-align: center;"></i>
                             <br>
-                            {{'来自：'+this.formdata.location}}
+                            {{'来自：' + this.userdata.location}}
                             <br>
-                            {{'个人简介：'+ this.formdata.introduction}}
+                            {{'个人简介：' + this.userdata.introduction}}
                         </div>
                     </div>
                 </div>
@@ -67,9 +66,9 @@
                 @select="handleSelect"
                 active-text-color="#ffd04b"
                 style="margin-right: auto;left: 300px">
-            <el-menu-item index="1" @click="findInfo">收藏</el-menu-item>
-            <el-menu-item index="2" @click="findInfo">我创建的歌单</el-menu-item>
-            <el-menu-item index="3" @click="findInfo">关注</el-menu-item>
+            <el-menu-item index="1" @click="findInfo()">收藏</el-menu-item>
+            <el-menu-item index="2" @click="findAccount()">我创建的歌单</el-menu-item>
+            <el-menu-item index="3" @click="findAvator()">关注</el-menu-item>
         </el-menu>
         <!-- 中间部分 -->
         <el-container style="height: 800px; border: 1px solid #eee">
@@ -87,15 +86,17 @@
     new Vue({
         el: "#div",
         data: {
-            avatarUrl:'https://tupian.qqw21.com/article/UploadPic/2020-5/20205622141367241.jpg',
+            avatarUrl: 'https://tupian.qqw21.com/article/UploadPic/2020-5/20205622141367241.jpg',
             iframeSrc: "like.html",
-            userdata:{},
-            formdata:{
-                name:'翁修成',
-                sex:'',
-                location:'广西',
-                introduction:'广西老表'
+            userdata: {
+                name: '翁修成',
+                sex: 0,
+                location: '广西',
+                introduction: '广西老表'
             },
+        },
+        mounted() {
+            this.getUser();
         },
         methods: {
             //获取用户信息
@@ -106,14 +107,13 @@
                 }).then(resp => {
                     if (resp.data.code == 1) {
                         this.userdata = resp.data.data;
-                        this.getuserinfo();
                     } else {
                         this.$message.error(resp.data.msg);
                     }
                 })
             },
             //动态获取页面信息
-            getuserinfo(){
+            getuserinfo() {
                 axios({
                     url: "/user/getuserinfo",
                     method: "get",
