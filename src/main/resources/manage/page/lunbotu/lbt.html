@@ -19,7 +19,7 @@
 
                 <el-table-column prop="pic" label="图片" width="400" align="center">
                     <template slot-scope="scope">
-                        　　　　 <img :src="scope.row.pic" width="200" height="100"/>
+                        　　　　 <img :src="'/common/download?name=' + scope.row.pic" width="200" height="100"/>
                     </template>
                 </el-table-column>
                 <el-table-column label="操作" align="center">
@@ -37,7 +37,7 @@
                         <el-form-item label="图片:" prop="avatar" class="uploadImg">
                             <el-upload class="avatar-uploader" action="/common/upload" :show-file-list="false"
                                        :on-success="handleAvatarSuccess" :on-change="onChange" ref="upload">
-                                <img v-if="`/common/download?name=` + imageUrl" :src="`/common/download?name=` +  imageUrl" class="avatar" style="width: 70px; height: 70px;"/>
+                                <img v-if="'/common/download?name=' + imageUrl" :src="'/common/download?name=' +  imageUrl" class="avatar" style="width: 70px; height: 70px;"/>
                                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                             </el-upload>
                         </el-form-item>
@@ -50,6 +50,7 @@
             </div>
         </div>
     </div>
+
 </div>
 
 </body>

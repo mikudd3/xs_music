@@ -16,7 +16,7 @@ new Vue({
             ],//当前页要展示的列表数据
             formData: {},//表单数据
             dialogFormVisible: false,//控制表单是否可见
-            dialogFormVisible1: false,
+            dialogFormVisible4Edit: false,
             name: "",
             imageUrl: "",
         }
@@ -61,14 +61,8 @@ new Vue({
         },
         //弹出编辑窗口
         handleUpdate(row) {
-            //根据id查询数据
-            axios({
-                method: "get",
-                url: "/songlist/selectById?id=" + row.id,
-            }).then((res) => {
-                this.formData = res.data.data;
-                this.dialogFormVisible4Edit = true;
-            })
+            this.formData = row;
+            this.dialogFormVisible4Edit = true;
         },
         //编辑
         handleEdit() {

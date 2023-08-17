@@ -5,9 +5,7 @@ import com.win.xs_music.pojo.Banner;
 import com.win.xs_music.service.BannerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,4 +28,11 @@ public class BannerController {
     }
 
 
+    //更新数据
+    @PutMapping("/update")
+    public R update(@RequestBody Banner pic) {
+        log.info("更新歌手传入信息：{}", pic);
+        boolean ret = bannerService.updateById(pic);
+        return ret ? R.success("更新成功") : R.error("更新失败");
+    }
 }

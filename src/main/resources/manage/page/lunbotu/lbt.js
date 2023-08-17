@@ -2,10 +2,6 @@ new Vue({
     el: '#app',
     data() {
         return {
-            currentPage: 1,
-            pageSize: 5,
-            totalCount: 0,
-            pagination: {},
             dataList: [
                 {
                     pic: "../../image/tx.jpg",
@@ -13,7 +9,7 @@ new Vue({
             ],//当前页要展示的列表数据
             formData: {},//表单数据
             dialogFormVisible4Edit: false,//编辑表单是否可见
-            imageUrl: '../../image/tx.jpg',
+            imageUrl: "",
         }
     },
     //钩子函数，VUE对象初始化完成后自动执行
@@ -27,34 +23,23 @@ new Vue({
         //列表
         getAll() {
             axios({
-                method: "post",
-                url: "/banner/page",
-                data: {
-                    currentPage: this.currentPage,
-                    pageSize: this.pageSize,
-                }
+                method: "get",
+                url: "/banner/getlbt",
             }).then((res) => {
                 let r = res.data;
-                this.dataList = r.data.records;
-                this.totalCount = r.data.total;
-                console.log(this.totalCount)
+                this.dataList = r.data;
             })
 
         },
         //弹出编辑窗口
         handleUpdate(row) {
-            //根据id查询数据
-            axios({
-                method: "get",
-                url: "/banner/selectById?id=" + row.id,
-            }).then((res) => {
-                this.formData = res.data.data;
-                this.dialogFormVisible4Edit = true;
-            })
+            this.imageUrl = row.pic
+            this.formData = row;
+            this.dialogFormVisible4Edit = true;
         },
         //编辑
         handleEdit() {
-            this.formData.url = this.imageUrl;
+            this.formData.pic = this.imageUrl;
             //发送请求
             axios({
                 method: "Put",
