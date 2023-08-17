@@ -82,7 +82,7 @@ body{
 	background-color:rgba(0,0,0,0);
 	display: inline-block;
 	border-radius: 10px;
-	margin: 5px 0;
+	margin: 5px;
 }
 
 .content div > a:hover{
@@ -92,13 +92,13 @@ body{
 
 .content div> a > img{
 
-	width: 200px;
-	height: 200px;
+	width: 250px;
+	height: 250px;
 	padding: 10px;
 }
 
 .content div> a > img ~ div{
-	text-align: left;
+	text-align: center;
 }
 
 #footer{
