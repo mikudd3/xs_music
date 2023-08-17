@@ -9,7 +9,7 @@ new Vue({
             location:"中国",          //歌手国籍
             pic:"",                   //歌手图片
             songs:[],                 //歌曲列表
-            imageurl:"all.jpg"
+            imageurl:"https://bkimg.cdn.bcebos.com/pic/d1a20cf431adcbef76091cafaff839dda3cc7cd93159?x-bce-process=image/resize,m_lfit,w_536,limit_1/format,f_auto"
         }
     },
     methods: {
@@ -31,6 +31,8 @@ new Vue({
                 this.introduction = singer.introduction;
                 this.birth = singer.birth;
                 this.location = singer.location;
+                this.imageUrl = singer.pic;
+                console.log(this.imageUrl)
             })
         },
     }
