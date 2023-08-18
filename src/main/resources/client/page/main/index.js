@@ -40,6 +40,9 @@ new Vue({
         //播放列表抽屉
         drawer: false,
         direction: 'rtl',
+        //歌曲详情抽屉
+        infodrawer: false,
+        infodirection:'ttb',
         //播放列表
         songlist: [
             {
@@ -139,6 +142,9 @@ new Vue({
         //开关抽屉
         changelist() {
             this.drawer = !this.drawer;
+        },
+        musicinfo(){
+            this.infodrawer = !this.infodrawer;
         }
     },
     mounted() {

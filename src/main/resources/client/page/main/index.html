@@ -90,9 +90,22 @@
 </div>
 <!-- 播放器组件 -->
 <div id="music">
+    <!--歌曲详情-->
+    <el-drawer
+            :visible.sync="infodrawer"
+            :direction="infodirection"
+            size="87%"
+            :append-to-body="true"
+            :modal="false">
+        <template>
+            <!--歌曲详情页-->
+            <iframe v-if="this.songlist.length >0" src="https://www.bilibili.com/" style="width: 100%;height: 1200px"></iframe>
+        </template>
+    </el-drawer>
+
     <!-- 正在播放的歌曲信息（图片） -->
     <span id="playingsonginfo">
-				<span>
+				<span @click="musicinfo">
 					<el-image
                             id="img"
                             :src="this.playsong.ImgUrl"

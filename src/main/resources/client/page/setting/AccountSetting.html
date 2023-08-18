@@ -82,7 +82,7 @@
             </el-steps>
             <div class="step-content">
                 <div v-if="active === 0">
-                    <p>你已绑定号码：{{'181****3660'}} 输入完整号码后发送验证码</p>
+                    <p>你已绑定号码：{{this.currentPhone}} 输入完整号码后发送验证码</p>
                     <el-input
                             placeholder="请输入完整号码："
                             v-model="pwdSet.phone"
