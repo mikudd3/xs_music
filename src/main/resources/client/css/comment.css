@@ -4,42 +4,44 @@ input,
 select,
 textarea,
 th {
-    color: #000;
-    background-color: #fff;
-    font-size: 14px;
-    line-height: 1.5;
-    font-family: poppin, Tahoma, Arial, \5FAE\8F6F\96C5\9ED1, sans-serif;
-    font-family: Tahoma, Arial, \5FAE\8F6F\96C5\9ED1, sans-serif;
+	color: #000;
+	background-color: #fff;
+	font-size: 14px;
+	line-height: 1.5;
+	font-family: poppin, Tahoma, Arial, \5FAE\8F6F\96C5\9ED1, sans-serif;
+	font-family: Tahoma, Arial, \5FAE\8F6F\96C5\9ED1, sans-serif;
 }
-#comment_box{
-    width: 87.5rem;
-    margin: auto;
+
+#comment_box {
+	width: 87.5rem;
+	margin: auto;
 }
-#comment_box>div{
-    margin: auto;
+
+#comment_box>div {
+	margin: auto;
 }
 
 
 .comment__input {
-    position: relative;
-    padding-bottom: 60px;
+	position: relative;
+	padding-bottom: 60px;
 }
 
 .comment__textarea {
-    position: relative;
-    overflow: hidden;
-    min-height: 102px;
-    border: 1px solid #ececec;
-    background-color: #f5f5f5;
+	position: relative;
+	overflow: hidden;
+	min-height: 102px;
+	border: 1px solid #ececec;
+	background-color: #f5f5f5;
 }
 
 .comment__textarea_default,
 .comment__textarea_input {
-    width: 100%;
-    border: none;
-    min-height: 66px;
-    resize: none;
-    color: #333;
+	width: 100%;
+	border: none;
+	min-height: 66px;
+	resize: none;
+	color: #333;
 }
 
 /* 对字体超出的规则 */
@@ -50,17 +52,17 @@ th {
 /*}*/
 
 .mod_hot_comment {
-    margin-bottom: 1rem;
+	margin-bottom: 1rem;
 }
 
 /* 全部评论的框 */
 .comment_type__title {
-    position: relative;
-    height: 2.125rem;
-    line-height: 34px;
-    padding-bottom: 0.625rem;
-    border-bottom: 1px solid;
-    border-color: #ededed;
+	position: relative;
+	height: 2.125rem;
+	line-height: 34px;
+	padding-bottom: 0.625rem;
+	border-bottom: 1px solid;
+	border-color: #ededed;
 }
 
 /* 评论区 */
@@ -90,77 +92,77 @@ td,
 textarea,
 th,
 ul {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 .comment__list {
-    padding-bottom: 14px;
+	padding-bottom: 14px;
 }
 
 ul {
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
+	display: block;
+	list-style-type: disc;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	padding-inline-start: 40px;
 }
 
 .comment__list_item {
-    position: relative;
-    padding: 15px 0 15px 56px;
-    zoom: 1;
-    border-bottom: 1px solid;
-    border-color: #ededed;
+	position: relative;
+	padding: 15px 0 15px 56px;
+	zoom: 1;
+	border-bottom: 1px solid;
+	border-color: #ededed;
 }
 
 li {
-    list-style: none;
+	list-style: none;
 }
 
 .comment__avatar {
-    position: absolute;
-    left: 0;
-    top: 18px;
-    width: 2.375rem;
-    height: 38px;
+	position: absolute;
+	left: 0;
+	top: 18px;
+	width: 2.375rem;
+	height: 38px;
 }
 
 a,
 a:hover {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 a {
-    color: #000;
-    cursor: pointer;
+	color: #000;
+	cursor: pointer;
 }
 
 /* 图片 */
 .comment__avatar img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: 999px;
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: 999px;
 }
 
 img {
-    border: 0;
-    -ms-interpolation-mode: bicubic;
-    image-rendering: optimizeQuality;
-    /*overflow-clip-margin: content-box;*/
-    overflow: clip;
+	border: 0;
+	-ms-interpolation-mode: bicubic;
+	image-rendering: optimizeQuality;
+	/*overflow-clip-margin: content-box;*/
+	overflow: clip;
 }
 
 .comment__title {
-    font-weight: 400;
-    overflow: hidden;
-    height: 1.625rem;
-    line-height: 26px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	font-weight: 400;
+	overflow: hidden;
+	height: 1.625rem;
+	line-height: 26px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 h1,
@@ -169,105 +171,121 @@ h3,
 h4,
 h5,
 h6 {
-    font-size: 100%;
+	font-size: 100%;
 }
 
 .comment__title a,
 .comment__title span {
-    float: left;
+	float: left;
 }
 
 .comment__date {
-    margin-bottom: 10px;
-    height: 20px;
-    line-height: 20px;
+	margin-bottom: 10px;
+	height: 20px;
+	line-height: 20px;
 }
 
 p {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+	display: block;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
 }
 
 .comment__text {
-    overflow: hidden;
-    word-break: break-all;
-    word-wrap: break-word;
-    line-height: 24px;
-    text-align: justify;
+	overflow: hidden;
+	word-break: break-all;
+	word-wrap: break-word;
+	line-height: 24px;
+	text-align: justify;
 }
 
 .comment__opt {
-    line-height: 24px;
-    overflow: hidden;
-    margin-top: 8px;
+	line-height: 24px;
+	overflow: hidden;
+	margin-top: 8px;
 }
 
 
 .icon_comment_like {
-    background-position: -25px -25px;
+	background-position: -25px -25px;
 }
 
 .icon_comment_like,
 .icon_comment_liked {
-    display: inline-block;
-    margin-right: 5px;
-    width: 17px;
-    height: 17px;
-    /* overflow: hidden; */
-    vertical-align: -3px;
-}
-.comment__zan {
-    vertical-align: -1px;
+	display: inline-block;
+	margin-right: 5px;
+	width: 17px;
+	height: 17px;
+	/* overflow: hidden; */
+	vertical-align: -3px;
 }
 
-.mod_btn, .mod_btn_green {
-    border-radius: 2px;
-    font-size: 14px;
-    margin-right: 6px;
-    padding: 0 23px;
-    height: 38px;
-    line-height: 38px;
-    display: inline-block;
-    white-space: nowrap;
-    box-sizing: border-box;
-    overflow: hidden;
+.comment__zan {
+	vertical-align: -1px;
+}
+
+.mod_btn,
+.mod_btn_green {
+	border-radius: 2px;
+	font-size: 14px;
+	margin-right: 6px;
+	padding: 0 23px;
+	height: 38px;
+	line-height: 38px;
+	display: inline-block;
+	white-space: nowrap;
+	box-sizing: border-box;
+	overflow: hidden;
 }
 
 .comment__tool_btn {
-    width: 80px;
-    line-height: 27px;
-    height: 27px;
-    text-align: center;
-    padding: 0;
+	width: 80px;
+	line-height: 27px;
+	height: 27px;
+	text-align: center;
+	padding: 0;
 }
 
 .mod_btn_green {
-    border: 1px solid #31c27c;
-    background-color: #31c27c;
-    color: #fff;
+	border: 1px solid #31c27c;
+	background-color: #31c27c;
+	color: #fff;
 }
+
 .mod_btn_green {
-    border: 1px solid #31c27c;
-    background-color: #31c27c;
-    color: #fff;
+	border: 1px solid #31c27c;
+	background-color: #31c27c;
+	color: #fff;
 }
+
 .comment__tool {
-    position: absolute;
-    bottom: 10px;
-    right: -5px
+	position: absolute;
+	bottom: 10px;
+	right: -5px
 }
 
 .comment__tool a {
-    margin-right: 5px
+	margin-right: 5px
 }
 
 .comment__tool_btn {
-    width: 80px;
-    line-height: 27px;
-    height: 27px;
-    text-align: center;
-    padding: 0
+	width: 80px;
+	line-height: 27px;
+	height: 27px;
+	text-align: center;
+	padding: 0
+}
+
+/* 新 */
+#main2 {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	top: 40px;
+	position: relative;
+	top: 12.5rem;
+	align-items: stretch;
+	margin-right: 0;
 }
