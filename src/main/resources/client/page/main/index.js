@@ -51,6 +51,7 @@ new Vue({
                 song: 'https://www.ihaoge.net/server/1/287280938.mp3',
                 name: '叮叮当',
                 singer: '宝宝巴士',
+                like:false
             },
             {
                 ImgUrl: 'https://star.kuwo.cn/star/starheads/180/21/12/1142472669.jpg',
@@ -143,12 +144,25 @@ new Vue({
         changelist() {
             this.drawer = !this.drawer;
         },
+        //开关
         musicinfo(){
             this.infodrawer = !this.infodrawer;
         }
     },
     mounted() {
         this.fristsong();
+        //监听追加曲子
+        this.$watch(
+            () => sessionStorage.getItem('songId'),
+            (newValue, oldValue) => {
+                // 处理 songId 变化的逻辑
+                if (newValue.length == 1){
+                    this.songlist.push(newValue);
+                }else{
+                    this.songlist = newValue;
+                }
+            }
+        );
     }
 });
 
