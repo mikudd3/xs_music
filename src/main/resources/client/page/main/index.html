@@ -40,9 +40,11 @@
                     <img id="touxiang" :src="imageUrl"
                          style="display: inline-block; width: 50px;height: 50px;border-radius: 40px;margin-top: 20px;margin-right: 30px">
                 </a>
-                <button id="display1" class="btn denglu" data-toggle="modal" data-target="#myModal"
-                        style="margin-top: 20px">登 &nbsp&nbsp录
-                </button>
+                <a href="../login/login.html">
+                    <button id="display1" class="btn denglu" data-toggle="modal" data-target="#myModal"
+                            style="margin-top: 20px">登 &nbsp&nbsp录
+                    </button>
+                </a>
             </div>
         </nav>
     </div>
@@ -88,7 +90,7 @@
     </div>
 </div>
 <!-- 播放器组件 -->
-<div id="music" >
+<div id="music">
     <!-- 正在播放的歌曲信息（图片） -->
     <span id="playingsonginfo">
 				<span>
@@ -110,10 +112,10 @@
 			</span>
 
     <!-- 播放器控制按键(上一首，播放暂停，下一首) -->
-    <div >
+    <div>
         <el-button class="eic" icon="el-icon-d-arrow-left" @click="backup" circle></el-button>
-        <el-button v-if="this.state == true" class="eic" icon="el-icon-caret-right"  @click="play" circle></el-button>
-        <el-button v-else class="eic" icon="el-icon-video-pause"  @click="stop" circle></el-button>
+        <el-button v-if="this.state == true" class="eic" icon="el-icon-caret-right" @click="play" circle></el-button>
+        <el-button v-else class="eic" icon="el-icon-video-pause" @click="stop" circle></el-button>
         <el-button class="eic" icon="el-icon-d-arrow-right" @click="nextto" circle></el-button>
     </div>
 
@@ -121,8 +123,8 @@
     <!--播放器-->
     <div style="align-items: center ;margin-top: 20px;display: inline;">
         <audio id="musicer" controls="controls" style="width: 900px;">
-            <source :src="this.playsong.song" type="audio/mp3" />
-            <embed height="100" width="100" src="song.mp3" />
+            <source :src="this.playsong.song" type="audio/mp3"/>
+            <embed height="100" width="100" src="song.mp3"/>
         </audio>
     </div>
 
