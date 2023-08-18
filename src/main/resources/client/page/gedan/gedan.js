@@ -3,8 +3,9 @@ new Vue({
     data() {
         return {
             title: "希望十八岁你爱的人是八十岁在你身边的人",   //歌单专题
-            introduction: "让你怦然心动",                 //歌单介绍
+            introduction: "",                 //歌单介绍
             pic: "",
+            searchParams: "",
             songs: [
                 {
                     id: 1,
@@ -29,9 +30,16 @@ new Vue({
         this.getAll();
     },
     methods: {
+        playAll() {
+            console.log(this.songs)
+            sessionStorage.setItem("songs", this.songs);
+        },
+
+
         getAll() {
-            const searchParams = new URLSearchParams(window.location.search);
-            const id = searchParams.get('id');
+            this.searchParams = new URLSearchParams(window.location.search);
+            //const searchParams = new URLSearchParams(window.location.search);
+            const id = this.searchParams.get('id');
             //获取歌单的信息请求
             axios({
                 method: "post",
