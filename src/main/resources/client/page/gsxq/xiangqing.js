@@ -63,8 +63,9 @@ new Vue({
         },
 
         //点击歌曲输出歌曲id
-        handleClick(id) {
-
+        handleClick(song) {
+            sessionStorage.setItem("songs", song);
+            console.log(song)
         },
 
         // 收藏列表
@@ -93,7 +94,13 @@ new Vue({
                     this.$message.error("添加失败");
                 }
             })
-        }
+        },
+
+        //点击播放全部
+        playAll() {
+            console.log(this.songs)
+            sessionStorage.setItem("songs", this.songs);
+        },
 
 
     }
