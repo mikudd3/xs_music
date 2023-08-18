@@ -5,75 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>小松音乐</title>
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../../css/index.css">
     <link rel="stylesheet" type="text/css" href="gequ.css">
 </head>
 
 <body>
-<!-- 首页头部  -->
-<div style="width: 100%;height: 80px; background-color:#fff;position: relative;">
 
-    <div class="search1">
-        <div class="logo1" style="width: 153px; padding: 20.6px 0; display: inline-block;">
-            <img src="../../image/logo.png">
-        </div>
-        <nav class="navmargin navbar navbar-default" role="navigation">
-            <div class="shurukuang" style="padding: 30px 100px;">
-                <form class="bs-example" role="form" action="#" method="get">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="input-group">
-                                <input type="text" id="songName" name="songName" class="form-control"
-                                       placeholder="为音乐而生">
-                                <span class="input-group-btn">
-                                        <button onclick="getList2($('#songName').serialize())" class="btn btn-default"
-                                                type="button">搜索</button></span>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <!-- 图标加上搜索框结束 -->
-            <div id="col10" class="dengluzhuce">
-                <a href="../setting/Setting.html">
-                    <img id="touxiang" :src="imageUrl"
-                         style="display: inline-block; width: 50px;height: 50px;border-radius: 40px;margin-top: 20px;margin-right: 30px">
-                </a>
-                <button id="display1" class="btn denglu" data-toggle="modal" data-target="#myModal"
-                        style="margin-top: 20px">登 &nbsp&nbsp录
-                </button>
-            </div>
-        </nav>
-    </div>
-</div>
-
-<nav class="daohanglan">
-    <div class="big3">
-        <ul>
-            <li>
-                <a class="gudingbeij erjicaidan2" href="#">
-                    <el-menu-item class="gudingbeij erjicaidan2" index="1" @click="findInfo()">首页</el-menu-item>
-                </a>
-            </li>
-            <li>
-                <a class=" erjicaidan2">
-                    <el-menu-item class=" erjicaidan2" index="2" @click="findAccount()">歌单</el-menu-item>
-                </a>
-            </li>
-            <li>
-                <a class="erjicaidan2">
-                    <el-menu-item class="erjicaidan2" index="3" @click="findAvator()">歌手</el-menu-item>
-                </a>
-            </li>
-            <li>
-                <a class="erjicaidan2">
-                    <el-menu-item class="erjicaidan2" index="4" @click="findAvator()">我的音乐</el-menu-item>
-                </a>
-            </li>
-        </ul>
-    </div>
-</nav>
 
 <div id="main">
     <div class="song-list">
@@ -91,7 +27,18 @@
                 <td>李白</td>
                 <td>好</td>
                 <td>
-                    <button id="likeButton" class="like-button">
+                    <button class="like-button likeButton">
+                        <span class="heart-icon" style="border: black;">&#x2764;</span>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>喜欢</td>
+                <td>李白</td>
+                <td>好</td>
+                <td>
+                    <button class="like-button likeButton">
                         <span class="heart-icon" style="border: black;">&#x2764;</span>
                     </button>
                 </td>

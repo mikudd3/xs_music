@@ -9,7 +9,6 @@ new Vue({
                     pic: "../../image/a (7).png",
                     love: "",
                 }
-
             ],
         }
     },
@@ -26,7 +25,7 @@ new Vue({
                 if (resp.data.code == 1) {
                     this.items = resp.data.data;
                     for (let index = 0; index < this.items.length; index++) {
-                        this.items[index].pic = `/common/download?name-` + this.items[index].pic;
+                        this.items[index].pic = `/common/download?name=` + this.items[index].pic;
                     }
                 }
             })

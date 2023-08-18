@@ -44,19 +44,16 @@
                         </tr>
                         <tr v-for="(song,i) in songs " @dblclick="handleClick(song.id)">
                             <td>
-                                <button id="likeButton" class="like-button">
+                                <button class="like-button" :class="{ active: song.isLiked }" @click="toggleLike(song)">
                                     <span class="heart-icon" style="border: black;">&#x2764;</span>
                                 </button>
                             </td>
-                            <td>{{i + 1}}</td>
-                            <!--                            歌名-->
-                            <td>{{song.name}}</td>
-                            <!--                            歌手-->
-                            <td>{{song.singerName}}</td>
-                            <!--                            专辑-->
-                            <td>{{song.introduction}}</td>
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ song.name }}</td>
+                            <td>{{ song.singerName }}</td>
+                            <td>{{ song.introduction }}</td>
                             <td>
-                                <button id="collection">收藏</button>
+                                <button class="collection" @click="collect(song.id)">收藏</button>
                             </td>
                         </tr>
 
@@ -73,5 +70,4 @@
 <script src="../../plugins/axios/axios-0.18.0.js"></script>
 <script src="../../plugins/jquery/jquery-1.10.0.min.js"></script>
 <script src="gedan.js"></script>
-<script src="../gequ/gequ.js"></script>
 </html>

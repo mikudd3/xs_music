@@ -7,9 +7,17 @@ new Vue({
             pic: "",
             songs: [
                 {
-                    name:"111",
-                    singerName:"222",
-                    introduction:"333",
+                    id: "",
+                    name: "111",
+                    singerName: "222",
+                    introduction: "333",
+                },
+                {
+                    id: "",
+                    name: "111",
+                    singerName: "222",
+                    introduction: "333",
+                    isLiked: false,
                 }
             ],
         }
@@ -42,11 +50,25 @@ new Vue({
             })
         },
         //点击歌曲输出歌曲id
-        handleClick(id){
+        handleClick(id) {
             console.log(id)
         },
+        toggleLike(song) {
+            song.isLiked = !song.isLiked; // 切换点赞状态
+            if (song.isLiked) {
+                // 执行点赞操作，使用song.id
+                console.log("点赞", song.id);
+            } else {
+                // 执行取消点赞操作，使用song.id
+                console.log("取消点赞", song.id);
+            }
+        },
+        collect(id) {
+            // 处理收藏事件，使用id参数
+            console.log("收藏", id);
+        },
+    },
 
-    }
 
 })
 
