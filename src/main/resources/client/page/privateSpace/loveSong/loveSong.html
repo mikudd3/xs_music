@@ -33,7 +33,7 @@
                             <th>歌手</th>
                             <th>专辑</th>
                         </tr>
-                        <tr v-for="(song,i) in songs " @click="handleClick(song.id)">
+                        <tr v-for="(song,i) in songs " @dblclick="handleClick(song)">
                             <td>{{i + 1}}</td>
                             <!--                            歌名-->
                             <td>{{song.name}}</td>
@@ -41,6 +41,9 @@
                             <td>{{song.singerName}}</td>
                             <!--                            专辑-->
                             <td>{{song.introduction}}</td>
+                            <td>
+                                <button class="collection" @click="collect(song.id)">收藏</button>
+                            </td>
                         </tr>
                     </table>
                 </div>

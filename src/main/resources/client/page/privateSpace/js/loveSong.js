@@ -2,13 +2,21 @@ new Vue({
     el: "#app",
     data() {
         return {
-            songs: [],
+            song:"",
+            songs: [
+
+            ],
         }
     },
     mounted() {
         this.getAll();
     },
     methods: {
+        //点击歌曲输出歌曲id
+        handleClick(song) {
+            console.log(song)
+        },
+
         getAll() {
             axios({
                 method: "get",
@@ -19,7 +27,6 @@ new Vue({
                 } else {
                     this.$message.error(res.data.msg);
                 }
-
             })
         },
     }

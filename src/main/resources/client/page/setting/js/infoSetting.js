@@ -2,7 +2,12 @@ new Vue({
     el: "#div",
     data: {
         userdata:{},
-        formdata:[], //表单信息
+        formdata:[
+            {
+                username:"111",
+                sex:"1"
+            }
+        ], //表单信息
         rules: {
             username: [
                 {required: true, message: '请输入用户名', trigger: 'blur'},
