@@ -95,22 +95,7 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
         return R.success(lists);
     }
 
-    /**
-     * 歌单详情页获取歌单数据
-     *
-     * @return
-     */
-    @Override
-    public ArrayList<gedanVo> getgedan(Integer id) {
-        ArrayList<gedanVo> maps = null;
-        try {
-            maps = songListMapper.getgedan(id);
-        } catch (Exception e) {
-            throw new CustomException("系统错误，请联系管理员");
-        }
-        log.info("查询到的数据为：{}", maps);
-        return maps;
-    }
+
 
     @Override
     public R getOne(Integer id) {
