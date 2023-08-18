@@ -9,6 +9,7 @@ import com.win.xs_music.mapper.SongListMapper;
 import com.win.xs_music.pojo.SongList;
 import com.win.xs_music.service.SongListService;
 import com.win.xs_music.vo.SongListflVo;
+import com.win.xs_music.vo.gedanVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -89,5 +90,22 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
             throw new CustomException("系统错误，请联系管理员");
         }
         return R.success(lists);
+    }
+
+    /**
+     * 歌单详情页获取歌单数据
+     *
+     * @return
+     */
+    @Override
+    public ArrayList<gedanVo> getgedan(Integer id) {
+        ArrayList<gedanVo> maps = null;
+        try {
+            maps = songListMapper.getgedan(id);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
+        log.info("查询到的数据为：{}", maps);
+        return maps;
     }
 }

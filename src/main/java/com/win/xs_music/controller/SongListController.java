@@ -7,6 +7,7 @@ import com.win.xs_music.dto.SongListPageDto;
 import com.win.xs_music.pojo.SongList;
 import com.win.xs_music.service.SongListService;
 import com.win.xs_music.vo.SongListflVo;
+import com.win.xs_music.vo.gedanVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -136,5 +137,22 @@ public class SongListController {
         } catch (Exception e) {
             throw new CustomException("系统错误，请联系管理员");
         }
+    }
+
+
+    /**
+     * 歌单详情页获取歌单数据
+     *
+     */
+    @RequestMapping("/gedan")
+    public R getSongList(Integer id) {
+        ArrayList<gedanVo> sl = null;
+        try {
+            sl = songListService.getgedan(id);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
+        log.info(String.valueOf(sl));
+        return R.success(sl);
     }
 }

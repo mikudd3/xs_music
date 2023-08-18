@@ -21,4 +21,10 @@
         </if>
         ORDER BY song_list.id
     </select>
+
+    <select id="getgedan" resultType="java.util.Map">
+        SELECT title,pic,introduction
+        from song_list
+        WHERE id = #{id}
+    </select>
 </mapper>
