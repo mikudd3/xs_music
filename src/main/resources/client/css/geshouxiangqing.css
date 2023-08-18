@@ -161,3 +161,25 @@ a {
     position: relative;
     top: 650px;
 }
+
+/* 点赞 */
+.like-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.heart-icon {
+    color: rgb(147, 144, 144);
+    border: 2px soid;
+    border-radius: 50%;
+    font-size: 24px;
+    padding: 4px;
+    transition: color 0.3s;
+}
+
+.heart-icon.active {
+    color: red;
+}

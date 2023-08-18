@@ -26,12 +26,19 @@
                 <div class="song-list">
                     <table>
                         <tr>
+                            <th></th>
                             <th>序号</th>
                             <th>歌曲名</th>
                             <th>歌手</th>
                             <th>专辑</th>
+                            <th>操作</th>
                         </tr>
-                        <tr v-for="(song,i) in songs " @click="handleClick(song.id)">
+                        <tr v-for="(song,i) in songs " @dblclick="handleClick(song.id)">
+                            <td>
+                                <button id="likeButton" class="like-button">
+                                    <span class="heart-icon" style="border: black;">&#x2764;</span>
+                                </button>
+                            </td>
                             <td>{{i + 1}}</td>
                             <!--                            歌名-->
                             <td>{{song.name}}</td>
@@ -39,7 +46,11 @@
                             <td>{{song.singerName}}</td>
                             <!--                            专辑-->
                             <td>{{song.introduction}}</td>
+                            <td>
+                                <button id="collection">收藏</button>
+                            </td>
                         </tr>
+
                     </table>
                 </div>
             </div>
@@ -53,4 +64,5 @@
 <script src="../../plugins/axios/axios-0.18.0.js"></script>
 <script src="../../plugins/jquery/jquery-1.10.0.min.js"></script>
 <script src="gedan.js"></script>
+<script src="../gequ/gequ.js"></script>
 </html>

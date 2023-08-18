@@ -5,7 +5,13 @@ new Vue({
             title: "希望十八岁你爱的人是八十岁在你身边的人",   //歌单专题
             introduction: "让你怦然心动",                 //歌单介绍
             pic: "",
-            songs: [],
+            songs: [
+                {
+                    name:"111",
+                    singerName:"222",
+                    introduction:"333",
+                }
+            ],
         }
     },
     mounted() {
