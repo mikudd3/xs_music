@@ -63,9 +63,9 @@
                                     收藏<i class="el-icon-arrow-down el-icon--right"></i>
                                   </span>
                                     <el-dropdown-menu slot="dropdown">
-                                        <el-dropdown-item v-for="(song,i) in items">
-                                            <a rel="nofollow" @click="getPriceRange('song.id')">
-                                                {{song.title}}
+                                        <el-dropdown-item v-for="(songs,i) in items">
+                                            <a rel="nofollow" @click="getPriceRange('songs.id')">
+                                                {{songs.title}}
                                             </a>
                                         </el-dropdown-item>
 
