@@ -88,7 +88,7 @@ new Vue({
                 url: "/songlist/add",
                 method: "get",
                 params: {
-                    songlist_id: range,
+                    song_list_id: range,
                     song_id:id
                 }
             }).then(resp => {
