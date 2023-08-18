@@ -11,7 +11,6 @@
 	<body>
 	<div id="main">
 			<div id="m3" class="type">
-
 <!--				歌单类型-->
 				<div class="title">
 					<div>
@@ -30,7 +29,7 @@
 				<div class="content">
 <!--					迭代遍历歌单-->
 						<div >
-							<a v-for="(song_list,i) in items" href="../gedan/gedan.html">
+							<a v-for="(song_list,i) in items" :href="`../gedan/gedan.html?id=`+song_list.id">
 								<img  :src="song_list.pic">	<!--图片-->
 								<div>{{song_list.title}}</div>	<!--歌单介绍-->
 							</a>

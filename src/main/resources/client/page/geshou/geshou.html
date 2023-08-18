@@ -38,12 +38,12 @@
         <ul class="singer_list__list">
             <li class="singer_list__item" v-for="singer in singers" :key="singer.id">
                 <div class="singer_list__item_box">
-                    <a class="singer_list__cover" title="" :href=singer.url>
+                    <a class="singer_list__cover" title="" :href="`../gsxq/xq.html?id=`+singer.id">
                     <img class="singer_list__pic" :src="singer.pic"
                          :alt="singer.name"
                          data-qar-def=""/></a>
                     <h3 class="singer_list__title" style="min-height:20px">
-                        <a href="">{{singer.name}}</a></h3>
+                        <a :href="`../gsxq/xq.html?id=`+singer.id">{{singer.name}}</a></h3>
                 </div>
             </li>
         </ul>
