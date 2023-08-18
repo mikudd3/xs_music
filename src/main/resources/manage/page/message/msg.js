@@ -56,7 +56,7 @@ new Vue({
                     this.womenCount = r.data.womenCount;
                     this.bingtu1();
                 } else {
-                    this.$message.success(res.data.msg);
+                    this.$message.error(res.data.msg);
                 }
             })
         },
@@ -98,7 +98,7 @@ new Vue({
                 if (r.code == 1) {
                     this.songCount = r.data;
                 } else {
-                    this.$message.success(res.data.msg);
+                    this.$message.error(res.data.msg);
                 }
             })
         },
@@ -114,7 +114,7 @@ new Vue({
                     this.singerCountWomen = r.data.singerCountWomen;
                     this.bingtu2();
                 } else {
-                    this.$message.success(res.data.msg);
+                    this.$message.error(res.data.msg);
                 }
 
             })
@@ -156,7 +156,7 @@ new Vue({
                 if (r.code == 1) {
                     this.song_list_Count = r.data;
                 } else {
-                    this.$message.success(res.data.msg);
+                    this.$message.error(res.data.msg);
                 }
             })
         },
