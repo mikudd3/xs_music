@@ -3,7 +3,8 @@ new Vue({
     data() {
         return {
             items: [
-                {id: 1, pic: "../../image/tx.jpg", title: "陈奕迅"},
+                {id: 1, pic: "../../image/tx.jpg", title: "史诗 • 神级BGM丨灵魂的震颤&心灵的洗涤史诗"},
+
             ],
             dialogFormVisible: false,
             formData: {},

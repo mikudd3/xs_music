@@ -13,12 +13,17 @@ import com.win.xs_music.pojo.Singer;
 import com.win.xs_music.pojo.Song;
 import com.win.xs_music.pojo.SongList;
 import com.win.xs_music.service.CollectService;
+import com.win.xs_music.vo.SongListVo;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> implements CollectService {
 
     @Autowired
@@ -50,6 +55,7 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
             }
             //根据获得的歌手id集合查询歌手数据
             singers = singerMapper.selectBatchIds(ids);
+
         } catch (Exception e) {
             throw new CustomException("系统错误，请联系管理员");
         }
@@ -76,6 +82,7 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
                 return R.success(null);
             }
             songLists = songListMapper.selectBatchIds(ids);
+
         } catch (Exception e) {
             throw new CustomException("系统错误，请联系管理员");
         }
@@ -99,7 +106,16 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
             }
             //根据查询到歌曲id查询歌曲信息
             List<Song> songs = songMapper.selectBatchIds(ids);
-            return R.success(songs);
+            List<SongListVo>  list = new ArrayList<>();
+            for (int i = 0; i < songs.size(); i++) {
+                String[] arr = songs.get(i).getName().split("-");
+                SongListVo songListVo = new SongListVo();
+                BeanUtils.copyProperties(songs.get(i), songListVo);
+                songListVo.setName(arr[1]);
+                songListVo.setSingerName(arr[0]);
+                list.add(songListVo);
+            }
+            return R.success(list);
         } catch (Exception e) {
             throw new CustomException("系统错误，请联系管理员");
         }
