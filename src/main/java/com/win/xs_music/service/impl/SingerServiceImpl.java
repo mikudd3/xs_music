@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.win.xs_music.common.CustomException;
 import com.win.xs_music.common.R;
 import com.win.xs_music.mapper.SingerMapper;
 import com.win.xs_music.mapper.SongMapper;
@@ -31,7 +32,12 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
 
     @Override
     public R getSingerLocationCategory() {
-        List<Map<String, Object>> listMap = singerMapper.getSingerLocationCategory();
+        List<Map<String, Object>> listMap = null;
+        try {
+            listMap = singerMapper.getSingerLocationCategory();
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
         log.info("查询到的数据为：{}", listMap);
         Map<String, Long> map = new HashMap<>();
         // 处理查询结果
@@ -50,7 +56,11 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
         Page<Singer> page = new Page<>(currentPage, pageSize);
         LambdaQueryWrapper<Singer> wrapper = new LambdaQueryWrapper<>();
         wrapper.like(StringUtils.isNotEmpty(name), Singer::getName, name);
-        this.page(page, wrapper);
+        try {
+            this.page(page, wrapper);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
         return R.success(page);
     }
 
@@ -58,31 +68,44 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
     @Override
     public R delete(Integer id) {
         //删除歌手的歌曲
-        songMapper.getListBySingerId(id);
-
-        //删除歌手
-        this.removeById(id);
+        try {
+            songMapper.getListBySingerId(id);
+            //删除歌手
+            this.removeById(id);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
         return R.success("删除成功");
     }
 
     @Override
     public R selectCount() {
         //查找男歌手数量
-        QueryWrapper<Singer> men = Wrappers.query();
-        men.eq("sex", 1);
-        int singerCountMan = this.count(men);
-        //查找女歌手数量
-        QueryWrapper<Singer> women = Wrappers.query();
-        women.eq("sex", 0);
-        int singerCountWomen = this.count(women);
-        int singerCount = singerCountMan + singerCountWomen;
-        SingCountVo singCountVo = new SingCountVo(singerCountMan, singerCountWomen, singerCount);
+        SingCountVo singCountVo = null;
+        try {
+            QueryWrapper<Singer> men = Wrappers.query();
+            men.eq("sex", 1);
+            int singerCountMan = this.count(men);
+            //查找女歌手数量
+            QueryWrapper<Singer> women = Wrappers.query();
+            women.eq("sex", 0);
+            int singerCountWomen = this.count(women);
+            int singerCount = singerCountMan + singerCountWomen;
+            singCountVo = new SingCountVo(singerCountMan, singerCountWomen, singerCount);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
         return R.success(singCountVo);
     }
 
     @Override
     public R getOne(Integer id) {
-        Singer singer = songMapper.selectOne(id);
+        Singer singer = null;
+        try {
+            singer = songMapper.selectOne(id);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
         return R.success(singer);
 
     }
@@ -91,7 +114,12 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
 
     @Override
     public R getSingers(Singer singer) {
-        List<Map<String, Object>> singerList = singerMapper.getSingers(singer);
+        List<Map<String, Object>> singerList = null;
+        try {
+            singerList = singerMapper.getSingers(singer);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
         // 处理查询结果
         return R.success(singerList);
     }

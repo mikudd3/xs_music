@@ -3,6 +3,7 @@ package com.win.xs_music.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.win.xs_music.common.CustomException;
 import com.win.xs_music.common.R;
 import com.win.xs_music.mapper.SingerMapper;
 import com.win.xs_music.mapper.view.SongViewMapper;
@@ -15,6 +16,7 @@ import com.win.xs_music.view.SongView;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -40,27 +42,37 @@ public class SongViewServiceImpl extends ServiceImpl<SongViewMapper, SongView> i
 
     @Override
     public R getPage(Integer currentPage, Integer pageSize, String singerName) {
-        Page<SongView> page = new Page<>(currentPage, pageSize);
-        LambdaQueryWrapper<SongView> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(StringUtils.isNotEmpty(singerName), SongView::getSingerName, singerName);
-        this.page(page, wrapper);
+        Page<SongView> page = null;
+        try {
+            page = new Page<>(currentPage, pageSize);
+            LambdaQueryWrapper<SongView> wrapper = new LambdaQueryWrapper<>();
+            wrapper.eq(StringUtils.isNotEmpty(singerName), SongView::getSingerName, singerName);
+            this.page(page, wrapper);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
         return R.success(page);
     }
 
     //添加歌曲
     @Override
     public R add(SongView songView) {
-        //根据歌手名获取歌手id
-        Singer singer = singerMapper.selectByName(songView.getSingerName());
-        //判断该歌手已经存在
-        if (singer == null) {
-            return R.error("该歌手不存在，请先创建歌手");
+        boolean ret = false;
+        try {
+            //根据歌手名获取歌手id
+            Singer singer = singerMapper.selectByName(songView.getSingerName());
+            //判断该歌手已经存在
+            if (singer == null) {
+                return R.error("该歌手不存在，请先创建歌手");
+            }
+            Song song = new Song();
+            BeanUtils.copyProperties(songView, song);
+            //设置歌手id
+            song.setSingerId(singer.getId());
+            ret = songService.save(song);
+        } catch (BeansException e) {
+            throw new CustomException("系统错误，请联系管理员");
         }
-        Song song = new Song();
-        BeanUtils.copyProperties(songView, song);
-        //设置歌手id
-        song.setSingerId(singer.getId());
-        boolean ret = songService.save(song);
         return ret ? R.success("添加成功") : R.error("添加失败");
     }
 }

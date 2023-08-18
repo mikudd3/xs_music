@@ -3,6 +3,7 @@ package com.win.xs_music.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.win.xs_music.common.CustomException;
 import com.win.xs_music.common.R;
 import com.win.xs_music.mapper.AdminMapper;
 import com.win.xs_music.pojo.Admin;
@@ -38,7 +39,11 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
                     .eq(admin.getZt() != null, Admin::getZt, admin.getZt());
         }
         //进行查询
-        this.page(page, wrapper);
+        try {
+            this.page(page, wrapper);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
 
         return R.success(page);
     }
@@ -48,7 +53,12 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     public R login(Admin admin, HttpServletRequest request) {
         LambdaQueryWrapper<Admin> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Admin::getName, admin.getName());
-        Admin a = getOne(wrapper);
+        Admin a = null;
+        try {
+            a = getOne(wrapper);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
 
         //进行查询
 //        Admin a = adminMapper.selectByName(admin.getName());
@@ -64,7 +74,6 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         request.getSession().setAttribute("admin", a.getId());
         return R.success(a);
     }
-
 
 
 }

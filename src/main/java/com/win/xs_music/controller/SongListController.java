@@ -1,6 +1,7 @@
 package com.win.xs_music.controller;
 
 
+import com.win.xs_music.common.CustomException;
 import com.win.xs_music.common.R;
 import com.win.xs_music.dto.SongListPageDto;
 import com.win.xs_music.pojo.SongList;
@@ -27,7 +28,12 @@ public class SongListController {
      */
     @GetMapping("/getSongListCount")
     public R getSongListCount() {
-        int count = songListService.count();
+        int count = 0;
+        try {
+            count = songListService.count();
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
         return R.success(count);
     }
 
@@ -40,7 +46,11 @@ public class SongListController {
     @PostMapping("/page")
     public R page(@RequestBody SongListPageDto songListPageDto) {
         log.info("歌单信息分页查询:{}", songListPageDto);
-        return songListService.getPage(songListPageDto.getCurrentPage(), songListPageDto.getPageSize(), songListPageDto.getName());
+        try {
+            return songListService.getPage(songListPageDto.getCurrentPage(), songListPageDto.getPageSize(), songListPageDto.getName());
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
     }
 
     /**
@@ -50,7 +60,12 @@ public class SongListController {
      */
     @GetMapping("/getStyle")
     public R getStyle() {
-        R result = songListService.getStyle();
+        R result = null;
+        try {
+            result = songListService.getStyle();
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
         log.info(String.valueOf(result));
         return result;
     }
@@ -64,7 +79,12 @@ public class SongListController {
     @PostMapping("/update")
     public R update(@RequestBody SongList songList) {
         log.info("更新歌单传入信息：{}", songList);
-        boolean ret = songListService.updateById(songList);
+        boolean ret = false;
+        try {
+            ret = songListService.updateById(songList);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
         return ret ? R.success("更新成功") : R.error("更新失败");
     }
 
@@ -77,7 +97,12 @@ public class SongListController {
     @PostMapping("/deleteById")
     public R delete(Integer id) {
         log.info("要删除的用户id为:{}", id);
-        boolean b = songListService.removeById(id);
+        boolean b = false;
+        try {
+            b = songListService.removeById(id);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
         return b ? R.success("删除成功") : R.success("删除失败");
     }
 
@@ -89,7 +114,12 @@ public class SongListController {
      */
     @RequestMapping("/songfl")
     public R getSongList(String style_name) {
-        ArrayList<SongListflVo> sl = songListService.getSongList(style_name);
+        ArrayList<SongListflVo> sl = null;
+        try {
+            sl = songListService.getSongList(style_name);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
         log.info(String.valueOf(sl));
         return R.success(sl);
     }
@@ -101,6 +131,10 @@ public class SongListController {
      */
     @GetMapping("/getSongList")
     public R getIndexSongList() {
-        return  songListService.getIndexSongList();
+        try {
+            return songListService.getIndexSongList();
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
     }
 }
