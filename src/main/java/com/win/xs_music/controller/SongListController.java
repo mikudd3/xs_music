@@ -142,15 +142,23 @@ public class SongListController {
 
     @PostMapping("/one")
     public R getOne(Integer id) {
-        log.info("查询的歌单id为：{}", id);
-        return songListService.getOne(id);
+        try {
+            log.info("查询的歌单id为：{}", id);
+            return songListService.getOne(id);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
     }
 
 
     @GetMapping("/getMyCreateSongList")
     /*传入用户的id*/
     public R getMyCreateSongList(){
-        return songListService.getMyCreateSongList();
+        try {
+            return songListService.getMyCreateSongList();
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
     }
 
 
@@ -158,7 +166,11 @@ public class SongListController {
     //把歌曲添加到用户创建的歌单
     @RequestMapping("/add")
     public R addsing(Integer song_id,Integer song_list_id){
-        return songListService.addsing(song_id,song_list_id);
+        try {
+            return songListService.addsing(song_id,song_list_id);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
     }
 
 }

@@ -7,17 +7,20 @@ new Vue({
             pic: "",
             songs: [
                 {
-                    id: "",
-                    name: "111",
-                    singerName: "222",
-                    introduction: "333",
-                },
-                {
-                    id: "",
+                    id: 1,
                     name: "111",
                     singerName: "222",
                     introduction: "333",
                     isLiked: false,
+                    url: "",
+                },
+                {
+                    id: 2,
+                    name: "111",
+                    singerName: "222",
+                    introduction: "333",
+                    isLiked: false,
+                    url: "",
                 }
             ],
         }
@@ -50,9 +53,11 @@ new Vue({
             })
         },
         //点击歌曲输出歌曲id
-        handleClick(id) {
-            console.log(id)
+        handleClick(song) {
+            sessionStorage.setItem("songs", song);
+            console.log(song)
         },
+
         toggleLike(song) {
             song.isLiked = !song.isLiked; // 切换点赞状态
             if (song.isLiked) {
@@ -75,13 +80,13 @@ new Vue({
 // 收藏
 const collectButton = document.getElementById("collectButton");
 
-collectButton.addEventListener("click", function() {
+collectButton.addEventListener("click", function () {
     collectButton.querySelector(".heart-icon").classList.toggle("active");
-  
-  // 根据点赞状态执行相应的操作
-  if (collectButton.querySelector(".heart-icon").classList.contains("active")) {
-  // 执行点赞操作
-  } else {
-  // 执行取消点赞操作
-  }
+
+    // 根据点赞状态执行相应的操作
+    if (collectButton.querySelector(".heart-icon").classList.contains("active")) {
+        // 执行点赞操作
+    } else {
+        // 执行取消点赞操作
+    }
 });

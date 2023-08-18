@@ -42,7 +42,7 @@
                             <th>专辑</th>
                             <th>操作</th>
                         </tr>
-                        <tr v-for="(song,i) in songs " @dblclick="handleClick(song.id)">
+                        <tr v-for="(song,i) in songs " @dblclick="handleClick(song)">
                             <td>
                                 <button class="like-button" :class="{ active: song.isLiked }" @click="toggleLike(song)">
                                     <span class="heart-icon" style="border: black;">&#x2764;</span>

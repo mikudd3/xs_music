@@ -45,7 +45,7 @@ tr:nth-child(even) {
   
   .heart-icon {
     color: rgb(147, 144, 144);
-    border: 2px soid;
+    border: 2px solid;
     border-radius: 50%;
     font-size: 24px;
     padding: 4px;

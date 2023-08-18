@@ -9,6 +9,7 @@
             cursor: pointer;
             color: #409EFF;
         }
+
         .el-icon-arrow-down {
             font-size: 12px;
         }
@@ -58,19 +59,18 @@
                                 <td>{{name}}</td>
                                 <td>{{song.introduction}}</td>
                                 <td>
-                                <el-dropdown>
-                                  <span class="el-dropdown-link">
+                                    <el-dropdown>
+                                  <span class="el-dropdown-link" @click="togglePopup">
                                     收藏<i class="el-icon-arrow-down el-icon--right"></i>
                                   </span>
-                                    <el-dropdown-menu slot="dropdown">
-                                        <el-dropdown-item v-for="(songs,i) in items">
-                                            <a rel="nofollow" @click="getPriceRange('songs.id')">
-                                                {{songs.title}}
-                                            </a>
-                                        </el-dropdown-item>
-
-                                    </el-dropdown-menu>
-                                </el-dropdown>
+                                        <el-dropdown-menu slot="dropdown">
+                                            <el-dropdown-item v-for="(songList,i) in songLists">
+                                                <a rel="nofollow" @click="getPriceRange(songList.id,song.id)">
+                                                    {{songList.title}}
+                                                </a>
+                                            </el-dropdown-item>
+                                        </el-dropdown-menu>
+                                    </el-dropdown>
                                 </td>
                             </tr>
 

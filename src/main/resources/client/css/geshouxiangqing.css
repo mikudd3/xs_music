@@ -48,9 +48,11 @@ div {
 
     width: 420px;
 }
-#left div{
+
+#left div {
     float: left;
 }
+
 #touxiang {
 
     height: 200px;
@@ -60,6 +62,7 @@ div {
     position: relative;
 
 }
+
 #xinxi {
     height: 200px;
     width: 210px;
@@ -69,18 +72,21 @@ div {
 }
 
 #right {
-    width:800px;
+    width: 800px;
 }
+
 .name {
     height: 200px;
     top: 40px;
     position: relative;
 }
-.song-list{
+
+.song-list {
     top: 40px;
     position: relative;
     top: 100px;
 }
+
 .song-list {
     display: flex;
     flex-direction: column;
@@ -108,13 +114,13 @@ tr:nth-child(even) {
 
 
 /*叶尾*/
-  .footer {
-      padding-bottom: 50px;
-      background-color: #DCD9D4;
-      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), radial-gradient(at 50% 0%, rgba(255, 255, 255, 0.10) 0%, rgba(0, 0, 0, 0.50) 50%);
-      background-blend-mode: soft-light, screen;
-      box-shadow: -3px -3px 4px rgba(0, 0, 0, 0.18);
-  }
+.footer {
+    padding-bottom: 50px;
+    background-color: #DCD9D4;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), radial-gradient(at 50% 0%, rgba(255, 255, 255, 0.10) 0%, rgba(0, 0, 0, 0.50) 50%);
+    background-blend-mode: soft-light, screen;
+    box-shadow: -3px -3px 4px rgba(0, 0, 0, 0.18);
+}
 
 .footer .links {
     position: relative;
@@ -156,7 +162,7 @@ a {
 /*.foot {*/
 /*    flex-shrink: 0;*/
 /*}*/
-.foot{
+.foot {
     height: 200px;
     position: relative;
     top: 650px;
@@ -169,20 +175,20 @@ a {
     cursor: pointer;
     display: flex;
     align-items: center;
-  }
-  
-  .heart-icon {
+}
+
+.heart-icon {
     color: rgb(147, 144, 144);
     border: 2px solid;
     border-radius: 50%;
     font-size: 24px;
     padding: 5px;
     transition: color 0.3s;
-  }
-  
-  .heart-icon.active {
+}
+
+.heart-icon.active {
     color: red;
-  }
+}
 
 /* 点赞 */
 .like-button {
@@ -195,7 +201,7 @@ a {
 
 .heart-icon {
     color: rgb(147, 144, 144);
-    border: 2px soid;
+    border: 2px solid;
     border-radius: 50%;
     font-size: 24px;
     padding: 4px;
@@ -203,6 +209,10 @@ a {
 }
 
 .heart-icon.active {
+    color: red;
+}
+
+.active {
     color: red;
 }
 

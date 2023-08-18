@@ -11,9 +11,9 @@ new Vue({
             //歌曲列表
             songs: [
                 {
-                    id:"",
-                    name:"11111",
-                    introduction:"11111",
+                    id: "",
+                    name: "11111",
+                    introduction: "11111",
                 }
             ],
             imageUrl: "https://bkimg.cdn.bcebos.com/pic/d1a20cf431adcbef76091cafaff839dda3cc7cd93159?x-bce-process=image/resize,m_lfit,w_536,limit_1/format,f_auto",
@@ -22,9 +22,14 @@ new Vue({
             items: [
                 {id: 1, pic: "../../image/tx.jpg", title: "陈奕迅"},
             ],
-            songId:1,
+            songLists: [
+                {
+                    id: 1,
+                    title: "111",
+                }
+            ],
             //用于判断收藏是否成功
-            sl:0,
+            sl: 0,
         }
     },
     mounted() {
@@ -58,8 +63,8 @@ new Vue({
         },
 
         //点击歌曲输出歌曲id
-        handleClick(id){
-            this.songId = id;
+        handleClick(id) {
+
         },
 
         // 收藏列表
@@ -70,33 +75,22 @@ new Vue({
                 method: "get",
             }).then(resp => {
                 if (resp.data.code == 1) {
-                    this.items = resp.data.data;
-                    //对图片进行处理
-                    for (let i = 0; i < this.items.length; i++) {
-                        this.items[i].pic = `/common/download?name=` + this.items[i].pic;
-                    }
+                    this.songLists = resp.data.data;
                 }
             })
         },
-
-
         //将歌曲添加到用户创建的歌单
-        getPriceRange(range) {
+        getPriceRange(songListId, songId) {
             axios({
                 url: "/songlist/add",
                 method: "get",
                 params: {
-                    song_list_id: range,
-                    song_id:this.songId
+                    song_list_id: songListId,
+                    song_id: songId
                 }
             }).then(resp => {
-                if (resp.data.code == 1) {
-                    this.sc = resp.data.data;
-                    if (this.sc > 0) {
-                        alert("添加成功！")
-                    }else {
-                        alert("添加失败！")
-                    }
+                if (resp.data.code != 1) {
+                    this.$message.error("添加失败");
                 }
             })
         }

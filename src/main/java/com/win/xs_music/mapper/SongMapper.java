@@ -28,7 +28,7 @@ public interface SongMapper extends BaseMapper<Song> {
     Singer selectOne(Integer id);
 
 
-    @Select("SELECT * FROM `song.html` WHERE singer_id = #{id}")
+    @Select("SELECT * FROM song WHERE singer_id = #{id}")
     List<Song> selectList(Integer id);
 
     //多表查询查询指定歌单的歌曲

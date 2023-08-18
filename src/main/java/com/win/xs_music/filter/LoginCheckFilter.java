@@ -5,7 +5,7 @@ import com.win.xs_music.common.BaseContext;
 import com.win.xs_music.common.R;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.AntPathMatcher;;
+import org.springframework.util.AntPathMatcher;
 
 
 import javax.servlet.*;
@@ -48,8 +48,8 @@ public class LoginCheckFilter implements Filter {
                 "/common/download", "/user/login1",
                 "/songlist/songfl", "/singer/getSingers",
                 "/singer/one", "/song.html/list", "/song.html/list2",
-                "/songlist/one","/songlist/getMyCreateSongList",
-                "/comment/gets"
+                "/songlist/one", "/songlist/getMyCreateSongList",
+                "/comment/gets", "/song/list"
         };
 
         //2.判断本次请求是否需要处理

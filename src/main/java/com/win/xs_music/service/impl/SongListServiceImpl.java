@@ -8,7 +8,9 @@ import com.win.xs_music.common.BaseContext;
 import com.win.xs_music.common.CustomException;
 import com.win.xs_music.common.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.win.xs_music.mapper.ListSongMapper;
 import com.win.xs_music.mapper.SongListMapper;
+import com.win.xs_music.pojo.ListSong;
 import com.win.xs_music.pojo.SongList;
 import com.win.xs_music.service.SongListService;
 import com.win.xs_music.vo.SongListflVo;
@@ -30,7 +32,10 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
 
 
     @Autowired
-    SongListMapper songListMapper;
+    private SongListMapper songListMapper;
+
+    @Autowired
+    private ListSongMapper listSongMapper;
 
     //歌手信息分页查询
     @Override
@@ -97,32 +102,45 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
     }
 
 
-
     @Override
     public R getOne(Integer id) {
-        //查询歌单详细信息
-        QueryWrapper<SongList> query = Wrappers.query();
-        query.eq("id",id);
-        SongList songList = songListMapper.selectOne(query);
-        log.info("查到的歌单信息为：{}",songList);
-        return R.success(songList);
+        try {
+            //查询歌单详细信息
+            QueryWrapper<SongList> query = Wrappers.query();
+            query.eq("id", id);
+            SongList songList = songListMapper.selectOne(query);
+            log.info("查到的歌单信息为：{}", songList);
+            return R.success(songList);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
     }
 
     @Override
     public R getMyCreateSongList() {
-        Integer id = BaseContext.getCurrentId();
-        //查询我创建的歌单
-        QueryWrapper<SongList> query = Wrappers.query();
-        query.eq("user_id",id);
-        List<SongList> songLists = songListMapper.selectList(query);
-        return R.success(songLists);
+        try {
+            Integer id = BaseContext.getCurrentId();
+            //查询我创建的歌单
+            QueryWrapper<SongList> query = Wrappers.query();
+            query.eq("user_id", id);
+            List<SongList> songLists = songListMapper.selectList(query);
+            return R.success(songLists);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
     }
-
 
 
     @Override
     public R addsing(Integer song_id, Integer song_list_id) {
-        Integer songLists = songListMapper.addsing(song_id,song_list_id);
-        return R.success(songLists);
+        try {
+            ListSong listSong = new ListSong();
+            listSong.setSongListId(song_list_id);
+            listSong.setSongId(song_id);
+            int ret = listSongMapper.insert(listSong);
+            return ret > 0 ? R.success("添加成功") : R.error("添加失败");
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
     }
 }
