@@ -40,84 +40,37 @@
                     <img id="touxiang" :src="imageUrl"
                          style="display: inline-block; width: 50px;height: 50px;border-radius: 40px;margin-top: 20px;margin-right: 30px">
                 </a>
-                <button id="display1" class="btn denglu" data-toggle="modal" data-target="#myModal"
-                        style="margin-top: 20px">登 &nbsp&nbsp录
-                </button>
+                <a href="../login/login.html">
+                    <button id="display1" class="btn denglu" data-toggle="modal" data-target="#myModal"
+                            style="margin-top: 20px">登 &nbsp&nbsp录
+                    </button>
+                </a>
             </div>
         </nav>
     </div>
 </div>
 
-<nav class="daohanglan">
-    <div class="big3">
-        <ul>
-
-
-            <li>
-                <a class="gudingbeij erjicaidan2" href="#">
-                    <el-menu-item class="gudingbeij erjicaidan2" index="1" @click="findInfo()">首页</el-menu-item>
-                </a>
-            </li>
-            <li>
-                <a class=" erjicaidan2">
-                    <el-menu-item class=" erjicaidan2" index="2" @click="findAccount()">歌单</el-menu-item>
-                </a>
-            </li>
-            <li>
-                <a class="erjicaidan2">
-                    <el-menu-item class="erjicaidan2" index="3" @click="findAvator()">歌手</el-menu-item>
-                </a>
-            </li>
-            <li>
-                <a class="erjicaidan2">
-                    <el-menu-item class="erjicaidan2" index="4" @click="findAvator()">我的音乐</el-menu-item>
-                </a>
-            </li>
-        </ul>
-    </div>
-</nav>
-
-<div id="m2">
-    <div id="slider">
-        <div class="slider-wrapper">
-            <img :src="currentSlide.pic" alt=""/>
+<div id="main" style="height: 1900px">
+    <nav class="daohanglan">
+        <div class="big3">
+            <el-menu
+                    :default-active="activeIndex2"
+                    mode="horizontal"
+                    @select="handleSelect"
+                    :style="{ 'background-color': 'transparent' }">
+                <el-menu-item class="gudingbeij erjicaidan2" index="1" @click="findmain()">首页</el-menu-item>
+                <el-menu-item class="gudingbeij erjicaidan2" index="2" @click="findsonglis()">歌单</el-menu-item>
+                <el-menu-item class="gudingbeij erjicaidan2" index="3" @click="findSinger()">歌手</el-menu-item>
+                <el-menu-item class="gudingbeij erjicaidan2" index="4" @click="findmysong()">我的音乐</el-menu-item>
+            </el-menu>
+            <!-- 主区域部分 -->
+            <el-main>
+                <iframe :src="iframeSrc" style="width: 100%;height:1800px;border:3px;padding: 0"></iframe>
+            </el-main>
         </div>
-        <div class="slider-footer">
-            <ul class="slider-indicator">
-                <li v-for="(slide, index) in slides" :key="index" :class="{ active: index === currentIndex }"></li>
-            </ul>
-            <div class="toggle">
-                <button class="prev" @click="prevSlide">&lt;</button>
-                <button class="next" @click="nextSlide">&gt;</button>
-            </div>
-        </div>
-    </div>
+    </nav>
 </div>
 
-<div class="big4">
-    <div class="gedan">
-        <div class="dazi">
-            <p>精品歌单
-            <p>
-        </div>
-        <div class="xiaodaohang" id="gedan">
-            <ul class="clearfix">
-                <li v-for="song in songs" :key="song.id" style="width: 200px;">
-                    <div class="zhedang">
-                        <div class="bofang">
-                            <div class="bofang1">
-                                <a href=""><span class="glyphicon glyphicon-play"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <img :src="song.pic" width="200px" height="200px">
-                    <span>{{ song.title }}</span>
-                    <span style="font-size: 12px; color: #777; display: block;">收藏数：{{ song.love }}</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
 
 <div class="footer">
     <div class="links">
@@ -136,10 +89,86 @@
         </p>
     </div>
 </div>
+<!-- 播放器组件 -->
+<div id="music">
+    <!-- 正在播放的歌曲信息（图片） -->
+    <span id="playingsonginfo">
+				<span>
+					<el-image
+                            id="img"
+                            :src="this.playsong.ImgUrl"
+                    >
+					  <div slot="error" class="image-slot">
+					        <i class="el-icon-picture-outline"></i>
+					</div>
+					</el-image>
+				</span>
+			</span>
+    <!-- 文字信息 -->
+    <span style="float:left; margin-top: 30px;margin-left: 50px;font-size: 15px;">
+				{{this.playsong.name}}
+				<br/>
+				{{this.playsong.singer}}
+			</span>
 
+    <!-- 播放器控制按键(上一首，播放暂停，下一首) -->
+    <div>
+        <el-button class="eic" icon="el-icon-d-arrow-left" @click="backup" circle></el-button>
+        <el-button v-if="this.state == true" class="eic" icon="el-icon-caret-right" @click="play" circle></el-button>
+        <el-button v-else class="eic" icon="el-icon-video-pause" @click="stop" circle></el-button>
+        <el-button class="eic" icon="el-icon-d-arrow-right" @click="nextto" circle></el-button>
+    </div>
+
+
+    <!--播放器-->
+    <div style="align-items: center ;margin-top: 20px;display: inline;">
+        <audio id="musicer" controls="controls" style="width: 900px;">
+            <source :src="this.playsong.song" type="audio/mp3"/>
+            <embed height="100" width="100" src="song.mp3"/>
+        </audio>
+    </div>
+
+
+    <!-- 播放单抽屉 -->
+    <span id="song_list">
+				<el-button icon="el-icon-s-unfold" @click="changelist" plain></el-button>
+			</span>
+
+    <el-drawer
+            title="播放列表"
+            :visible.sync="drawer"
+            :direction="direction"
+            :modal="false">
+        <template>
+            <el-table
+                    :data="songlist"
+                    style="width: 100%">
+                <el-table-column
+                        prop="name"
+                        label="歌名"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="singer"
+                        label="歌手"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        label="操作"
+                        width="100">
+                    <template slot-scope="scope">
+                        <el-button @click="selectplay(scope.$index)" type="text" size="small">播放</el-button>
+                        <el-button @click="deletesong(scope.$index)" type="text" size="small">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </template>
+    </el-drawer>
+</div>
 <script src="../../plugins/vue/vue.js"></script>
 <script src="../../plugins/element-ui/index.js"></script>
-<link href="../../plugins/element-ui/index.css">
+<script src="../../plugins/jquery/jquery-1.10.0.min.js"></script>
+<link rel="stylesheet" href="../../plugins/element-ui/index.css">
 <script src="../../plugins/axios/axios-0.18.0.js"></script>
 <script src="index.js"></script>
 </body>

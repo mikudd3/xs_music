@@ -9,11 +9,11 @@ new Vue({
             location:"中国",          //歌手国籍
             pic:"",                   //歌手图片
             songs:[],                 //歌曲列表
-            imageurl:"https://bkimg.cdn.bcebos.com/pic/d1a20cf431adcbef76091cafaff839dda3cc7cd93159?x-bce-process=image/resize,m_lfit,w_536,limit_1/format,f_auto"
+            imageUrl:"https://bkimg.cdn.bcebos.com/pic/d1a20cf431adcbef76091cafaff839dda3cc7cd93159?x-bce-process=image/resize,m_lfit,w_536,limit_1/format,f_auto",
+            text:"",
         }
     },
     methods: {
-
         get(){
             console.log(this.text)
             this.getAll();
@@ -32,7 +32,13 @@ new Vue({
                 this.birth = singer.birth;
                 this.location = singer.location;
                 this.imageUrl = singer.pic;
-                console.log(this.imageUrl)
+                console.log(this.imageurl)
+            });
+            axios({
+                method:"post",
+                url:"/song/list?id="+2,
+            }).then(rest=>{
+                this.songs = rest.data.data;
             })
         },
     }

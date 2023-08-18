@@ -2,6 +2,7 @@ package com.win.xs_music.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.win.xs_music.common.CustomException;
 import com.win.xs_music.common.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.win.xs_music.mapper.SongListMapper;
@@ -29,23 +30,33 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
     //歌手信息分页查询
     @Override
     public R getPage(Integer currentPage, Integer pageSize, String name) {
-        Page<SongList> page = new Page<>(currentPage, pageSize);
-        LambdaQueryWrapper<SongList> wrapper = new LambdaQueryWrapper<>();
-        wrapper.like(StringUtils.isNotEmpty(name), SongList::getTitle, name);
-        this.page(page, wrapper);
+        Page<SongList> page = null;
+        try {
+            page = new Page<>(currentPage, pageSize);
+            LambdaQueryWrapper<SongList> wrapper = new LambdaQueryWrapper<>();
+            wrapper.like(StringUtils.isNotEmpty(name), SongList::getTitle, name);
+            this.page(page, wrapper);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
         return R.success(page);
     }
 
     @Override
     public R getStyle() {
-        List<Map<String, Object>> maps = songListMapper.getStyle();
+        List<Map<String, Object>> maps = null;
+        try {
+            maps = songListMapper.getStyle();
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
         log.info("查询到的数据为：{}", maps);
-        Map<String,Long> map = new HashMap<>();
+        Map<String, Long> map = new HashMap<>();
         //处理查询结果
-        for (Map<String,Object> styleCount : maps){
+        for (Map<String, Object> styleCount : maps) {
             String style = (String) styleCount.get("name");
             Long count = (Long) styleCount.get("count");
-            map.put(style,count);
+            map.put(style, count);
         }
         log.info("查询到的map集合为：{}", map);
         return R.success(map);
@@ -54,8 +65,29 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
 
     @Override
     public ArrayList<SongListflVo> getSongList(String style_name) {
-        ArrayList<SongListflVo> maps = songListMapper.getSongList(style_name);
+        ArrayList<SongListflVo> maps = null;
+        try {
+            maps = songListMapper.getSongList(style_name);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
         log.info("查询到的数据为：{}", maps);
         return maps;
+    }
+
+    /**
+     * 首页获取歌单数据
+     *
+     * @return
+     */
+    @Override
+    public R getIndexSongList() {
+        List<SongList> lists = null;
+        try {
+            lists = songListMapper.getIndexSongList();
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
+        return R.success(lists);
     }
 }

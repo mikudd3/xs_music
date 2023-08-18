@@ -16,4 +16,12 @@ public interface SongListService extends IService<SongList> {
 
 
     ArrayList<SongListflVo> getSongList(String style_name);
+
+    /**
+     * 首页获取歌单数据
+     *
+     * @return
+     */
+    R getIndexSongList();
+
 }

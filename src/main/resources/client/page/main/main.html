@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>主页</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/index.css">
+</head>
+<body>
+<div id="m2">
+    <div id="slider">
+        <div class="slider-wrapper">
+            <img :src="currentSlide.pic" alt=""/>
+        </div>
+        <div class="slider-footer">
+            <ul class="slider-indicator">
+                <li v-for="(slide, index) in slides" :key="index" :class="{ active: index === currentIndex }"></li>
+            </ul>
+            <div class="toggle">
+                <button class="prev" @click="prevSlide">&lt;</button>
+                <button class="next" @click="nextSlide">&gt;</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="big4">
+    <div class="gedan">
+        <div class="dazi">
+            <p>精品歌单
+            <p>
+        </div>
+        <div class="xiaodaohang" id="gedan">
+            <ul class="clearfix">
+                <li v-for="song in songs" :key="song.id" style="width: 200px;">
+                    <div class="zhedang">
+                        <div class="bofang">
+                            <div class="bofang1">
+                                <a href=""><span class="glyphicon glyphicon-play"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <img :src="song.pic" width="200px" height="200px">
+                    <span>{{ song.title }}</span>
+                    <span style="font-size: 12px; color: #777; display: block;">收藏数：{{ song.love }}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../../plugins/vue/vue.js"></script>
+<script src="../../plugins/element-ui/index.js"></script>
+<script src="../../plugins/jquery/jquery-1.10.0.min.js"></script>
+<link rel="stylesheet" href="../../plugins/element-ui/index.css">
+<script src="../../plugins/axios/axios-0.18.0.js"></script>
+<script src="main.js"></script>
+</html>

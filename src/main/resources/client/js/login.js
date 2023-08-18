@@ -2,7 +2,8 @@ new Vue({
     el: "#container",
     data() {
         return {
-            isPasswordLogin: false,
+            isPasswordLogin: false,    //用于判断当前是验证码登录还是密码登录
+            isPhoneNumberValid: false, //用于判断当前输入的手机号是否是11位数字
             phone: "",
             password: "",
             username: "",
@@ -10,8 +11,13 @@ new Vue({
     },
     methods: {
 
+        //判断手机号是否是11位数字
+        validatePhoneNumber() {
+            this.isPhoneNumberValid = /^\d{11}$/.test(this.phone);
+        },
         //点击发送验证码六十秒倒计时
         send() {
+            console.log(this.isPhoneNumberValid)
             console.log(typeof this.phone)
             // 3. 点击之后，禁用按钮，同时开启倒计时
             this.disabled = true
@@ -69,7 +75,6 @@ new Vue({
 
         //点击登录
         login() {
-            console.log(this.isPasswordLogin)
             //当this.isPasswordLogin为true的时候使用的是密码登录
             if (this.isPasswordLogin) {
                 console.log("当前为密码登录")

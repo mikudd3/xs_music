@@ -6,11 +6,10 @@ new Vue({
             sex: '',
             location: '',
             singers: [{
+                id: 1,
                 name: "杰哥",
                 pic: 'https://liquan-springboot-music.oss-cn-shanghai.aliyuncs.com/images/introduce_img/f1.jpg',
-                url: 'http://localhost/client/page/main/index.html',
             }
-
             ]
         }
     },
