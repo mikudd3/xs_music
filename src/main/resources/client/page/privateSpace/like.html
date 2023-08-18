@@ -82,63 +82,7 @@
 <script src="../../plugins/axios/axios-0.18.0.js"></script>
 <script src="../../plugins/element-ui/index.js"></script>
 <link rel="stylesheet" href="../../plugins/element-ui/index.css">
-<script>
-    new Vue({
-        el: "#app",
-        data() {
-            return {
-                items: [
-                    {id: 1, pic: "../../image/tx.jpg", title: "陈奕迅"},
-                    {id: 2, pic: "../../image/tx.jpg", title: "陈奕迅"},
-                    {id: 3, pic: "../../image/tx.jpg", title: "陈奕迅"},
-                ],
-                dialogFormVisible: false,
-                formData: {},
-            };
-        },
-        mounted() {
-            this.getMyCreateSongList();
-        },
-        methods: {
-            handleAvatarSuccess(resp) {
-                this.imageUrl = resp.data;
-            },
-            addSongList() {
-                this.dialogFormVisible = true;
-            },
-            handleAdd() {
-                this.formData.pic = this.imageUrl;
-                axios({
-                    url: "/songlist/addSongList",
-                    method: "post",
-                }).then(resp => {
-                    if (resp.data.code == 1) {
-                        this.$message.success("添加成功");
-                        this.getMyCreateSongList();
-                    } else {
-                        this.$message.error(resp.data.msg);
-                    }
-                })
-            },
-            getMyCreateSongList() {
-                axios({
-                    url: "/songlist/getMyCreateSongList",
-                    method: "get",
-                }).then(resp => {
-                    if (resp.data.code == 1) {
-                        this.items = resp.data.data;
-                        //对图片进行处理
-                        for (let i = 0; i < this.items.length; i++) {
-                            this.items[i].pic = `/common/download?name=` + this.items[i].pic;
-                        }
-                    } else {
-                        this.$message.error(resp.data.msg);
-                    }
-                })
-            }
-        }
-    })
-</script>
+<script src="js/like.js"></script>
 </body>
 
 </html>
