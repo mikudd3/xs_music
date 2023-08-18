@@ -5,14 +5,14 @@ new Vue({
             all_comment: 89898,
             comments: [{
                 id: 1,
-                name: "妖怪",
+                name: '妖怪',
                 create_time: "2010-10-1",
-                context: "show time!",
+                content: "show time!",
             }
             ]
         }
     }, methods: {
-        getComment() {
+        getUp() {
 
         }, setComment() {
             axios({

@@ -43,11 +43,11 @@ th {
 }
 
 /* 对字体超出的规则 */
-div[Attributes Style] {
-    -webkit-user-modify: read-write;
-    overflow-wrap: break-word;
-    -webkit-line-break: after-white-space;
-}
+/*div[Attributes Style] {*/
+/*    -webkit-user-modify: read-write;*/
+/*    overflow-wrap: break-word;*/
+/*    -webkit-line-break: after-white-space;*/
+/*}*/
 
 .mod_hot_comment {
     margin-bottom: 1rem;
@@ -150,7 +150,7 @@ img {
     border: 0;
     -ms-interpolation-mode: bicubic;
     image-rendering: optimizeQuality;
-    overflow-clip-margin: content-box;
+    /*overflow-clip-margin: content-box;*/
     overflow: clip;
 }
 
