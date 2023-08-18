@@ -47,7 +47,8 @@ public class LoginCheckFilter implements Filter {
                 "/banner/getlbt", "/songlist/getSongList",
                 "/common/download", "/user/login1",
                 "/songlist/songfl", "/singer/getSingers",
-                "/singer/one","/song/list"
+                "/singer/one", "/song/list", "/song/list2",
+                "/songlist/one",
         };
 
         //2.判断本次请求是否需要处理

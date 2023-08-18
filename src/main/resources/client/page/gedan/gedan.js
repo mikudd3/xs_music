@@ -4,10 +4,7 @@ new Vue({
         return {
             title: "希望十八岁你爱的人是八十岁在你身边的人",   //歌单专题
             introduction: "让你怦然心动",                 //歌单介绍
-            pic: "",                                     //歌单图片
-            name: "",
-            imageurl: "5.png",
-            text: "",
+            pic: "",
             songs: [],
         }
     },
@@ -28,7 +25,7 @@ new Vue({
                 this.title = songlist.title;
                 this.introduction = songlist.introduction;
                 //歌单图片
-                this.imageurl = songlist.pic;
+                this.pic = `/common/download?name=` + songlist.pic;
             });
             //获取歌单的歌曲请求
             axios({

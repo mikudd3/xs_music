@@ -140,27 +140,11 @@ public class SongListController {
     }
 
 
-    /**
-     * 歌单详情页获取歌单数据
-     *
-     */
-    @RequestMapping("/gedan")
-    public R getSongList(Integer id) {
-        ArrayList<gedanVo> sl = null;
-        try {
-            sl = songListService.getgedan(id);
-        } catch (Exception e) {
-            throw new CustomException("系统错误，请联系管理员");
-        }
-        log.info(String.valueOf(sl));
-        return R.success(sl);
-    }
     @PostMapping("/one")
-    public R getOne(Integer id){
-        log.info("查询的歌单id为：{}",id);
+    public R getOne(Integer id) {
+        log.info("查询的歌单id为：{}", id);
         return songListService.getOne(id);
     }
-
 
 
 }
