@@ -22,7 +22,7 @@ new Vue({
             items: [
                 {id: 1, pic: "../../image/tx.jpg", title: "陈奕迅"},
             ],
-
+            songId:1,
             //用于判断收藏是否成功
             sl:0,
         }
@@ -59,7 +59,7 @@ new Vue({
 
         //点击歌曲输出歌曲id
         handleClick(id){
-            console.log(id)
+            this.songId = id;
         },
 
         // 收藏列表
@@ -82,20 +82,20 @@ new Vue({
 
         //将歌曲添加到用户创建的歌单
         getPriceRange(range) {
-            const searchParams = new URLSearchParams(window.location.search);
-            const id = searchParams.get('id');
             axios({
                 url: "/songlist/add",
                 method: "get",
                 params: {
                     song_list_id: range,
-                    song_id:id
+                    song_id:this.songId
                 }
             }).then(resp => {
                 if (resp.data.code == 1) {
                     this.sc = resp.data.data;
                     if (this.sc > 0) {
                         alert("添加成功！")
+                    }else {
+                        alert("添加失败！")
                     }
                 }
             })
