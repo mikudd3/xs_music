@@ -22,4 +22,6 @@ public interface SongListMapper extends BaseMapper<SongList> {
     @Select("select * from song_list order by love desc limit 10")
     List<SongList> getIndexSongList();
 
+
+    Integer addsing(Integer song_id, Integer song_list_id);
 }

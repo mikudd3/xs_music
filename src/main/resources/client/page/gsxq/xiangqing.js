@@ -8,9 +8,23 @@ new Vue({
             birth: "2020-01-01",       //歌手生日
             location: "中国",          //歌手国籍
             pic: "",                   //歌手图片
-            songs: [],                 //歌曲列表
+            //歌曲列表
+            songs: [
+                {
+                    id:"",
+                    name:"11111",
+                    introduction:"11111",
+                }
+            ],
             imageUrl: "https://bkimg.cdn.bcebos.com/pic/d1a20cf431adcbef76091cafaff839dda3cc7cd93159?x-bce-process=image/resize,m_lfit,w_536,limit_1/format,f_auto",
             text: "",
+            showPopup: false,
+            items: [
+                {id: 1, pic: "../../image/tx.jpg", title: "陈奕迅"},
+            ],
+
+            //用于判断收藏是否成功
+            sl:0,
         }
     },
     mounted() {
@@ -42,10 +56,51 @@ new Vue({
                 this.songs = rest.data.data;
             })
         },
+
         //点击歌曲输出歌曲id
         handleClick(id){
             console.log(id)
         },
+
+        // 收藏列表
+        togglePopup() {
+            this.showPopup = !this.showPopup;
+            axios({
+                url: "/songlist/getMyCreateSongList",
+                method: "get",
+            }).then(resp => {
+                if (resp.data.code == 1) {
+                    this.items = resp.data.data;
+                    //对图片进行处理
+                    for (let i = 0; i < this.items.length; i++) {
+                        this.items[i].pic = `/common/download?name=` + this.items[i].pic;
+                    }
+                }
+            })
+        },
+
+
+        //将歌曲添加到用户创建的歌单
+        getPriceRange(range) {
+            const searchParams = new URLSearchParams(window.location.search);
+            const id = searchParams.get('id');
+            axios({
+                url: "/songlist/add",
+                method: "get",
+                params: {
+                    songlist_id: range,
+                    song_id:id
+                }
+            }).then(resp => {
+                if (resp.data.code == 1) {
+                    this.sc = resp.data.data;
+                    if (this.sc > 0) {
+                        alert("添加成功！")
+                    }
+                }
+            })
+        }
+
 
     }
 

@@ -27,4 +27,10 @@
         from song_list
         WHERE id = #{id}
     </select>
+
+
+    <insert id="addsing">
+        insert into song_list(song_id, song_list_id)
+        values (#{song_id}, #{song_list_id})
+    </insert>
 </mapper>

@@ -153,4 +153,12 @@ public class SongListController {
         return songListService.getMyCreateSongList();
     }
 
+
+
+    //把歌曲添加到用户创建的歌单
+    @RequestMapping("/add")
+    public R addsing(Integer song_id,Integer song_list_id){
+        return songListService.addsing(song_id,song_list_id);
+    }
+
 }

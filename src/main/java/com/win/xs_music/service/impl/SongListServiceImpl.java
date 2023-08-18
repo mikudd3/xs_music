@@ -117,4 +117,12 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
         List<SongList> songLists = songListMapper.selectList(query);
         return R.success(songLists);
     }
+
+
+
+    @Override
+    public R addsing(Integer song_id, Integer song_list_id) {
+        Integer songLists = songListMapper.addsing(song_id,song_list_id);
+        return R.success(songLists);
+    }
 }

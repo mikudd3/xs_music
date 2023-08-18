@@ -27,4 +27,6 @@ public interface SongListService extends IService<SongList> {
     R getOne(Integer id);
 
     R getMyCreateSongList();
+
+    R addsing(Integer song_id, Integer song_list_id);
 }
