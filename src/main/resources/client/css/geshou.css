@@ -91,7 +91,7 @@ li {
     background-color: white;
     padding: 25px 0;
     overflow: hidden;
-    width: 195px;
+    width: 240px;
     height: 300px;
 }
 
@@ -101,6 +101,8 @@ a:hover {
 /*设置图片格式*/
 .singer_list__item_box img{
     height: 220px;
-    width: 160px; /* 让图片宽度占满容器 */
+    width: 220px; /* 让图片宽度占满容器 */
+    border-radius: 999px;
+    border: 0;
 }
 
