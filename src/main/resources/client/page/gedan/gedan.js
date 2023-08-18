@@ -24,6 +24,14 @@ new Vue({
                     url: "",
                 }
             ],
+            songLists: [
+                {
+                    id: 1,
+                    title: "111",
+                }
+            ],
+            //用于判断收藏是否成功
+            sl: 0,
         }
     },
     mounted() {
@@ -64,6 +72,33 @@ new Vue({
         handleClick(song) {
             sessionStorage.setItem("songs", song);
             console.log(song)
+        },
+        // 收藏列表
+        togglePopup() {
+            this.showPopup = !this.showPopup;
+            axios({
+                url: "/songlist/getMyCreateSongList",
+                method: "get",
+            }).then(resp => {
+                if (resp.data.code == 1) {
+                    this.songLists = resp.data.data;
+                }
+            })
+        },
+        //将歌曲添加到用户创建的歌单
+        getPriceRange(songListId, songId) {
+            axios({
+                url: "/songlist/add",
+                method: "get",
+                params: {
+                    song_list_id: songListId,
+                    song_id: songId
+                }
+            }).then(resp => {
+                if (resp.data.code != 1) {
+                    this.$message.error("添加失败");
+                }
+            })
         },
 
         toggleLike(song) {

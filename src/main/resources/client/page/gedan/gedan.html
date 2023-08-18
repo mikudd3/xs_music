@@ -5,6 +5,16 @@
     <title></title>
     <link rel="stylesheet" href="../../css/geshouxiangqing.css">
     <link rel="stylesheet" type="text/css" href="../../css/comment.css">
+    <style>
+        .el-dropdown-link {
+            cursor: pointer;
+            color: #409EFF;
+        }
+
+        .el-icon-arrow-down {
+            font-size: 12px;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
@@ -60,7 +70,18 @@
                             <td>{{ song.singerName }}</td>
                             <td>{{ song.introduction }}</td>
                             <td>
-                                <button class="collection" @click="collect(song.id)">收藏</button>
+                                <el-dropdown>
+                                  <span class="el-dropdown-link" @click="togglePopup">
+                                    收藏<i class="el-icon-arrow-down el-icon--right"></i>
+                                  </span>
+                                    <el-dropdown-menu slot="dropdown">
+                                        <el-dropdown-item v-for="(songList,i) in songLists">
+                                            <a rel="nofollow" @click="getPriceRange(songList.id,song.id)">
+                                                {{songList.title}}
+                                            </a>
+                                        </el-dropdown-item>
+                                    </el-dropdown-menu>
+                                </el-dropdown>
                             </td>
                         </tr>
                     </table>
@@ -139,5 +160,6 @@
 <script src="../../plugins/vue/vue.js"></script>
 <script src="../../plugins/axios/axios-0.18.0.js"></script>
 <script src="../../plugins/jquery/jquery-1.10.0.min.js"></script>
+<script src="../../plugins/element-ui/index.js"></script>
 <script src="gedan.js"></script>
 </html>
