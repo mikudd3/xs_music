@@ -26,9 +26,6 @@ new Vue({
 })
 
 
-
-
-
 new Vue({
     el: "#music",
     data: {

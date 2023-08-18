@@ -27,4 +27,8 @@ public interface CollectMapper extends BaseMapper<Collect> {
      */
     @Select("select song_list_id from collect where user_id = #{id} and type = 1")
     List<Integer> getCollectSongListByUserId(Integer id);
+
+
+    @Select("select song_id from collect where user_id = #{id} and type = 0")
+    List<Integer> geMyLoveSongIdsByUserId(Integer userId);
 }

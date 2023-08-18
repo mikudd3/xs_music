@@ -35,4 +35,13 @@ public class CollectController {
     }
 
 
+    //获取我喜欢的音乐
+    @GetMapping("/getMyLoveSong")
+    public R getMyLoveSong(){
+        try {
+            return collectService.getMyLoveSong();
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
+    }
 }

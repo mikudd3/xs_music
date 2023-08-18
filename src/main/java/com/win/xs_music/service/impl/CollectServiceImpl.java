@@ -7,8 +7,10 @@ import com.win.xs_music.common.R;
 import com.win.xs_music.mapper.CollectMapper;
 import com.win.xs_music.mapper.SingerMapper;
 import com.win.xs_music.mapper.SongListMapper;
+import com.win.xs_music.mapper.SongMapper;
 import com.win.xs_music.pojo.Collect;
 import com.win.xs_music.pojo.Singer;
+import com.win.xs_music.pojo.Song;
 import com.win.xs_music.pojo.SongList;
 import com.win.xs_music.service.CollectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,8 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
     private SingerMapper singerMapper;
     @Autowired
     private SongListMapper songListMapper;
+    @Autowired
+    private SongMapper songMapper;
 
     /**
      * 获取当前登录用户所关注的歌手
@@ -76,6 +80,29 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
             throw new CustomException("系统错误，请联系管理员");
         }
         return R.success(songLists);
+    }
+
+    /**
+     * 获取我喜欢的音乐
+     *
+     * @return
+     */
+    @Override
+    public R getMyLoveSong() {
+        try {
+            //先获取当前登录的用户id
+            Integer userId = BaseContext.getCurrentId();
+            //根据用户id获取收藏的歌的id
+            List<Integer> ids = collectMapper.geMyLoveSongIdsByUserId(userId);
+            if (ids == null) {
+                return R.success(null);
+            }
+            //根据查询到歌曲id查询歌曲信息
+            List<Song> songs = songMapper.selectBatchIds(ids);
+            return R.success(songs);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
     }
 
 
