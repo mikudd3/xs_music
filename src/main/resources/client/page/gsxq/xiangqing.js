@@ -42,6 +42,11 @@ new Vue({
                 this.songs = rest.data.data;
             })
         },
+        //点击歌曲输出歌曲id
+        handleClick(id){
+            console.log(id)
+        },
+
     }
 
 })
