@@ -8,7 +8,7 @@
 <body>
 <div id="app">
     <div class="box">
-        <a v-for="(item, index) in items" :key="index" href="#">
+        <a v-for="(item, index) in items" :key="index" :href="`../gedan/gedan.html?id`+item.id">
             <img class="img" :src="item.pic">
             <p>{{ item.title }}</p>
         </a>

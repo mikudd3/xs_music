@@ -4,8 +4,6 @@ new Vue({
         return {
             items: [
                 {id: 1, pic: "../../image/tx.jpg", title: "陈奕迅"},
-                {id: 2, pic: "../../image/tx.jpg", title: "陈奕迅"},
-                {id: 3, pic: "../../image/tx.jpg", title: "陈奕迅"},
             ],
             dialogFormVisible: false,
             formData: {},

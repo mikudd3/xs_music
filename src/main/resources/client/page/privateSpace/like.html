@@ -23,7 +23,7 @@
     </p>
 
     <div id="two">
-        <a v-for="(item, index) in items" :key="index" href="#">
+        <a v-for="(item, index) in items" :key="index" :href="`../gedan/gedan.html?id`+item.id">
             <img class="img" :src="item.pic">
             <p class="title">{{ item.title }}</p>
         </a>

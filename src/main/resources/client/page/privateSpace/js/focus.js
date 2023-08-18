@@ -4,8 +4,6 @@ new Vue({
         return {
             items: [
                 {pic: "../../image/tx.jpg", name: "陈奕迅"},
-                {pic: "../../image/tx.jpg", name: "陈奕迅"},
-                {pic: "../../image/tx.jpg", name: "陈奕迅"},
             ],
         };
     },
