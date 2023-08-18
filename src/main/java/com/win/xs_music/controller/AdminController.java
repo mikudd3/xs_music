@@ -1,5 +1,6 @@
 package com.win.xs_music.controller;
 
+import com.win.xs_music.common.CustomException;
 import com.win.xs_music.common.R;
 import com.win.xs_music.dto.AdminPageDto;
 import com.win.xs_music.pojo.Admin;
@@ -31,14 +32,22 @@ public class AdminController {
     @PostMapping("/login")
     public R login(@RequestBody Admin admin, HttpServletRequest request) {
         log.info("登录管理员后台所传入信息：{}", admin);
-        return adminService.login(admin, request);
+        try {
+            return adminService.login(admin, request);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
     }
 
     //管理员界面员工管理分页查询
     @PostMapping("page")
     public R adminMgrPage(@RequestBody AdminPageDto adminPageDto) {
         log.info("管理员界面员工管理分页查询输入的信息为：{}", adminPageDto);
-        return adminService.adminMgrPage(adminPageDto.getAdmin(), adminPageDto.getCurrentPage(), adminPageDto.getPageSize());
+        try {
+            return adminService.adminMgrPage(adminPageDto.getAdmin(), adminPageDto.getCurrentPage(), adminPageDto.getPageSize());
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
     }
 
 
@@ -46,7 +55,12 @@ public class AdminController {
     @PostMapping("/add")
     public R add(@RequestBody Admin admin) {
         log.info("添加员工所输入信息：{}", admin);
-        boolean save = adminService.save(admin);
+        boolean save = false;
+        try {
+            save = adminService.save(admin);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
         return save ? R.success("添加成功") : R.success("添加失败");
     }
 
@@ -54,7 +68,12 @@ public class AdminController {
     @PostMapping("/update")
     public R update(@RequestBody Admin admin) {
         log.info("修改员工所输入信息：{}", admin);
-        boolean ret = adminService.updateById(admin);
+        boolean ret = false;
+        try {
+            ret = adminService.updateById(admin);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
         return ret ? R.success("修改成功") : R.success("修改失败");
     }
 
@@ -62,7 +81,12 @@ public class AdminController {
     @PostMapping("deleteById")
     public R deleteById(Integer id) {
         log.info("删除员工所输入信息：{}", id);
-        boolean ret = adminService.removeById(id);
+        boolean ret = false;
+        try {
+            ret = adminService.removeById(id);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
         return ret ? R.success("删除成功") : R.success("删除失败");
     }
 }

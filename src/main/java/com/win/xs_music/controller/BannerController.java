@@ -1,5 +1,6 @@
 package com.win.xs_music.controller;
 
+import com.win.xs_music.common.CustomException;
 import com.win.xs_music.common.R;
 import com.win.xs_music.pojo.Banner;
 import com.win.xs_music.service.BannerService;
@@ -22,7 +23,12 @@ public class BannerController {
 
     @GetMapping("/getlbt")
     public R getBanner() {
-        List<Banner> list = bannerService.list();
+        List<Banner> list = null;
+        try {
+            list = bannerService.list();
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
         log.info("获取到的轮播图数据为：{}", list);
         return R.success(list);
     }
@@ -32,7 +38,12 @@ public class BannerController {
     @PutMapping("/update")
     public R update(@RequestBody Banner pic) {
         log.info("更新歌手传入信息：{}", pic);
-        boolean ret = bannerService.updateById(pic);
+        boolean ret = false;
+        try {
+            ret = bannerService.updateById(pic);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
         return ret ? R.success("更新成功") : R.error("更新失败");
     }
 }
