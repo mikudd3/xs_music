@@ -89,6 +89,8 @@ public class SongController {
         }
     }
 
+
+    //查询歌手的歌曲列表
     @PostMapping("list")
     public R selectList(Integer id) {
         try {
@@ -97,6 +99,13 @@ public class SongController {
             throw new CustomException("系统错误，请联系管理员");
         }
     }
+
+    //查询歌单的歌曲列表
+    @PostMapping("list2")
+    public R selectList1(Integer id){
+        return songService.selectList1(id);
+    }
+
 
 
 }

@@ -155,4 +155,12 @@ public class SongListController {
         log.info(String.valueOf(sl));
         return R.success(sl);
     }
+    @PostMapping("/one")
+    public R getOne(Integer id){
+        log.info("查询的歌单id为：{}",id);
+        return songListService.getOne(id);
+    }
+
+
+
 }

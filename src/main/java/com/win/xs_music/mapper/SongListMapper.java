@@ -3,7 +3,6 @@ package com.win.xs_music.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.win.xs_music.pojo.SongList;
 import com.win.xs_music.vo.SongListflVo;
-import com.win.xs_music.vo.gedanVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -23,5 +22,6 @@ public interface SongListMapper extends BaseMapper<SongList> {
     @Select("select * from song_list order by love desc limit 10")
     List<SongList> getIndexSongList();
 
-    ArrayList<gedanVo> getgedan(Integer id);
+
+
 }

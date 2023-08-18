@@ -7,9 +7,24 @@
 </head>
 <body>
 <div id="app">
+    <header>
+        <!-- 网站的页眉，包括导航栏、Logo等 -->
+        <nav>
+            <!-- 导航栏 -->
+            <ul>
+                <li><a href="/">首页</a></li>
+                <li><a href="/歌手">歌手</a></li>
+                <li><a href="/歌曲">歌曲</a></li>
+                <li><input type="text" v-model="text"/>
+                    <input type="submit"  value="搜索" @click="get()"/>
+                </li>
+                <!-- 其他导航链接 -->
+            </ul>
+
+        </nav>
+    </header>
     <div id="bd">
         <div id="head">
-
         </div>
         <div id="main" >
             <div id="left">
@@ -17,7 +32,6 @@
                 <div id="touxiang">
                     <img :src="gedan.pic" alt="" style="width: 100%; height: 100%;">
                 </div>
-                
             </div>
             <div id="right">
                 <!-- 右 -->
@@ -40,7 +54,7 @@
 <!--                            歌名-->
                             <td>{{song.name}}</td>
 <!--                            歌手-->
-                            <td>{{song.singer}}</td>
+                            <td>{{song.singerName}}</td>
 <!--                            专辑-->
                             <td>{{song.introduction}}</td>
                         </tr>
@@ -48,6 +62,26 @@
                 </div>
             </div>
         </div>
+        <div class="foot">
+            <div class="footer">
+                <div class="links">
+                    <a hidefocus="true" href="#" target="_blank">开发者：</a>
+                    <a hidefocus="true" href="https://github.com/linliquan" target="_blank">小松音乐</a>
+                    <a hidefocus="true" href="#" target="_blank">广告合作</a>
+                </div>
+                <div class="copyright">
+                    <p style="-moz-user-select: text;-webkit-user-select: text;-ms-user-select: text; user-select:text">
+                        如有侵权，请联系：xiaosong@163.com </p>
+                    <p>Copyright&nbsp;&nbsp;©&nbsp;&nbsp;2023&nbsp;&nbsp;版权所有&nbsp;&nbsp;
+                        <a hidefocus="true" href="http://www.beian.miit.gov.cn" target="_blank">桂ICP备19004924号</a>
+                        <a hidefocus="true" class="office-verification"
+                           href="http://netadreg.gzaic.gov.cn/ntmm/WebSear/WebLogoPub.aspx?logo=440106106022006022000209"
+                           target="_blank"></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 

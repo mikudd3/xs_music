@@ -1,6 +1,8 @@
 package com.win.xs_music.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.win.xs_music.common.CustomException;
 import com.win.xs_music.common.R;
@@ -11,6 +13,7 @@ import com.win.xs_music.service.SongListService;
 import com.win.xs_music.vo.SongListflVo;
 import com.win.xs_music.vo.gedanVo;
 import lombok.extern.slf4j.Slf4j;
+import org.ini4j.spi.Warnings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.commons.lang.StringUtils;
@@ -107,5 +110,15 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
         }
         log.info("查询到的数据为：{}", maps);
         return maps;
+    }
+
+    @Override
+    public R getOne(Integer id) {
+        //查询歌单详细信息
+        QueryWrapper<SongList> query = Wrappers.query();
+        query.eq("id",id);
+        SongList songList = songListMapper.selectOne(query);
+        log.info("查到的歌单信息为：{}",songList);
+        return R.success(songList);
     }
 }

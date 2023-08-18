@@ -10,6 +10,7 @@ import com.win.xs_music.pojo.Singer;
 import com.win.xs_music.pojo.Song;
 import com.win.xs_music.service.SongService;
 import com.win.xs_music.view.SongView;
+import com.win.xs_music.vo.SongListVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
@@ -27,6 +28,10 @@ import java.util.List;
 public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements SongService {
     @Autowired
     private SingerMapper singerMapper;
+
+
+    @Autowired
+    private SongMapper songMapper;
 
     @Override
     public R updateSong(SongView songView) {
@@ -63,14 +68,33 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
     public R selectList(Integer id) {
         List<Song> songs = null;
         try {
-            songs = singerMapper.selectList(id);
+            songs = songMapper.selectList(id);
         } catch (Exception e) {
             throw new CustomException("系统错误，请联系管理员");
         }
         log.info("查到了：{}首歌曲",songs.size());
         for (int i = 0; i < songs.size(); i++) {
+            //格式化歌名
             String[] arr = songs.get(i).getName().split("-");
             songs.get(i).setName(arr[1]);
+        }
+        return R.success(songs);
+    }
+
+    @Override
+    public R selectList1(Integer id) {
+        List<SongListVo> songs = null;
+        try {
+            songs = songMapper.selectList1(id);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
+        log.info("查到了：{}首歌曲",songs);
+        for (int i = 0; i < songs.size(); i++) {
+            //格式化歌名
+            String[] arr = songs.get(i).getName().split("-");
+            songs.get(i).setName(arr[1]);
+            songs.get(i).setSingerName(arr[0]);
         }
         return R.success(songs);
     }
