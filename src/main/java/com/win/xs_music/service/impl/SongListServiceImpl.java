@@ -40,12 +40,12 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
     public R getStyle() {
         List<Map<String, Object>> maps = songListMapper.getStyle();
         log.info("查询到的数据为：{}", maps);
-        Map<String,Long> map = new HashMap<>();
+        Map<String, Long> map = new HashMap<>();
         //处理查询结果
-        for (Map<String,Object> styleCount : maps){
+        for (Map<String, Object> styleCount : maps) {
             String style = (String) styleCount.get("name");
             Long count = (Long) styleCount.get("count");
-            map.put(style,count);
+            map.put(style, count);
         }
         log.info("查询到的map集合为：{}", map);
         return R.success(map);
@@ -57,5 +57,16 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
         ArrayList<SongListflVo> maps = songListMapper.getSongList(style_name);
         log.info("查询到的数据为：{}", maps);
         return maps;
+    }
+
+    /**
+     * 首页获取歌单数据
+     *
+     * @return
+     */
+    @Override
+    public R getIndexSongList() {
+        List<SongList> lists = songListMapper.getIndexSongList();
+        return R.success(lists);
     }
 }
