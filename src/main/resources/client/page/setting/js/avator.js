@@ -16,6 +16,7 @@ new Vue({
             }).then(resp => {
                 if (resp.data.code == 1) {
                     this.userdata = resp.data.data;
+                    this.imageUrl = this.userdata.tx;
                 } else {
                     this.$message.error(resp.data.msg);
                 }
@@ -23,7 +24,7 @@ new Vue({
         },
         //回调函数上传成功的处理
         handleAvatarSuccess(res, file) {
-            this.imageUrl = URL.createObjectURL(file.raw);
+            this.imageUrl = res.data;
         },
         //上传前的检验
         beforeAvatarUpload(file) {
@@ -55,7 +56,7 @@ new Vue({
             }).then(resp => {
                 if (resp.data.code == 1) {
                     this.$message.success("修改成功！")
-                    this.getuserinfo();
+                    this.getUser();
                 } else {
                     this.$message.error(resp.data.msg);
                 }

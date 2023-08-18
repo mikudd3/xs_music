@@ -80,8 +80,8 @@
     <div class="mod_singer_list ">
         <ul class="singer_list__list">
             <li class="singer_list__item" v-for="singer in singers" :key="singer.id">
-                <div class="singer_list__item_box"><a class="singer_list__cover" title=""
-                                                      :href=singer.url>
+                <div class="singer_list__item_box">
+                    <a class="singer_list__cover" title="" :href=singer.url>
                     <img class="singer_list__pic" :src="singer.pic"
                          :alt="singer.name"
                          data-qar-def=""/></a>

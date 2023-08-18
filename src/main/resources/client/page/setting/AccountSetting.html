@@ -14,7 +14,7 @@
     <el-divider class="line" content-position="left"></el-divider>
     <div  class="i-box">
         <i class="el-icon-mobile myicon"></i>
-        <span>已绑定号码：{{'181****3660'}}
+        <span>已绑定号码：{{this.currentPhone}}
             <el-button @click="PhonedialogForm">重新绑定</el-button>
         </span>
     </div>
@@ -36,7 +36,7 @@
             </el-steps>
             <div class="step-content">
                 <div v-if="active === 0">
-                    <p>你已绑定号码：{{'181****3660'}} </p>
+                    <p>你已绑定号码：{{this.currentPhone}} </p>
                     <el-input
                             placeholder="请输入完整号码："
                             v-model="phoneSet.oldphone"
@@ -52,7 +52,7 @@
                     </el-input>
                 </div>
                 <div v-if="active === 2">
-                    <p>输入验证码； 未收到？<a href="#" @click="sentMasage">重新发送</a></p>
+                    <p>输入验证码； 未收到？<a href="#" @click="sentMasage(this.phoneSet.newphone)">重新发送</a></p>
                     <el-input
                             placeholder="请输入验证码："
                             v-model="phoneSet.yzm"
