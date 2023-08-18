@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.win.xs_music.common.BaseContext;
 import com.win.xs_music.common.CustomException;
 import com.win.xs_music.common.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -105,5 +106,15 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
         SongList songList = songListMapper.selectOne(query);
         log.info("查到的歌单信息为：{}",songList);
         return R.success(songList);
+    }
+
+    @Override
+    public R getMyCreateSongList() {
+        Integer id = BaseContext.getCurrentId();
+        //查询我创建的歌单
+        QueryWrapper<SongList> query = Wrappers.query();
+        query.eq("user_id",id);
+        List<SongList> songLists = songListMapper.selectList(query);
+        return R.success(songLists);
     }
 }

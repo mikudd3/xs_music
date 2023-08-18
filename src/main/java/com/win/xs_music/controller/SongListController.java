@@ -147,4 +147,10 @@ public class SongListController {
     }
 
 
+    @GetMapping("/getMyCreateSongList")
+    /*传入用户的id*/
+    public R getMyCreateSongList(){
+        return songListService.getMyCreateSongList();
+    }
+
 }
