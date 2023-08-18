@@ -1,0 +1,57 @@
+
+#main {
+    width: 1200px;
+    margin: auto;
+}
+
+#main div {
+    margin: 10px;
+}
+.song-list{
+    top: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+table {
+    width: 1200px;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* 点赞 */
+.like-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .heart-icon {
+    color: rgb(147, 144, 144);
+    border: 2px soid;
+    border-radius: 50%;
+    font-size: 24px;
+    padding: 4px;
+    transition: color 0.3s;
+  }
+  
+  .heart-icon.active {
+    color: red;
+  }
