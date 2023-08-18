@@ -17,10 +17,10 @@ public interface SongMapper extends BaseMapper<Song> {
 
 
 
-    @Select("select * from song where singer_id = #{id}")
+    @Select("select * from song.html where singer_id = #{id}")
     List<Song> getListBySingerId(Integer id);
 
-    @Delete("delete from song where singer_id = #{id}")
+    @Delete("delete from song.html where singer_id = #{id}")
     void deleteBySingerId(Integer id);
 
 
@@ -28,7 +28,7 @@ public interface SongMapper extends BaseMapper<Song> {
     Singer selectOne(Integer id);
 
 
-    @Select("SELECT * FROM `song` WHERE singer_id = #{id}")
+    @Select("SELECT * FROM `song.html` WHERE singer_id = #{id}")
     List<Song> selectList(Integer id);
 
     //多表查询查询指定歌单的歌曲

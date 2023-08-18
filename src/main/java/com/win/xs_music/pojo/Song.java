@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-@TableName(value = "song")
+@TableName(value = "song.html")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
