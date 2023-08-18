@@ -40,6 +40,10 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
         List<Singer> singers = null;
         try {
             ids = collectMapper.getCollectSingerByUserId(id);
+            if (ids == null) {
+                //如果没有收藏歌单
+                return R.success(null);
+            }
             //根据获得的歌手id集合查询歌手数据
             singers = singerMapper.selectBatchIds(ids);
         } catch (Exception e) {
@@ -63,6 +67,10 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
         List<SongList> songLists = null;
         try {
             ids = collectMapper.getCollectSongListByUserId(id);
+            if (ids == null) {
+                //没有关注的歌手
+                return R.success(null);
+            }
             songLists = songListMapper.selectBatchIds(ids);
         } catch (Exception e) {
             throw new CustomException("系统错误，请联系管理员");

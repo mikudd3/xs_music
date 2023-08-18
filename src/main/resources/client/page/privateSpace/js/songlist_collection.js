@@ -24,8 +24,6 @@ new Vue({
                     for (let i = 0; i < this.items.length; i++) {
                         this.items[i].pic = `/common/download?name=` + this.items[i].pic;
                     }
-                } else {
-                    this.$message.error(resp.data.msg);
                 }
             })
         },

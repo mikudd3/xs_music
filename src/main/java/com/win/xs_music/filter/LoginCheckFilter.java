@@ -24,7 +24,7 @@ import java.io.IOException;
  * @version: 1.0
  */
 @Slf4j
-//@WebFilter(filterName = "loginCheckFilter", urlPatterns = "/*")
+@WebFilter(filterName = "loginCheckFilter", urlPatterns = "/*")
 public class LoginCheckFilter implements Filter {
 
     //路径匹配器，支持通配符
