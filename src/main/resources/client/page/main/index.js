@@ -116,7 +116,7 @@ new Vue({
             }).then(resp => {
                 let r = resp.data;
                 if (r.code == 1) {
-                    this.songs = r;
+                    this.songs = r.data;
                 } else {
                     this.$message.error(resp.data.msg);
                 }
