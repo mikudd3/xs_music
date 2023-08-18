@@ -244,3 +244,45 @@ new Vue({
         this.fristsong();
     }
 });
+
+new Vue({
+    el: "#main",
+    data: {
+        iframeSrc: "main.html",
+    },
+    mounted() {
+        this.getUser();
+    },
+    methods: {
+        //获取用户信息
+        getUser() {
+            axios({
+                url: "/user/getUser",
+                method: "get",
+            }).then(resp => {
+                if (resp.data.code == 1) {
+                    this.userdata = resp.data.data;
+                } else {
+                    this.$message.error(resp.data.msg);
+                }
+            })
+        },
+        // 首页
+        findmain: function () {
+            this.iframeSrc = "main.html"
+        },
+        //歌单
+        findsonglis: function () {
+            this.iframeSrc = "../gedan/song_list.html"
+        },
+        //歌手
+        findSinger: function () {
+            this.iframeSrc = "../geshou/geshou.html"
+        },
+        // 个人主页
+        findmysong: function () {
+            this.iframeSrc = "../privateSpace/spaceManage.html"
+        }
+
+    }
+});

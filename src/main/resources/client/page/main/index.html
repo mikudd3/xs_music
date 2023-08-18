@@ -48,76 +48,27 @@
     </div>
 </div>
 
-<nav class="daohanglan">
-    <div class="big3">
-        <ul>
-
-
-            <li>
-                <a class="gudingbeij erjicaidan2" href="#">
-                    <el-menu-item class="gudingbeij erjicaidan2" index="1" @click="findInfo()">首页</el-menu-item>
-                </a>
-            </li>
-            <li>
-                <a class=" erjicaidan2">
-                    <el-menu-item class=" erjicaidan2" index="2" @click="findAccount()">歌单</el-menu-item>
-                </a>
-            </li>
-            <li>
-                <a class="erjicaidan2">
-                    <el-menu-item class="erjicaidan2" index="3" @click="findAvator()">歌手</el-menu-item>
-                </a>
-            </li>
-            <li>
-                <a class="erjicaidan2">
-                    <el-menu-item class="erjicaidan2" index="4" @click="findAvator()">我的音乐</el-menu-item>
-                </a>
-            </li>
-        </ul>
-    </div>
-</nav>
-
-<div id="m2">
-    <div id="slider">
-        <div class="slider-wrapper">
-            <img :src="currentSlide.pic" alt=""/>
+<div id="main" style="height: 1900px">
+    <nav class="daohanglan">
+        <div class="big3">
+            <el-menu
+                    :default-active="activeIndex2"
+                    mode="horizontal"
+                    @select="handleSelect"
+                    :style="{ 'background-color': 'transparent' }">
+                <el-menu-item class="gudingbeij erjicaidan2" index="1" @click="findmain()">首页</el-menu-item>
+                <el-menu-item class="gudingbeij erjicaidan2" index="2" @click="findsonglis()">歌单</el-menu-item>
+                <el-menu-item class="gudingbeij erjicaidan2" index="3" @click="findSinger()">歌手</el-menu-item>
+                <el-menu-item class="gudingbeij erjicaidan2" index="4" @click="findmysong()">我的音乐</el-menu-item>
+            </el-menu>
+            <!-- 主区域部分 -->
+            <el-main>
+                <iframe :src="iframeSrc" style="width: 100%;height:1800px;border:3px;padding: 0"></iframe>
+            </el-main>
         </div>
-        <div class="slider-footer">
-            <ul class="slider-indicator">
-                <li v-for="(slide, index) in slides" :key="index" :class="{ active: index === currentIndex }"></li>
-            </ul>
-            <div class="toggle">
-                <button class="prev" @click="prevSlide">&lt;</button>
-                <button class="next" @click="nextSlide">&gt;</button>
-            </div>
-        </div>
-    </div>
+    </nav>
 </div>
 
-<div class="big4">
-    <div class="gedan">
-        <div class="dazi">
-            <p>精品歌单
-            <p>
-        </div>
-        <div class="xiaodaohang" id="gedan">
-            <ul class="clearfix">
-                <li v-for="song in songs" :key="song.id" style="width: 200px;">
-                    <div class="zhedang">
-                        <div class="bofang">
-                            <div class="bofang1">
-                                <a href=""><span class="glyphicon glyphicon-play"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <img :src="song.pic" width="200px" height="200px">
-                    <span>{{ song.title }}</span>
-                    <span style="font-size: 12px; color: #777; display: block;">收藏数：{{ song.love }}</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
 
 <div class="footer">
     <div class="links">

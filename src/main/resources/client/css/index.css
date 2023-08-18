@@ -100,7 +100,7 @@ body {
 
 
 .daohanglan {
-    height: 55px;
+    height: 61px;
     margin-top: 5px;
     background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);
     background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
@@ -108,7 +108,7 @@ body {
 }
 
 .daohanglan .big3 {
-    width: 1226px;
+    width: 1600px;
     margin: auto;
 }
 
