@@ -3,34 +3,42 @@ new Vue({
     data() {
         return {
             all_comment: 89898,
-
             comments: [{
                 id: 1,
                 name: "妖怪",
-                create_time:"2010-10-1",
+                create_time: "2010-10-1",
                 context: "show time!",
             }
             ]
         }
-    },methods:{
-        getComment(){
+    }, methods: {
+        getComment() {
 
-        },setComment(){
-
+        }, setComment() {
+            axios({
+                method: "get",
+                url: "/comment/add",
+                params: {
+                    type: 1,
+                }
+            })
+            this.getAllComments();
         },
-        getAllComments(){
+        getAllComments() {
             axios({
                 method: "get",
                 url: "/comment/gets",
                 params: {
-
+                    type: 1,
                 }
             }).then(res => {
-                this.singers = res.data.data;
-                console.log(this.singers);
+                this.comments = res.data.data;
+                console.log(this.comments);
+                this.all_comment=this.comments.size;
+                console.log(this.all_comment);
             })
         }
-    },mounted(){
+    }, mounted() {
         this.getAllComments();
     }
 })

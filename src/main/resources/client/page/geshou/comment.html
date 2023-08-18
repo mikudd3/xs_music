@@ -18,7 +18,7 @@
         <div class="comment__textarea">
             <div class="comment__textarea_inner">
                 <div class="comment__textarea_default c_tx_normal" contenteditable="true"
-                     style="display: block;">说说你的看法吧
+                     style="display: block;">
                 </div>
                 <div class="comment__textarea_input" contenteditable="true" style="display: none;">
                 </div>
@@ -31,7 +31,7 @@
         </div>
         <a class="comment__face"><i class="icon_comment icon_comment_face"></i></a>
         <div class="comment__tool">
-            <a class="mod_btn_green comment__tool_btn" href="#" @click="comment in comment_list"
+            <a class="mod_btn_green comment__tool_btn" href="#" @click="setComment()"
                style="margin-right: 0">发表评论</a>
         </div>
     </div>
@@ -43,7 +43,6 @@
         </div>
         <ul class="comment__list">
             <li class="comment__list_item c_b_normal" v-for="comment in comments">
-				<a>{{comments.context}}{{comments.context}}{{comments.context}}</a>
                 <!-- 循环语句开始的地方 -->
                 <div><a class="comment__avatar">
                     <img class="comment_list__avatar_img"
