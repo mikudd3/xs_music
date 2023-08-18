@@ -19,7 +19,7 @@ new Vue({
         },
         dialogFormVisible4Pwd: false,//修改密码窗口
         userdata: {
-            phone: '18154643660',
+            phone: '',
         },//用户信息
         formdata: [], //页面信息
         currentPhone: "",
@@ -33,6 +33,7 @@ new Vue({
             }).then(resp => {
                 if (resp.data.code == 1) {
                     this.userdata = resp.data.data;
+                    this.currentPhone = this.hidePhoneNumber(this.userdata.phone)
                 } else {
                     this.$message.error(resp.data.msg);
                 }
@@ -228,6 +229,6 @@ new Vue({
     },
     mounted() {
         this.getUser();
-        this.currentPhone = this.hidePhoneNumber(this.userdata.phone)
+
     }
 });
