@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../../css/comment.css">
+</head>
+<body>
+<div class="mod_comment" id="main2">
+    <!-- 大盒子 -->
+    <div class="part_head">
+        <h2>评论
+            <span>{{all_comment}}</span>
+            <!-- 所有评论 -->
+        </h2>
+    </div>
+    <div class="comment__input">
+        <div class="comment__textarea">
+            <div class="comment__textarea_inner">
+                <div class="comment__textarea_default c_tx_normal" contenteditable="true"
+                     style="display: block;">说说你的看法吧
+                </div>
+                <div class="comment__textarea_input" contenteditable="true" style="display: none;">
+                </div>
+            </div>
+            <div class="comment__tips">剩余
+                <span class="c_tx_highlight">300</span>
+                字
+                <!--						不懂是不是很需要-->
+            </div>
+        </div>
+        <a class="comment__face"><i class="icon_comment icon_comment_face"></i></a>
+        <div class="comment__tool">
+            <a class="mod_btn_green comment__tool_btn" href="#" @click="comment in comment_list"
+               style="margin-right: 0">发表评论</a>
+        </div>
+    </div>
+    <!-- part2 -->
+
+    <div class="mod_hot_comment" id="main3">
+        <div class="comment_type__title c_b_normal">
+            <h2>全部评论({{all_comment}})</h2>
+        </div>
+        <ul class="comment__list">
+            <li class="comment__list_item c_b_normal" v-for="comment in comments">
+				<a>{{comments.context}}{{comments.context}}{{comments.context}}</a>
+                <!-- 循环语句开始的地方 -->
+                <div><a class="comment__avatar">
+                    <img class="comment_list__avatar_img"
+                         src="https://y.qq.com/music/photo_new/T002R300x300M0000000GhGG0imP4j_1.jpg?max_age=2592000"
+                         alt="{{name}}"
+                         data-qar-def=""></a>
+                    <h4 class="comment__title"><a class="c_tx_thin">{{comment.name}}</a>
+                    </h4>
+                    <div class="comment__date c_tx_thin">{{comment.create_time}}</div>
+                    <p class="comment__text ">
+                        <!-- 评论内容 -->
+                        <span>{{comment.context}}</span>
+                    </p>
+                    <div class="comment__opt">
+                        <a class="comment__zan ">
+                            <i class="icon_comment icon_comment_like">up</i>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+</div>
+</body>
+<script src="../../plugins/vue/vue.js"></script>
+<script src="../../plugins/axios/axios-0.18.0.js"></script>
+<script src="../../js/comment.js"></script>
+</html>
