@@ -26,7 +26,6 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         } catch (Exception e) {
             throw new CustomException("系统错误，请联系管理员");
         }
-        liss = commentMapper.getCommentList(comment);
         return R.success(liss);
     }
 

@@ -22,28 +22,26 @@ public class CommentController {
 
     @Autowired
     private CommentService commentService;
+
     @GetMapping("/gets")
-    public R getComments(Comment comment){
+    public R getComments(Comment comment) {
         R comment_list;
-        BaseContext baseContext;
-        Integer id = BaseContext.getCurrentId();
-        comment.setSongListId(id);
-        log.info("!!!!!!!!!!!!!!!!!!!!!!"+id);
-        log.info("查询歌单评论数"+comment);
-        if (comment.getSongListId() == null){
+        log.info("!!!!!!!!!!!!!!!!!!!!!!");
+        log.info("查询歌单评论数" + comment);
+        if (comment.getSongListId() == null) {
             return R.error("null");
         }
         try {
-
-                comment_list = commentService.getCommentList(comment);
-        }catch (Exception e){
+            comment_list = commentService.getCommentList(comment);
+        } catch (Exception e) {
             throw new CustomException("系统错误，请联系管理员");
         }
         return comment_list;
     }
+
     @PostMapping("/add")
-    public R addComment(@RequestBody Comment comment) {
-        log.info("添加员工所输入信息：{}", comment);
+    public R addComment(Comment comment) {
+        log.info("添加评论所输入信息：{}", comment);
 
         boolean save = false;
         try {

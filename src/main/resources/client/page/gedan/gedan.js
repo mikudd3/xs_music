@@ -3,7 +3,8 @@ new Vue({
     data() {
         return {
             //tang
-            content: "alkjdfkl",
+            content: '',
+            userData:[{}],
             all_comment: 233,
             comments: [{
                 name: '妖怪',
@@ -46,16 +47,34 @@ new Vue({
     },
     mounted() {
         this.getAll();
+        this.getUser();
         this.getAllComments();
     },
     methods: {
         //获取全部评论
+        getUser() {
+            axios({
+                url: "/user/getUser",
+                method: "get",
+            }).then(resp => {
+                if (resp.data.code == 1) {
+                    this.userData = resp.data.data;
+                } else {
+                    this.$message.error(resp.data.msg);
+                }
+            })
+        },
         getAllComments() {
+            this.searchParams = new URLSearchParams(window.location.search);
+            //const searchParams = new URLSearchParams(window.location.search);
+            const id = this.searchParams.get('id');
             axios({
                 method: "get",
                 url: "/comment/gets",
                 params: {
+
                     type: 1,
+                    songListId:id,
                 }
             }).then(res => {
                 this.comments = res.data.data;
@@ -64,16 +83,17 @@ new Vue({
         },
         setComment() {
             this.searchParams = new URLSearchParams(window.location.search);
-            //const searchParams = new URLSearchParams(window.location.search);
             const id = this.searchParams.get('id');
+            console.log(this.userData.id+"user");
             {
                 axios({
-                    method: "get",
+                    method: "post",
                     url: "/comment/add",
                     params: {
-                        user_id: id,
+                        userId: this.userData.id,
                         type: 1,
                         content: this.content,
+                        songListId:id,
                     }
                 }).then(ress => {
                     this.comments = ress.data.data;
