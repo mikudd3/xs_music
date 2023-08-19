@@ -169,6 +169,7 @@ public class SongListController {
         try {
             return songListService.addSongList(songList);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
