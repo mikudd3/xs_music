@@ -153,17 +153,26 @@ new Vue({
             // 检查事件的来源是否是sessionStorage，并且key是否是songs
             if (event.storageArea === sessionStorage && event.key === 'songs') {
                 // 处理sessionStorage中songs属性的变化
+
                 var songs =JSON.parse(sessionStorage.getItem("songs"))
-                if (songs.length > 1){
+
+                if(songs.length > 1){
                     this.songlist=songs;
-                    this.playsong =this.songlist[0];
+                    this.fristsong();
+                    this.songindex = 0;
                     var mymusic = document.getElementById("musicer");
                     mymusic.load();
-                    this.play();
-                }else{
-                    this.songlist.push(songs);
+                }else {
+                    if(this.songlist.length == 0){
+                        this.songlist=songs;
+                        this.fristsong();
+                        this.songindex = 0;
+                        var mymusic = document.getElementById("musicer");
+                        mymusic.load();
+                    }else {
+                        this.songlist.push(songs);
+                    }
                 }
-
             }
         }
     },
