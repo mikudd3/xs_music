@@ -26,4 +26,10 @@ public interface CollectService extends IService<Collect> {
      * @return
      */
     R getMyLoveSong();
+
+    //添加到我喜欢
+    R addMyLoveSong(Integer id);
+
+    //取消添加到我的喜欢
+    R deleteMyLoveSong(Integer id);
 }

@@ -2,6 +2,7 @@ package com.win.xs_music.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.win.xs_music.pojo.Collect;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -31,4 +32,7 @@ public interface CollectMapper extends BaseMapper<Collect> {
 
     @Select("select song_id from collect where user_id = #{id} and type = 0")
     List<Integer> geMyLoveSongIdsByUserId(Integer userId);
+
+    @Delete("delete from collect where user_id = #{id} and song_id = #{id} and type = 0")
+    boolean deleteWithUserIdAndSongId(Integer userId, Integer id);
 }

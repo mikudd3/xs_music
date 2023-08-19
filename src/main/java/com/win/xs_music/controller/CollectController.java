@@ -3,11 +3,13 @@ package com.win.xs_music.controller;
 import com.win.xs_music.common.CustomException;
 import com.win.xs_music.common.R;
 import com.win.xs_music.service.CollectService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/collect")
+@Slf4j
 public class CollectController {
 
     @Autowired
@@ -37,11 +39,36 @@ public class CollectController {
 
     //获取我喜欢的音乐
     @GetMapping("/getMyLoveSong")
-    public R getMyLoveSong(){
+    public R getMyLoveSong() {
         try {
             return collectService.getMyLoveSong();
         } catch (Exception e) {
             throw new CustomException("系统错误，请联系管理员");
         }
     }
+
+
+    //添加到我喜欢
+    @PostMapping("/addMyLoveSong")
+    public R addMyLoveSong(Integer id) {
+        try {
+            log.info("获取的id为：{}", id);
+            return collectService.addMyLoveSong(id);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
+    }
+
+
+    //取消添加到我的喜欢
+    @PostMapping("/deleteMyLoveSong")
+    public R deleteMyLoveSong(Integer id){
+        try {
+            log.info("获取的id为：{}", id);
+            return collectService.deleteMyLoveSong(id);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
+    }
+
 }
