@@ -160,19 +160,21 @@ new Vue({
                     this.songlist=songs;
                     this.fristsong();
                     this.songindex = 0;
-                    var mymusic = document.getElementById("musicer");
-                    mymusic.load();
                 }else {
                     if(this.songlist.length == 0){
                         this.songlist=songs;
                         this.fristsong();
                         this.songindex = 0;
-                        var mymusic = document.getElementById("musicer");
-                        mymusic.load();
+
                     }else {
                         this.songlist.push(songs);
+                        this.playsong = this.songlist[this.songlist.length-1];
+                        this.songindex = this.songlist.length-1
                     }
                 }
+                var mymusic = document.getElementById("musicer");
+                mymusic.load();
+                this.play()
             }
         }
     },
