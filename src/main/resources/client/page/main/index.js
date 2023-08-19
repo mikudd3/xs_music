@@ -139,7 +139,8 @@ new Vue({
             this.playsong = this.songlist[this.songindex];
             var mymusic = document.getElementById("musicer");
             mymusic.load();
-            this.play();
+            mymusic.play();
+
         },
         //开关抽屉
         changelist() {
@@ -174,7 +175,8 @@ new Vue({
                 }
                 var mymusic = document.getElementById("musicer");
                 mymusic.load();
-                this.play()
+                this.play();
+                this.state = false;
             }
         }
     },
