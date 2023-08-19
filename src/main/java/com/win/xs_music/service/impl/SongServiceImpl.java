@@ -1,5 +1,6 @@
 package com.win.xs_music.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -144,9 +145,8 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
             //获取本地登录用户
             Integer userId = BaseContext.getCurrentId();
             //根据用户名模糊查询
-            LambdaQueryWrapper<Song> wrapper = new LambdaQueryWrapper<>();
-            wrapper.like(Song::getName, songname);
-            List<Song> songs = this.list(wrapper);
+            songname = "%" + songname + "%";
+            List<Song> songs = songMapper.getListBySongName(songname);
             //遍历
             List<GetListSongVo> list = new ArrayList<>();
             for (Song song : songs) {

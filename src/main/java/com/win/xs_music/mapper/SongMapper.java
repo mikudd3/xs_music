@@ -34,4 +34,7 @@ public interface SongMapper extends BaseMapper<Song> {
 
     //多表查询查询指定歌单的歌曲
     List<SongListVo> selectList1(Integer id);
+
+    @Select("select * from song where name like #{songname}")
+    List<Song> getListBySongName(String songname);
 }

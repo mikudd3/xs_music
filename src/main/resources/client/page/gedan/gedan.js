@@ -174,11 +174,8 @@ new Vue({
             if (row.like) {
                 //添加到我喜欢
                 axios({
-                    url: "/collect/addMyLoveSong",
+                    url: "/collect/addMyLoveSong?id="+row.id ,
                     method: "post",
-                    data: {
-                        id: row.id
-                    }
                 }).then(resp => {
                     if (resp.data.code == 1) {
                         row.like = !row.like;
@@ -190,11 +187,8 @@ new Vue({
             } else {
                 //取消我喜欢
                 axios({
-                    url: "/collect/deleteMyLoveSong",
+                    url: "/collect/deleteMyLoveSong?id="+row.id,
                     method: "post",
-                    data: {
-                        id: row.id
-                    }
                 }).then(resp => {
                     if (resp.data.code == 1) {
                         row.like = !row.like;

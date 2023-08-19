@@ -25,7 +25,6 @@ new Vue({
             }).then(res => {
                 if (res.data.code == 1) {
                     this.song = res.data.data
-                    this.song.pic = `/common/download?name=` + this.song.pic
                 }
             });
         },
