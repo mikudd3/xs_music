@@ -88,6 +88,8 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
                     Collect collect = collectMapper.getMyLoveSongWithUserIdAndSongId(userId, song.getId());
                     //true表示不喜欢，false表示该歌曲已被用户添加到我喜欢
                     singerSongVo.setLike(collect == null);
+                } else {
+                    singerSongVo.setLike(true);
                 }
                 list.add(singerSongVo);
             }
@@ -117,6 +119,8 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
                     Collect collect = collectMapper.getMyLoveSongWithUserIdAndSongId(userId, song.getId());
                     //true表示不喜欢，false表示该歌曲已被用户添加到我喜欢
                     getListSongVo.setLike(collect == null);
+                } else {
+                    getListSongVo.setLike(true);
                 }
                 list.add(getListSongVo);
             }
