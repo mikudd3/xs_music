@@ -1,5 +1,6 @@
 package com.win.xs_music.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.win.xs_music.common.BaseContext;
@@ -17,6 +18,7 @@ import com.win.xs_music.vo.GetListSongVo;
 import com.win.xs_music.vo.GetSingerSongVo;
 import com.win.xs_music.vo.SongListVo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -113,6 +115,45 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
                 song.setSingerName(arr[0]);
                 GetListSongVo getListSongVo = new GetListSongVo();
                 BeanUtils.copyProperties(song, getListSongVo);
+                //如果当前用户已登录
+                if (userId != null) {
+                    //通过当前登录用户和歌曲id查询是否是当前用户已喜欢的歌曲
+                    Collect collect = collectMapper.getMyLoveSongWithUserIdAndSongId(userId, song.getId());
+                    //true表示不喜欢，false表示该歌曲已被用户添加到我喜欢
+                    getListSongVo.setLike(collect == null);
+                } else {
+                    getListSongVo.setLike(true);
+                }
+                list.add(getListSongVo);
+            }
+            return R.success(list);
+        } catch (BeansException e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
+    }
+
+
+    @Override
+    public R getSongByName(String songname) {
+        try {
+            if (!StringUtils.isNotEmpty(songname)) {
+                return R.error("请输入查询条件");
+            }
+            //获取本地登录用户
+            Integer userId = BaseContext.getCurrentId();
+            //根据用户名模糊查询
+            LambdaQueryWrapper<Song> wrapper = new LambdaQueryWrapper<>();
+            wrapper.like(Song::getName, songname);
+            List<Song> songs = this.list(wrapper);
+            //遍历
+            List<GetListSongVo> list = new ArrayList<>();
+            for (Song song : songs) {
+                //格式化歌名
+                String[] arr = song.getName().split("-");
+                song.setName(arr[1]);
+                GetListSongVo getListSongVo = new GetListSongVo();
+                BeanUtils.copyProperties(song, getListSongVo);
+                getListSongVo.setSingerName(arr[0]);
                 //如果当前用户已登录
                 if (userId != null) {
                     //通过当前登录用户和歌曲id查询是否是当前用户已喜欢的歌曲

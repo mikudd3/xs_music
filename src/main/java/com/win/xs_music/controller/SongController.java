@@ -102,10 +102,15 @@ public class SongController {
 
     //查询歌单的歌曲列表
     @PostMapping("list2")
-    public R selectList1(Integer id){
+    public R selectList1(Integer id) {
         return songService.selectList1(id);
     }
 
 
-
+    //搜索歌曲
+    @GetMapping("/searchSong")
+    public R searchSong(String songname) {
+        log.info("搜索条件为：{}", songname);
+        return songService.getSongByName(songname);
+    }
 }

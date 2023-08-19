@@ -16,4 +16,7 @@ public interface SongService extends IService<Song> {
     R selectList(Integer id);
 
     R selectList1(Integer id);
+
+    //搜索歌曲
+    R getSongByName(String songname);
 }

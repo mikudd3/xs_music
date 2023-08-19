@@ -217,7 +217,7 @@ new Vue({
         },
         //搜索
         getList2: function (songname){
-            this.iframeSrc ="../gequ/gequ.html?songname="+songname;
+            this.iframeSrc ="../gequ/gequ.html?songname="+ songname;
         }
     }
 });

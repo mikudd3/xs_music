@@ -34,7 +34,26 @@ new Vue({
         ],
         showPopup: false,
     },
+    mounted() {
+        this.getSong();
+    },
     methods: {
+        getSong() {
+            this.searchParams = new URLSearchParams(window.location.search);
+            const songname = this.searchParams.get('songname');
+            // alert(songname);
+            axios({
+                url: "/song/searchSong?songname=" + songname,
+                method: "get",
+            }).then(resp => {
+                if (resp.data.code == 1) {
+                    this.songs = resp.data.data;
+                    this.$message.success("添加成功")
+                } else {
+                    this.$message.error(resp.data.msg)
+                }
+            })
+        },
         //喜欢
         toggleFavorite(row) {
             if (row.like) {
