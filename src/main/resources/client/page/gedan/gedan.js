@@ -27,7 +27,7 @@ new Vue({
             songLists: [
                 {
                     id: 1,
-                    title: "111",
+                    title:""
                 }
             ],
             //用于判断收藏是否成功
