@@ -1,29 +1,4 @@
-//获取登录用户的头像
-new Vue({
-    el: "#col10",
-    data() {
-        return {
-            imageUrl: "../../image/tx.jpg",
-        }
-    },
-    mounted() {
-        this.getUser();
-    },
-    methods: {
-        getUser() {
-            axios({
-                url: "/user/getUser",
-                method: "get",
-            }).then(resp => {
-                if (resp.data.code == 1) {
-                    this.imageUrl = `/common/download?name=` + resp.data.data.tx;
-                } else {
-                    this.$message.error(resp.data.msg);
-                }
-            })
-        },
-    }
-})
+
 
 
 new Vue({
@@ -199,8 +174,25 @@ new Vue({
     data: {
         iframeSrc: "main.html",
         songname:'',
+        imageUrl: "../../image/tx.jpg",
+    },
+    mounted() {
+        this.getUser();
     },
     methods: {
+        //获取登录用户的头像
+        getUser() {
+            axios({
+                url: "/user/getUser",
+                method: "get",
+            }).then(resp => {
+                if (resp.data.code == 1) {
+                    this.imageUrl = `/common/download?name=` + resp.data.data.tx;
+                } else {
+                    this.$message.error(resp.data.msg);
+                }
+            })
+        },
         // 首页
         findmain: function () {
             this.iframeSrc = "main.html"
@@ -220,6 +212,10 @@ new Vue({
         //搜索
         getList2: function (songname){
             this.iframeSrc ="../gequ/gequ.html?songname="+ songname;
+        },
+        //个人设置
+        findset: function (songname){
+            this.iframeSrc ="../setting/Setting.html";
         }
     }
 });
