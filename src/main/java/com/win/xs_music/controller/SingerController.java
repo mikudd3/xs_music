@@ -26,6 +26,7 @@ public class SingerController {
         try {
             return singerService.selectCount();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -36,6 +37,7 @@ public class SingerController {
         try {
             return singerService.getSingerLocationCategory();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -47,6 +49,7 @@ public class SingerController {
         try {
             return singerService.getPage(singerPageDto.getCurrentPage(), singerPageDto.getPageSize(), singerPageDto.getName());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -60,6 +63,7 @@ public class SingerController {
         try {
             ret = singerService.save(singer);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return ret ? R.success("添加成功") : R.error("添加失败");
@@ -74,6 +78,7 @@ public class SingerController {
         try {
             ret = singerService.updateById(singer);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return ret ? R.success("更新成功") : R.error("更新失败");
@@ -86,6 +91,7 @@ public class SingerController {
         try {
             return singerService.delete(id);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -97,6 +103,7 @@ public class SingerController {
         try {
             return singerService.getOne(id);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -108,6 +115,7 @@ public class SingerController {
         try {
             return singerService.getSingers(singer);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }

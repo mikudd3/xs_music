@@ -43,6 +43,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             //进行分页查询
             this.page(page, wrapper);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return R.success(page);
@@ -61,6 +62,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             }
             b = this.updateById(user);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return b ? R.success("修改成功") : R.success("修改失败");
@@ -81,6 +83,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             int userCount = menCount + womenCount;
             userCountVo = new UserCountVo(menCount, womenCount, userCount);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return R.success(userCountVo);
@@ -99,6 +102,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             }
             request.getSession().setAttribute("user", one.getId());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return R.success(one);
@@ -116,6 +120,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         try {
             u = this.getById(userId);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         //根据用户id
@@ -133,6 +138,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         try {
             ret = this.updateById(user);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return ret ? R.success("更新成功") : R.error("更新失败");

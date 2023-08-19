@@ -57,6 +57,7 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
             singers = singerMapper.selectBatchIds(ids);
 
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         //将得到的数据返回
@@ -86,6 +87,7 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
             songLists = songListMapper.selectBatchIds(ids);
 
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return R.success(songLists);
@@ -119,6 +121,7 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
             }
             return R.success(list);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -154,6 +157,7 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
             boolean ret = collectMapper.deleteWithUserIdAndSongId(userId, id);
             return ret ? R.success("取消成功") : R.error("取消失败");
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -171,6 +175,7 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
             int ret = collectMapper.insert(collect);
             return ret > 0 ? R.success("收藏成功") : R.error("收藏失败");
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }

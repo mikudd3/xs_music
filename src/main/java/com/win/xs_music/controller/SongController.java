@@ -29,6 +29,7 @@ public class SongController {
         try {
             count = songService.count();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return R.success(count);
@@ -41,6 +42,7 @@ public class SongController {
         try {
             return songService.getSingerName();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -52,6 +54,7 @@ public class SongController {
         try {
             return songViewService.getPage(songPageDto.getCurrentPage(), songPageDto.getPageSize(), songPageDto.getSingerName());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -63,6 +66,7 @@ public class SongController {
         try {
             return songViewService.add(songView);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -74,6 +78,7 @@ public class SongController {
         try {
             return songService.updateSong(songView);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -85,6 +90,7 @@ public class SongController {
         try {
             return ret ? R.success("删除成功") : R.error("删除失败");
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -96,6 +102,7 @@ public class SongController {
         try {
             return songService.selectList(id);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }

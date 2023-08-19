@@ -21,6 +21,7 @@ public class CollectController {
         try {
             return collectService.getCollectSinger();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -32,6 +33,7 @@ public class CollectController {
         try {
             return collectService.getCollectSongList();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -43,6 +45,7 @@ public class CollectController {
         try {
             return collectService.getMyLoveSong();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -55,6 +58,7 @@ public class CollectController {
             log.info("获取的id为：{}", id);
             return collectService.addMyLoveSong(id);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -67,6 +71,7 @@ public class CollectController {
             log.info("获取的id为：{}", id);
             return collectService.deleteMyLoveSong(id);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -79,6 +84,7 @@ public class CollectController {
             log.info("获得的id为：{}", id);
             return collectService.collectSongList(id);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -90,6 +96,7 @@ public class CollectController {
             log.info("获得的id为：{}", id);
             return collectService.deleteMyCollectSongList(id);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }

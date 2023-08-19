@@ -57,6 +57,7 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
             boolean ret = this.updateById(song);
             return ret ? R.success("更新成功") : R.error("更新失败");
         } catch (BeansException e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -68,6 +69,7 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
             log.info("获得的歌手名为：{}", singerName);
             return R.success(singerName);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -100,6 +102,7 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
             }
             return R.success(list);
         } catch (BeansException e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -131,6 +134,7 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
             }
             return R.success(list);
         } catch (BeansException e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -169,6 +173,7 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
             }
             return R.success(list);
         } catch (BeansException e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -185,6 +190,7 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
             songListVo.setSingerName(arr[0]);
             return R.success(songListVo);
         } catch (BeansException e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }

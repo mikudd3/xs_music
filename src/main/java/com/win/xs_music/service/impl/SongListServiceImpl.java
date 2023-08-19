@@ -55,6 +55,7 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
             wrapper.like(StringUtils.isNotEmpty(name), SongList::getTitle, name);
             this.page(page, wrapper);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return R.success(page);
@@ -66,6 +67,7 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
         try {
             maps = songListMapper.getStyle();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         log.info("查询到的数据为：{}", maps);
@@ -87,6 +89,7 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
         try {
             maps = songListMapper.getSongList(style_name);
         } catch (Exception e) {
+        e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         log.info("查询到的数据为：{}", maps);
@@ -105,6 +108,7 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
                 maps = songListMapper.getSongList1("日韩");
             }
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         log.info("查询到的数据为：{}", maps);
@@ -123,6 +127,7 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
         try {
             lists = songListMapper.getIndexSongList();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return R.success(lists);
@@ -146,6 +151,7 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
             }
             return R.success(songListVo);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -160,22 +166,26 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
             List<SongList> songLists = songListMapper.selectList(query);
             return R.success(songLists);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
 
     @Override
     public R addSongList(SongList songList) {
-        try {
-            //获取当前登录用户的id
-            Integer user_id = BaseContext.getCurrentId();
-            System.out.println(user_id);
-            songList.setUser_id(user_id);
-            boolean i = this.save(songList);
-            return i ? R.success("添加成功") : R.error("添加失败");
-        } catch (Exception e) {
-            throw new CustomException("系统错误，请联系管理员");
-        }
+        boolean i = this.save(songList);
+        return i ? R.success("添加成功") : R.error("添加失败");
+//        try {
+//            //获取当前登录用户的id
+//            Integer user_id = BaseContext.getCurrentId();
+//            System.out.println(user_id);
+//            songList.setUser_id(user_id);
+//            boolean i = this.save(songList);
+//            return i ? R.success("添加成功") : R.error("添加失败");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            throw new CustomException("系统错误，请联系管理员");
+//        }
     }
 
 }

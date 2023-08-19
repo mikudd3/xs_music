@@ -34,6 +34,7 @@ public class CommentController {
         try {
             comment_list = commentService.getCommentList(comment);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return comment_list;
@@ -47,6 +48,7 @@ public class CommentController {
         try {
             save = commentService.save(comment);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return save ? R.success("添加成功") : R.success("添加失败");

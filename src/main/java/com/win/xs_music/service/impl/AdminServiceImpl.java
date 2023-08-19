@@ -42,6 +42,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         try {
             this.page(page, wrapper);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
 
@@ -57,6 +58,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         try {
             a = getOne(wrapper);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
 

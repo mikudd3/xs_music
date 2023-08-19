@@ -36,6 +36,7 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
         try {
             listMap = singerMapper.getSingerLocationCategory();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         log.info("查询到的数据为：{}", listMap);
@@ -59,6 +60,7 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
         try {
             this.page(page, wrapper);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return R.success(page);
@@ -73,6 +75,7 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
             //删除歌手
             this.removeById(id);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return R.success("删除成功");
@@ -93,6 +96,7 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
             int singerCount = singerCountMan + singerCountWomen;
             singCountVo = new SingCountVo(singerCountMan, singerCountWomen, singerCount);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return R.success(singCountVo);
@@ -104,6 +108,7 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
         try {
             singer = songMapper.selectOne(id);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return R.success(singer);
@@ -118,6 +123,7 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
         try {
             singerList = singerMapper.getSingers(singer);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         // 处理查询结果

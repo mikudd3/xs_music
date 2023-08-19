@@ -32,6 +32,7 @@ public class UserController {
         try {
             return userService.getPage(userPageDto.getCurrentPage(), userPageDto.getPageSize(), userPageDto.getUser());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -43,6 +44,7 @@ public class UserController {
         try {
             return userService.update(user);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -54,6 +56,7 @@ public class UserController {
         try {
             b = userService.removeById(id);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return b ? R.success("删除成功") : R.success("删除失败");
@@ -65,6 +68,7 @@ public class UserController {
         try {
             return userService.selectUserCount();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -77,6 +81,7 @@ public class UserController {
         try {
             return userService.login(user, request);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -89,6 +94,7 @@ public class UserController {
         try {
             return userService.login1(userLoginDto, request);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -100,6 +106,7 @@ public class UserController {
         try {
             return userService.getUser();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -113,6 +120,7 @@ public class UserController {
         try {
             return userService.send(user.getPhone(), session);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -123,6 +131,7 @@ public class UserController {
         try {
             return userService.getLoginCode(user.getPhone(), session);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }

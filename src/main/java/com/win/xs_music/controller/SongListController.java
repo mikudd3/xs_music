@@ -135,6 +135,7 @@ public class SongListController {
         try {
             return songListService.getIndexSongList();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -146,6 +147,7 @@ public class SongListController {
             log.info("查询的歌单id为：{}", id);
             return songListService.getOne(id);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -157,6 +159,7 @@ public class SongListController {
         try {
             return songListService.getMyCreateSongList();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }

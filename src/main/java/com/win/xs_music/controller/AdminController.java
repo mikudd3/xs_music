@@ -35,6 +35,7 @@ public class AdminController {
         try {
             return adminService.login(admin, request);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -46,6 +47,7 @@ public class AdminController {
         try {
             return adminService.adminMgrPage(adminPageDto.getAdmin(), adminPageDto.getCurrentPage(), adminPageDto.getPageSize());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }
@@ -59,6 +61,7 @@ public class AdminController {
         try {
             save = adminService.save(admin);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return save ? R.success("添加成功") : R.success("添加失败");
@@ -72,6 +75,7 @@ public class AdminController {
         try {
             ret = adminService.updateById(admin);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return ret ? R.success("修改成功") : R.success("修改失败");
@@ -85,6 +89,7 @@ public class AdminController {
         try {
             ret = adminService.removeById(id);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return ret ? R.success("删除成功") : R.success("删除失败");

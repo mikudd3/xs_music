@@ -21,6 +21,7 @@ public class ListSongController {
         try {
             return listSongService.add(song_id, song_list_id);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }

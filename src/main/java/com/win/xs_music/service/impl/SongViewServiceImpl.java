@@ -49,6 +49,7 @@ public class SongViewServiceImpl extends ServiceImpl<SongViewMapper, SongView> i
             wrapper.eq(StringUtils.isNotEmpty(singerName), SongView::getSingerName, singerName);
             this.page(page, wrapper);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return R.success(page);
@@ -71,6 +72,7 @@ public class SongViewServiceImpl extends ServiceImpl<SongViewMapper, SongView> i
             song.setSingerId(singer.getId());
             ret = songService.save(song);
         } catch (BeansException e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
         return ret ? R.success("添加成功") : R.error("添加失败");
