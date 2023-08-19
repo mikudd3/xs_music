@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.win.xs_music.mapper.CommentMapper">
-    <insert id="addComments">
-        insert into comment
-        values ()
-    </insert>
+    <select id="getCommentList" resultType="java.util.Map">
+        SELECT user.username, comment.* FROM comment, user
+        <where>
+            <if test="type != null">
+                 type = #{type}
+            </if>
+            <if test="songListId != null">
+                AND song_list_id = #{songListId}
+--                 AND song_list_id =1
+            </if>
+        </where>
+    </select>
+
 </mapper>

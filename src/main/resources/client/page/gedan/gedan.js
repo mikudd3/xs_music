@@ -2,6 +2,15 @@ new Vue({
     el: "#app",
     data() {
         return {
+            //tang
+            content:"alkjdfkl",
+            all_comment: 233,
+            comments: [{
+                name: '妖怪',
+                create_time: "2010-10-1",
+                content: "show time!",
+            }
+            ],
             items: {
                 id: 1,
                 title: "希望十八岁你爱的人是八十岁在你身边的人",   //歌单专题
@@ -40,8 +49,40 @@ new Vue({
     },
     mounted() {
         this.getAll();
+        this.getAllComments();
     },
     methods: {
+        getAllComments() {
+            axios({
+                method: "get",
+                url: "/comment/gets",
+                params: {
+                    type: 1,
+                }
+            }).then(res => {
+                this.comments = res.data.data;
+                console.log(this.comments);
+            })
+        },
+        setComment() {
+            this.searchParams = new URLSearchParams(window.location.search);
+            //const searchParams = new URLSearchParams(window.location.search);
+            const id = this.searchParams.get('id');
+            {
+                axios({
+                    method: "get",
+                    url: "/comment/add",
+                    params: {
+                        user_id:id,
+                        type: 1,
+                        content:this.content,
+                    }
+                }).then(ress=>{
+                    this.comments = ress.data.data;
+                    this.getAllComments();
+                })
+            }
+        },
         playAll() {
             console.log(this.songs)
             sessionStorage.setItem("songs", JSON.stringify(this.songs));

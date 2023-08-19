@@ -1,6 +1,7 @@
 package com.win.xs_music.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.win.xs_music.common.CustomException;
 import com.win.xs_music.common.R;
 import com.win.xs_music.mapper.CommentMapper;
 import com.win.xs_music.pojo.Comment;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> implements CommentService {
@@ -17,8 +19,14 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
 
     @Override
-    public R getCommentList(byte type) {
-        List<Comment> liss = commentMapper.getCommentList(type);
+    public R getCommentList(Comment comment) {
+        List<Map<String, Object>> liss=null;
+        try {
+            liss = commentMapper.getCommentList(comment);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
+        liss = commentMapper.getCommentList(comment);
         return R.success(liss);
     }
 

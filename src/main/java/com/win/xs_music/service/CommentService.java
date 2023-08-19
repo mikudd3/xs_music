@@ -6,6 +6,6 @@ import com.win.xs_music.pojo.Comment;
 
 
 public interface CommentService extends IService<Comment> {
-    R getCommentList(byte type);
+    R getCommentList(Comment comment);
 
 }
