@@ -24,4 +24,6 @@ public interface SongListMapper extends BaseMapper<SongList> {
 
 
     Integer addsing(Integer song_id, Integer song_list_id);
+
+    ArrayList<SongListflVo> getSongList1(String style_name);
 }

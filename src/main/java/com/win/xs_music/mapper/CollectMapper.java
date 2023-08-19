@@ -30,9 +30,12 @@ public interface CollectMapper extends BaseMapper<Collect> {
     List<Integer> getCollectSongListByUserId(Integer id);
 
 
-    @Select("select song_id from collect where user_id = #{id} and type = 0")
+    @Select("select song_id from collect where user_id = #{userId} and type = 0")
     List<Integer> geMyLoveSongIdsByUserId(Integer userId);
 
-    @Delete("delete from collect where user_id = #{id} and song_id = #{id} and type = 0")
+    @Delete("delete from collect where user_id = #{userId} and song_id = #{id} and type = 0")
     boolean deleteWithUserIdAndSongId(Integer userId, Integer id);
+
+    @Delete("delete from collect where user_id = #{userId} and song_list_id = #{id} and type = 1")
+    boolean deleteMyCollectSongListWithUserIdAndSongListId(Integer userId, Integer id);
 }

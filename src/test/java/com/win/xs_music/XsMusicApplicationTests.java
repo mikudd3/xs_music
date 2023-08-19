@@ -40,4 +40,9 @@ class XsMusicApplicationTests {
         System.out.println(myCreateSongList.getData());
     }
 
+    @Test
+    void test1(){
+        songListService.getSongList("日韩");
+    }
+
 }

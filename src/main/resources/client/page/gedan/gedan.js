@@ -2,9 +2,13 @@ new Vue({
     el: "#app",
     data() {
         return {
-            title: "希望十八岁你爱的人是八十岁在你身边的人",   //歌单专题
-            introduction: "",                 //歌单介绍
-            pic: "",
+            items: {
+                id: 1,
+                title: "希望十八岁你爱的人是八十岁在你身边的人",   //歌单专题
+                introduction: "",                 //歌单介绍
+                pic: "",
+                isCollected: false,
+            },
             searchParams: "",
             songs: [
                 {
@@ -27,7 +31,7 @@ new Vue({
             songLists: [
                 {
                     id: 1,
-                    title:""
+                    title: ""
                 }
             ],
             //用于判断收藏是否成功
@@ -42,8 +46,6 @@ new Vue({
             console.log(this.songs)
             sessionStorage.setItem("songs", this.songs);
         },
-
-
         getAll() {
             this.searchParams = new URLSearchParams(window.location.search);
             //const searchParams = new URLSearchParams(window.location.search);
@@ -101,35 +103,52 @@ new Vue({
             })
         },
 
-        toggleLike(song) {
-            song.isLiked = !song.isLiked; // 切换点赞状态
-            if (song.isLiked) {
-                // 执行点赞操作，使用song.id
-                console.log("点赞", song.id);
+        toggleCollect(itemId) {
+            if (!this.items.isCollected) {
+                // 执行收藏操作
+                axios({
+                    url: "/collect/collectSongList?id=" + itemId,
+                    method: "post",
+                }).then(resp => {
+                    if (resp.data.code == 1) {
+                        this.$message.error("收藏成功");
+                        this.items.isCollected = !this.items.isCollected;
+                    } else {
+                        this.$message.error(resp.data.msg);
+                    }
+                })
             } else {
-                // 执行取消点赞操作，使用song.id
-                console.log("取消点赞", song.id);
+                // 执行取消收藏操作
+                axios({
+                    url: "/collect/deleteMyCollectSongList?id=" + itemId,
+                    method: "post",
+                }).then(resp => {
+                    if (resp.data.code == 1) {
+                        this.$message.error("取消成功");
+                        this.items.isCollected = !this.items.isCollected;
+                    } else {
+                        this.$message.error(resp.data.msg);
+                    }
+                })
             }
-        },
-        collect(id) {
-            // 处理收藏事件，使用id参数
-            console.log("收藏", id);
-        },
+        }
+
     },
 
 
 })
 
-// 收藏
-const collectButton = document.getElementById("collectButton");
 
-collectButton.addEventListener("click", function () {
-    collectButton.querySelector(".heart-icon").classList.toggle("active");
-
-    // 根据点赞状态执行相应的操作
-    if (collectButton.querySelector(".heart-icon").classList.contains("active")) {
-        // 执行点赞操作
-    } else {
-        // 执行取消点赞操作
-    }
-});
+// // 收藏
+// const collectButton = document.getElementById("collectButton");
+//
+// collectButton.addEventListener("click", function () {
+//     collectButton.querySelector(".heart-icon").classList.toggle("active");
+//
+//     // 根据点赞状态执行相应的操作
+//     if (collectButton.querySelector(".heart-icon").classList.contains("active")) {
+//         // 执行点赞操作
+//     } else {
+//         // 执行取消点赞操作
+//     }
+// });
