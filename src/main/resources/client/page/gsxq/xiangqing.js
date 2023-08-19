@@ -83,7 +83,7 @@ new Vue({
         //将歌曲添加到用户创建的歌单
         getPriceRange(songListId, songId) {
             axios({
-                url: "/songlist/add",
+                url: "/listSong/add",
                 method: "get",
                 params: {
                     song_list_id: songListId,

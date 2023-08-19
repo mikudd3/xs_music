@@ -163,14 +163,6 @@ public class SongListController {
 
 
 
-    //把歌曲添加到用户创建的歌单
-    @RequestMapping("/add")
-    public R addsing(Integer song_id,Integer song_list_id){
-        try {
-            return songListService.addsing(song_id,song_list_id);
-        } catch (Exception e) {
-            throw new CustomException("系统错误，请联系管理员");
-        }
-    }
+
 
 }

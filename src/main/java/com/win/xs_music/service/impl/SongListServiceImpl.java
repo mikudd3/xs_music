@@ -130,17 +130,4 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
         }
     }
 
-
-    @Override
-    public R addsing(Integer song_id, Integer song_list_id) {
-        try {
-            ListSong listSong = new ListSong();
-            listSong.setSongListId(song_list_id);
-            listSong.setSongId(song_id);
-            int ret = listSongMapper.insert(listSong);
-            return ret > 0 ? R.success("添加成功") : R.error("添加失败");
-        } catch (Exception e) {
-            throw new CustomException("系统错误，请联系管理员");
-        }
-    }
 }
