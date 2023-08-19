@@ -5,6 +5,7 @@ import com.win.xs_music.mapper.SongMapper;
 import com.win.xs_music.pojo.SongList;
 import com.win.xs_music.service.SingerService;
 import com.win.xs_music.service.SongListService;
+import com.win.xs_music.service.StyleService;
 import com.win.xs_music.vo.SongListVo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,9 @@ class XsMusicApplicationTests {
     private SingerService singerService;
     @Autowired
     private SongListService songListService;
+
+    @Autowired
+    private StyleService styleService;
     @Autowired
     private SongMapper songMapper;
     @Test
@@ -45,4 +49,9 @@ class XsMusicApplicationTests {
         songListService.getSongList("日韩");
     }
 
+
+    @Test
+    void test2(){
+        styleService.getStyleName();
+    }
 }

@@ -28,4 +28,5 @@ public interface SongListService extends IService<SongList> {
 
     R getMyCreateSongList();
 
+    R addSongList(SongList songList);
 }

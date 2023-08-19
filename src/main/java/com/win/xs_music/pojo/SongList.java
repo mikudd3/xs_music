@@ -20,6 +20,7 @@ public class SongList implements Serializable {
     private String title;
     private String pic;
     private String introduction;
+    private Integer user_id;
     private Long love;
     @TableField("style_ids")
     private String styleIds;//风格

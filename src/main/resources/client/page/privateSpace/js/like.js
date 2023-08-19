@@ -8,12 +8,32 @@ new Vue({
             ],
             dialogFormVisible: false,
             formData: {},
+            options:[],
         };
     },
     mounted() {
         this.getMyCreateSongList();
+        this.getStyleName();
     },
     methods: {
+
+        getStyleName() {
+            axios({
+                method: "post",
+                url: "/style/getStyleName",
+            }).then((res) => {
+                let r = res.data;
+                console.log(r)
+                if (r.code == 1) {
+                    this.options = r.data;
+                } else {
+                    this.$message.error(r.msg)
+                }
+            })
+        },
+
+
+
         handleAvatarSuccess(resp) {
             this.imageUrl = resp.data;
         },
@@ -22,10 +42,19 @@ new Vue({
         },
         handleAdd() {
             this.formData.pic = this.imageUrl;
+            console.log(this.formData)
             axios({
                 url: "/songlist/addSongList",
                 method: "post",
-            }).then(resp => {
+                data:{
+                    //songlist:this.formData,
+                    user_id:"",
+                    title:this.formData.title,
+                    pic:this.formData.pic,
+                    introduction:this.formData.introduction,
+                    styleIds:this.formData.id,
+                }
+                }).then(resp => {
                 if (resp.data.code == 1) {
                     this.$message.success("添加成功");
                     this.getMyCreateSongList();

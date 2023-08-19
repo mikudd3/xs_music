@@ -22,11 +22,11 @@ new Vue({
             //歌单数量
             song_list_Count: 50,
 
-            //存贮国籍的数组
+            //存放国籍的数组
             chartData:[],
             cityData:[],
 
-            //存贮风格的数组
+            //存放风格的数组
             styleName:[],
             styleCount:[],
         };

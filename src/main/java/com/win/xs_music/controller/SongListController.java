@@ -161,4 +161,17 @@ public class SongListController {
         }
     }
 
+
+    //新建歌单
+    @PostMapping("/addSongList")
+    public R addSongList(@RequestBody SongList songList){
+        log.info("输入的数据为：{}",songList);
+        try {
+            return songListService.addSongList(songList);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
+    }
+
+
 }

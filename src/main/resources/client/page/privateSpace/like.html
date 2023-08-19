@@ -63,7 +63,10 @@
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="风格" prop="style">
-                            <el-input v-model="formData.style"/>
+                            <el-select placeholder="风格" v-model="formData.id" style="width: 120px;" class="filter-item">
+                                <el-option v-for="option in options" :key="option.id" :value="option.id"
+                                           :label="option.styleName"></el-option>
+                            </el-select>
                         </el-form-item>
                     </el-col>
                 </el-row>
