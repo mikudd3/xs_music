@@ -3,7 +3,7 @@ new Vue({
     data() {
         return {
             //tang
-            content:"alkjdfkl",
+            content: "alkjdfkl",
             all_comment: 233,
             comments: [{
                 name: '妖怪',
@@ -11,6 +11,7 @@ new Vue({
                 content: "show time!",
             }
             ],
+            //歌单信息
             items: {
                 id: 1,
                 title: "希望十八岁你爱的人是八十岁在你身边的人",   //歌单专题
@@ -19,32 +20,33 @@ new Vue({
                 isCollected: false,
             },
             searchParams: "",
+            //歌曲
             songs: [
                 {
-                    id: 1,
-                    name: "111",
-                    singerName: "222",
-                    introduction: "333",
-                    isLiked: false,
-                    url: "",
+                    //必要信息
+                    id: 30,
+                    pic: 'http://www.170hi.com/wp-content/themes/beetube/images/nopic.png',
+                    url: 'https://www.ihaoge.net/server/1/287280938.mp3',
+                    name: '叮叮当',
+                    singerName: '宝宝巴士',
+                    like: true
                 },
                 {
-                    id: 2,
-                    name: "111",
-                    singerName: "222",
-                    introduction: "333",
-                    isLiked: false,
-                    url: "",
-                }
+                    pic: 'https://star.kuwo.cn/star/starheads/180/21/12/1142472669.jpg',
+                    url: 'https://www.ihaoge.net/server/1/283424829.mp3',
+                    name: '水中花(Live)',
+                    singerName: '郁可唯',
+                    like: true
+                },
             ],
+            //当前登录用户的歌单
             songLists: [
                 {
                     id: 1,
-                    title: ""
+                    title: "1111"
                 }
             ],
-            //用于判断收藏是否成功
-            sl: 0,
+            showPopup: false,
         }
     },
     mounted() {
@@ -52,6 +54,7 @@ new Vue({
         this.getAllComments();
     },
     methods: {
+        //获取全部评论
         getAllComments() {
             axios({
                 method: "get",
@@ -73,35 +76,32 @@ new Vue({
                     method: "get",
                     url: "/comment/add",
                     params: {
-                        user_id:id,
+                        user_id: id,
                         type: 1,
-                        content:this.content,
+                        content: this.content,
                     }
-                }).then(ress=>{
+                }).then(ress => {
                     this.comments = ress.data.data;
                     this.getAllComments();
                 })
             }
         },
+        //播放全部
         playAll() {
             console.log(this.songs)
             sessionStorage.setItem("songs", JSON.stringify(this.songs));
         },
+        //获取当前歌单的全部歌曲
         getAll() {
             this.searchParams = new URLSearchParams(window.location.search);
-            //const searchParams = new URLSearchParams(window.location.search);
             const id = this.searchParams.get('id');
             //获取歌单的信息请求
             axios({
                 method: "post",
                 url: "/songlist/one?id=" + id,
             }).then(res => {
-                let songlist = res.data.data;
-                console.log(songlist)
-                this.title = songlist.title;
-                this.introduction = songlist.introduction;
-                //歌单图片
-                this.pic = `/common/download?name=` + songlist.pic;
+                this.items = res.data.data;
+                this.items.pic = `/common/download?name=` + this.items.pic;
             });
             //获取歌单的歌曲请求
             axios({
@@ -111,12 +111,12 @@ new Vue({
                 this.songs = rest.data.data;
             })
         },
-        //点击歌曲输出歌曲id
+        //点击歌曲输出歌曲
         handleClick(song) {
-            sessionStorage.setItem("songs", song);
+            sessionStorage.setItem("songs", JSON.stringify(song));
             console.log(song)
         },
-        // 收藏列表
+        // 当前用户的收藏列表
         togglePopup() {
             this.showPopup = !this.showPopup;
             axios({
@@ -143,9 +143,8 @@ new Vue({
                 }
             })
         },
-
+        //收藏歌单
         toggleCollect(itemId) {
-
             if (!this.items.isCollected) {
                 // 执行收藏操作
                 axios({
@@ -173,7 +172,50 @@ new Vue({
                     }
                 })
             }
-        }
+        },
+        //喜欢
+        toggleFavorite(row) {
+            // row.like = !row.like;
+            if (row.like) {
+                //添加到我喜欢
+                axios({
+                    url: "/collect/addMyLoveSong",
+                    method: "post",
+                    data: {
+                        id: row.id
+                    }
+                }).then(resp => {
+                    if (resp.data.code == 1) {
+                        row.like = !row.like;
+                        this.$message.success("添加成功")
+                    } else {
+                        this.$message.error(resp.data.msg)
+                    }
+                })
+            } else {
+                //取消我喜欢
+                axios({
+                    url: "/collect/deleteMyLoveSong",
+                    method: "post",
+                    data: {
+                        id: row.id
+                    }
+                }).then(resp => {
+                    if (resp.data.code == 1) {
+                        row.like = !row.like;
+                        this.$message.success("取消成功")
+                    } else {
+                        this.$message.error(resp.data.msg)
+                    }
+                })
+            }
+        },
+        //播放
+        addtoplay(row) {
+            //信息塞进session域中
+            sessionStorage.setItem("songs", JSON.stringify(row));
+        },
+
 
     },
 

@@ -2,6 +2,7 @@ new Vue({
     el: "#app",
     data() {
         return {
+            //歌手信息
             singer: {
                 name: "许嵩",              //歌手名字
                 introduction: "著名作词人、作曲人、唱片制作人、歌手。内地独立音乐之标杆人物，有音乐鬼才之称。2009年独立出版首张词曲全创作专辑《自定义》，2010年独立出版第二张词曲全创作专辑《寻雾启示》，两度掀起讨论热潮，一跃成为内地互联网讨论度最高的独立音乐人。2011年加盟海蝶音乐，推出第三张词曲全创作专辑《苏格拉没有底》，发行首月即在大陆地区摘下唱片销量榜冠军，轰动全国媒体，并拉开全国巡回签售及歌迷见面会。",
@@ -11,24 +12,26 @@ new Vue({
                 pic: "https://bkimg.cdn.bcebos.com/pic/d1a20cf431adcbef76091cafaff839dda3cc7cd93159?x-bce-process=image/resize,m_lfit,w_536,limit_1/format,f_auto",                //歌手图片
                 isCollected: false,
             },
-
             //歌曲列表
             songs: [
                 {
-                    id: "",
-                    name: "11111",
-                    introduction: "11111",
-                }
+                    //必要信息
+                    id: 30,
+                    pic: 'http://www.170hi.com/wp-content/themes/beetube/images/nopic.png',
+                    url: 'https://www.ihaoge.net/server/1/287280938.mp3',
+                    name: '叮叮当',
+                    singerName: '宝宝巴士',
+                    like: true
+                },
             ],
             showPopup: false,
+            // 当前登录用户所创建的歌单
             songLists: [
                 {
                     id: 1,
                     title: "",
                 }
             ],
-            //用于判断收藏是否成功
-            sl: 0,
         }
     },
     mounted() {
@@ -58,9 +61,8 @@ new Vue({
         //点击歌曲输出歌曲id
         handleClick(song) {
             sessionStorage.setItem("songs", JSON.stringify(song));
-            console.log(song)
         },
-        // 收藏列表
+        // 当前用户的收藏列表
         togglePopup() {
             this.showPopup = !this.showPopup;
             axios({
@@ -93,37 +95,49 @@ new Vue({
             console.log(this.songs)
             sessionStorage.setItem("songs", JSON.stringify(this.songs));
         },
-        toggleCollect(itemId) {
-            this.singer.isCollected = !this.singer.isCollected;
-            if (!this.singer.isCollected) {
-                // 执行收藏操作
+
+        //喜欢
+        toggleFavorite(row) {
+            // row.like = !row.like;
+            if (row.like) {
+                //添加到我喜欢
                 axios({
-                    url: "/collect/collectSongList?id=" + itemId,
+                    url: "/collect/addMyLoveSong",
                     method: "post",
+                    data: {
+                        id: row.id
+                    }
                 }).then(resp => {
                     if (resp.data.code == 1) {
-                        this.$message.error("收藏成功");
-                        this.singer.isCollected = !this.singer.isCollected;
+                        row.like = !row.like;
+                        this.$message.success("添加成功")
                     } else {
-                        this.$message.error(resp.data.msg);
+                        this.$message.error(resp.data.msg)
                     }
                 })
             } else {
-                // 执行取消收藏操作
+                //取消我喜欢
                 axios({
-                    url: "/collect/deleteMyCollectSongList?id=" + itemId,
+                    url: "/collect/deleteMyLoveSong",
                     method: "post",
+                    data: {
+                        id: row.id
+                    }
                 }).then(resp => {
                     if (resp.data.code == 1) {
-                        this.$message.error("取消成功");
-                        this.singer.isCollected = !this.singer.isCollected;
+                        row.like = !row.like;
+                        this.$message.success("取消成功")
                     } else {
-                        this.$message.error(resp.data.msg);
+                        this.$message.error(resp.data.msg)
                     }
                 })
             }
-        }
-
+        },
+        //播放
+        addtoplay(row) {
+            //信息塞进session域中
+            sessionStorage.setItem("songs", JSON.stringify(row));
+        },
     }
 
 })

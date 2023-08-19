@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../../css/geshouxiangqing.css">
     <link rel="stylesheet" type="text/css" href="../../css/comment.css">
     <link rel="stylesheet" href="../../plugins/element-ui/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <style>
         .el-dropdown-link {
             cursor: pointer;
@@ -55,41 +56,37 @@
                 </div>
 
                 <div class="song-list">
-                    <table>
-                        <tr>
-                            <th></th>
-                            <th>序号</th>
-                            <th>歌曲名</th>
-                            <th>歌手</th>
-                            <th>专辑</th>
-                            <th>操作</th>
-                        </tr>
-                        <tr v-for="(song,i) in songs " @dblclick="handleClick(song)">
-                            <td>
-                                <button class="like-button" :class="{ active: song.isLiked }" @click="toggleLike(song)">
-                                    <span class="heart-icon" style="border: black;">&#x2764;</span>
-                                </button>
-                            </td>
-                            <td>{{ i + 1 }}</td>
-                            <td>{{ song.name }}</td>
-                            <td>{{ song.singerName }}</td>
-                            <td>{{ song.introduction }}</td>
-                            <td>
+                    <el-table :data="songs" style="width: 100%">
+                        <el-table-column label="">
+                            <template slot-scope="scope">
+                                <i class="bi bi-play" style="color: blue;width: 30px; height: 30px;margin-right: 5px"
+                                   @click="addtoplay(scope.row)"></i>
+                                <i v-if="scope.row.like" class="bi bi-suit-heart"
+                                   style="color: red;margin-right: 5px"
+                                   @click="toggleFavorite(scope.row)"></i>
+                                <i v-else class="bi bi-suit-heart-fill" style="color: red;margin-right: 5px"
+                                   @click="toggleFavorite(scope.row)"></i>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="name" label="歌名"></el-table-column>
+                        <el-table-column prop="singerName" label="歌手"></el-table-column>
+                        <el-table-column prop="class" label="专辑"></el-table-column>
+                        <el-table-column prop="">
+                            <template slot-scope="scope">
                                 <el-dropdown>
-                                  <span class="el-dropdown-link" @click="togglePopup">
-                                    收藏<i class="el-icon-arrow-down el-icon--right"></i>
-                                  </span>
-                                    <el-dropdown-menu slot="dropdown">
-                                        <el-dropdown-item v-for="(songList,i) in songLists">
-                                            <a rel="nofollow" @click="getPriceRange(songList.id,song.id)">
-                                                {{songList.title}}
-                                            </a>
+                                    <span class="el-dropdown-link" @click="togglePopup()">收藏<i
+                                        class="el-icon-arrow-down el-icon--right"></i></span>
+                                        <el-dropdown-menu slot="dropdown">
+                                            <el-dropdown-item v-for="(songList,i) in songLists">
+                                                <a rel="nofollow" @click="getPriceRange(songList.id,song.id)">
+                                                    {{songList.title}}
+                                                </a>
                                         </el-dropdown-item>
                                     </el-dropdown-menu>
                                 </el-dropdown>
-                            </td>
-                        </tr>
-                    </table>
+                            </template>
+                        </el-table-column>
+                    </el-table>
                 </div>
                 <div class="mod_comment" id="main2">
                     <!-- 大盒子 -->
@@ -105,7 +102,8 @@
                                 <div class="comment__textarea_default c_tx_normal" contenteditable="true"
                                      style="display: block;">
                                 </div>
-                                <div class="comment__textarea_input" contenteditable="true" style="display: none;" v-model="content">{{content}}
+                                <div class="comment__textarea_input" contenteditable="true" style="display: none;"
+                                     v-model="content">{{content}}
 
                                 </div>
                             </div>
@@ -155,7 +153,6 @@
 
                 </div>
 
-
             </div>
         </div>
 
@@ -168,5 +165,4 @@
 <script src="../../plugins/jquery/jquery-1.10.0.min.js"></script>
 <script src="../../plugins/element-ui/index.js"></script>
 <script src="gedan.js"></script>
-<!--<script src="../../js/comment.js"></script>-->
 </html>

@@ -9,36 +9,39 @@
 </head>
 
 <body>
-<div id="list">
+<div id="app">
     <template>
-        <el-table
-                :data="listResout"
-                style="width: 100%">
-            <el-table-column
-                    prop="name"
-                    label="歌名"
-                    >
-            </el-table-column>
-            <el-table-column
-                    prop="singerName"
-                    label="歌手"
-                    >
-            </el-table-column>
-            <el-table-column
-                    prop="class"
-                    label="专辑"
-                    >
-            </el-table-column>
-            <el-table-column
-                    label="操作"
-                    >
+        <el-table :data="songs" style="width: 100%">
+            <el-table-column></el-table-column>
+            <el-table-column label="">
                 <template slot-scope="scope">
-                    <i class="bi bi-play" style="color: blue;width: 30px; height: 30px;margin-right: 5px"  @click="addtoplay(scope.row)"></i>
-
-                    <i v-if="scope.row.like == true" class="bi bi-suit-heart" style="color: red;margin-right: 5px" @click="toggleFavorite(scope.row)"></i>
-                    <i v-else class="bi bi-suit-heart-fill" style="color: red;margin-right: 5px" @click="toggleFavorite(scope.row)"></i>
+                    <i class="bi bi-play" style="color: blue;width: 30px; height: 30px;margin-right: 5px"
+                       @click="addtoplay(scope.row)"></i>
+                    <i v-if="scope.row.like" class="bi bi-suit-heart" style="color: red;margin-right: 5px"
+                       @click="toggleFavorite(scope.row)"></i>
+                    <i v-else class="bi bi-suit-heart-fill" style="color: red;margin-right: 5px"
+                       @click="toggleFavorite(scope.row)"></i>
                 </template>
             </el-table-column>
+            <el-table-column prop="name" label="歌名"></el-table-column>
+            <el-table-column prop="singerName" label="歌手"></el-table-column>
+            <el-table-column prop="class" label="专辑"></el-table-column>
+            <el-table-column prop="">
+                <template slot-scope="scope">
+                    <el-dropdown>
+                        <span class="el-dropdown-link" @click="togglePopup()">收藏<i
+                                class="el-icon-arrow-down el-icon--right"></i></span>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item v-for="(songList,i) in songLists">
+                                <a rel="nofollow" @click="getPriceRange(songList.id,song.id)">
+                                    {{songList.title}}
+                                </a>
+                            </el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </template>
+            </el-table-column>
+            <el-table-column></el-table-column>
         </el-table>
     </template>
     <svg class="bi" width="32" height="32" fill="currentColor">
@@ -48,7 +51,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 <script src="../../plugins/vue/vue.js"></script>
 <script src="../../plugins/element-ui/index.js"></script>
-<link href="../../plugins/element-ui/index.css">
+<link rel="stylesheet" href="../../plugins/element-ui/index.css">
 <script src="../../plugins/axios/axios-0.18.0.js"></script>
 <script src="gequ.js"></script>
 </body>

@@ -24,6 +24,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +33,7 @@ import java.util.Map;
 
 @Service
 @Slf4j
+@Transactional
 public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> implements SongListService {
 
 
@@ -164,16 +166,18 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
 
     @Override
     public R addSongList(SongList songList) {
-        try {
-            //获取当前登录用户的id
-            Integer user_id = BaseContext.getCurrentId();
-            System.out.println(user_id);
-            songList.setUser_id(user_id);
-            int i = songListMapper.insert(songList);
-            return i>0? R.success("添加成功"):R.error("添加失败");
-        } catch (Exception e) {
-            throw new CustomException("系统错误，请联系管理员");
-        }
+        boolean i = this.save(songList);
+        return i ? R.success("添加成功") : R.error("添加失败");
+//        try {
+//            //获取当前登录用户的id
+//            Integer user_id = BaseContext.getCurrentId();
+//            System.out.println(user_id);
+//            songList.setUser_id(user_id);
+//            boolean i = this.save(songList);
+//            return i ? R.success("添加成功") : R.error("添加失败");
+//        } catch (Exception e) {
+//            throw new CustomException("系统错误，请联系管理员");
+//        }
     }
 
 }
