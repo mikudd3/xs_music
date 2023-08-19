@@ -77,23 +77,25 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
             //获取当前登录用户
             Integer userId = BaseContext.getCurrentId();
             //获取歌手歌曲
-            List<Song> songs = songMapper.selectList(id);
-            List<GetSingerSongVo> list = new ArrayList<>();
-            for (Song song : songs) {
+            List<SongListVo> songs = songMapper.selectList(id);
+            List<GetListSongVo> list = new ArrayList<>();
+           for (SongListVo song : songs) {
+                //格式化歌名
                 String[] arr = song.getName().split("-");
                 song.setName(arr[1]);
-                GetSingerSongVo singerSongVo = new GetSingerSongVo();
-                BeanUtils.copyProperties(song, singerSongVo);
+                song.setSingerName(arr[0]);
+                GetListSongVo getListSongVo = new GetListSongVo();
+                BeanUtils.copyProperties(song, getListSongVo);
                 //如果当前用户已登录
                 if (userId != null) {
                     //通过当前登录用户和歌曲id查询是否是当前用户已喜欢的歌曲
                     Collect collect = collectMapper.getMyLoveSongWithUserIdAndSongId(userId, song.getId());
                     //true表示不喜欢，false表示该歌曲已被用户添加到我喜欢
-                    singerSongVo.setLike(collect == null);
+                    getListSongVo.setLike(collect == null);
                 } else {
-                    singerSongVo.setLike(true);
+                    getListSongVo.setLike(true);
                 }
-                list.add(singerSongVo);
+                list.add(getListSongVo);
             }
             return R.success(list);
         } catch (BeansException e) {

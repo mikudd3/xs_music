@@ -26,12 +26,7 @@ new Vue({
             ],
             showPopup: false,
             // 当前登录用户所创建的歌单
-            songLists: [
-                {
-                    id: 1,
-                    title: "",
-                }
-            ],
+            songLists: [],
         }
     },
     mounted() {
@@ -49,6 +44,11 @@ new Vue({
             }).then(res => {
                 if (res.data.code == 1) {
                     this.singer = res.data.data;
+                    if(this.singer.sex == 1){
+                        this.singer.sex ="男"
+                    }else {
+                        this.singer.sex ="女"
+                    }
                 }
             });
             axios({

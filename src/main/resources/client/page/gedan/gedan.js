@@ -40,12 +40,7 @@ new Vue({
                 },
             ],
             //当前登录用户的歌单
-            songLists: [
-                {
-                    id: 1,
-                    title: "1111"
-                }
-            ],
+            songLists: [],
             showPopup: false,
         }
     },
