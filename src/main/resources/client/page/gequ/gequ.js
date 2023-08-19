@@ -70,7 +70,7 @@ new Vue({
         //播放
         addtoplay(row) {
             //信息塞进session域中
-            sessionStorage.setItem("songs", row);
+            sessionStorage.setItem("songs", JSON.stringify(row));
         }
 
     }

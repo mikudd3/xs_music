@@ -44,7 +44,7 @@ new Vue({
     methods: {
         playAll() {
             console.log(this.songs)
-            sessionStorage.setItem("songs", this.songs);
+            sessionStorage.setItem("songs", JSON.stringify(this.songs));
         },
         getAll() {
             this.searchParams = new URLSearchParams(window.location.search);
@@ -138,17 +138,3 @@ new Vue({
 
 })
 
-
-// // 收藏
-// const collectButton = document.getElementById("collectButton");
-//
-// collectButton.addEventListener("click", function () {
-//     collectButton.querySelector(".heart-icon").classList.toggle("active");
-//
-//     // 根据点赞状态执行相应的操作
-//     if (collectButton.querySelector(".heart-icon").classList.contains("active")) {
-//         // 执行点赞操作
-//     } else {
-//         // 执行取消点赞操作
-//     }
-// });

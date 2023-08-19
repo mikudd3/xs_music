@@ -148,24 +148,35 @@ new Vue({
         //开关
         musicinfo(){
             this.infodrawer = !this.infodrawer;
+        },
+        handleStorageChange(event) {
+            // 检查事件的来源是否是sessionStorage，并且key是否是songs
+            if (event.storageArea === sessionStorage && event.key === 'songs') {
+                // 处理sessionStorage中songs属性的变化
+                var songs =JSON.parse(sessionStorage.getItem("songs"))
+                if (songs.length > 1){
+                    this.songlist=songs;
+                    this.playsong =this.songlist[0];
+                    var mymusic = document.getElementById("musicer");
+                    mymusic.load();
+                    this.play();
+                }else{
+                    this.songlist.push(songs);
+                }
+
+            }
         }
     },
     mounted() {
+        // 添加storage事件监听器
+        window.addEventListener('storage', this.handleStorageChange);
         this.fristsong();
-        //监听追加曲子
-        this.$watch(
-            () => sessionStorage.getItem('songs'),
-            (newValue, oldValue) => {
-                console.log("收到监听曲目："+newValue)
-                // 处理 songId 变化的逻辑
-                if (newValue.length == 1){
-                    this.songlist.push(newValue);
-                }else{
-                    this.songlist = newValue;
-                }
-            }
-        );
-    }
+    },
+    beforeDestroy() {
+        // 移除storage事件监听器
+        window.removeEventListener('storage', this.handleStorageChange);
+    },
+
 });
 
 new Vue({
