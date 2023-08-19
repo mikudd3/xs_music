@@ -24,6 +24,8 @@ public class SongList implements Serializable {
     private Long love;
     @TableField("style_ids")
     private String styleIds;//风格
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime; //更新时间
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private LocalDateTime createTime; //创建时间
 

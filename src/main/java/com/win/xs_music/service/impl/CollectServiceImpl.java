@@ -139,6 +139,7 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
             int ret = collectMapper.insert(collect);
             return ret > 0 ? R.success("添加成功") : R.error("添加失败");
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
     }

@@ -26,6 +26,8 @@ public class Comment implements Serializable {
     private String content;
     private Byte type; //评论属于哪里（0歌曲，1歌单)
     private Integer up; //点赞数
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime; //更新时间
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private LocalDateTime createTime; //创建时间
 

@@ -24,6 +24,7 @@ public class ListSong implements Serializable {
     @TableField("song_list_id")
     private Integer songListId;
 
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
