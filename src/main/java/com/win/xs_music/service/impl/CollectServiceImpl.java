@@ -77,7 +77,9 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
         List<SongList> songLists = null;
         try {
             ids = collectMapper.getCollectSongListByUserId(id);
-            if (ids == null) {
+            log.info("111:{}", ids);
+
+            if (ids == null||ids.isEmpty()) {
                 //没有关注的歌手
                 return R.success(null);
             }
@@ -101,7 +103,7 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
             Integer userId = BaseContext.getCurrentId();
             //根据用户id获取收藏的歌的id
             List<Integer> ids = collectMapper.geMyLoveSongIdsByUserId(userId);
-            if (ids == null) {
+            if (ids == null || ids.isEmpty()) {
                 return R.success(null);
             }
             //根据查询到歌曲id查询歌曲信息
@@ -177,7 +179,7 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
     public R deleteMyCollectSongList(Integer id) {
         //获取当前登录用户
         Integer userId = BaseContext.getCurrentId();
-        collectMapper.deleteMyCollectSongListWithUserIdAndSongListId(userId,id);
+        collectMapper.deleteMyCollectSongListWithUserIdAndSongListId(userId, id);
         return null;
     }
 }
