@@ -111,7 +111,7 @@
 				<span @click="musicinfo">
 					<el-image
                             id="img"
-                            :src="this.playsong.ImgUrl"
+                            :src="this.playsong.pic"
                     >
 					  <div slot="error" class="image-slot">
 					        <i class="el-icon-picture-outline"></i>
@@ -123,7 +123,7 @@
     <span style="float:left; margin-top: 30px;margin-left: 50px;font-size: 15px;">
 				{{this.playsong.name}}
 				<br/>
-				{{this.playsong.singer}}
+				{{this.playsong.singerName}}
     </span>
 
     <!-- 播放器控制按键(上一首，播放暂停，下一首) -->
@@ -138,7 +138,7 @@
     <!--播放器-->
     <div style="align-items: center ;margin-top: 20px;display: inline;">
         <audio id="musicer" controls="controls" style="width: 900px;">
-            <source :src="this.playsong.song" type="audio/mp3"/>
+            <source :src="this.playsong.url" type="audio/mp3"/>
             <embed height="100" width="100" src="song.mp3"/>
         </audio>
     </div>
@@ -165,7 +165,7 @@
                         width="180">
                 </el-table-column>
                 <el-table-column
-                        prop="singer"
+                        prop="singerName"
                         label="歌手"
                         width="180">
                 </el-table-column>

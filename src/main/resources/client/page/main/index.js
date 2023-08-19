@@ -32,10 +32,11 @@ new Vue({
         // 正在播放的歌
         state: true,
         playsong: {
-            ImgUrl: '',
-            song: '',
+            id:'',
+            pic: '',
+            url: '',
             name: '暂无歌曲',
-            singer: '无',
+            singerName: '无',
         },
         //播放列表抽屉
         drawer: false,
@@ -47,23 +48,23 @@ new Vue({
         songlist: [
             {
                 //必要信息
-                ImgUrl: 'http://www.170hi.com/wp-content/themes/beetube/images/nopic.png',
-                song: 'https://www.ihaoge.net/server/1/287280938.mp3',
+                id:30,
+                pic: 'http://www.170hi.com/wp-content/themes/beetube/images/nopic.png',
+                url: 'https://www.ihaoge.net/server/1/287280938.mp3',
                 name: '叮叮当',
-                singer: '宝宝巴士',
-                like:false
+                singerName: '宝宝巴士',
             },
             {
-                ImgUrl: 'https://star.kuwo.cn/star/starheads/180/21/12/1142472669.jpg',
-                song: 'https://www.ihaoge.net/server/1/283424829.mp3',
+                pic: 'https://star.kuwo.cn/star/starheads/180/21/12/1142472669.jpg',
+                url: 'https://www.ihaoge.net/server/1/283424829.mp3',
                 name: '水中花(Live)',
-                singer: '郁可唯',
+                singerName: '郁可唯',
             },
             {
-                ImgUrl: 'http://static.170hi.com/wp-content/themes/beetube/images/nopic.png',
-                song: 'https://www.ihaoge.net/server/1/289548192.mp3',
+                pic: 'http://static.170hi.com/wp-content/themes/beetube/images/nopic.png',
+                url: 'https://www.ihaoge.net/server/1/289548192.mp3',
                 name: '僕らのスペクトラ',
-                singer: '北谷洋',
+                singerName: '北谷洋',
             }
         ],
         //当前序号
@@ -153,8 +154,9 @@ new Vue({
         this.fristsong();
         //监听追加曲子
         this.$watch(
-            () => sessionStorage.getItem('songId'),
+            () => sessionStorage.getItem('songs'),
             (newValue, oldValue) => {
+                console.log("收到监听曲目："+newValue)
                 // 处理 songId 变化的逻辑
                 if (newValue.length == 1){
                     this.songlist.push(newValue);
