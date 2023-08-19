@@ -104,6 +104,7 @@ new Vue({
         },
 
         toggleCollect(itemId) {
+
             if (!this.items.isCollected) {
                 // 执行收藏操作
                 axios({

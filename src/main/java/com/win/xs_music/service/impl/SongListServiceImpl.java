@@ -8,15 +8,19 @@ import com.win.xs_music.common.BaseContext;
 import com.win.xs_music.common.CustomException;
 import com.win.xs_music.common.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.win.xs_music.mapper.CollectMapper;
 import com.win.xs_music.mapper.ListSongMapper;
 import com.win.xs_music.mapper.SongListMapper;
+import com.win.xs_music.pojo.Collect;
 import com.win.xs_music.pojo.ListSong;
 import com.win.xs_music.pojo.SongList;
 import com.win.xs_music.service.SongListService;
+import com.win.xs_music.vo.GetMyCollectSongListVo;
 import com.win.xs_music.vo.SongListflVo;
 import com.win.xs_music.vo.gedanVo;
 import lombok.extern.slf4j.Slf4j;
 import org.ini4j.spi.Warnings;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.commons.lang.StringUtils;
@@ -36,6 +40,8 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
 
     @Autowired
     private ListSongMapper listSongMapper;
+    @Autowired
+    private CollectMapper collectMapper;
 
     //歌手信息分页查询
     @Override
@@ -91,10 +97,9 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
         ArrayList<SongListflVo> maps = null;
         try {
             System.out.println(!"日韩".equals(style_name));
-            if (style_name == null && !"日韩".equals(style_name)){
+            if (style_name == null && !"日韩".equals(style_name)) {
                 maps = songListMapper.getSongList(style_name);
-            }
-            else {
+            } else {
                 maps = songListMapper.getSongList1("日韩");
             }
         } catch (Exception e) {
@@ -125,12 +130,19 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
     @Override
     public R getOne(Integer id) {
         try {
+            //获取当前登录用户
+            Integer userId = BaseContext.getCurrentId();
             //查询歌单详细信息
-            QueryWrapper<SongList> query = Wrappers.query();
-            query.eq("id", id);
-            SongList songList = songListMapper.selectOne(query);
-            log.info("查到的歌单信息为：{}", songList);
-            return R.success(songList);
+            SongList songList = songListMapper.selectById(id);
+            GetMyCollectSongListVo songListVo = new GetMyCollectSongListVo();
+            BeanUtils.copyProperties(songList, songListVo);
+            //判断当前用户是否已经登录
+            if (userId != null) {
+                //如果已经登录则查询当前歌单是否已经被当前登录的用户收藏
+                Collect collect = collectMapper.getCollectSongListWithUserIdAndSongListId(userId, songList.getId());
+                songListVo.setIsCollected(collect != null);
+            }
+            return R.success(songListVo);
         } catch (Exception e) {
             throw new CustomException("系统错误，请联系管理员");
         }

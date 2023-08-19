@@ -23,74 +23,76 @@
             <div id="left">
                 <!-- 左 -->
                 <div id="touxiang">
-                    <img :src="imageUrl" alt="" style="width: 100%; height: 100%;">
+                    <img :src="this.singer.pic" alt="" style="width: 100%; height: 100%;">
                 </div>
                 <div id="xinxi">
                     <span style="font-size: 30px;margin-left: 50px">基本资料</span>
                     <br>
-                    <span style="font-size: 20px;margin-left: 20px">性别：{{sex}}</span>
+                    <span style="font-size: 20px;margin-left: 20px">性别：{{this.singer.sex}}</span>
                     <br>
-                    <span style="font-size: 20px;margin-left: 20px">生日：{{birth}}</span>
+                    <span style="font-size: 20px;margin-left: 20px">生日：{{this.singer.birth}}</span>
                     <br>
-                    <span style="font-size: 20px;margin-left: 20px">故乡：{{location}}</span>
+                    <span style="font-size: 20px;margin-left: 20px">故乡：{{this.singer.location}}</span>
                 </div>
             </div>
             <div id="right">
                 <!-- 右 -->
                 <div class="name">
-                    <span style="font-size: 25px;">{{name}}</span>
+                    <span style="font-size: 25px;">{{this.singer.name}}</span>
                     <!--                    <p>著名作词人、作曲人、唱片制作人、歌手。内地独立音乐之标杆人物，有音乐鬼才之称。2009年独立出版首张词曲全创作专辑《自定义》，2010年独立出版第二张词曲全创作专辑《寻雾启示》，两度掀起讨论热潮，一跃成为内地互联网讨论度最高的独立音乐人。2011年加盟海蝶音乐，推出第三张词曲全创作专辑《苏格拉没有底》，发行首月即在大陆地区摘下唱片销量榜冠军，轰动全国媒体，并拉开全国巡回签售及歌迷见面会。</p>-->
-                    <p>{{introduction}}</p>
+                    <p>{{this.singer.introduction}}</p>
 
+                    <button id="collectButton" class="collect-button">
+                    <span class="heart-icon" :class="{ active: singer.isCollected } "
+                          style="border: black; margin-top: 25px;"
+                          @click="toggleCollect(this.singer.id)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                                 class="star" viewBox="0 0 16 16">
+                                <path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.178.178 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.178.178 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.178.178 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.178.178 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.178.178 0 0 0 .134-.098L7.84 4.1z"/>
+                                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                            </svg>
+                        </span>
+                    </button>
 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-caret-right" viewBox="0 0 16 16" @click="playAll()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                         class="bi bi-caret-right" viewBox="0 0 16 16" @click="playAll()">
                         <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z"/>
-                        <span >播放全部</span>
-                        <!-- 收藏 -->
-                        <button id="collectButton" class="collect-button">
-                    <span class="heart-icon" style="border: black; margin-top: 25px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="star" viewBox="0 0 16 16">
-                            <path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.178.178 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.178.178 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.178.178 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.178.178 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.178.178 0 0 0 .134-.098L7.84 4.1z"/>
-                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
-                        </svg>
-                    </span>
-                        </button>
+                        <span>播放全部</span>
                     </svg>
-
 
 
                 </div>
                 <div class="song-list">
-                        <table>
-                            <tr>
-                                <th>序号</th>
-                                <th>歌曲名</th>
-                                <th>歌手</th>
-                                <th>专辑</th>
-                                <th>操作</th>
-                            </tr>
-                            <tr v-for="(song,i) in songs " @dblclick="handleClick(song.id)">
-                                <td>{{i + 1}}</td>
-                                <td>{{song.name}}</td>
-                                <td>{{name}}</td>
-                                <td>{{song.introduction}}</td>
-                                <td>
-                                    <el-dropdown>
+                    <table>
+                        <tr>
+                            <th>序号</th>
+                            <th>歌曲名</th>
+                            <th>歌手</th>
+                            <th>专辑</th>
+                            <th>操作</th>
+                        </tr>
+                        <tr v-for="(song,i) in songs " @dblclick="handleClick(song.id)">
+                            <td>{{i + 1}}</td>
+                            <td>{{song.name}}</td>
+                            <td>{{singer.name}}</td>
+                            <td>{{song.introduction}}</td>
+                            <td>
+                                <el-dropdown>
                                   <span class="el-dropdown-link" @click="togglePopup">
                                     收藏<i class="el-icon-arrow-down el-icon--right"></i>
                                   </span>
-                                        <el-dropdown-menu slot="dropdown">
-                                            <el-dropdown-item v-for="(songList,i) in songLists">
-                                                <a rel="nofollow" @click="getPriceRange(songList.id,song.id)">
-                                                    {{songList.title}}
-                                                </a>
-                                            </el-dropdown-item>
-                                        </el-dropdown-menu>
-                                    </el-dropdown>
-                                </td>
-                            </tr>
+                                    <el-dropdown-menu slot="dropdown">
+                                        <el-dropdown-item v-for="(songList,i) in songLists">
+                                            <a rel="nofollow" @click="getPriceRange(songList.id,song.id)">
+                                                {{songList.title}}
+                                            </a>
+                                        </el-dropdown-item>
+                                    </el-dropdown-menu>
+                                </el-dropdown>
+                            </td>
+                        </tr>
 
-                        </table>
+                    </table>
                 </div>
             </div>
         </div>
