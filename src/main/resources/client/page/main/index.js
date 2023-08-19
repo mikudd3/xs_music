@@ -55,12 +55,14 @@ new Vue({
                 singerName: '宝宝巴士',
             },
             {
+                id:30,
                 pic: 'https://star.kuwo.cn/star/starheads/180/21/12/1142472669.jpg',
                 url: 'https://www.ihaoge.net/server/1/283424829.mp3',
                 name: '水中花(Live)',
                 singerName: '郁可唯',
             },
             {
+                id:30,
                 pic: 'http://static.170hi.com/wp-content/themes/beetube/images/nopic.png',
                 url: 'https://www.ihaoge.net/server/1/289548192.mp3',
                 name: '僕らのスペクトラ',

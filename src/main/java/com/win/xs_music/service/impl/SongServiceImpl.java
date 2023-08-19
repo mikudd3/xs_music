@@ -170,4 +170,20 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
             throw new CustomException("系统错误，请联系管理员");
         }
     }
+
+    //获取当前正在播放的音乐信息
+    @Override
+    public R getSong(Integer id) {
+        try {
+            Song song = this.getById(id);
+            SongListVo songListVo = new SongListVo();
+            BeanUtils.copyProperties(song, songListVo);
+            String[] arr = song.getName().split("-");
+            songListVo.setName(arr[1]);
+            songListVo.setSingerName(arr[0]);
+            return R.success(songListVo);
+        } catch (BeansException e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
+    }
 }

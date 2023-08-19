@@ -19,4 +19,7 @@ public interface SongService extends IService<Song> {
 
     //搜索歌曲
     R getSongByName(String songname);
+
+    //获取当前正在播放的音乐的信息
+    R getSong(Integer id);
 }

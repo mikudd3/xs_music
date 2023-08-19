@@ -113,4 +113,10 @@ public class SongController {
         log.info("搜索条件为：{}", songname);
         return songService.getSongByName(songname);
     }
+
+
+    @PostMapping("/getSong")
+    public R getSong(Integer id) {
+        return songService.getSong(id);
+    }
 }
