@@ -62,7 +62,7 @@ public class CollectController {
 
     //取消添加到我的喜欢
     @PostMapping("/deleteMyLoveSong")
-    public R deleteMyLoveSong(Integer id){
+    public R deleteMyLoveSong(Integer id) {
         try {
             log.info("获取的id为：{}", id);
             return collectService.deleteMyLoveSong(id);
@@ -71,4 +71,26 @@ public class CollectController {
         }
     }
 
+
+    //执行收藏歌单功能
+    @PostMapping("/collectSongList")
+    public R collectSongList(Integer id) {
+        try {
+            log.info("获得的id为：{}", id);
+            return collectService.collectSongList(id);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
+    }
+
+    //执行取消收藏功能
+    @PostMapping("/deleteMyCollectSongList")
+    public R deleteMyCollectSongList(Integer id) {
+        try {
+            log.info("获得的id为：{}", id);
+            return collectService.deleteMyCollectSongList(id);
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
+    }
 }

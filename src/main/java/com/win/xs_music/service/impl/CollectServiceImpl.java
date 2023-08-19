@@ -154,4 +154,30 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
             throw new CustomException("系统错误，请联系管理员");
         }
     }
+
+    //收藏歌单
+    @Override
+    public R collectSongList(Integer id) {
+        try {
+            Integer userId = BaseContext.getCurrentId();
+            Collect collect = new Collect();
+            //设置属性
+            collect.setUserId(userId);
+            collect.setSongListId(id);
+            collect.setType((byte) 1);
+            int ret = collectMapper.insert(collect);
+            return ret > 0 ? R.success("收藏成功") : R.error("收藏失败");
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
+    }
+
+    //取消收藏
+    @Override
+    public R deleteMyCollectSongList(Integer id) {
+        //获取当前登录用户
+        Integer userId = BaseContext.getCurrentId();
+        collectMapper.deleteMyCollectSongListWithUserIdAndSongListId(userId,id);
+        return null;
+    }
 }
