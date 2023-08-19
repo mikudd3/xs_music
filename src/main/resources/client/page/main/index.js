@@ -167,9 +167,10 @@ new Vue({
 });
 
 new Vue({
-    el: "#main",
+    el: "#main2",
     data: {
         iframeSrc: "main.html",
+        songname:'',
     },
     methods: {
         // 首页
@@ -187,7 +188,10 @@ new Vue({
         // 个人主页
         findmysong: function () {
             this.iframeSrc = "../privateSpace/spaceManage.html"
+        },
+        //搜索
+        getList2: function (songname){
+            this.iframeSrc ="../gequ/gequ.html?songname="+songname;
         }
-
     }
 });

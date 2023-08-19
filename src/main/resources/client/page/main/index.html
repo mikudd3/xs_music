@@ -11,65 +11,68 @@
 </head>
 
 <body>
-<!-- 首页头部  -->
-<div style="width: 100%;height: 80px; background-color:#fff;position: relative;">
+<div id="main2">
+    <!-- 首页头部  -->
+    <div style="width: 100%;height: 80px; background-color:#fff;position: relative;">
 
-    <div class="search1">
-        <div class="logo1" style="width: 153px; padding: 20.6px 0; display: inline-block;">
-            <img src="../../image/logo.png">
-        </div>
-        <nav class="navmargin navbar navbar-default" role="navigation">
-            <div class="shurukuang" style="padding: 30px 100px;">
-                <form class="bs-example" role="form" action="#" method="get">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="input-group">
-                                <input type="text" id="songName" name="songName" class="form-control"
-                                       placeholder="为音乐而生">
-                                <span class="input-group-btn">
-                                        <button onclick="getList2($('#songName').serialize())" class="btn btn-default"
+        <div class="search1">
+            <div class="logo1" style="width: 153px; padding: 20.6px 0; display: inline-block;">
+                <img src="../../image/logo.png">
+            </div>
+            <nav class="navmargin navbar navbar-default" role="navigation">
+                <div class="shurukuang" style="padding: 30px 100px;">
+                    <form class="bs-example" role="form" action="#" method="get">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="input-group">
+                                    <input v-model="songname" type="text" id="songName" name="songName" class="form-control"
+                                           placeholder="为音乐而生">
+                                    <span class="input-group-btn">
+                                        <button @click="getList2(songname)" class="btn btn-default"
                                                 type="button">搜索</button></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </div>
-            <!-- 图标加上搜索框结束 -->
-            <div id="col10" class="dengluzhuce">
-                <a href="../setting/Setting.html">
-                    <img id="touxiang" :src="imageUrl"
-                         style="display: inline-block; width: 50px;height: 50px;border-radius: 40px;margin-top: 20px;margin-right: 30px">
-                </a>
-                <a href="../login/login.html">
-                    <button id="display1" class="btn denglu" data-toggle="modal" data-target="#myModal"
-                            style="margin-top: 20px">登 &nbsp&nbsp录
-                    </button>
-                </a>
+                    </form>
+                </div>
+                <!-- 图标加上搜索框结束 -->
+                <div id="col10" class="dengluzhuce">
+                    <a href="../setting/Setting.html">
+                        <img id="touxiang" :src="imageUrl"
+                             style="display: inline-block; width: 50px;height: 50px;border-radius: 40px;margin-top: 20px;margin-right: 30px">
+                    </a>
+                    <a href="../login/login.html">
+                        <button id="display1" class="btn denglu" data-toggle="modal" data-target="#myModal"
+                                style="margin-top: 20px">登 &nbsp&nbsp录
+                        </button>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div id="main" style="height: 1900px">
+        <nav class="daohanglan">
+            <div class="big3">
+                <el-menu
+                        :default-active="activeIndex2"
+                        mode="horizontal"
+                        @select="handleSelect"
+                        :style="{ 'background-color': 'transparent' }">
+                    <el-menu-item class="gudingbeij erjicaidan2" index="1" @click="findmain()">首页</el-menu-item>
+                    <el-menu-item class="gudingbeij erjicaidan2" index="2" @click="findsonglis()">歌单</el-menu-item>
+                    <el-menu-item class="gudingbeij erjicaidan2" index="3" @click="findSinger()">歌手</el-menu-item>
+                    <el-menu-item class="gudingbeij erjicaidan2" index="4" @click="findmysong()">我的音乐</el-menu-item>
+                </el-menu>
+                <!-- 主区域部分 -->
+                <el-main>
+                    <iframe :src="iframeSrc" style="width: 100%;height:1800px;border:3px;padding: 0"></iframe>
+                </el-main>
             </div>
         </nav>
     </div>
 </div>
 
-<div id="main" style="height: 1900px">
-    <nav class="daohanglan">
-        <div class="big3">
-            <el-menu
-                    :default-active="activeIndex2"
-                    mode="horizontal"
-                    @select="handleSelect"
-                    :style="{ 'background-color': 'transparent' }">
-                <el-menu-item class="gudingbeij erjicaidan2" index="1" @click="findmain()">首页</el-menu-item>
-                <el-menu-item class="gudingbeij erjicaidan2" index="2" @click="findsonglis()">歌单</el-menu-item>
-                <el-menu-item class="gudingbeij erjicaidan2" index="3" @click="findSinger()">歌手</el-menu-item>
-                <el-menu-item class="gudingbeij erjicaidan2" index="4" @click="findmysong()">我的音乐</el-menu-item>
-            </el-menu>
-            <!-- 主区域部分 -->
-            <el-main>
-                <iframe :src="iframeSrc" style="width: 100%;height:1800px;border:3px;padding: 0"></iframe>
-            </el-main>
-        </div>
-    </nav>
-</div>
 
 <div class="footer">
     <div class="links">
@@ -99,7 +102,7 @@
             :modal="false">
         <template>
             <!--歌曲详情页-->
-            <iframe v-if="this.songlist.length >0" src="https://www.bilibili.com/" style="width: 100%;height: 1200px"></iframe>
+            <iframe v-if="this.songlist.length >0" :src="`../song/song.html?id=`+this.playsong.id" style="width: 100%;height: 1200px"></iframe>
         </template>
     </el-drawer>
 
@@ -148,13 +151,14 @@
 
     <el-drawer
             title="播放列表"
+            size="33%"
             :visible.sync="drawer"
             :direction="direction"
             :modal="false">
         <template>
             <el-table
                     :data="songlist"
-                    style="width: 100%">
+                    style="width: 100%;height: 100%">
                 <el-table-column
                         prop="name"
                         label="歌名"
