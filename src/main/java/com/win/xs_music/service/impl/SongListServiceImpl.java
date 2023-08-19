@@ -73,7 +73,7 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
     }
 
 
-    @Override
+   /* @Override
     public ArrayList<SongListflVo> getSongList(String style_name) {
         ArrayList<SongListflVo> maps = null;
         try {
@@ -83,7 +83,27 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
         }
         log.info("查询到的数据为：{}", maps);
         return maps;
+    }*/
+
+
+    @Override
+    public ArrayList<SongListflVo> getSongList(String style_name) {
+        ArrayList<SongListflVo> maps = null;
+        try {
+            System.out.println(!"日韩".equals(style_name));
+            if (style_name == null && !"日韩".equals(style_name)){
+                maps = songListMapper.getSongList(style_name);
+            }
+            else {
+                maps = songListMapper.getSongList1("日韩");
+            }
+        } catch (Exception e) {
+            throw new CustomException("系统错误，请联系管理员");
+        }
+        log.info("查询到的数据为：{}", maps);
+        return maps;
     }
+
 
     /**
      * 首页获取歌单数据
