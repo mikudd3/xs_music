@@ -5,7 +5,6 @@ new Vue({
             //tang
             content: '',
             userData:[{}],
-            all_comment: 233,
             comments: [{
                 name: '妖怪',
                 create_time: "2010-10-1",
@@ -72,19 +71,17 @@ new Vue({
                 method: "get",
                 url: "/comment/gets",
                 params: {
-
                     type: 1,
                     songListId:id,
                 }
             }).then(res => {
                 this.comments = res.data.data;
-                console.log(this.comments);
             })
         },
         setComment() {
             this.searchParams = new URLSearchParams(window.location.search);
             const id = this.searchParams.get('id');
-            console.log(this.userData.id+"user");
+            console.log(this.content+"user");
             {
                 axios({
                     method: "post",
@@ -97,6 +94,7 @@ new Vue({
                     }
                 }).then(ress => {
                     this.comments = ress.data.data;
+                    this.content='';
                     this.getAllComments();
                 })
             }

@@ -92,20 +92,22 @@
                     <!-- 大盒子 -->
                     <div class="part_head">
                         <h2>评论
-                            <span>{{all_comment}}</span>
+                            <span></span>
                             <!-- 所有评论 -->
                         </h2>
                     </div>
                     <div class="comment__input">
                         <div class="comment__textarea">
                             <div class="comment__textarea_inner">
-                                <div class="comment__textarea_default c_tx_normal" contenteditable="true"
-                                     style="display: block;">
-                                </div>
-                                <div class="comment__textarea_input" contenteditable="true" style="display: none;"
-                                     v-model="content">{{content}}
+<!--                                <div class="comment__textarea_default c_tx_normal" contenteditable="true"-->
+<!--                                     style="display: block;">-->
+<!--                                </div>-->
+<!--                                <div class="comment__textarea_input" contenteditable="true" style="display: none;"-->
+<!--                                     v-model="content">{{content}}-->
+                                    <input v-model="content" type="text" style="width: 100%;height: 66px" placeholder="请输入你的想法">
+                                    <p>{{content}}</p>
 
-                                </div>
+<!--                                </div>-->
                             </div>
                             <div class="comment__tips">剩余
                                 <span class="c_tx_highlight">300</span>
@@ -123,7 +125,7 @@
 
                     <div class="mod_hot_comment" id="main3">
                         <div class="comment_type__title c_b_normal">
-                            <h2>全部评论({{all_comment}})</h2>
+                            <h2>全部评论</h2>
                         </div>
                         <ul class="comment__list">
                             <li class="comment__list_item c_b_normal" v-for="comment in comments" :key="comments.id">
@@ -134,7 +136,7 @@
                                          alt=""
                                          data-qar-def=""></a>
                                     <h4 class="comment__title">
-                                        <a class="c_tx_thin">{{comment.username}}</a>
+                                        <a class="c_tx_thin"></a>
                                     </h4>
                                     <div class="comment__date c_tx_thin">{{comment.create_time}}</div>
                                     <p class="comment__text ">
