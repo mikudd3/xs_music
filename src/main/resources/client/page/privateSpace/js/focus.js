@@ -18,10 +18,6 @@ new Vue({
             }).then(resp => {
                 if (resp.data.code == 1) {
                     this.items = resp.data.data;
-                    //对图片进行处理
-                    for (let i = 0; i < this.items.length; i++) {
-                        this.items[i].pic = `/common/download?name=` + this.items[i].pic;
-                    }
                 }
             })
         }
