@@ -10,7 +10,7 @@ new Vue({
                 birth: "2020-01-01",       //歌手生日
                 location: "中国",          //歌手国籍
                 pic: "https://bkimg.cdn.bcebos.com/pic/d1a20cf431adcbef76091cafaff839dda3cc7cd93159?x-bce-process=image/resize,m_lfit,w_536,limit_1/format,f_auto",                //歌手图片
-                isCollected: false,
+                isCollected: true,
             },
             //歌曲列表
             songs: [
@@ -132,6 +132,38 @@ new Vue({
             //信息塞进session域中
             sessionStorage.setItem("songs", JSON.stringify(row));
         },
+        //关注歌手
+        toggleFollow() {
+            //false表示未关注
+            // this.singer.isCollected = !this.singer.isCollected;
+            if (!this.singer.isCollected) {
+                //如果为false表示为要关注该歌手
+                axios({
+                    url: "/collect/addMyLoveSinger?id=" + this.singer.id,
+                    method: "post",
+                }).then(resp => {
+                    if (resp.data.code == 1) {
+                        this.singer.isCollected = !this.singer.isCollected;
+                        this.$message.success("添加成功")
+                    } else {
+                        this.$message.error(resp.data.msg)
+                    }
+                })
+            } else {
+                //原来为false，现在点击，表示取消关注
+                axios({
+                    url: "/collect/deleteMyLoveSinger?id=" + this.singer.id,
+                    method: "post",
+                }).then(resp => {
+                    if (resp.data.code == 1) {
+                        this.singer.isCollected = !this.singer.isCollected;
+                        this.$message.success("取消成功")
+                    } else {
+                        this.$message.error(resp.data.msg)
+                    }
+                })
+            }
+        }
     }
 
 })

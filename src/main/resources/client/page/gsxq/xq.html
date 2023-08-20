@@ -42,6 +42,11 @@
                     <span style="font-size: 25px;">{{this.singer.name}}</span>
                     <!--                    <p>著名作词人、作曲人、唱片制作人、歌手。内地独立音乐之标杆人物，有音乐鬼才之称。2009年独立出版首张词曲全创作专辑《自定义》，2010年独立出版第二张词曲全创作专辑《寻雾启示》，两度掀起讨论热潮，一跃成为内地互联网讨论度最高的独立音乐人。2011年加盟海蝶音乐，推出第三张词曲全创作专辑《苏格拉没有底》，发行首月即在大陆地区摘下唱片销量榜冠军，轰动全国媒体，并拉开全国巡回签售及歌迷见面会。</p>-->
                     <p>{{this.singer.introduction}}</p>
+                    <p>
+                        <el-button :type="this.singer.isCollected ? 'success' : 'primary'" @click="toggleFollow">
+                            {{ this.singer.isCollected ? '已关注' : '未关注' }}
+                        </el-button>
+                    </p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                          class="bi bi-caret-right" viewBox="0 0 16 16" @click="playAll()">
                         <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z"/>

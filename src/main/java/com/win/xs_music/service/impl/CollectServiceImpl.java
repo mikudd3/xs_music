@@ -80,7 +80,7 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
             ids = collectMapper.getCollectSongListByUserId(id);
             log.info("111:{}", ids);
 
-            if (ids == null||ids.isEmpty()) {
+            if (ids == null || ids.isEmpty()) {
                 //没有关注的歌手
                 return R.success(null);
             }
@@ -187,5 +187,41 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
         Integer userId = BaseContext.getCurrentId();
         collectMapper.deleteMyCollectSongListWithUserIdAndSongListId(userId, id);
         return null;
+    }
+
+    //关注歌手
+    @Override
+    public R addMyLoveSinger(Integer id) {
+        try {
+            //获取当前登录的用户
+            Integer userId = BaseContext.getCurrentId();
+            //创建Collect对象
+            Collect collect = new Collect();
+            //设置属性
+            collect.setUserId(userId);
+            collect.setSingerId(id);
+            collect.setType((byte) 2);
+            //添加到数据库
+            int ret = collectMapper.insert(collect);
+            return ret > 0 ? R.success("添加成功") : R.error("添加失败");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CustomException("系统错误，请联系管理员");
+        }
+    }
+
+    //取消关注
+    @Override
+    public R deleteMyLoveSinger(Integer id) {
+        //根据用户id和歌曲id删除数据
+        //获取当前登录的用户
+        try {
+            Integer userId = BaseContext.getCurrentId();
+            boolean ret = collectMapper.deleteWithUserIdAndSingerId(userId, id);
+            return ret ? R.success("取消成功") : R.error("取消失败");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CustomException("系统错误，请联系管理员");
+        }
     }
 }

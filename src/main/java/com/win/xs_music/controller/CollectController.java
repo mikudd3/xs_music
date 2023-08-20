@@ -100,4 +100,29 @@ public class CollectController {
             throw new CustomException("系统错误，请联系管理员");
         }
     }
+
+    //关注歌手
+    @PostMapping("/addMyLoveSinger")
+    public R addMyLoveSinger(Integer id) {
+        try {
+            log.info("获得的歌手id为：{}", id);
+            return collectService.addMyLoveSinger(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CustomException("系统错误，请联系管理员");
+        }
+    }
+
+    //取消关注歌手
+    @PostMapping("/deleteMyLoveSinger")
+    public R deleteMyLoveSinger(Integer id) {
+        try {
+            log.info("获得的歌手id为：{}", id);
+            return collectService.deleteMyLoveSinger(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CustomException("系统错误，请联系管理员");
+        }
+    }
+
 }
