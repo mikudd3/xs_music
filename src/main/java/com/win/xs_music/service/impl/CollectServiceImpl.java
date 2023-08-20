@@ -185,8 +185,13 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
     public R deleteMyCollectSongList(Integer id) {
         //获取当前登录用户
         Integer userId = BaseContext.getCurrentId();
-        collectMapper.deleteMyCollectSongListWithUserIdAndSongListId(userId, id);
-        return null;
+        boolean b = collectMapper.deleteMyCollectSongListWithUserIdAndSongListId(userId, id);
+        if(b){
+            return R.success("取消成功");
+        }else {
+
+            return R.error("取消失败");
+        }
     }
 
     //关注歌手
