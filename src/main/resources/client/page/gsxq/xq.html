@@ -47,11 +47,11 @@
                             {{ this.singer.isCollected ? '已关注' : '未关注' }}
                         </el-button>
                     </p>
-                    <div class="playAll">
+                    <p class="playAll">
                         <el-button  @click="playAll()">
                             ▷播放全部
                         </el-button>
-                    </div>
+                    </p>
                 </div>
                 <div class="song-list">
                     <el-table :data="songs" style="width: 100%">

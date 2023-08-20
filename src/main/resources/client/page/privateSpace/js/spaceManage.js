@@ -23,8 +23,6 @@ new Vue({
                 if (resp.data.code == 1) {
                     this.userdata = resp.data.data;
                     this.avatarUrl = `/common/download?name=` + this.userdata.tx;
-                } else {
-                    this.$message.error(resp.data.msg);
                 }
             })
         },

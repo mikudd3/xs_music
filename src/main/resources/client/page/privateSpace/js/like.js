@@ -26,8 +26,6 @@ new Vue({
                 console.log(r)
                 if (r.code == 1) {
                     this.options = r.data;
-                } else {
-                    this.$message.error(r.msg)
                 }
             })
         },
