@@ -37,10 +37,18 @@ new Vue({
         handleAvatarSuccess(resp) {
             this.imageUrl = resp.data;
         },
+
+
+        //点击了创建歌单
         addSongList() {
+            //弹窗显示
             this.dialogFormVisible = true;
         },
+
+        //点击了确定
         handleAdd() {
+            //弹窗关闭
+            this.dialogFormVisible = false;
             this.formData.pic = this.imageUrl;
             console.log(this.formData)
             axios({
