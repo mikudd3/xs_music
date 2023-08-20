@@ -65,15 +65,13 @@ new Vue({
             } else {
                 //取消我喜欢
                 axios({
-                    url: "/collect/deleteMyLoveSong",
+                    url: "/collect/deleteMyLoveSong?id="+row.id,
                     method: "post",
-                    data: {
-                        id: row.id
-                    }
                 }).then(resp => {
                     if (resp.data.code == 1) {
                         row.like = !row.like;
                         this.$message.success("取消成功")
+                        this.getAll();
                     } else {
                         this.$message.error(resp.data.msg)
                     }
