@@ -5,16 +5,22 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.win.xs_music.common.BaseContext;
 import com.win.xs_music.common.CustomException;
 import com.win.xs_music.common.R;
+import com.win.xs_music.mapper.CollectMapper;
 import com.win.xs_music.mapper.SingerMapper;
 import com.win.xs_music.mapper.SongMapper;
+import com.win.xs_music.pojo.Collect;
 import com.win.xs_music.pojo.Singer;
 import com.win.xs_music.service.SingerService;
+import com.win.xs_music.vo.MyCollectSingerVo;
 import com.win.xs_music.vo.SingCountVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -29,6 +35,8 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
     private SingerMapper singerMapper;
     @Autowired
     private SongMapper songMapper;
+    @Autowired
+    private CollectMapper collectMapper;
 
     @Override
     public R getSingerLocationCategory() {
@@ -104,17 +112,27 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
 
     @Override
     public R getOne(Integer id) {
-        Singer singer = null;
         try {
-            singer = songMapper.selectOne(id);
+            Singer singer = songMapper.selectOne(id);
+            MyCollectSingerVo collectSingerVo = new MyCollectSingerVo();
+            BeanUtils.copyProperties(singer, collectSingerVo);
+            //获取当前用户id
+            Integer userId = BaseContext.getCurrentId();
+            //根据当前用户id和歌手id判断当前歌手是否已经被当前用户已经关注
+            Collect collect = collectMapper.selectMyLoveSingerWithUserIdAndSingerId(userId, id);
+            //如果为空，表示没有关注过
+            if (collect != null) {
+                //将属性置为false
+                collectSingerVo.setIsCollected(true);
+            }
+            return R.success(collectSingerVo);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return R.success(singer);
+
 
     }
-
 
 
     @Override
