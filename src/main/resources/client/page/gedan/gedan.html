@@ -88,7 +88,7 @@
                         </el-table-column>
                     </el-table>
                 </div>
-                <div class="mod_comment" id="main2">
+                <div class="mod_comment" id="main2" >
                     <!-- 大盒子 -->
                     <div class="part_head">
                         <h2>评论
@@ -105,7 +105,7 @@
 <!--                                <div class="comment__textarea_input" contenteditable="true" style="display: none;"-->
 <!--                                     v-model="content">{{content}}-->
                                     <input v-model="content" type="text" style="width: 100%;height: 66px" placeholder="请输入你的想法">
-                                    <p>{{content}}</p>
+<!--                                    <p>{{content}}</p>-->
 
 <!--                                </div>-->
                             </div>
@@ -132,11 +132,11 @@
                                 <!-- 循环语句开始的地方 -->
                                 <div><a class="comment__avatar">
                                     <img class="comment_list__avatar_img"
-                                         src="https://y.qq.com/music/photo_new/T002R300x300M0000000GhGG0imP4j_1.jpg?max_age=2592000"
-                                         alt=""
+                                         :src="comment.tx"
+                                         :alt="comment.username"
                                          data-qar-def=""></a>
                                     <h4 class="comment__title">
-                                        <a class="c_tx_thin"></a>
+                                        <a class="c_tx_thin">{{comment.username}}</a>
                                     </h4>
                                     <div class="comment__date c_tx_thin">{{comment.create_time}}</div>
                                     <p class="comment__text ">

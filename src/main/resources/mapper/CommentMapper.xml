@@ -2,11 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.win.xs_music.mapper.CommentMapper">
     <select id="getCommentList" resultType="java.util.Map">
-        SELECT user.username, comment.*
+        SELECT user.username, comment.*,user.tx
         FROM comment
            JOIN user ON comment.user_id = user.id
         WHERE type = #{type}
-          AND song_list_id = #{songListId}
+        <if test="songListId!=null">
+            AND song_list_id = #{songListId}
+        </if>
+        <if test="songId!=null">
+            AND song_id = #{songId}
+        </if>
     </select>
 
 </mapper>

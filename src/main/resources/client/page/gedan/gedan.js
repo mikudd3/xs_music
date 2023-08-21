@@ -58,6 +58,8 @@ new Vue({
             }).then(resp => {
                 if (resp.data.code == 1) {
                     this.userData = resp.data.data;
+                    this.$message.error("获取用户");
+
                 } else {
                     this.$message.error(resp.data.msg);
                 }
@@ -75,13 +77,16 @@ new Vue({
                     songListId:id,
                 }
             }).then(res => {
-                this.comments = res.data.data;
+               if(res.data.code){
+                   this.comments = res.data.data;
+               }else{
+                   this.$message.error("res.data.msg");
+               }
             })
         },
         setComment() {
             this.searchParams = new URLSearchParams(window.location.search);
             const id = this.searchParams.get('id');
-            console.log(this.content+"user");
             {
                 axios({
                     method: "post",
@@ -93,9 +98,14 @@ new Vue({
                         songListId:id,
                     }
                 }).then(ress => {
-                    this.comments = ress.data.data;
-                    this.content='';
-                    this.getAllComments();
+                    if(ress.data.code==1){
+                        this.comments = ress.data.data;
+                        this.content='';
+                        this.$message.error("评论成功");
+                        this.getAllComments();
+                    }else{
+                        this.$message.error(ress.data.msg);
+                    }
                 })
             }
         },
