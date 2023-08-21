@@ -22,10 +22,8 @@
                 </el-radio-group>
             </el-form-item>
             <el-form-item label="生日" prop="birth">
-                <template>
-                    <el-date-picker value-format="yyyy-MM-dd" v-model="formdata.birth" type="date"
+                    <el-date-picker value-format="timestamp" v-model="formdata.birth" type="date"
                                     placeholder="请选择日期"></el-date-picker>
-                </template>
             </el-form-item>
             <el-form-item label="地区" prop="location">
                 <el-input v-model="formdata.location" style="width: 300px"></el-input>
