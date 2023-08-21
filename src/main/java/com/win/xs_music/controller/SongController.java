@@ -22,21 +22,26 @@ public class SongController {
     @Autowired
     private SongViewService songViewService;
 
-    //查找歌曲数量
+    /**
+     * 查找歌曲数量
+     * @return
+     */
     @GetMapping("/getSongCount")
     public R getSongCount() {
-        int count = 0;
         try {
-            count = songService.count();
+            int count = songService.count();
+            return R.success(count);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return R.success(count);
     }
 
 
-    //获取歌手名
+    /**
+     * 获取歌手名
+     * @return
+     */
     @GetMapping("/getSingerName")
     public R getSingerName() {
         try {
@@ -47,7 +52,11 @@ public class SongController {
         }
     }
 
-    //歌曲分页查询
+    /**
+     * 歌曲分页查询
+     * @param songPageDto
+     * @return
+     */
     @PostMapping("/page")
     public R page(@RequestBody SongPageDto songPageDto) {
         log.info("歌曲分类查询：{}", songPageDto);
@@ -59,7 +68,11 @@ public class SongController {
         }
     }
 
-    //添加歌曲
+    /**
+     * 添加歌曲
+     * @param songView
+     * @return
+     */
     @PostMapping("/add")
     public R addSong(@RequestBody SongView songView) {
         log.info("添加歌曲接收信息：{}", songView);
@@ -71,7 +84,11 @@ public class SongController {
         }
     }
 
-    //更新歌曲接收信息
+    /**
+     * 更新歌曲接收信息
+     * @param songView
+     * @return
+     */
     @PostMapping("/update")
     public R updateSong(@RequestBody SongView songView) {
         log.info("更新歌曲接收的信息:{}", songView);
@@ -83,11 +100,15 @@ public class SongController {
         }
     }
 
-    //删除歌曲
+    /**
+     * 删除歌曲
+     * @param id
+     * @return
+     */
     @PostMapping("/delete")
     public R delete(Integer id) {
-        boolean ret = songService.removeById(id);
         try {
+            boolean ret = songService.removeById(id);
             return ret ? R.success("删除成功") : R.error("删除失败");
         } catch (Exception e) {
             e.printStackTrace();
@@ -96,7 +117,11 @@ public class SongController {
     }
 
 
-    //查询歌手的歌曲列表
+    /**
+     * 查询歌手的歌曲列表
+     * @param id
+     * @return
+     */
     @PostMapping("list")
     public R selectList(Integer id) {
         try {
@@ -107,23 +132,50 @@ public class SongController {
         }
     }
 
-    //查询歌单的歌曲列表
+    /**
+     * 查询歌单的歌曲列表
+     * @param id
+     * @return
+     */
     @PostMapping("list2")
     public R selectList1(Integer id) {
-        return songService.selectList1(id);
+        try {
+            return songService.selectList1(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CustomException("系统错误，请联系管理员");
+        }
     }
 
 
-    //搜索歌曲
+    /**
+     * 搜索歌曲
+     * @param songname
+     * @return
+     */
     @GetMapping("/searchSong")
     public R searchSong(String songname) {
-        log.info("搜索条件为：{}", songname);
-        return songService.getSongByName(songname);
+        try {
+            log.info("搜索条件为：{}", songname);
+            return songService.getSongByName(songname);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CustomException("系统错误，请联系管理员");
+        }
     }
 
-
+    /**
+     * 获取歌曲
+     * @param id
+     * @return
+     */
     @PostMapping("/getSong")
     public R getSong(Integer id) {
-        return songService.getSong(id);
+        try {
+            return songService.getSong(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CustomException("系统错误，请联系管理员");
+        }
     }
 }

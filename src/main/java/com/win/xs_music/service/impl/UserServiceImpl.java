@@ -29,11 +29,18 @@ import java.nio.file.NotLinkException;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         implements UserService {
 
+    /**
+     * 用户分类查询
+     *
+     * @param currentPage
+     * @param pageSize
+     * @param user
+     * @return
+     */
     @Override
     public R getPage(Integer currentPage, Integer pageSize, User user) {
-        Page<User> page = null;
         try {
-            page = new Page(currentPage, pageSize);
+            Page<User> page = new Page(currentPage, pageSize);
             LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
             //进行动态sql
             if (user != null) {
@@ -42,15 +49,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             }
             //进行分页查询
             this.page(page, wrapper);
+            return R.success(page);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return R.success(page);
+
     }
 
+    /**
+     * 更新用户信息
+     *
+     * @param user
+     * @return
+     */
     public R update(User user) {
-        boolean b = false;
         try {
             QueryWrapper<User> query = Wrappers.query();
             query.eq("username", user.getUsername());
@@ -60,17 +73,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
                     return R.success("用户名以存在");
                 }
             }
-            b = this.updateById(user);
+            boolean b = this.updateById(user);
+            return b ? R.success("修改成功") : R.success("修改失败");
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return b ? R.success("修改成功") : R.success("修改失败");
     }
 
+    /**
+     * 获取用户数量
+     *
+     * @return
+     */
     @Override
     public R selectUserCount() {
-        UserCountVo userCountVo = null;
         try {
             //查找男用户数量
             QueryWrapper<User> men = Wrappers.query();
@@ -81,114 +98,169 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             women.eq("sex", 0);
             int womenCount = this.count(women);
             int userCount = menCount + womenCount;
-            userCountVo = new UserCountVo(menCount, womenCount, userCount);
+            UserCountVo userCountVo = new UserCountVo(menCount, womenCount, userCount);
+            return R.success(userCountVo);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return R.success(userCountVo);
     }
 
+    /**
+     * 密码登录
+     *
+     * @param user
+     * @param request
+     * @return
+     */
     @Override
     public R login(User user, HttpServletRequest request) {
-        User one = null;
         try {
             QueryWrapper<User> query = Wrappers.query();
             query.eq("phone", user.getPhone());
             query.eq("password", user.getPassword());
-            one = this.getOne(query);
+            User one = this.getOne(query);
             if (one == null) {
                 return R.error("账号或密码错误");
             }
             request.getSession().setAttribute("user", one.getId());
+            return R.success(one);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return R.success(one);
 
     }
 
-    //获取当前登录的用户
+    /**
+     * 获取当前登录的用户
+     *
+     * @return
+     */
     @Override
     public R getUser() {
-        //从本地线程获取登录用户的id
-        Integer userId = BaseContext.getCurrentId();
-        //根据id查询用户信息
-//        User u = this.getById(64); //测试
-        User u = null;
         try {
-            u = this.getById(userId);
-        } catch (Exception e) {
+            //从本地线程获取登录用户的id
+            Integer userId = BaseContext.getCurrentId();
+            User u = null;
+            try {
+                u = this.getById(userId);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new CustomException("系统错误，请联系管理员");
+            }
+            //根据用户id
+            return R.success(u);
+        } catch (CustomException e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        //根据用户id
-        return R.success(u);
     }
 
+    /**
+     * 更新用户手机
+     *
+     * @param user
+     * @return
+     */
     @Override
     public R updatePhone(User user) {
-        //从本地线程获取当前登录用户的id
-        Integer id = BaseContext.getCurrentId();
-        //创建user对象
-        user.setId(id);
-        //更新电话
-        boolean ret = false;
         try {
-            ret = this.updateById(user);
+            //从本地线程获取当前登录用户的id
+            Integer id = BaseContext.getCurrentId();
+            //创建user对象
+            user.setId(id);
+            //更新电话
+            boolean ret = false;
+            try {
+                ret = this.updateById(user);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new CustomException("系统错误，请联系管理员");
+            }
+            return ret ? R.success("更新成功") : R.error("更新失败");
+        } catch (CustomException e) {
+            e.printStackTrace();
+            throw new CustomException("系统错误，请联系管理员");
+        }
+    }
+
+    /**
+     * 发送短信验证码
+     *
+     * @param phone
+     * @param session
+     * @return
+     */
+    @Override
+    public R send(String phone, HttpSession session) {
+        try {
+            if (StringUtils.isNotEmpty(phone)) {
+                String code = ValidateCodeUtils.generateValidateCode(4).toString();
+                log.info("生成的验证码为：{}", code);
+                SMSUtils.sendMessage("苏健昌的音乐", "SMS_462595788", phone, code);
+                session.setAttribute(phone, code);
+                return R.success("短信发送成功");
+            }
+            return R.error("登陆失败");
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return ret ? R.success("更新成功") : R.error("更新失败");
     }
 
+    /**
+     * 验证码登录
+     *
+     * @param userLoginDto
+     * @param request
+     * @return
+     */
     @Override
-    public R send(String phone, HttpSession session) {
-        if (StringUtils.isNotEmpty(phone)) {
-            String code = ValidateCodeUtils.generateValidateCode(4).toString();
-            log.info("生成的验证码为：{}", code);
-            //SMSUtils.sendMessage("苏健昌的音乐", "SMS_462595788", phone, code);
-            session.setAttribute(phone, code);
-            return R.success("短信发送成功");
-        }
-        return R.error("登陆失败");
-    }
-
-    @Override
-    public R login1(UserLoginDto userLoginDto, HttpServletRequest request) {
-        String codeSession = (String) request.getSession().getAttribute(userLoginDto.getPhone());
-//        log.info(codeSession);
-//        System.out.println(codeSession != null);
-        String code = userLoginDto.getCode() + "";
-//        log.info(code);
-        if (codeSession != null && codeSession.equals(code)) {
-//            log.info("22222");
-            QueryWrapper<User> query = Wrappers.query();
-            query.eq("phone", userLoginDto.getPhone());
-            User user = this.getOne(query);
-            if (user == null) {
-//                log.info("3333");
-                user = new User();
-                user.setPhone(userLoginDto.getPhone());
-                user.setUsername(userLoginDto.getPhone());
-                user.setPassword(userLoginDto.getPhone());
-                this.save(user);
+    public R SMSLogin(UserLoginDto userLoginDto, HttpServletRequest request) {
+        try {
+            String codeSession = (String) request.getSession().getAttribute(userLoginDto.getPhone());
+            String code = userLoginDto.getCode() + "";
+            if (codeSession != null && codeSession.equals(code)) {
+                QueryWrapper<User> query = Wrappers.query();
+                query.eq("phone", userLoginDto.getPhone());
+                User user = this.getOne(query);
+                if (user == null) {
+                    //                log.info("3333");
+                    user = new User();
+                    user.setPhone(userLoginDto.getPhone());
+                    user.setUsername(userLoginDto.getPhone());
+                    user.setPassword(userLoginDto.getPhone());
+                    this.save(user);
+                }
+                //查找新创建用户的id
+                user = this.getOne(query);
+                request.setAttribute("user", user.getId());
+                return R.success(user);
             }
-            //查找新创建用户的id
-            user = this.getOne(query);
-            request.setAttribute("user", user.getId());
-            return R.success(user);
+            return R.error("登录失败");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CustomException("系统错误，请联系管理员");
         }
-        return R.error("登录失败");
     }
 
-
+    /**
+     * 获取登录验证码
+     *
+     * @param phone
+     * @param session
+     * @return
+     */
     @Override
     public R getLoginCode(String phone, HttpSession session) {
-        Object code = session.getAttribute(phone);
-        log.info("验证码为：{}", code);
-        return R.success(code);
+        try {
+            Object code = session.getAttribute(phone);
+            log.info("验证码为：{}", code);
+            return R.success(code);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CustomException("系统错误，请联系管理员");
+        }
     }
 }

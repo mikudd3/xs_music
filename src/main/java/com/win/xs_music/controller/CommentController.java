@@ -23,34 +23,42 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
+    /**
+     * 获取评论
+     *
+     * @param comment
+     * @return
+     */
     @GetMapping("/gets")
     public R getComments(Comment comment) {
-        R comment_list;
-        log.info("!!!!!!!!!!!!!!!!!!!!!!");
         log.info("查询歌单评论数" + comment);
-        if (comment.getSongListId() == null) {
-            return R.error("null");
-        }
         try {
-            comment_list = commentService.getCommentList(comment);
+            if (comment.getSongListId() == null) {
+                return R.error("null");
+            }
+            return commentService.getCommentList(comment);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return comment_list;
     }
 
+    /**
+     * 添加评论
+     *
+     * @param comment
+     * @return
+     */
     @PostMapping("/add")
     public R addComment(Comment comment) {
         log.info("添加评论所输入信息：{}", comment);
-
-        boolean save = false;
         try {
-            save = commentService.save(comment);
+            boolean save = commentService.save(comment);
+            return save ? R.success("添加成功") : R.success("添加失败");
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return save ? R.success("添加成功") : R.success("添加失败");
+
     }
 }

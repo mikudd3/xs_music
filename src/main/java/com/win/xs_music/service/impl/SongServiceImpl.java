@@ -43,6 +43,11 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
     @Autowired
     private SongMapper songMapper;
 
+    /**
+     * 更新歌曲信息
+     * @param songView
+     * @return
+     */
     @Override
     public R updateSong(SongView songView) {
         try {
@@ -62,6 +67,10 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
         }
     }
 
+    /**
+     * 获取歌手名字
+     * @return
+     */
     @Override
     public R getSingerName() {
         try {
@@ -74,6 +83,11 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
         }
     }
 
+    /**
+     * 查询歌手的歌曲列表
+     * @param id
+     * @return
+     */
     @Override
     public R selectList(Integer id) {
         try {
@@ -107,6 +121,11 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
         }
     }
 
+    /**
+     * 查询歌单的歌曲列表
+     * @param id
+     * @return
+     */
     @Override
     public R selectList1(Integer id) {
         try {
@@ -139,7 +158,11 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
         }
     }
 
-
+    /**
+     * 通过歌曲名字获取歌曲信息
+     * @param songname
+     * @return
+     */
     @Override
     public R getSongByName(String songname) {
         try {
@@ -178,7 +201,11 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
         }
     }
 
-    //获取当前正在播放的音乐信息
+    /**
+     * 获取当前正在播放的音乐信息
+     * @param id
+     * @return
+     */
     @Override
     public R getSong(Integer id) {
         try {

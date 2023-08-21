@@ -38,43 +38,58 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
     @Autowired
     private CollectMapper collectMapper;
 
+    /**
+     * 获取歌手地区分类
+     *
+     * @return
+     */
     @Override
     public R getSingerLocationCategory() {
-        List<Map<String, Object>> listMap = null;
         try {
-            listMap = singerMapper.getSingerLocationCategory();
+            List<Map<String, Object>> listMap = singerMapper.getSingerLocationCategory();
+            log.info("查询到的数据为：{}", listMap);
+            Map<String, Long> map = new HashMap<>();
+            // 处理查询结果
+            for (Map<String, Object> locationCount : listMap) {
+                String location = (String) locationCount.get("location");
+                Long count = (Long) locationCount.get("count");
+                map.put(location, count);
+            }
+            log.info("查询到的map集合为：{}", map);
+            return R.success(map);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        log.info("查询到的数据为：{}", listMap);
-        Map<String, Long> map = new HashMap<>();
-        // 处理查询结果
-        for (Map<String, Object> locationCount : listMap) {
-            String location = (String) locationCount.get("location");
-            Long count = (Long) locationCount.get("count");
-            map.put(location, count);
-        }
-        log.info("查询到的map集合为：{}", map);
-        return R.success(map);
     }
 
-    //歌手信息分页查询
+    /**
+     * 歌手信息分页查询
+     * @param currentPage
+     * @param pageSize
+     * @param name
+     * @return
+     */
     @Override
     public R getPage(Integer currentPage, Integer pageSize, String name) {
-        Page<Singer> page = new Page<>(currentPage, pageSize);
-        LambdaQueryWrapper<Singer> wrapper = new LambdaQueryWrapper<>();
-        wrapper.like(StringUtils.isNotEmpty(name), Singer::getName, name);
         try {
+            Page<Singer> page = new Page<>(currentPage, pageSize);
+            LambdaQueryWrapper<Singer> wrapper = new LambdaQueryWrapper<>();
+            wrapper.like(StringUtils.isNotEmpty(name), Singer::getName, name);
             this.page(page, wrapper);
+            return R.success(page);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return R.success(page);
+
     }
 
-    // 删除歌手
+    /**
+     * 删除歌手
+     * @param id
+     * @return
+     */
     @Override
     public R delete(Integer id) {
         //删除歌手的歌曲
@@ -82,17 +97,21 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
             songMapper.getListBySingerId(id);
             //删除歌手
             this.removeById(id);
+            return R.success("删除成功");
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return R.success("删除成功");
+
     }
 
+    /**
+     * 获取歌手数量
+     * @return
+     */
     @Override
     public R selectCount() {
         //查找男歌手数量
-        SingCountVo singCountVo = null;
         try {
             QueryWrapper<Singer> men = Wrappers.query();
             men.eq("sex", 1);
@@ -102,14 +121,20 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
             women.eq("sex", 0);
             int singerCountWomen = this.count(women);
             int singerCount = singerCountMan + singerCountWomen;
-            singCountVo = new SingCountVo(singerCountMan, singerCountWomen, singerCount);
+            SingCountVo singCountVo = new SingCountVo(singerCountMan, singerCountWomen, singerCount);
+            return R.success(singCountVo);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return R.success(singCountVo);
+
     }
 
+    /**
+     * 根据id获取歌手信息
+     * @param id
+     * @return
+     */
     @Override
     public R getOne(Integer id) {
         try {
@@ -134,18 +159,22 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer> impleme
 
     }
 
-
+    /**
+     * 获取歌手列表
+     * @param singer
+     * @return
+     */
     @Override
     public R getSingers(Singer singer) {
-        List<Map<String, Object>> singerList = null;
         try {
-            singerList = singerMapper.getSingers(singer);
+            List<Map<String, Object>> singerList = singerMapper.getSingers(singer);
+            // 处理查询结果
+            return R.success(singerList);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        // 处理查询结果
-        return R.success(singerList);
+
     }
 
 

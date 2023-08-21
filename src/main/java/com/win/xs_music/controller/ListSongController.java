@@ -15,7 +15,12 @@ public class ListSongController {
     @Autowired
     private ListSongService listSongService;
 
-    //把歌曲添加到用户创建的歌单
+    /**
+     * 把歌曲添加到用户创建的歌单
+     * @param song_id
+     * @param song_list_id
+     * @return
+     */
     @RequestMapping("/add")
     public R add(Integer song_id, Integer song_list_id) {
         try {

@@ -28,7 +28,13 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    //管理员后台登录
+    /**
+     * 管理员后台登录
+     *
+     * @param admin
+     * @param request
+     * @return
+     */
     @PostMapping("/login")
     public R login(@RequestBody Admin admin, HttpServletRequest request) {
         log.info("登录管理员后台所传入信息：{}", admin);
@@ -40,7 +46,12 @@ public class AdminController {
         }
     }
 
-    //管理员界面员工管理分页查询
+    /**
+     * 管理员界面员工管理分页查询
+     *
+     * @param adminPageDto
+     * @return
+     */
     @PostMapping("page")
     public R adminMgrPage(@RequestBody AdminPageDto adminPageDto) {
         log.info("管理员界面员工管理分页查询输入的信息为：{}", adminPageDto);
@@ -53,45 +64,57 @@ public class AdminController {
     }
 
 
-    //添加员工
+    /**
+     * 添加员工
+     *
+     * @param admin
+     * @return
+     */
     @PostMapping("/add")
     public R add(@RequestBody Admin admin) {
         log.info("添加员工所输入信息：{}", admin);
-        boolean save = false;
         try {
-            save = adminService.save(admin);
+            boolean save = adminService.save(admin);
+            return save ? R.success("添加成功") : R.success("添加失败");
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return save ? R.success("添加成功") : R.success("添加失败");
     }
 
-    //修改信息
+    /**
+     * 修改信息
+     * @param admin
+     * @return
+     */
     @PostMapping("/update")
     public R update(@RequestBody Admin admin) {
         log.info("修改员工所输入信息：{}", admin);
-        boolean ret = false;
         try {
-            ret = adminService.updateById(admin);
+            boolean ret = adminService.updateById(admin);
+            return ret ? R.success("修改成功") : R.success("修改失败");
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return ret ? R.success("修改成功") : R.success("修改失败");
+
     }
 
-    //删除管理员
+    /**
+     * 删除管理员
+     * @param id
+     * @return
+     */
     @PostMapping("deleteById")
     public R deleteById(Integer id) {
         log.info("删除员工所输入信息：{}", id);
-        boolean ret = false;
         try {
-            ret = adminService.removeById(id);
+            boolean ret = adminService.removeById(id);
+            return ret ? R.success("删除成功") : R.success("删除失败");
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return ret ? R.success("删除成功") : R.success("删除失败");
+
     }
 }

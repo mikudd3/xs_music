@@ -20,7 +20,10 @@ public class SingerController {
     private SingerService singerService;
 
 
-    //查询歌手男女个数
+    /**
+     * 查询歌手男女个数
+     * @return
+     */
     @GetMapping("/getSingCount")
     public R getSingCount() {
         try {
@@ -31,7 +34,10 @@ public class SingerController {
         }
     }
 
-    //获取歌手分布地区信息以及对应的数量
+    /**
+     * 获取歌手分布地区信息以及对应的数量
+     * @return
+     */
     @GetMapping("/getSingerLocationCategory")
     public R getSingerLocationCategory() {
         try {
@@ -42,7 +48,11 @@ public class SingerController {
         }
     }
 
-    //歌手信息分页查询
+    /**
+     * 歌手信息分页查询
+     * @param singerPageDto
+     * @return
+     */
     @PostMapping("/page")
     public R page(@RequestBody SingerPageDto singerPageDto) {
         log.info("歌手信息分页查询:{}", singerPageDto);
@@ -55,36 +65,48 @@ public class SingerController {
     }
 
 
-    //添加歌手
+    /**
+     * 添加歌手
+     * @param singer
+     * @return
+     */
     @PostMapping("/add")
     public R add(@RequestBody Singer singer) {
         log.info("添加歌手传入信息：{}", singer);
-        boolean ret = false;
         try {
-            ret = singerService.save(singer);
+            boolean ret = singerService.save(singer);
+            return ret ? R.success("添加成功") : R.error("添加失败");
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return ret ? R.success("添加成功") : R.error("添加失败");
+
     }
 
 
-    //更新数据
+    /**
+     * 更新歌手数据
+     * @param singer
+     * @return
+     */
     @PostMapping("/update")
     public R update(@RequestBody Singer singer) {
         log.info("更新歌手传入信息：{}", singer);
-        boolean ret = false;
         try {
-            ret = singerService.updateById(singer);
+            boolean ret = singerService.updateById(singer);
+            return ret ? R.success("更新成功") : R.error("更新失败");
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return ret ? R.success("更新成功") : R.error("更新失败");
+
     }
 
-    //删除歌手
+    /**
+     * 删除歌手
+     * @param id
+     * @return
+     */
     @PostMapping("/delete")
     public R delete(Integer id) {
         log.info("删除歌手传入信息：{}", id);
@@ -96,7 +118,11 @@ public class SingerController {
         }
     }
 
-    //查询一个歌手信息
+    /**
+     * 查询一个歌手信息
+     * @param id
+     * @return
+     */
     @PostMapping("one")
     public R getOne(Integer id){
         log.info("查询的歌手id为：{}",id);
@@ -108,10 +134,14 @@ public class SingerController {
         }
     }
 
+    /**
+     * 获取歌手信息
+     * @param singer
+     * @return
+     */
     @GetMapping("/getSingers")
     public R getSingersFromInformation(Singer singer) {
         log.info("传入的歌手信息" + singer);
-        log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         try {
             return singerService.getSingers(singer);
         } catch (Exception e) {

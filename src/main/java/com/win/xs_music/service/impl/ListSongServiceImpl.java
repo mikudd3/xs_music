@@ -19,6 +19,12 @@ public class ListSongServiceImpl extends ServiceImpl<ListSongMapper, ListSong> i
     @Autowired
     private ListSongMapper listSongMapper;
 
+    /**
+     * 将歌曲添加到歌单
+     * @param songId
+     * @param songListId
+     * @return
+     */
     @Override
     public R add(Integer songId, Integer songListId) {
         try {

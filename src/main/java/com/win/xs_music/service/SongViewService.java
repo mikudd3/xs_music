@@ -8,10 +8,19 @@ import com.win.xs_music.view.SongView;
 public interface SongViewService extends IService<SongView> {
 
 
-
-    //歌曲分页查询
+    /**
+     * 歌曲分页查询
+     * @param currentPage
+     * @param pageSize
+     * @param singerName
+     * @return
+     */
     R getPage(Integer currentPage, Integer pageSize, String singerName);
 
-    //添加歌曲
+    /**
+     * 添加歌曲
+     * @param songView
+     * @return
+     */
     R add(SongView songView);
 }

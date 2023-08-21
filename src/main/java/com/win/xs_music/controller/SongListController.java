@@ -29,13 +29,13 @@ public class SongListController {
      */
     @GetMapping("/getSongListCount")
     public R getSongListCount() {
-        int count = 0;
         try {
-            count = songListService.count();
+            int count = songListService.count();
+            return R.success(count);
         } catch (Exception e) {
             throw new CustomException("系统错误，请联系管理员");
         }
-        return R.success(count);
+
     }
 
     /**
@@ -61,14 +61,12 @@ public class SongListController {
      */
     @GetMapping("/getStyle")
     public R getStyle() {
-        R result = null;
         try {
-            result = songListService.getStyle();
+            return songListService.getStyle();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        log.info(String.valueOf(result));
-        return result;
     }
 
     /**
@@ -140,7 +138,11 @@ public class SongListController {
         }
     }
 
-
+    /**
+     *  根据id获取歌单
+     * @param id
+     * @return
+     */
     @PostMapping("/one")
     public R getOne(Integer id) {
         try {
@@ -152,7 +154,10 @@ public class SongListController {
         }
     }
 
-
+    /**
+     * 获取我创建的歌单列表
+     * @return
+     */
     @GetMapping("/getMyCreateSongList")
     /*传入用户的id*/
     public R getMyCreateSongList(){
@@ -165,7 +170,11 @@ public class SongListController {
     }
 
 
-    //新建歌单
+    /**
+     * 新建歌单
+     * @param songList
+     * @return
+     */
     @PostMapping("/addSongList")
     public R addSongList(@RequestBody SongList songList){
         log.info("输入的数据为：{}",songList);

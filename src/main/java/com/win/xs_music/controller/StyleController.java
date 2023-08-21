@@ -1,5 +1,6 @@
 package com.win.xs_music.controller;
 
+import com.win.xs_music.common.CustomException;
 import com.win.xs_music.common.R;
 import com.win.xs_music.service.StyleService;
 import lombok.extern.slf4j.Slf4j;
@@ -20,8 +21,18 @@ public class StyleController {
 
     @Autowired
     private StyleService styleService;
+
+    /**
+     * 获取分类名
+     * @return
+     */
     @PostMapping("/getStyleName")
     public R getStyleName(){
-        return  styleService.getStyleName();
+        try {
+            return  styleService.getStyleName();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CustomException("系统错误，请联系管理员");
+        }
     }
 }

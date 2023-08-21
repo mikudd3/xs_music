@@ -27,21 +27,50 @@ public interface CollectService extends IService<Collect> {
      */
     R getMyLoveSong();
 
-    //添加到我喜欢
+    /**
+     * 添加到我喜欢
+     *
+     * @param id
+     * @return
+     */
     R addMyLoveSong(Integer id);
 
-    //取消添加到我的喜欢
+    /**
+     * 取消添加到我的喜欢
+     *
+     * @param id
+     * @return
+     */
     R deleteMyLoveSong(Integer id);
 
-    //收藏歌单
+    /***
+     * 收藏歌单
+     * @param id
+     * @return
+     */
     R collectSongList(Integer id);
 
-    //取消收藏
+    /**
+     * 取消收藏
+     *
+     * @param id
+     * @return
+     */
     R deleteMyCollectSongList(Integer id);
 
-    //关注歌手
+    /**
+     * 关注歌手
+     *
+     * @param id
+     * @return
+     */
     R addMyLoveSinger(Integer id);
 
-    // 取消关注歌手
+    /**
+     * 取消关注歌手
+     *
+     * @param id
+     * @return
+     */
     R deleteMyLoveSinger(Integer id);
 }

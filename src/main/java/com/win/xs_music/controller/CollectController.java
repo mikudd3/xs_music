@@ -15,7 +15,10 @@ public class CollectController {
     @Autowired
     private CollectService collectService;
 
-    //获取当前登录用户所关注的歌手
+    /**
+     * 获取当前登录用户所关注的歌手
+     * @return
+     */
     @GetMapping("/getCollectSinger")
     public R getCollectSinger() {
         try {
@@ -27,7 +30,10 @@ public class CollectController {
     }
 
 
-    //获取当前登录用户所收藏的歌单
+    /**
+     * 获取当前登录用户所收藏的歌单
+     * @return
+     */
     @GetMapping("/getCollectSongList")
     public R getCollectSongList() {
         try {
@@ -39,7 +45,10 @@ public class CollectController {
     }
 
 
-    //获取我喜欢的音乐
+    /**
+     * 获取我喜欢的音乐
+     * @return
+     */
     @GetMapping("/getMyLoveSong")
     public R getMyLoveSong() {
         try {
@@ -51,7 +60,11 @@ public class CollectController {
     }
 
 
-    //添加到我喜欢
+    /**
+     * 添加到我喜欢
+     * @param id
+     * @return
+     */
     @PostMapping("/addMyLoveSong")
     public R addMyLoveSong(Integer id) {
         try {
@@ -64,7 +77,11 @@ public class CollectController {
     }
 
 
-    //取消添加到我的喜欢
+    /**
+     * 取消添加到我的喜欢
+     * @param id
+     * @return
+     */
     @PostMapping("/deleteMyLoveSong")
     public R deleteMyLoveSong(Integer id) {
         try {
@@ -77,7 +94,11 @@ public class CollectController {
     }
 
 
-    //执行收藏歌单功能
+    /**
+     * 执行收藏歌单功能
+     * @param id
+     * @return
+     */
     @PostMapping("/collectSongList")
     public R collectSongList(Integer id) {
         try {
@@ -89,7 +110,11 @@ public class CollectController {
         }
     }
 
-    //执行取消收藏功能
+    /**
+     * 执行取消收藏功能
+     * @param id
+     * @return
+     */
     @PostMapping("/deleteMyCollectSongList")
     public R deleteMyCollectSongList(Integer id) {
         try {
@@ -101,7 +126,11 @@ public class CollectController {
         }
     }
 
-    //关注歌手
+    /**
+     * 关注歌手
+     * @param id
+     * @return
+     */
     @PostMapping("/addMyLoveSinger")
     public R addMyLoveSinger(Integer id) {
         try {
@@ -113,7 +142,11 @@ public class CollectController {
         }
     }
 
-    //取消关注歌手
+    /**
+     * 取消关注歌手
+     * @param id
+     * @return
+     */
     @PostMapping("/deleteMyLoveSinger")
     public R deleteMyLoveSinger(Integer id) {
         try {

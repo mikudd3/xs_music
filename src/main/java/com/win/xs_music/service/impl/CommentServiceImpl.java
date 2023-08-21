@@ -17,17 +17,22 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     @Autowired
     CommentMapper commentMapper;
 
-
+    /**
+     * 获取评论
+     *
+     * @param comment
+     * @return
+     */
     @Override
     public R getCommentList(Comment comment) {
-        List<Map<String, Object>> liss=null;
         try {
-            liss = commentMapper.getCommentList(comment);
+            List<Map<String, Object>> liss = commentMapper.getCommentList(comment);
+            return R.success(liss);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return R.success(liss);
+
     }
 
 }

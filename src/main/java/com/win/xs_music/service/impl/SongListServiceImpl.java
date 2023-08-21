@@ -45,74 +45,77 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
     @Autowired
     private CollectMapper collectMapper;
 
-    //歌手信息分页查询
+    /**
+     * 歌手信息分页查询
+     *
+     * @param currentPage
+     * @param pageSize
+     * @param name
+     * @return
+     */
     @Override
     public R getPage(Integer currentPage, Integer pageSize, String name) {
-        Page<SongList> page = null;
         try {
-            page = new Page<>(currentPage, pageSize);
+            Page<SongList> page = new Page<>(currentPage, pageSize);
             LambdaQueryWrapper<SongList> wrapper = new LambdaQueryWrapper<>();
             wrapper.like(StringUtils.isNotEmpty(name), SongList::getTitle, name);
             this.page(page, wrapper);
+            return R.success(page);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return R.success(page);
+
     }
 
+    /**
+     * 获取歌单分类
+     *
+     * @return
+     */
     @Override
     public R getStyle() {
-        List<Map<String, Object>> maps = null;
         try {
-            maps = songListMapper.getStyle();
+            List<Map<String, Object>> maps = songListMapper.getStyle();
+            log.info("查询到的数据为：{}", maps);
+            Map<String, Long> map = new HashMap<>();
+            //处理查询结果
+            for (Map<String, Object> styleCount : maps) {
+                String style = (String) styleCount.get("name");
+                Long count = (Long) styleCount.get("count");
+                map.put(style, count);
+            }
+            log.info("查询到的map集合为：{}", map);
+            return R.success(map);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        log.info("查询到的数据为：{}", maps);
-        Map<String, Long> map = new HashMap<>();
-        //处理查询结果
-        for (Map<String, Object> styleCount : maps) {
-            String style = (String) styleCount.get("name");
-            Long count = (Long) styleCount.get("count");
-            map.put(style, count);
-        }
-        log.info("查询到的map集合为：{}", map);
-        return R.success(map);
+
     }
 
-
-   /* @Override
-    public ArrayList<SongListflVo> getSongList(String style_name) {
-        ArrayList<SongListflVo> maps = null;
-        try {
-            maps = songListMapper.getSongList(style_name);
-        } catch (Exception e) {
-        e.printStackTrace();
-            throw new CustomException("系统错误，请联系管理员");
-        }
-        log.info("查询到的数据为：{}", maps);
-        return maps;
-    }*/
-
-
+    /**
+     * 获取歌单列表
+     *
+     * @param style_name
+     * @return
+     */
     @Override
     public ArrayList<SongListflVo> getSongList(String style_name) {
-        ArrayList<SongListflVo> maps = null;
         try {
+            ArrayList<SongListflVo> maps = null;
             System.out.println(!"日韩".equals(style_name));
             if (style_name == null && !"日韩".equals(style_name)) {
                 maps = songListMapper.getSongList(style_name);
             } else {
                 maps = songListMapper.getSongList1("日韩");
             }
+            log.info("查询到的数据为：{}", maps);
+            return maps;
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        log.info("查询到的数据为：{}", maps);
-        return maps;
     }
 
 
@@ -133,7 +136,11 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
         return R.success(lists);
     }
 
-
+    /**
+     * 根据歌单id获取歌单信息
+     * @param id
+     * @return
+     */
     @Override
     public R getOne(Integer id) {
         try {
@@ -156,6 +163,10 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
         }
     }
 
+    /**
+     * 获取我创建的歌单
+     * @return
+     */
     @Override
     public R getMyCreateSongList() {
         try {
@@ -171,6 +182,11 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
         }
     }
 
+    /**
+     * 添加歌单
+     * @param songList
+     * @return
+     */
     @Override
     public R addSongList(SongList songList) {
         try {

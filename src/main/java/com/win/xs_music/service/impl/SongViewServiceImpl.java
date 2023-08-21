@@ -38,27 +38,36 @@ public class SongViewServiceImpl extends ServiceImpl<SongViewMapper, SongView> i
     @Autowired
     private SongService songService;
 
-    //获取歌手名
 
+    /**
+     * 获取歌手名
+     * @param currentPage
+     * @param pageSize
+     * @param singerName
+     * @return
+     */
     @Override
     public R getPage(Integer currentPage, Integer pageSize, String singerName) {
-        Page<SongView> page = null;
         try {
-            page = new Page<>(currentPage, pageSize);
+            Page<SongView> page = new Page<>(currentPage, pageSize);
             LambdaQueryWrapper<SongView> wrapper = new LambdaQueryWrapper<>();
             wrapper.eq(StringUtils.isNotEmpty(singerName), SongView::getSingerName, singerName);
             this.page(page, wrapper);
+            return R.success(page);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return R.success(page);
+
     }
 
-    //添加歌曲
+    /**
+     * 添加歌曲
+     * @param songView
+     * @return
+     */
     @Override
     public R add(SongView songView) {
-        boolean ret = false;
         try {
             //根据歌手名获取歌手id
             Singer singer = singerMapper.selectByName(songView.getSingerName());
@@ -70,11 +79,12 @@ public class SongViewServiceImpl extends ServiceImpl<SongViewMapper, SongView> i
             BeanUtils.copyProperties(songView, song);
             //设置歌手id
             song.setSingerId(singer.getId());
-            ret = songService.save(song);
+            boolean ret = songService.save(song);
+            return ret ? R.success("添加成功") : R.error("添加失败");
         } catch (BeansException e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return ret ? R.success("添加成功") : R.error("添加失败");
+
     }
 }

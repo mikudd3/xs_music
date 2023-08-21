@@ -42,26 +42,24 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
      */
     @Override
     public R getCollectSinger() {
-        //从本地线程获取当前所登录的用户id
-        Integer id = BaseContext.getCurrentId();
-        //通过登录用户id查询用户的收藏的歌手id
-        List<Integer> ids = null;
-        List<Singer> singers = null;
         try {
-            ids = collectMapper.getCollectSingerByUserId(id);
+            //从本地线程获取当前所登录的用户id
+            Integer id = BaseContext.getCurrentId();
+            //通过登录用户id查询用户的收藏的歌手id
+            List<Integer> ids = collectMapper.getCollectSingerByUserId(id);
             if (ids == null) {
                 //如果没有收藏歌单
                 return R.success(null);
             }
             //根据获得的歌手id集合查询歌手数据
-            singers = singerMapper.selectBatchIds(ids);
-
+            List<Singer> singers = singerMapper.selectBatchIds(ids);
+            //将得到的数据返回
+            return R.success(singers);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        //将得到的数据返回
-        return R.success(singers);
+
     }
 
     /**
@@ -71,26 +69,24 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
      */
     @Override
     public R getCollectSongList() {
-        //从本地线程获取当前所登录的用户id
-        Integer id = BaseContext.getCurrentId();
-        //通过登录的id获取当前登录所收藏的歌单
-        List<Integer> ids = null;
-        List<SongList> songLists = null;
         try {
-            ids = collectMapper.getCollectSongListByUserId(id);
+            //从本地线程获取当前所登录的用户id
+            Integer id = BaseContext.getCurrentId();
+            //通过登录的id获取当前登录所收藏的歌单
+            List<Integer> ids = collectMapper.getCollectSongListByUserId(id);
             log.info("111:{}", ids);
 
             if (ids == null || ids.isEmpty()) {
                 //没有关注的歌手
                 return R.success(null);
             }
-            songLists = songListMapper.selectBatchIds(ids);
-
+            List<SongList> songLists = songListMapper.selectBatchIds(ids);
+            return R.success(songLists);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return R.success(songLists);
+
     }
 
     /**
@@ -126,7 +122,11 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
         }
     }
 
-    //添加到我喜欢
+    /**
+     * 添加到我喜欢
+     * @param id
+     * @return
+     */
     @Override
     public R addMyLoveSong(Integer id) {
         try {
@@ -147,7 +147,11 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
         }
     }
 
-    //取消添加到我的喜欢
+    /**
+     * 取消添加到我的喜欢
+     * @param id
+     * @return
+     */
     @Override
     public R deleteMyLoveSong(Integer id) {
         //根据用户id和歌曲id删除数据
@@ -162,7 +166,11 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
         }
     }
 
-    //收藏歌单
+    /**
+     * 收藏歌单
+     * @param id
+     * @return
+     */
     @Override
     public R collectSongList(Integer id) {
         try {
@@ -180,21 +188,34 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
         }
     }
 
-    //取消收藏
+    /**
+     * 取消收藏
+     * @param id
+     * @return
+     */
     @Override
     public R deleteMyCollectSongList(Integer id) {
-        //获取当前登录用户
-        Integer userId = BaseContext.getCurrentId();
-        boolean b = collectMapper.deleteMyCollectSongListWithUserIdAndSongListId(userId, id);
-        if(b){
-            return R.success("取消成功");
-        }else {
+        try {
+            //获取当前登录用户
+            Integer userId = BaseContext.getCurrentId();
+            boolean b = collectMapper.deleteMyCollectSongListWithUserIdAndSongListId(userId, id);
+            if (b) {
+                return R.success("取消成功");
+            } else {
 
-            return R.error("取消失败");
+                return R.error("取消失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CustomException("系统错误，请联系管理员");
         }
     }
 
-    //关注歌手
+    /**
+     * 关注歌手
+     * @param id
+     * @return
+     */
     @Override
     public R addMyLoveSinger(Integer id) {
         try {
@@ -215,7 +236,11 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
         }
     }
 
-    //取消关注
+    /**
+     * 取消关注
+     * @param id
+     * @return
+     */
     @Override
     public R deleteMyLoveSinger(Integer id) {
         //根据用户id和歌曲id删除数据
