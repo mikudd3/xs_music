@@ -90,6 +90,9 @@ new Vue({
                 let r = resp.data;
                 if (r.code == 1) {
                     this.songs = r.data;
+                    for (let i = 0; i < this.songs.length; i++) {
+                        this.songs[i].pic = `/common/download?name=${this.songs[i].pic}`
+                    }
                 } else {
                     this.$message.error(resp.data.msg);
                 }

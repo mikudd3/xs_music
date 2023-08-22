@@ -13,7 +13,7 @@ new Vue({
             ],
             //歌单信息
             items: {
-                id: 1,
+
                 title: "希望十八岁你爱的人是八十岁在你身边的人",   //歌单专题
                 introduction: "",                 //歌单介绍
                 pic: "",
@@ -67,7 +67,6 @@ new Vue({
         },
         getAllComments() {
             this.searchParams = new URLSearchParams(window.location.search);
-            //const searchParams = new URLSearchParams(window.location.search);
             const id = this.searchParams.get('id');
             axios({
                 method: "get",

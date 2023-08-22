@@ -123,7 +123,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             if (one == null) {
                 return R.error("账号或密码错误");
             }
-            request.getSession().setAttribute("user", one.getId());
+            request.getSession().setAttribute("User", one.getId());
             return R.success(one);
         } catch (Exception e) {
             e.printStackTrace();
@@ -142,14 +142,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         try {
             //从本地线程获取登录用户的id
             Integer userId = BaseContext.getCurrentId();
-            User u = null;
-            try {
-                u = this.getById(userId);
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new CustomException("系统错误，请联系管理员");
-            }
+            log.info("本地id为：{}", userId);
             //根据用户id
+            User u = this.getById(userId);
             return R.success(u);
         } catch (CustomException e) {
             e.printStackTrace();
@@ -171,13 +166,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             //创建user对象
             user.setId(id);
             //更新电话
-            boolean ret = false;
-            try {
-                ret = this.updateById(user);
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new CustomException("系统错误，请联系管理员");
-            }
+            boolean ret = this.updateById(user);
             return ret ? R.success("更新成功") : R.error("更新失败");
         } catch (CustomException e) {
             e.printStackTrace();
@@ -226,7 +215,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
                 query.eq("phone", userLoginDto.getPhone());
                 User user = this.getOne(query);
                 if (user == null) {
-                    //                log.info("3333");
                     user = new User();
                     user.setPhone(userLoginDto.getPhone());
                     user.setUsername(userLoginDto.getPhone());
@@ -235,7 +223,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
                 }
                 //查找新创建用户的id
                 user = this.getOne(query);
-                request.setAttribute("user", user.getId());
+                request.setAttribute("User", user.getId());
                 return R.success(user);
             }
             return R.error("登录失败");

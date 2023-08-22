@@ -76,7 +76,7 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
                 SongListPageVo songListPageVo = new SongListPageVo();
                 BeanUtils.copyProperties(record, songListPageVo);
                 //查找风格名
-                songListPageVo.setStyle(styleMapper.selectById(record.getId()).getStyleName());
+                songListPageVo.setStyle(styleMapper.selectById(record.getStyleIds()).getStyleName());
                 listRecords.add(songListPageVo);
             }
             listPage.setRecords(listRecords);

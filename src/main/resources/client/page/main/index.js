@@ -1,6 +1,5 @@
 
 
-
 new Vue({
     el: "#music",
     data: {
