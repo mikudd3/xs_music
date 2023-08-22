@@ -33,7 +33,7 @@
                                 class="el-icon-arrow-down el-icon--right"></i></span>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item v-for="(songList,i) in songLists">
-                                <a rel="nofollow" @click="getPriceRange(songList.id,song.id)">
+                                <a rel="nofollow" @click="getPriceRange(songList.id,scope.row.id)">
                                     {{songList.title}}
                                 </a>
                             </el-dropdown-item>

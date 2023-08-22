@@ -4,7 +4,7 @@ new Vue({
         return {
             //tang
             content: '',
-            userData:[{}],
+            userData: [{}],
             comments: [{
                 name: '妖怪',
                 create_time: "2010-10-1",
@@ -40,7 +40,9 @@ new Vue({
                 },
             ],
             //当前登录用户的歌单
-            songLists: [],
+            songLists: [{
+                title: "111",
+            }],
             showPopup: false,
         }
     },
@@ -72,14 +74,14 @@ new Vue({
                 url: "/comment/gets",
                 params: {
                     type: 1,
-                    songListId:id,
+                    songListId: id,
                 }
             }).then(res => {
-               if(res.data.code){
-                   this.comments = res.data.data;
-               }else{
-                   this.$message.error("res.data.msg");
-               }
+                if (res.data.code) {
+                    this.comments = res.data.data;
+                } else {
+                    this.$message.error("res.data.msg");
+                }
             })
         },
         setComment() {
@@ -93,15 +95,15 @@ new Vue({
                         userId: this.userData.id,
                         type: 1,
                         content: this.content,
-                        songListId:id,
+                        songListId: id,
                     }
                 }).then(ress => {
-                    if(ress.data.code==1){
+                    if (ress.data.code == 1) {
                         this.comments = ress.data.data;
-                        this.content='';
+                        this.content = '';
                         this.$message.success("评论成功");
                         this.getAllComments();
-                    }else{
+                    } else {
                         this.$message.error(ress.data.msg);
                     }
                 })
@@ -152,7 +154,7 @@ new Vue({
         //将歌曲添加到用户创建的歌单
         getPriceRange(songListId, songId) {
             axios({
-                url: "/songlist/add",
+                url: "/listSong/add",
                 method: "get",
                 params: {
                     song_list_id: songListId,
@@ -200,7 +202,7 @@ new Vue({
             if (row.like) {
                 //添加到我喜欢
                 axios({
-                    url: "/collect/addMyLoveSong?id="+row.id ,
+                    url: "/collect/addMyLoveSong?id=" + row.id,
                     method: "post",
                 }).then(resp => {
                     if (resp.data.code == 1) {
@@ -213,7 +215,7 @@ new Vue({
             } else {
                 //取消我喜欢
                 axios({
-                    url: "/collect/deleteMyLoveSong?id="+row.id,
+                    url: "/collect/deleteMyLoveSong?id=" + row.id,
                     method: "post",
                 }).then(resp => {
                     if (resp.data.code == 1) {

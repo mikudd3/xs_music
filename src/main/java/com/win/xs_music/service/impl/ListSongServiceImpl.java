@@ -21,6 +21,7 @@ public class ListSongServiceImpl extends ServiceImpl<ListSongMapper, ListSong> i
 
     /**
      * 将歌曲添加到歌单
+     *
      * @param songId
      * @param songListId
      * @return
@@ -37,11 +38,11 @@ public class ListSongServiceImpl extends ServiceImpl<ListSongMapper, ListSong> i
                 //已经收藏过，不可以重复收藏
                 return R.error("不可重复收藏");
             }
-            listSongMapper.insert(listSong);
+            int ret = listSongMapper.insert(listSong);
+            return ret > 0 ? R.success("添加成功") : R.error("添加是吧");
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return null;
     }
 }
