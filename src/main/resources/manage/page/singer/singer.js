@@ -88,7 +88,7 @@ new Vue({
                     this.dialogFormVisible = false;
                 } else {
                     //添加失败
-                    this.$message.success(res.data.msg);
+                    this.$message.error(res.data.msg);
                 }
 
             }).finally(() => {

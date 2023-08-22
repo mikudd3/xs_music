@@ -84,6 +84,7 @@ public class LoginCheckFilter implements Filter {
             //获取移动端用户id
             Integer userId = (Integer) request.getSession().getAttribute("user");
             //设置当前线程的id
+            log.info("当前线程id为：{}", userId);
             BaseContext.setCurrentId(userId);
 
             //用户已登录，则放行

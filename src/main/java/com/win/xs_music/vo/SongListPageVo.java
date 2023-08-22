@@ -8,38 +8,27 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  * @project:
- * @author: fqq
+ * @author: mikudd3
  * @version: 1.0
  */
-
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class SongListVo {
-    //存放歌曲详细信息和歌手名
+@AllArgsConstructor
+public class SongListPageVo implements Serializable {
     private Integer id;
-
-    private Integer singerId;
-
-    private String name;
-
-    private String introduction;
-
+    private String title;
     private String pic;
-
-    private String lyric;
-
-    private String url;
-
+    private String introduction;
+    private Integer user_id;
+    private Long love;
+    private String styleIds;//风格
     private LocalDateTime updateTime; //更新时间
     private LocalDateTime createTime; //创建时间
-
-    private String singerName;
-
-
-
+    //风格名
+    private String style;
 }

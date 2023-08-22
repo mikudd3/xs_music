@@ -58,8 +58,6 @@ new Vue({
             }).then(resp => {
                 if (resp.data.code == 1) {
                     this.userData = resp.data.data;
-                    this.$message.error("获取用户");
-
                 } else {
                     this.$message.error(resp.data.msg);
                 }
@@ -101,7 +99,7 @@ new Vue({
                     if(ress.data.code==1){
                         this.comments = ress.data.data;
                         this.content='';
-                        this.$message.error("评论成功");
+                        this.$message.success("评论成功");
                         this.getAllComments();
                     }else{
                         this.$message.error(ress.data.msg);

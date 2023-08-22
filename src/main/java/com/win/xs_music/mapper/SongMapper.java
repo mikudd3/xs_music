@@ -18,10 +18,10 @@ public interface SongMapper extends BaseMapper<Song> {
 
 
 
-    @Select("select * from song.html where singer_id = #{id}")
+    @Select("select * from song where singer_id = #{id}")
     List<Song> getListBySingerId(Integer id);
 
-    @Delete("delete from song.html where singer_id = #{id}")
+    @Delete("delete from song where singer_id = #{id}")
     void deleteBySingerId(Integer id);
 
 

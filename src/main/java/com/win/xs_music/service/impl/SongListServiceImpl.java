@@ -11,17 +11,20 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.win.xs_music.mapper.CollectMapper;
 import com.win.xs_music.mapper.ListSongMapper;
 import com.win.xs_music.mapper.SongListMapper;
+import com.win.xs_music.mapper.StyleMapper;
 import com.win.xs_music.pojo.Collect;
 import com.win.xs_music.pojo.ListSong;
 import com.win.xs_music.pojo.SongList;
 import com.win.xs_music.service.SongListService;
 import com.win.xs_music.vo.GetMyCollectSongListVo;
+import com.win.xs_music.vo.SongListPageVo;
 import com.win.xs_music.vo.SongListflVo;
 import com.win.xs_music.vo.gedanVo;
 import lombok.extern.slf4j.Slf4j;
 import org.ini4j.spi.Warnings;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,6 +47,8 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
     private ListSongMapper listSongMapper;
     @Autowired
     private CollectMapper collectMapper;
+    @Autowired
+    private StyleMapper styleMapper;
 
     /**
      * 歌手信息分页查询
@@ -60,7 +65,22 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
             LambdaQueryWrapper<SongList> wrapper = new LambdaQueryWrapper<>();
             wrapper.like(StringUtils.isNotEmpty(name), SongList::getTitle, name);
             this.page(page, wrapper);
-            return R.success(page);
+            //创建PageVo对象
+            Page<SongListPageVo> listPage = new Page<>();
+            BeanUtils.copyProperties(page, listPage, "records");
+            //根据id查找风格
+            List<SongList> records = page.getRecords();
+            List<SongListPageVo> listRecords = new ArrayList<>();
+            for (SongList record : records) {
+                //根据id查询风格名
+                SongListPageVo songListPageVo = new SongListPageVo();
+                BeanUtils.copyProperties(record, songListPageVo);
+                //查找风格名
+                songListPageVo.setStyle(styleMapper.selectById(record.getId()).getStyleName());
+                listRecords.add(songListPageVo);
+            }
+            listPage.setRecords(listRecords);
+            return R.success(listPage);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
@@ -138,6 +158,7 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
 
     /**
      * 根据歌单id获取歌单信息
+     *
      * @param id
      * @return
      */
@@ -165,6 +186,7 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
 
     /**
      * 获取我创建的歌单
+     *
      * @return
      */
     @Override
@@ -184,6 +206,7 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
 
     /**
      * 添加歌单
+     *
      * @param songList
      * @return
      */
