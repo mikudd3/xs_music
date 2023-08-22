@@ -79,6 +79,9 @@ new Vue({
             }).then(res => {
                 if (res.data.code) {
                     this.comments = res.data.data;
+                    for (let i = 0; i < this.comments.length; i++) {
+                        this.comments[i].tx = `/common/download?name=` + this.comments[i].tx;
+                    }
                 } else {
                     this.$message.error("res.data.msg");
                 }
