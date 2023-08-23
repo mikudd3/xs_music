@@ -125,7 +125,7 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
         try {
             ArrayList<SongListflVo> maps = null;
             System.out.println(!"日韩".equals(style_name));
-            if (style_name == null && !"日韩".equals(style_name)) {
+            if (style_name == null || !"日韩".equals(style_name)) {
                 maps = songListMapper.getSongList(style_name);
             } else {
                 maps = songListMapper.getSongList1("日韩");

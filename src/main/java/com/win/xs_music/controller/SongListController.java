@@ -77,14 +77,15 @@ public class SongListController {
      */
     @PostMapping("/update")
     public R update(@RequestBody SongList songList) {
-        log.info("更新歌单传入信息：{}", songList);
-        boolean ret = false;
         try {
-            ret = songListService.updateById(songList);
+            log.info("更新歌单传入信息：{}", songList);
+            boolean ret = songListService.updateById(songList);
+            return ret ? R.success("更新成功") : R.error("更新失败");
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return ret ? R.success("更新成功") : R.error("更新失败");
+
     }
 
     /**
@@ -95,14 +96,15 @@ public class SongListController {
      */
     @PostMapping("/deleteById")
     public R delete(Integer id) {
-        log.info("要删除的用户id为:{}", id);
-        boolean b = false;
         try {
-            b = songListService.removeById(id);
+            log.info("要删除的用户id为:{}", id);
+            boolean b = songListService.removeById(id);
+            return b ? R.success("删除成功") : R.success("删除失败");
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        return b ? R.success("删除成功") : R.success("删除失败");
+
     }
 
     /**
@@ -113,14 +115,15 @@ public class SongListController {
      */
     @RequestMapping("/songfl")
     public R getSongList(String style_name) {
-        ArrayList<SongListflVo> sl = null;
         try {
-            sl = songListService.getSongList(style_name);
+            ArrayList<SongListflVo> sl = songListService.getSongList(style_name);
+            log.info(String.valueOf(sl));
+            return R.success(sl);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
         }
-        log.info(String.valueOf(sl));
-        return R.success(sl);
+
     }
 
     /**
@@ -139,7 +142,8 @@ public class SongListController {
     }
 
     /**
-     *  根据id获取歌单
+     * 根据id获取歌单
+     *
      * @param id
      * @return
      */
@@ -156,11 +160,12 @@ public class SongListController {
 
     /**
      * 获取我创建的歌单列表
+     *
      * @return
      */
     @GetMapping("/getMyCreateSongList")
     /*传入用户的id*/
-    public R getMyCreateSongList(){
+    public R getMyCreateSongList() {
         try {
             return songListService.getMyCreateSongList();
         } catch (Exception e) {
@@ -172,12 +177,13 @@ public class SongListController {
 
     /**
      * 新建歌单
+     *
      * @param songList
      * @return
      */
     @PostMapping("/addSongList")
-    public R addSongList(@RequestBody SongList songList){
-        log.info("输入的数据为：{}",songList);
+    public R addSongList(@RequestBody SongList songList) {
+        log.info("输入的数据为：{}", songList);
         try {
             return songListService.addSongList(songList);
         } catch (Exception e) {
@@ -185,7 +191,6 @@ public class SongListController {
             throw new CustomException("系统错误，请联系管理员");
         }
     }
-
 
 
 }
