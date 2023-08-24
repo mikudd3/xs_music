@@ -26,7 +26,7 @@ public class SMSUtils {
      * @param param 参数
      */
     public static void sendMessage(String signName, String templateCode,String phoneNumbers,String param){
-        DefaultProfile profile = DefaultProfile.getProfile("cn-shenzhen", "LTAI5tP6PRn6okQhm9tsJAK6", "ttuwN1UANqRbAilArgwcaPdAIfQG4Y");
+        DefaultProfile profile = DefaultProfile.getProfile("cn-shenzhen", "", "");
         IAcsClient client = new DefaultAcsClient(profile);
 
         SendSmsRequest request = new SendSmsRequest();
