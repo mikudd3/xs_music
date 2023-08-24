@@ -187,7 +187,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             if (StringUtils.isNotEmpty(phone)) {
                 String code = ValidateCodeUtils.generateValidateCode(4).toString();
                 log.info("生成的验证码为：{}", code);
-                SMSUtils.sendMessage("苏健昌的音乐", "SMS_462595788", phone, code);
+//                SMSUtils.sendMessage("小松音乐", "", phone, code);
                 session.setAttribute(phone, code);
                 return R.success("短信发送成功");
             }
