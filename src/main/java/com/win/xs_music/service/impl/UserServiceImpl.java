@@ -132,7 +132,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
      * @return
      */
     @Override
-    public R updatePhone(User user) throws RuntimeException{
+    public R updatePhone(User user) throws RuntimeException {
         //从本地线程获取当前登录用户的id
         Integer id = BaseContext.getCurrentId();
         //创建user对象
@@ -150,7 +150,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
      * @return
      */
     @Override
-    public R send(String phone, HttpSession session) throws RuntimeException{
+    public R send(String phone, HttpSession session) throws RuntimeException {
         if (StringUtils.isNotEmpty(phone)) {
             String code = ValidateCodeUtils.generateValidateCode(4).toString();
             log.info("生成的验证码为：{}", code);
@@ -169,7 +169,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
      * @return
      */
     @Override
-    public R SMSLogin(UserLoginDto userLoginDto, HttpServletRequest request) throws RuntimeException{
+    public R SMSLogin(UserLoginDto userLoginDto, HttpServletRequest request) throws RuntimeException {
         String codeSession = (String) request.getSession().getAttribute(userLoginDto.getPhone());
         String code = userLoginDto.getCode() + "";
         if (codeSession != null && codeSession.equals(code)) {
@@ -199,7 +199,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
      * @return
      */
     @Override
-    public R getLoginCode(String phone, HttpSession session) throws RuntimeException{
+    public R getLoginCode(String phone, HttpSession session) throws RuntimeException {
         Object code = session.getAttribute(phone);
         log.info("验证码为：{}", code);
         return R.success(code);
