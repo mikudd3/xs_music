@@ -13,7 +13,7 @@ import java.util.Map;
 public interface SingerMapper extends BaseMapper<Singer> {
 
     List<Map<String, Object>> getSingerLocationCategory();
-    List<Map<String, Object>> getSingers(Singer singer);
+    List<Singer> getSingers(Singer singer);
 
 
     @Select("select * from singer where  name = #{singerName}")

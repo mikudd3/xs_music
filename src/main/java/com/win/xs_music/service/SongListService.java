@@ -12,6 +12,7 @@ public interface SongListService extends IService<SongList> {
 
     /**
      * 歌单分页查询
+     *
      * @param currentPage
      * @param pageSize
      * @param name
@@ -21,12 +22,14 @@ public interface SongListService extends IService<SongList> {
 
     /**
      * 获取歌单分类
+     *
      * @return
      */
     R getStyle();
 
     /**
      * 获取歌单列表
+     *
      * @param style_name
      * @return
      */
@@ -41,6 +44,7 @@ public interface SongListService extends IService<SongList> {
 
     /**
      * 根据id获取单个歌单信息
+     *
      * @param id
      * @return
      */
@@ -48,14 +52,32 @@ public interface SongListService extends IService<SongList> {
 
     /**
      * 获取我创建的歌单
+     *
      * @return
      */
     R getMyCreateSongList();
 
     /**
      * 创建歌单
+     *
      * @param songList
      * @return
      */
     R addSongList(SongList songList);
+
+    /**
+     * 更新歌单数据
+     *
+     * @param songList
+     * @return
+     */
+    R updateSongList(SongList songList);
+
+    /**
+     * 删除歌单
+     *
+     * @param id
+     * @return
+     */
+    R removeSongList(Integer id);
 }

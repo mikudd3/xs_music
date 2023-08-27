@@ -24,9 +24,7 @@ public class BannerController {
     @GetMapping("/getlbt")
     public R getBanner() {
         try {
-            List<Banner> list = bannerService.list();
-            log.info("获取到的轮播图数据为：{}", list);
-            return R.success(list);
+            return bannerService.getList();
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
@@ -42,10 +40,8 @@ public class BannerController {
      */
     @PutMapping("/update")
     public R update(@RequestBody Banner pic) {
-        log.info("更新歌手传入信息：{}", pic);
         try {
-            boolean ret = bannerService.updateById(pic);
-            return ret ? R.success("更新成功") : R.error("更新失败");
+            return bannerService.updateBanner(pic);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");

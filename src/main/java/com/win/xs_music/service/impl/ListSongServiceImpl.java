@@ -27,22 +27,17 @@ public class ListSongServiceImpl extends ServiceImpl<ListSongMapper, ListSong> i
      * @return
      */
     @Override
-    public R add(Integer songId, Integer songListId) {
-        try {
-            ListSong listSong = new ListSong();
-            listSong.setSongListId(songListId);
-            listSong.setSongId(songId);
-            //先判断是否已经存在
-            ListSong ls = listSongMapper.selectWithSongIdAndSongListId(songId, songListId);
-            if (ls != null) {
-                //已经收藏过，不可以重复收藏
-                return R.error("不可重复收藏");
-            }
-            int ret = listSongMapper.insert(listSong);
-            return ret > 0 ? R.success("添加成功") : R.error("添加是吧");
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new CustomException("系统错误，请联系管理员");
+    public R add(Integer songId, Integer songListId) throws RuntimeException {
+        ListSong listSong = new ListSong();
+        listSong.setSongListId(songListId);
+        listSong.setSongId(songId);
+        //先判断是否已经存在
+        ListSong ls = listSongMapper.selectWithSongIdAndSongListId(songId, songListId);
+        if (ls != null) {
+            //已经收藏过，不可以重复收藏
+            return R.error("不可重复收藏");
         }
+        int ret = listSongMapper.insert(listSong);
+        return ret > 0 ? R.success("添加成功") : R.error("添加是吧");
     }
 }

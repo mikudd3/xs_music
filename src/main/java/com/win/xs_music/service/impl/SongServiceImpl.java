@@ -45,180 +45,156 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
 
     /**
      * 更新歌曲信息
+     *
      * @param songView
      * @return
      */
     @Override
-    public R updateSong(SongView songView) {
-        try {
-            //根据歌手名获取歌手信息
-            Singer singer = singerMapper.selectByName(songView.getSingerName());
-            if (singer == null) {
-                return R.error("修改失败，歌手不存在，请先添加歌手");
-            }
-            Song song = new Song();
-            BeanUtils.copyProperties(songView, song);
-            song.setSingerId(singer.getId());
-            boolean ret = this.updateById(song);
-            return ret ? R.success("更新成功") : R.error("更新失败");
-        } catch (BeansException e) {
-            e.printStackTrace();
-            throw new CustomException("系统错误，请联系管理员");
+    public R updateSong(SongView songView) throws RuntimeException {
+        //根据歌手名获取歌手信息
+        Singer singer = singerMapper.selectByName(songView.getSingerName());
+        if (singer == null) {
+            return R.error("修改失败，歌手不存在，请先添加歌手");
         }
+        Song song = new Song();
+        BeanUtils.copyProperties(songView, song);
+        song.setSingerId(singer.getId());
+        boolean ret = this.updateById(song);
+        return ret ? R.success("更新成功") : R.error("更新失败");
     }
 
     /**
      * 获取歌手名字
+     *
      * @return
      */
     @Override
-    public R getSingerName() {
-        try {
-            List<String> singerName = singerMapper.getSingerName();
-            log.info("获得的歌手名为：{}", singerName);
-            return R.success(singerName);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new CustomException("系统错误，请联系管理员");
-        }
+    public R getSingerName() throws RuntimeException {
+        List<String> singerName = singerMapper.getSingerName();
+        log.info("获得的歌手名为：{}", singerName);
+        return R.success(singerName);
     }
 
     /**
      * 查询歌手的歌曲列表
+     *
      * @param id
      * @return
      */
     @Override
-    public R selectList(Integer id) {
-        try {
-            //获取当前登录用户
-            Integer userId = BaseContext.getCurrentId();
-            //获取歌手歌曲
-            List<SongListVo> songs = songMapper.selectList(id);
-            List<GetListSongVo> list = new ArrayList<>();
-           for (SongListVo song : songs) {
-                //格式化歌名
-                String[] arr = song.getName().split("-");
-                song.setName(arr[1]);
-                song.setSingerName(arr[0]);
-                GetListSongVo getListSongVo = new GetListSongVo();
-                BeanUtils.copyProperties(song, getListSongVo);
-                //如果当前用户已登录
-                if (userId != null) {
-                    //通过当前登录用户和歌曲id查询是否是当前用户已喜欢的歌曲
-                    Collect collect = collectMapper.getMyLoveSongWithUserIdAndSongId(userId, song.getId());
-                    //true表示不喜欢，false表示该歌曲已被用户添加到我喜欢
-                    getListSongVo.setLike(collect == null);
-                } else {
-                    getListSongVo.setLike(true);
-                }
-                list.add(getListSongVo);
+    public R selectList(Integer id) throws RuntimeException {
+        //获取当前登录用户
+        Integer userId = BaseContext.getCurrentId();
+        //获取歌手歌曲
+        List<SongListVo> songs = songMapper.selectList(id);
+        List<GetListSongVo> list = new ArrayList<>();
+        for (SongListVo song : songs) {
+            //格式化歌名
+            String[] arr = song.getName().split("-");
+            song.setName(arr[1]);
+            song.setSingerName(arr[0]);
+            GetListSongVo getListSongVo = new GetListSongVo();
+            BeanUtils.copyProperties(song, getListSongVo);
+            //如果当前用户已登录
+            if (userId != null) {
+                //通过当前登录用户和歌曲id查询是否是当前用户已喜欢的歌曲
+                Collect collect = collectMapper.getMyLoveSongWithUserIdAndSongId(userId, song.getId());
+                //true表示不喜欢，false表示该歌曲已被用户添加到我喜欢
+                getListSongVo.setLike(collect == null);
+            } else {
+                getListSongVo.setLike(true);
             }
-            return R.success(list);
-        } catch (BeansException e) {
-            e.printStackTrace();
-            throw new CustomException("系统错误，请联系管理员");
+            list.add(getListSongVo);
         }
+        return R.success(list);
     }
 
     /**
      * 查询歌单的歌曲列表
+     *
      * @param id
      * @return
      */
     @Override
-    public R selectList1(Integer id) {
-        try {
-            //获取当前登录用户
-            Integer userId = BaseContext.getCurrentId();
-            List<SongListVo> songs = songMapper.selectList1(id);
-            List<GetListSongVo> list = new ArrayList<>();
-            for (SongListVo song : songs) {
-                //格式化歌名
-                String[] arr = song.getName().split("-");
-                song.setName(arr[1]);
-                song.setSingerName(arr[0]);
-                GetListSongVo getListSongVo = new GetListSongVo();
-                BeanUtils.copyProperties(song, getListSongVo);
-                //如果当前用户已登录
-                if (userId != null) {
-                    //通过当前登录用户和歌曲id查询是否是当前用户已喜欢的歌曲
-                    Collect collect = collectMapper.getMyLoveSongWithUserIdAndSongId(userId, song.getId());
-                    //true表示不喜欢，false表示该歌曲已被用户添加到我喜欢
-                    getListSongVo.setLike(collect == null);
-                } else {
-                    getListSongVo.setLike(true);
-                }
-                list.add(getListSongVo);
+    public R selectList1(Integer id) throws RuntimeException {
+        //获取当前登录用户
+        Integer userId = BaseContext.getCurrentId();
+        List<SongListVo> songs = songMapper.selectList1(id);
+        List<GetListSongVo> list = new ArrayList<>();
+        for (SongListVo song : songs) {
+            //格式化歌名
+            String[] arr = song.getName().split("-");
+            song.setName(arr[1]);
+            song.setSingerName(arr[0]);
+            GetListSongVo getListSongVo = new GetListSongVo();
+            BeanUtils.copyProperties(song, getListSongVo);
+            //如果当前用户已登录
+            if (userId != null) {
+                //通过当前登录用户和歌曲id查询是否是当前用户已喜欢的歌曲
+                Collect collect = collectMapper.getMyLoveSongWithUserIdAndSongId(userId, song.getId());
+                //true表示不喜欢，false表示该歌曲已被用户添加到我喜欢
+                getListSongVo.setLike(collect == null);
+            } else {
+                getListSongVo.setLike(true);
             }
-            return R.success(list);
-        } catch (BeansException e) {
-            e.printStackTrace();
-            throw new CustomException("系统错误，请联系管理员");
+            list.add(getListSongVo);
         }
+        return R.success(list);
     }
 
     /**
      * 通过歌曲名字获取歌曲信息
+     *
      * @param songname
      * @return
      */
     @Override
-    public R getSongByName(String songname) {
-        try {
-            if (!StringUtils.isNotEmpty(songname)) {
-                return R.error("请输入查询条件");
-            }
-            //获取本地登录用户
-            Integer userId = BaseContext.getCurrentId();
-            //根据用户名模糊查询
-            songname = "%" + songname + "%";
-            List<Song> songs = songMapper.getListBySongName(songname);
-            //遍历
-            List<GetListSongVo> list = new ArrayList<>();
-            for (Song song : songs) {
-                //格式化歌名
-                String[] arr = song.getName().split("-");
-                song.setName(arr[1]);
-                GetListSongVo getListSongVo = new GetListSongVo();
-                BeanUtils.copyProperties(song, getListSongVo);
-                getListSongVo.setSingerName(arr[0]);
-                //如果当前用户已登录
-                if (userId != null) {
-                    //通过当前登录用户和歌曲id查询是否是当前用户已喜欢的歌曲
-                    Collect collect = collectMapper.getMyLoveSongWithUserIdAndSongId(userId, song.getId());
-                    //true表示不喜欢，false表示该歌曲已被用户添加到我喜欢
-                    getListSongVo.setLike(collect == null);
-                } else {
-                    getListSongVo.setLike(true);
-                }
-                list.add(getListSongVo);
-            }
-            return R.success(list);
-        } catch (BeansException e) {
-            e.printStackTrace();
-            throw new CustomException("系统错误，请联系管理员");
+    public R getSongByName(String songname) throws RuntimeException {
+        if (!StringUtils.isNotEmpty(songname)) {
+            return R.error("请输入查询条件");
         }
+        //获取本地登录用户
+        Integer userId = BaseContext.getCurrentId();
+        //根据用户名模糊查询
+        songname = "%" + songname + "%";
+        List<Song> songs = songMapper.getListBySongName(songname);
+        //遍历
+        List<GetListSongVo> list = new ArrayList<>();
+        for (Song song : songs) {
+            //格式化歌名
+            String[] arr = song.getName().split("-");
+            song.setName(arr[1]);
+            GetListSongVo getListSongVo = new GetListSongVo();
+            BeanUtils.copyProperties(song, getListSongVo);
+            getListSongVo.setSingerName(arr[0]);
+            //如果当前用户已登录
+            if (userId != null) {
+                //通过当前登录用户和歌曲id查询是否是当前用户已喜欢的歌曲
+                Collect collect = collectMapper.getMyLoveSongWithUserIdAndSongId(userId, song.getId());
+                //true表示不喜欢，false表示该歌曲已被用户添加到我喜欢
+                getListSongVo.setLike(collect == null);
+            } else {
+                getListSongVo.setLike(true);
+            }
+            list.add(getListSongVo);
+        }
+        return R.success(list);
     }
 
     /**
      * 获取当前正在播放的音乐信息
+     *
      * @param id
      * @return
      */
     @Override
-    public R getSong(Integer id) {
-        try {
-            Song song = this.getById(id);
-            SongListVo songListVo = new SongListVo();
-            BeanUtils.copyProperties(song, songListVo);
-            String[] arr = song.getName().split("-");
-            songListVo.setName(arr[1]);
-            songListVo.setSingerName(arr[0]);
-            return R.success(songListVo);
-        } catch (BeansException e) {
-            e.printStackTrace();
-            throw new CustomException("系统错误，请联系管理员");
-        }
+    public R getSong(Integer id) throws RuntimeException {
+        Song song = this.getById(id);
+        SongListVo songListVo = new SongListVo();
+        BeanUtils.copyProperties(song, songListVo);
+        String[] arr = song.getName().split("-");
+        songListVo.setName(arr[1]);
+        songListVo.setSingerName(arr[0]);
+        return R.success(songListVo);
     }
 }

@@ -3,7 +3,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/music
+    url: jdbc:mysql://47.109.67.241:3306/music
     username: root
     password: xiaosongRoot123
   data:
@@ -26,5 +26,5 @@ mybatis-plus:
 
 #文件上传下载路径设置
 xiaosong:
-  imagePath: "C:/upload/image/"
-  urlPath: "C:/upload/video/"
+  imagePath: "D:/upload/image/"
+  urlPath: "D:/upload/video/"

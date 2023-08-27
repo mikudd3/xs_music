@@ -30,15 +30,10 @@ public class StyleServiceImpl implements StyleService {
      * @return
      */
     @Override
-    public R getStyleName() {
-        try {
-            QueryWrapper<SongStyle> query = Wrappers.query();
-            List<SongStyle> songStyles = styleMapper.selectList(query);
-            log.info("查到的风格：{}", songStyles);
-            return R.success(songStyles);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new CustomException("系统错误，请联系管理员");
-        }
+    public R getStyleName() throws RuntimeException{
+        QueryWrapper<SongStyle> query = Wrappers.query();
+        List<SongStyle> songStyles = styleMapper.selectList(query);
+        log.info("查到的风格：{}", songStyles);
+        return R.success(songStyles);
     }
 }

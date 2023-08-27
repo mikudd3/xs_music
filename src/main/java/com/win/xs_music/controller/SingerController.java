@@ -25,7 +25,7 @@ public class SingerController {
      * @return
      */
     @GetMapping("/getSingCount")
-    public R getSingCount() {
+    public R getSingCount(){
         try {
             return singerService.selectCount();
         } catch (Exception e) {
@@ -74,8 +74,7 @@ public class SingerController {
     public R add(@RequestBody Singer singer) {
         log.info("添加歌手传入信息：{}", singer);
         try {
-            boolean ret = singerService.save(singer);
-            return ret ? R.success("添加成功") : R.error("添加失败");
+            return singerService.add(singer);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
@@ -93,8 +92,8 @@ public class SingerController {
     public R update(@RequestBody Singer singer) {
         log.info("更新歌手传入信息：{}", singer);
         try {
-            boolean ret = singerService.updateById(singer);
-            return ret ? R.success("更新成功") : R.error("更新失败");
+            return singerService.updateSinger(singer);
+
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");

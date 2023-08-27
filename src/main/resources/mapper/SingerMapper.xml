@@ -8,14 +8,13 @@
         GROUP BY location
         ORDER BY count DESC LIMIT 5
     </select>
-    <select id="getSingers" resultType="java.util.Map">
+    <select id="getSingers" resultType="com.win.xs_music.pojo.Singer">
         SELECT *
         FROM singer
         WHERE 1=1
         <if test="sex!=null">
             and sex = #{sex}
         </if>
-        -- and sex = 0
         <if test="location!=''and location!=null">
             and location like concat('%',#{location},'%')
         </if>

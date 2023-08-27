@@ -52,7 +52,7 @@ new Vue({
         this.getAllComments();
     },
     methods: {
-        //获取全部评论
+
         getUser() {
             axios({
                 url: "/user/getUser",
@@ -65,6 +65,7 @@ new Vue({
                 }
             })
         },
+        //获取全部评论
         getAllComments() {
             this.searchParams = new URLSearchParams(window.location.search);
             const id = this.searchParams.get('id');

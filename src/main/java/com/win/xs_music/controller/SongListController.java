@@ -79,8 +79,7 @@ public class SongListController {
     public R update(@RequestBody SongList songList) {
         try {
             log.info("更新歌单传入信息：{}", songList);
-            boolean ret = songListService.updateById(songList);
-            return ret ? R.success("更新成功") : R.error("更新失败");
+            return songListService.updateSongList(songList);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
@@ -98,8 +97,7 @@ public class SongListController {
     public R delete(Integer id) {
         try {
             log.info("要删除的用户id为:{}", id);
-            boolean b = songListService.removeById(id);
-            return b ? R.success("删除成功") : R.success("删除失败");
+            return songListService.removeSongList(id);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CustomException("系统错误，请联系管理员");
